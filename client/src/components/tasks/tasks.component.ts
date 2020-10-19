@@ -1,6 +1,9 @@
 import { css, customElement, html, LitElement, property, query, unsafeCSS } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
+import { httpClient } from '../../http-client';
+import { router } from '@fhms-wi/router';
+import { PageMixin } from '../page.mixin';
 
 interface Task {
   id: string;
@@ -11,20 +14,31 @@ interface Task {
 const componentCSS = require('./tasks.component.scss');
 
 @customElement('app-tasks')
-class TasksComponent extends LitElement {
+class TasksComponent extends PageMixin(LitElement) {
   static styles = css`
     ${unsafeCSS(componentCSS)}
   `;
 
   @query('#title') titleElement!: HTMLInputElement;
 
-  @property() private tasks: Task[] = [
-    { id: '0', title: 'TypeScript lernen', status: 'done' },
-    { id: '1', title: 'Web Components lernen', status: 'open' }
-  ];
+  @property() private tasks: Task[] = [];
+
+  async firstUpdated() {
+    try {
+      const response = await httpClient.get('tasks');
+      this.tasks = (await response.json()).results;
+    } catch ({ message, statusCode }) {
+      if (statusCode === 401) {
+        router.navigate('users/sign-in');
+      } else {
+        this.setNotification({ errorMessage: message });
+      }
+    }
+  }
 
   render() {
     return html`
+      ${this.renderNotification()}
       <h1>Aufgaben</h1>
       <form novalidate @submit="${this.submit}">
         <div>
@@ -54,24 +68,43 @@ class TasksComponent extends LitElement {
     `;
   }
 
-  toggleTask(taskToToggle: Task) {
-    this.tasks = this.tasks.map(task =>
-      task === taskToToggle ? ({ ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } as Task) : task
-    );
-  }
-
-  removeTask(taskToRemove: Task) {
-    this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
-  }
-
-  submit(event: Event) {
-    event.preventDefault();
-    let task: Task = {
-      id: String(new Date().getTime()),
-      title: this.titleElement.value,
-      status: 'open'
+  async toggleTask(taskToToggle: Task) {
+    const updatedTask: Task = {
+      ...taskToToggle,
+      status: taskToToggle.status === 'open' ? 'done' : 'open'
     };
-    this.tasks = [...this.tasks, task];
-    this.titleElement.value = '';
+
+    try {
+      await httpClient.patch('tasks/' + updatedTask.id, updatedTask);
+      this.tasks = this.tasks.map(task =>
+        task === taskToToggle
+          ? ({ ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } as Task)
+          : task
+      );
+    } catch ({ message }) {
+      this.setNotification({ errorMessage: message });
+    }
+  }
+
+  async removeTask(taskToRemove: Task) {
+    try {
+      await httpClient.delete('tasks/' + taskToRemove.id);
+      this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
+    } catch ({ message }) {
+      this.setNotification({ errorMessage: message });
+    }
+  }
+
+  async submit(event: Event) {
+    event.preventDefault();
+    const partialTask: Partial<Task> = { title: this.titleElement.value };
+    try {
+      const response = await httpClient.post('tasks', partialTask);
+      const task: Task = await response.json();
+      this.tasks = [...this.tasks, task];
+      this.titleElement.value = '';
+    } catch ({ message }) {
+      this.setNotification({ errorMessage: message });
+    }
   }
 }

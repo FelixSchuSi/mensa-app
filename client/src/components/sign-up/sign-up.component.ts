@@ -1,9 +1,12 @@
 import { css, customElement, html, LitElement, query, unsafeCSS } from 'lit-element';
+import { httpClient } from '../../http-client';
+import { router } from '@fhms-wi/router';
+import { PageMixin } from '../page.mixin';
 
 const componentCSS = require('./sign-up.component.scss');
 
 @customElement('app-sign-up')
-class SignUpComponent extends LitElement {
+class SignUpComponent extends PageMixin(LitElement) {
   static styles = css`
     ${unsafeCSS(componentCSS)}
   `;
@@ -25,6 +28,7 @@ class SignUpComponent extends LitElement {
 
   render() {
     return html`
+      ${this.renderNotification()}
       <h1>Konto erstellen</h1>
       <form novalidate>
         <div>
@@ -62,7 +66,12 @@ class SignUpComponent extends LitElement {
         password: this.passwordElement.value,
         passwordCheck: this.passwordCheckElement.value
       };
-      // ...
+      try {
+        const response = await httpClient.post('users', accountData);
+        router.navigate('tasks');
+      } catch ({ message }) {
+        this.setNotification({ errorMessage: message });
+      }
     } else {
       this.form.classList.add('was-validated');
     }

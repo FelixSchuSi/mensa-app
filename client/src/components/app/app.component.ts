@@ -15,7 +15,8 @@ class AppComponent extends LitElement {
   @property()
   linkItems = [
     { title: 'Konto erstellen', routePath: 'users/sign-up' },
-    { title: 'Anmelden', routePath: 'users/sign-in' }
+    { title: 'Anmelden', routePath: 'users/sign-in' },
+    { title: 'Abmelden', routePath: 'users/sign-out' }
   ];
 
   firstUpdated() {
@@ -28,6 +29,8 @@ class AppComponent extends LitElement {
         return html`<app-sign-in></app-sign-in>`;
       case 'users/sign-up':
         return html`<app-sign-up></app-sign-up>`;
+      case 'users/sign-out':
+        return html`<app-sign-out></app-sign-out>`;
       case 'tasks':
         return html`<app-tasks></app-tasks>`;
       default:

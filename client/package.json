@@ -33,6 +33,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@fhms-wi/http-client": "file:../client-packages/http-client",
     "@fhms-wi/router": "file:../client-packages/router",
     "lit-element": "^2.4.0"
   }

@@ -1,0 +1,5 @@
+# Generated files
+src/**/*.js
+src/**/*.map
+db/**/*.js
+db/**/*.map
