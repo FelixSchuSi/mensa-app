@@ -18,8 +18,21 @@ class AppComponent extends LitElement {
     { title: 'Anmelden', routePath: 'users/sign-in' }
   ];
 
+  firstUpdated() {
+    router.subscribe(() => this.requestUpdate());
+  }
+
   renderRouterOutlet() {
-    return html`<app-tasks></app-tasks>`;
+    switch (router.getPath()) {
+      case 'users/sign-in':
+        return html`<app-sign-in></app-sign-in>`;
+      case 'users/sign-up':
+        return html`<app-sign-up></app-sign-up>`;
+      case 'tasks':
+        return html`<app-tasks></app-tasks>`;
+      default:
+        return html`<app-tasks></app-tasks>`;
+    }
   }
 
   render() {
