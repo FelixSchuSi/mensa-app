@@ -2,12 +2,15 @@ import express, { Express, Request } from 'express';
 import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import * as jwt from 'jsonwebtoken';
-import * as http from 'http';
+import * as fs from 'fs';
+import * as https from 'https';
+import * as path from 'path';
 import tasks from './routes/tasks';
 import users from './routes/users';
 import startDB from './db';
 
-const port = 3000;
+const port = 3443;
+const certDir = path.join(__dirname, 'certs');
 
 function configureApp(app: Express) {
   app.use(bodyParser.json());
@@ -52,12 +55,17 @@ async function start() {
 
   configureApp(app);
   await startDB(app, process.argv[2]);
-  startHttpServer(app);
+  startHttpsServer(app);
 }
 
-function startHttpServer(app: Express) {
-  const httpServer = http.createServer(app);
-  httpServer.listen(port, () => {
+function startHttpsServer(app: Express) {
+  const options = {
+    key: fs.readFileSync(path.join(certDir, 'server.key.pem')),
+    cert: fs.readFileSync(path.join(certDir, 'server.cert.pem')),
+    ca: fs.readFileSync(path.join(certDir, 'intermediate-ca.cert.pem'))
+  };
+  const httpsServer = https.createServer(options, app);
+  httpsServer.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
 }
