@@ -1,2 +1,2 @@
 import './index.scss';
-import './app';
+import './components/task/task.component.ts';
