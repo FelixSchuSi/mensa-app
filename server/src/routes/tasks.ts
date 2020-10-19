@@ -6,7 +6,12 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const taskDAO: GenericDAO<Task> = req.app.locals.taskDAO;
-  const tasks = await taskDAO.findAll({ userId: res.locals.user.id });
+  const status = req.query.status as Task['status'];
+  const filter: Partial<Task> = { userId: res.locals.user.id };
+  if (status) {
+    filter.status = status;
+  }
+  const tasks = await taskDAO.findAll(filter);
   res.json({ results: tasks });
 });
 

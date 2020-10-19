@@ -32,7 +32,7 @@ class TasksComponent extends PageMixin(LitElement) {
 
   async firstUpdated() {
     try {
-      const response = await httpClient.get('tasks');
+      const response = await httpClient.get('tasks' + location.search);
       this.tasks = (await response.json()).results;
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {

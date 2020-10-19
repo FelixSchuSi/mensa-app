@@ -11,6 +11,7 @@ const port = 3000;
 
 function configureApp(app: Express) {
   app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
   app.use((req, res, next) => {
     if (isOriginAllowed(req.get('Origin'))) {
