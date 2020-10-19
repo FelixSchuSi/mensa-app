@@ -1,0 +1,38 @@
+h1 {
+  font-weight: lighter;
+}
+
+form {
+  margin-top: 1rem;
+}
+
+label {
+  margin-top: 1rem;
+  display: block;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  display: block;
+  border: solid rgba(0, 0, 0, 0.125) 1px;
+  border-radius: 0.25rem;
+  font-size: 1.25rem;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+button {
+  margin-top: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  border: solid rgba(0, 0, 0, 0.125) 1px;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: var(--app-primary-color);
+  color: white;
+}

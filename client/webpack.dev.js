@@ -2,7 +2,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  devServer: { host: '0.0.0.0', port: 8080, public: 'localhost:8080' },
+  devServer: {
+    historyApiFallback: {
+      rewrites: [{ from: /^\/[a-z]*/, to: '/app/index.html' }]
+    },
+    host: '0.0.0.0',
+    port: 8080,
+    public: 'localhost:8080',
+    publicPath: '/app/'
+  },
   resolve: { extensions: ['.ts', '.js'] },
   module: {
     rules: [
@@ -27,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{ loader: 'file-loader', options: { outputPath: 'fonts/' } }]
+        use: [{ loader: 'file-loader', options: { outputPath: 'fonts/', publicPath: '/app/fonts' } }]
       }
     ]
   },
