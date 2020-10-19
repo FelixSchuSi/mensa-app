@@ -4,7 +4,11 @@ module.exports = function (config) {
     frameworks: ['jasmine', 'webpack'],
     files: [{ pattern: 'src/**/*.spec.ts', watched: false }],
     preprocessors: { 'src/**/*.spec.ts': ['webpack'] },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['coverage-istanbul', 'kjhtml'],
+    coverageIstanbulReporter: {
+      reports: ['html', 'text-summary'],
+      fixWebpackSourcePaths: true
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -19,6 +23,13 @@ module.exports = function (config) {
       module: {
         rules: [
           { test: /\.ts$/, use: { loader: 'ts-loader', options: { transpileOnly: true } } },
+          {
+            test: /\.ts$/,
+            exclude: /(node_modules|\.spec\.ts$)/,
+            loader: 'istanbul-instrumenter-loader',
+            enforce: 'post',
+            options: { esModules: true }
+          },
           {
             test: /\.scss$/,
             use: [
