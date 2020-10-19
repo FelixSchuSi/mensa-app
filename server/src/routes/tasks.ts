@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   const status = req.query.status as Task['status'];
   const filter: Partial<Task> = { userId: res.locals.user.id };
   if (status) {
-    filter.status = status;
+    filter.status = status === 'open' ? 'open' : 'done';
   }
   const tasks = (await taskDAO.findAll(filter)).map(task => {
     return { ...task, title: decrypt(task.title) };
