@@ -1,4 +1,4 @@
-import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, property, query, unsafeCSS } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 
@@ -16,6 +16,8 @@ class TasksComponent extends LitElement {
     ${unsafeCSS(componentCSS)}
   `;
 
+  @query('#title') titleElement!: HTMLInputElement;
+
   @property() private tasks: Task[] = [
     { id: '0', title: 'TypeScript lernen', status: 'done' },
     { id: '1', title: 'Web Components lernen', status: 'open' }
@@ -24,6 +26,11 @@ class TasksComponent extends LitElement {
   render() {
     return html`
       <h1>Aufgaben</h1>
+      <form novalidate @submit="${this.submit}">
+        <div>
+          <input type="text" autofocus required id="title" name="title" placeholder="Neue Aufgabe" />
+        </div>
+      </form>
       <div class="tasks">
         ${guard(
           [this.tasks],
@@ -55,5 +62,16 @@ class TasksComponent extends LitElement {
 
   removeTask(taskToRemove: Task) {
     this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
+  }
+
+  submit(event: Event) {
+    event.preventDefault();
+    let task: Task = {
+      id: String(new Date().getTime()),
+      title: this.titleElement.value,
+      status: 'open'
+    };
+    this.tasks = [...this.tasks, task];
+    this.titleElement.value = '';
   }
 }
