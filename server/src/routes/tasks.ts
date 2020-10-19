@@ -1,6 +1,7 @@
 import express from 'express';
 import { GenericDAO } from '../models/generic.dao';
 import { Task } from '../models/task';
+import { encrypt, decrypt } from '../services/crypto.service';
 
 const router = express.Router();
 
@@ -11,14 +12,20 @@ router.get('/', async (req, res) => {
   if (status) {
     filter.status = status;
   }
-  const tasks = await taskDAO.findAll(filter);
+  const tasks = (await taskDAO.findAll(filter)).map(task => {
+    return { ...task, title: decrypt(task.title) };
+  });
   res.json({ results: tasks });
 });
 
 router.post('/', async (req, res) => {
   const taskDAO: GenericDAO<Task> = req.app.locals.taskDAO;
-  const createdTask = await taskDAO.create({ userId: res.locals.user.id, title: req.body.title, status: 'open' });
-  res.status(201).json(createdTask);
+  const createdTask = await taskDAO.create({
+    userId: res.locals.user.id,
+    title: encrypt(req.body.title),
+    status: 'open'
+  });
+  res.status(201).json({ ...createdTask, title: decrypt(createdTask.title) });
 });
 
 router.delete('/:id', async (req, res) => {
