@@ -1,5 +1,6 @@
-const taskTemplate = document.createElement('template');
-taskTemplate.innerHTML = `
+import { html, render } from 'lit-html';
+
+const componentCSS = html`
   <style>
     :host {
       display: flex;
@@ -9,8 +10,8 @@ taskTemplate.innerHTML = `
       border: solid rgba(0, 0, 0, 0.125) 1px;
     }
     :host(:first-of-type) {
-      border-top-right-radius: .25rem;
-      border-top-left-radius: .25rem;
+      border-top-right-radius: 0.25rem;
+      border-top-left-radius: 0.25rem;
     }
 
     :host(:not(:first-of-type)) {
@@ -18,8 +19,8 @@ taskTemplate.innerHTML = `
     }
 
     :host(:last-of-type) {
-      border-bottom-right-radius: .25rem;
-      border-bottom-left-radius: .25rem;
+      border-bottom-right-radius: 0.25rem;
+      border-bottom-left-radius: 0.25rem;
     }
 
     .toggle-task {
@@ -32,18 +33,25 @@ taskTemplate.innerHTML = `
       justify-content: center;
       align-items: center;
     }
-    
-    slot[name='title']::slotted(*) { flex-grow:1; margin-left: 0.75rem }
-    
+
+    slot[name='title']::slotted(*) {
+      flex-grow: 1;
+      margin-left: 0.75rem;
+    }
+
     .status::before {
       color: #008000;
       font: normal normal normal 1.25rem/1 'Font Awesome 5 Free';
-      content: "\\f00c"
+      content: '\\f00c';
     }
   </style>
-  <span class="toggle-task"><span class="status"></span></span>
+`;
+
+const taskTemplate = (status: string) => html`
+  ${componentCSS}
+  <span class="toggle-task">${status === 'done' ? html`<span class="status"></span>` : ''}</span>
   <slot name="title"></slot>
-  `;
+`;
 
 class TaskComponent extends HTMLElement {
   private renderTriggered = false;
@@ -51,7 +59,6 @@ class TaskComponent extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot!.appendChild(taskTemplate.content.cloneNode(true));
   }
 
   static get observedAttributes() {
@@ -63,8 +70,8 @@ class TaskComponent extends HTMLElement {
   }
 
   render() {
-    const statusElem: any = this.shadowRoot!.querySelector('.status')!;
-    statusElem.style.display = this.getAttribute('status') === 'open' ? 'none' : 'inherit';
+    const status = this.getAttribute('status') || 'open';
+    render(taskTemplate(status), this.shadowRoot!);
   }
 
   invalidate() {
