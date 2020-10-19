@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, 10)
   });
-  res.cookie('jwt-token', createToken(createdUser));
+  res.cookie('jwt-token', createToken(createdUser), { sameSite: 'lax' });
   res.status(201).json(createdUser);
 });
 
@@ -50,7 +50,7 @@ router.post('/sign-in', async (req, res) => {
   const user = await userDAO.findOne(filter);
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
-    res.cookie('jwt-token', createToken(user));
+    res.cookie('jwt-token', createToken(user), { sameSite: 'lax' });
     res.status(201).json(user);
   } else {
     res.clearCookie('jwt-token');
