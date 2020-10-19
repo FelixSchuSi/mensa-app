@@ -2,14 +2,6 @@ import { html, render } from 'lit-html';
 
 const componentCSS = require('./task.component.scss');
 
-const taskTemplate = (status: string) => html`
-  <style>
-    ${componentCSS}
-  </style>
-  <span class="toggle-task">${status === 'done' ? html`<span class="status"></span>` : ''}</span>
-  <slot name="title"></slot>
-`;
-
 class TaskComponent extends HTMLElement {
   private renderTriggered = false;
 
@@ -28,7 +20,7 @@ class TaskComponent extends HTMLElement {
 
   render() {
     const status = this.getAttribute('status') || 'open';
-    render(taskTemplate(status), this.shadowRoot!);
+    render(this.taskTemplate(status), this.shadowRoot!);
   }
 
   invalidate() {
@@ -39,6 +31,24 @@ class TaskComponent extends HTMLElement {
         this.render();
       });
     }
+  }
+
+  toggleTask() {
+    const oldStatus = this.getAttribute('status') || 'open';
+    const newStatus = oldStatus === 'open' ? 'done' : 'open';
+    this.setAttribute('status', newStatus);
+  }
+
+  taskTemplate(status: string) {
+    return html`
+      <style>
+        ${componentCSS}
+      </style>
+      <span class="toggle-task" @click="${() => this.toggleTask()}"
+        >${status === 'done' ? html`<span class="status"></span>` : ''}</span
+      >
+      <slot name="title"></slot>
+    `;
   }
 }
 
