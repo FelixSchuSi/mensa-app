@@ -9,9 +9,19 @@ module.exports = {
       { test: /\.ts$/, use: { loader: 'ts-loader', options: { transpileOnly: true } } },
       {
         test: /\.scss$/,
+        include: /index\.scss$/,
         use: [
           'style-loader',
           { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        exclude: /index\.scss$/,
+        use: [
+          'to-string-loader',
+          { loader: 'css-loader', options: { sourceMap: true, esModule: false } },
           { loader: 'sass-loader', options: { sourceMap: true } }
         ]
       },

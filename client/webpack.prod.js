@@ -9,7 +9,18 @@ module.exports = {
       { test: /\.ts$/, use: 'ts-loader' },
       {
         test: /\.scss$/,
+        include: /index\.scss$/,
         use: [{ loader: MiniCssExtractPlugin.loader }, 'css-loader', 'postcss-loader', 'sass-loader']
+      },
+      {
+        test: /\.scss$/,
+        exclude: /index\.scss$/,
+        use: [
+          'to-string-loader',
+          { loader: 'css-loader', options: { esModule: false } },
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
