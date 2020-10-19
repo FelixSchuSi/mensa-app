@@ -46,6 +46,8 @@ taskTemplate.innerHTML = `
   `;
 
 class TaskComponent extends HTMLElement {
+  private renderTriggered = false;
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -57,12 +59,22 @@ class TaskComponent extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    this.render();
+    this.invalidate();
   }
 
   render() {
     const statusElem: any = this.shadowRoot!.querySelector('.status')!;
     statusElem.style.display = this.getAttribute('status') === 'open' ? 'none' : 'inherit';
+  }
+
+  invalidate() {
+    if (!this.renderTriggered) {
+      this.renderTriggered = true;
+      Promise.resolve().then(() => {
+        this.renderTriggered = false;
+        this.render();
+      });
+    }
   }
 }
 
