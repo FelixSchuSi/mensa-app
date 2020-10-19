@@ -17,5 +17,18 @@ describe('InMemoryGenericDAO', () => {
       const promise = personDAO.create({ name: 'john doe' });
       expect(promise instanceof Promise).toBeTruthy();
     });
+
+    it('should set the id property', async () => {
+      const person = await personDAO.create({ name: 'john doe' });
+      expect(person.id).toBeDefined();
+    });
+  });
+
+  describe('#findOne', () => {
+    it('should return an object given it`s id', async () => {
+      const createdPerson = await personDAO.create({ name: 'john doe' });
+      const retrievedPerson = await personDAO.findOne({ id: createdPerson.id });
+      expect(retrievedPerson).toBe(createdPerson);
+    });
   });
 });
