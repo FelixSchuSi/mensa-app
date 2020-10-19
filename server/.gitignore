@@ -3,3 +3,5 @@ src/**/*.js
 src/**/*.map
 db/**/*.js
 db/**/*.map
+.nyc_output/
+coverage/
