@@ -1,5 +1,6 @@
 import { html, render } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
+import { guard } from 'lit-html/directives/guard';
 
 interface Task {
   id: string;
@@ -44,17 +45,38 @@ class TasksComponent extends HTMLElement {
       </style>
       <h1>Aufgaben</h1>
       <div class="tasks">
-        ${repeat(
-          this.tasks,
-          task => task.id,
-          task => html`
-            <app-task status="${task.status}">
-              <span slot="title">${task.title}</span>
-            </app-task>
+        ${guard(
+          [this.tasks],
+          () => html`
+            ${repeat(
+              this.tasks,
+              task => task.id,
+              task => html`
+                <app-task
+                  status="${task.status}"
+                  @apptaskstatusclick=${() => this.toggleTask(task)}
+                  @apptaskremoveclick=${() => this.removeTask(task)}
+                >
+                  <span slot="title">${task.title}</span>
+                </app-task>
+              `
+            )}
           `
         )}
       </div>
     `;
+  }
+
+  toggleTask(taskToToggle: Task) {
+    this.tasks = this.tasks.map(task =>
+      task === taskToToggle ? ({ ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } as Task) : task
+    );
+    this.invalidate();
+  }
+
+  removeTask(taskToRemove: Task) {
+    this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
+    this.invalidate();
   }
 }
 

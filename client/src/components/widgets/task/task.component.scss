@@ -41,3 +41,9 @@ slot[name='title']::slotted(*) {
   font: normal normal normal 1.25rem/1 'Font Awesome 5 Free';
   content: '\f00c';
 }
+
+.remove-task::before {
+  font: normal normal normal 1.25rem/1 'Font Awesome 5 Free';
+  color: #800000;
+  content: '\f00d';
+}

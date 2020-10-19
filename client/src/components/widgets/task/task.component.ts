@@ -33,22 +33,28 @@ class TaskComponent extends HTMLElement {
     }
   }
 
-  toggleTask() {
-    const oldStatus = this.getAttribute('status') || 'open';
-    const newStatus = oldStatus === 'open' ? 'done' : 'open';
-    this.setAttribute('status', newStatus);
-  }
-
   taskTemplate(status: string) {
     return html`
       <style>
         ${componentCSS}
       </style>
-      <span class="toggle-task" @click="${() => this.toggleTask()}"
+      <span class="toggle-task" @click="${() => this.emit('apptaskstatusclick')}"
         >${status === 'done' ? html`<span class="status"></span>` : ''}</span
       >
       <slot name="title"></slot>
+      <span class="remove-task" @click="${() => this.emit('apptaskremoveclick')}"></span>
     `;
+  }
+
+  emit(eventType: string, eventData = {}) {
+    let event;
+    if (typeof CustomEvent === 'function') {
+      event = new CustomEvent(eventType, { detail: eventData, bubbles: true, composed: true });
+    } else {
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent(eventType, true, false, eventData);
+    }
+    this.dispatchEvent(event);
   }
 }
 
