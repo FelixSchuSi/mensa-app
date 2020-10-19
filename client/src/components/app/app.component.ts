@@ -5,6 +5,7 @@ const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
 
 @customElement('app-root')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class AppComponent extends LitElement {
   static styles = [
     css`

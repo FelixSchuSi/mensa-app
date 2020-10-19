@@ -3,6 +3,7 @@ import { httpClient } from '../../http-client';
 import { PageMixin } from '../page.mixin';
 
 @customElement('app-sign-out')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class SignOutComponent extends PageMixin(LitElement) {
   render() {
     return html` ${this.renderNotification()} `;

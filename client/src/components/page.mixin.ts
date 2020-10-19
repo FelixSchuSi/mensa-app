@@ -1,5 +1,6 @@
 import { LitElement, property, html } from 'lit-element';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T) => {
   class Page extends base {
     @property()

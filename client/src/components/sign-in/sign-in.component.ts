@@ -7,6 +7,7 @@ const sharedCSS = require('../shared.scss');
 const componentCSS = require('./sign-in.component.scss');
 
 @customElement('app-sign-in')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class SignInComponent extends PageMixin(LitElement) {
   static styles = [
     css`
@@ -53,7 +54,7 @@ class SignInComponent extends PageMixin(LitElement) {
         password: this.passwordElement.value
       };
       try {
-        const response = await httpClient.post('users/sign-in', authData);
+        await httpClient.post('users/sign-in', authData);
         router.navigate('tasks');
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });

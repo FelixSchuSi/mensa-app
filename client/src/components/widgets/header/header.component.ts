@@ -5,13 +5,8 @@ const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./header.component.scss');
 
 @customElement('app-header')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class HeaderComponent extends LitElement {
-  @property()
-  title = '';
-
-  @property()
-  linkItems: Array<{ title: string; routePath: string }> = [];
-
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
@@ -20,6 +15,12 @@ class HeaderComponent extends LitElement {
       ${unsafeCSS(componentCSS)}
     `
   ];
+
+  @property()
+  title = '';
+
+  @property()
+  linkItems: Array<{ title: string; routePath: string }> = [];
 
   @property()
   navbarOpen = false;

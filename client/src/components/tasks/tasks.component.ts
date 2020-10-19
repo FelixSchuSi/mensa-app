@@ -15,6 +15,7 @@ const sharedCSS = require('../shared.scss');
 const componentCSS = require('./tasks.component.scss');
 
 @customElement('app-tasks')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class TasksComponent extends PageMixin(LitElement) {
   static styles = [
     css`

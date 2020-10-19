@@ -7,6 +7,7 @@ const sharedCSS = require('../shared.scss');
 const componentCSS = require('./sign-up.component.scss');
 
 @customElement('app-sign-up')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class SignUpComponent extends PageMixin(LitElement) {
   static styles = [
     css`
@@ -80,7 +81,7 @@ class SignUpComponent extends PageMixin(LitElement) {
         passwordCheck: this.passwordCheckElement.value
       };
       try {
-        const response = await httpClient.post('users', accountData);
+        await httpClient.post('users', accountData);
         router.navigate('tasks');
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });

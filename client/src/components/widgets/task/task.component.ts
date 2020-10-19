@@ -3,6 +3,7 @@ import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-e
 const componentCSS = require('./task.component.scss');
 
 @customElement('app-task')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class TaskComponent extends LitElement {
   static styles = css`
     ${unsafeCSS(componentCSS)}

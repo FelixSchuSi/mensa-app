@@ -3,6 +3,7 @@ import { customElement, html, css, unsafeCSS, LitElement, property } from 'lit-e
 const sharedCSS = require('../../shared.scss');
 
 @customElement('app-notification')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class NotificationComponent extends LitElement {
   static styles = css`
     ${unsafeCSS(sharedCSS)}
