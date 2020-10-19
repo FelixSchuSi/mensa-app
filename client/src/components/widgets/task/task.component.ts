@@ -20,6 +20,10 @@ class TaskComponent extends LitElement {
     `;
   }
 
+  updated() {
+    console.log('status changed to: ' + this.status);
+  }
+
   emit(eventType: string, eventData = {}) {
     let event;
     if (typeof CustomEvent === 'function') {
