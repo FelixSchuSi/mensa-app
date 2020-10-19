@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: normal;
+  font-style: normal;
+  font-display: auto;
+  src: url('../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot');
+  src: url('../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot?#iefix') format('embedded-opentype'),
+    url('../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2') format('woff2'),
+    url('../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff') format('woff'),
+    url('../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf') format('truetype'),
+    url('../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.svg#fontawesome') format('svg');
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-weight: lighter;
+}
+
+.tasks {
+  padding-left: 0rem;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1rem;
+  border: solid rgba(0, 0, 0, 0.125) 1px;
+}
+
+.task:first-of-type {
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+}
+
+.task:not(:first-of-type) {
+  border-top: none;
+}
+
+.task:last-of-type {
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.toggle-task {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid #888;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  flex-grow: 1;
+  margin-left: 0.75rem;
+}
+
+.status::before {
+  color: #008000;
+  font: normal normal normal 1.25rem/1 'Font Awesome 5 Free';
+  content: '\f00c';
+}
