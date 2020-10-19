@@ -35,6 +35,7 @@
   "dependencies": {
     "@fhms-wi/http-client": "file:../client-packages/http-client",
     "@fhms-wi/router": "file:../client-packages/router",
+    "bootstrap": "^4.5.3",
     "lit-element": "^2.4.0"
   }
 }

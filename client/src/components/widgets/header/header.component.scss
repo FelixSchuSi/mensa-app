@@ -1,26 +1,3 @@
-:host {
-  display: flex;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 0px;
-  padding: 1rem 0.5rem 1rem 1rem;
-  background-color: var(--app-primary-color);
-  color: white;
-}
-
-a {
-  text-decoration: none;
-  color: #ccc;
-}
-
-a:hover {
-  color: #fff;
-}
-
 .logo::before {
   color: white;
   font: normal normal normal 1.25rem/1 'Font Awesome 5 Free';
@@ -29,28 +6,4 @@ a:hover {
 
 .logo {
   margin-right: 1rem;
-}
-
-.title {
-  color: white;
-  margin-top: 0px;
-  font-size: 1.25rem;
-  font-weight: lighter;
-}
-
-nav {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: row-reverse;
-
-  ol {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    a {
-      padding: 0rem 0.5em 0rem 0.5rem;
-      display: inline-block;
-    }
-  }
 }

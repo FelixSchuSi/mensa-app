@@ -3,13 +3,19 @@ import { httpClient } from '../../http-client';
 import { router } from '@fhms-wi/router';
 import { PageMixin } from '../page.mixin';
 
+const sharedCSS = require('../shared.scss');
 const componentCSS = require('./sign-in.component.scss');
 
 @customElement('app-sign-in')
 class SignInComponent extends PageMixin(LitElement) {
-  static styles = css`
-    ${unsafeCSS(componentCSS)}
-  `;
+  static styles = [
+    css`
+      ${unsafeCSS(sharedCSS)}
+    `,
+    css`
+      ${unsafeCSS(componentCSS)}
+    `
+  ];
 
   @query('form')
   form!: HTMLFormElement;
@@ -25,17 +31,17 @@ class SignInComponent extends PageMixin(LitElement) {
       ${this.renderNotification()}
       <h1>Anmelden</h1>
       <form>
-        <div>
-          <label for="email">E-Mail</label>
-          <input type="email" autofocus required id="email" name="email" />
+        <div class="form-group">
+          <label class="control-label" for="email">E-Mail</label>
+          <input class="form-control" type="email" autofocus required id="email" name="email" />
           <div class="invalid-feedback">E-Mail ist erforderlich und muss gültig sein</div>
         </div>
-        <div>
-          <label for="password">Passwort</label>
-          <input type="password" required id="password" name="password" />
+        <div class="form-group">
+          <label class="control-label" for="password">Passwort</label>
+          <input class="form-control" type="password" required id="password" name="password" />
           <div class="invalid-feedback">Passwort ist erforderlich</div>
         </div>
-        <button type="button" @click="${this.submit}">Anmelden</button>
+        <button class="btn btn-primary" type="button" @click="${this.submit}">Anmelden</button>
       </form>
     `;
   }

@@ -3,13 +3,19 @@ import { httpClient } from '../../http-client';
 import { router } from '@fhms-wi/router';
 import { PageMixin } from '../page.mixin';
 
+const sharedCSS = require('../shared.scss');
 const componentCSS = require('./sign-up.component.scss');
 
 @customElement('app-sign-up')
 class SignUpComponent extends PageMixin(LitElement) {
-  static styles = css`
-    ${unsafeCSS(componentCSS)}
-  `;
+  static styles = [
+    css`
+      ${unsafeCSS(sharedCSS)}
+    `,
+    css`
+      ${unsafeCSS(componentCSS)}
+    `
+  ];
 
   @query('form')
   form!: HTMLFormElement;
@@ -31,29 +37,36 @@ class SignUpComponent extends PageMixin(LitElement) {
       ${this.renderNotification()}
       <h1>Konto erstellen</h1>
       <form novalidate>
-        <div>
-          <label for="name">Name</label>
-          <input type="text" autofocus required id="name" name="name" />
+        <div class="form-group">
+          <label class="control-label" for="name">Name</label>
+          <input class="form-control" type="text" autofocus required id="name" name="name" />
           <div class="invalid-feedback">Name ist erforderlich</div>
         </div>
-        <div>
-          <label for="email">E-Mail</label>
-          <input type="email" required id="email" name="email" />
+        <div class="form-group">
+          <label class="control-label" for="email">E-Mail</label>
+          <input class="form-control" type="email" required id="email" name="email" />
           <div class="invalid-feedback">E-Mail ist erforderlich und muss gültig sein</div>
         </div>
-        <div>
-          <label for="password">Passwort</label>
-          <input type="password" required minlength="10" id="password" name="password" />
+        <div class="form-group">
+          <label class="control-label" for="password">Passwort</label>
+          <input class="form-control" type="password" required minlength="10" id="password" name="password" />
           <div class="invalid-feedback">Passwort ist erforderlich und muss mind. 10 Zeichen lang sein</div>
         </div>
-        <div>
-          <label for="password-check">Passwort nochmals eingeben</label>
-          <input type="password" required minlength="10" id="password-check" name="passwordCheck" />
+        <div class="form-group">
+          <label class="control-label" for="password-check">Passwort nochmals eingeben</label>
+          <input
+            class="form-control"
+            type="password"
+            required
+            minlength="10"
+            id="password-check"
+            name="passwordCheck"
+          />
           <div class="invalid-feedback">
             Erneute Passworteingabe ist erforderlich und muss mit der ersten Passworteingabe übereinstimmen
           </div>
         </div>
-        <button type="button" @click="${this.submit}">Konto erstellen</button>
+        <button class="btn btn-primary" type="button" @click="${this.submit}">Konto erstellen</button>
       </form>
     `;
   }

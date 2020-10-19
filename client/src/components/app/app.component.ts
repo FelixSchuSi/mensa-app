@@ -1,13 +1,19 @@
 import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
 import { router } from '@fhms-wi/router';
 
+const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
 
 @customElement('app-root')
 class AppComponent extends LitElement {
-  static styles = css`
-    ${unsafeCSS(componentCSS)}
-  `;
+  static styles = [
+    css`
+      ${unsafeCSS(sharedCSS)}
+    `,
+    css`
+      ${unsafeCSS(componentCSS)}
+    `
+  ];
 
   @property()
   title = 'Aufgabenverwaltung';
@@ -41,7 +47,7 @@ class AppComponent extends LitElement {
   render() {
     return html`
       <app-header title="${this.title}" .linkItems=${this.linkItems}> </app-header>
-      <div class="main">
+      <div class="main container">
         ${this.renderRouterOutlet()}
       </div>
     `;

@@ -11,13 +11,19 @@ interface Task {
   status: 'open' | 'done';
 }
 
+const sharedCSS = require('../shared.scss');
 const componentCSS = require('./tasks.component.scss');
 
 @customElement('app-tasks')
 class TasksComponent extends PageMixin(LitElement) {
-  static styles = css`
-    ${unsafeCSS(componentCSS)}
-  `;
+  static styles = [
+    css`
+      ${unsafeCSS(sharedCSS)}
+    `,
+    css`
+      ${unsafeCSS(componentCSS)}
+    `
+  ];
 
   @query('#title') titleElement!: HTMLInputElement;
 
@@ -42,7 +48,15 @@ class TasksComponent extends PageMixin(LitElement) {
       <h1>Aufgaben</h1>
       <form novalidate @submit="${this.submit}">
         <div>
-          <input type="text" autofocus required id="title" name="title" placeholder="Neue Aufgabe" />
+          <input
+            class="form-control form-control-lg"
+            type="text"
+            autofocus
+            required
+            id="title"
+            name="title"
+            placeholder="Neue Aufgabe"
+          />
         </div>
       </form>
       <div class="tasks">

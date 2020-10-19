@@ -1,0 +1,41 @@
+$theme-colors: (
+  primary: #034da1
+);
+
+@import 'bootstrap/scss/_mixins.scss';
+@import 'bootstrap/scss/_functions.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/_root.scss';
+@import 'bootstrap/scss/_reboot.scss';
+
+@import 'bootstrap/scss/_grid.scss';
+
+@import 'bootstrap/scss/_alert.scss';
+@import 'bootstrap/scss/_buttons.scss';
+@import 'bootstrap/scss/_forms.scss';
+
+@import 'bootstrap/scss/_navbar.scss';
+@import 'bootstrap/scss/_nav.scss';
+@import 'bootstrap/scss/_utilities.scss';
+@import 'bootstrap/scss/_transitions.scss';
+
+.invalid-feedback {
+  display: none;
+}
+
+.was-validated {
+  input:invalid {
+    border: solid var(--app-error-color) 1px;
+  }
+
+  input:invalid ~ .invalid-feedback {
+    color: var(--app-error-color);
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+    display: block;
+  }
+
+  input:valid ~ .invalid-feedback {
+    display: none;
+  }
+}
