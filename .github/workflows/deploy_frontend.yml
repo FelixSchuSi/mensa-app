@@ -24,4 +24,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build and publish to gh-pages.
-        run: cd client && npm run deploy
+        run: cd client && npm i && npm run deploy
