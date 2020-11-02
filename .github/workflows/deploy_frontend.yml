@@ -22,6 +22,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
+      - name: Edit git credentials.
+        run: git config --global user.name "Felix Schulze Sindern" && git config --global user.email "felixs@fh-muenster.de"
+      
+      - name: Install dependencies.
+        run: cd client && npm i
+
       - name: Build and publish to gh-pages.
-        run: cd client && npm i && npm run deploy
+        run: npm run deploy
