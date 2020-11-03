@@ -10,7 +10,7 @@ import users from './routes/users';
 import startDB from './db';
 
 const port = process.env.PORT || 3443;
-const certDir = path.join(__dirname, 'certs');
+// const certDir = path.join(__dirname, 'certs');
 
 function configureApp(app: Express) {
   app.get('/', (req, res) => {
@@ -64,12 +64,13 @@ async function start() {
 }
 
 function startHttpsServer(app: Express) {
-  const options = {
-    key: fs.readFileSync(path.join(certDir, 'server.key.pem')),
-    cert: fs.readFileSync(path.join(certDir, 'server.cert.pem')),
-    ca: fs.readFileSync(path.join(certDir, 'intermediate-ca.cert.pem'))
-  };
-  const httpsServer = https.createServer(options, app);
+  // const options = {
+  //   key: fs.readFileSync(path.join(certDir, 'server.key.pem')),
+  //   cert: fs.readFileSync(path.join(certDir, 'server.cert.pem')),
+  //   ca: fs.readFileSync(path.join(certDir, 'intermediate-ca.cert.pem'))
+  // };
+  // const httpsServer = https.createServer(options, app);
+  const httpsServer = https.createServer(app);
   httpsServer.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
