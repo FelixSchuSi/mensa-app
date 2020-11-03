@@ -10,8 +10,13 @@
     "test": "tsc && nyc jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "nyc": {
-    "exclude": ["src/**/*.spec.js"],
-    "reporter": ["text", "html"]
+    "exclude": [
+      "src/**/*.spec.js"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ]
   },
   "keywords": [],
   "author": "",

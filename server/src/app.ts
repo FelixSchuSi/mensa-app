@@ -9,7 +9,7 @@ import tasks from './routes/tasks';
 import users from './routes/users';
 import startDB from './db';
 
-const port = 3443;
+const port = process.env.PORT || 3443;
 const certDir = path.join(__dirname, 'certs');
 
 function configureApp(app: Express) {
