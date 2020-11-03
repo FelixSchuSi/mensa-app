@@ -41,6 +41,7 @@ function configureApp(app: Express) {
       res.locals.user = jwt.verify(token, 'mysecret');
       next();
     } catch (error) {
+      console.log(req);
       console.log(error);
       res.status(401).json({ message: 'Bitte melden Sie sich an!' });
     }
