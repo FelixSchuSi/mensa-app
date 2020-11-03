@@ -51,7 +51,7 @@ router.post('/sign-in', async (req, res) => {
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
     // res.cookie('jwt-token', createToken(user), { sameSite: 'lax' });
-    res.cookie('jwt-token', createToken(user));
+    res.cookie('jwt-token', createToken(user), { sameSite: 'none' });
     res.status(201).json(user);
   } else {
     res.clearCookie('jwt-token');
