@@ -3,7 +3,8 @@ import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import * as jwt from 'jsonwebtoken';
 import * as fs from 'fs';
-import * as https from 'https';
+// import * as https from 'https';
+import * as http from 'http';
 import * as path from 'path';
 import tasks from './routes/tasks';
 import users from './routes/users';
@@ -70,7 +71,7 @@ function startHttpsServer(app: Express) {
   //   ca: fs.readFileSync(path.join(certDir, 'intermediate-ca.cert.pem'))
   // };
   // const httpsServer = https.createServer(options, app);
-  const httpsServer = https.createServer(app);
+  const httpsServer = http.createServer(app);
   httpsServer.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
