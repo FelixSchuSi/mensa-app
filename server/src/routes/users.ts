@@ -50,6 +50,7 @@ router.post('/sign-in', async (req, res) => {
   const user = await userDAO.findOne(filter);
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
+    
     // res.cookie('jwt-token', createToken(user), { sameSite: 'lax' });
     res.cookie('jwt-token', createToken(user), { sameSite: 'none' });
     res.status(201).json(user);
