@@ -13,6 +13,9 @@ const port = process.env.PORT || 3443;
 const certDir = path.join(__dirname, 'certs');
 
 function configureApp(app: Express) {
+  app.get('/', (req, res) => {
+    res.send('ok')
+  })
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
@@ -39,6 +42,7 @@ function configureApp(app: Express) {
       res.status(401).json({ message: 'Bitte melden Sie sich an!' });
     }
   });
+  app.use('/api/tasks', tasks);
   app.use('/api/tasks', tasks);
 }
 
