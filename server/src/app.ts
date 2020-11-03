@@ -14,6 +14,7 @@ const certDir = path.join(__dirname, 'certs');
 
 function configureApp(app: Express) {
   app.get('/', (req, res) => {
+    console.log('health check!');
     res.send('ok')
   })
   app.use(bodyParser.json());
