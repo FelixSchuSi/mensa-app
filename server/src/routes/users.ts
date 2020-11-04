@@ -33,7 +33,6 @@ router.post('/', async (req, res) => {
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, 10)
   });
-  // res.cookie('jwt-token', createToken(createdUser), { sameSite: 'lax' });
   res.cookie('jwt-token', createToken(createdUser), { sameSite: 'none', secure: true});
   
   res.status(201).json(createdUser);
@@ -53,7 +52,6 @@ router.post('/sign-in', async (req, res) => {
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
     
-    // res.cookie('jwt-token', createToken(user), { sameSite: 'lax' });
     res.cookie('jwt-token', createToken(user), { sameSite: 'none', secure: true});
     res.status(201).json(user);
   } else {
