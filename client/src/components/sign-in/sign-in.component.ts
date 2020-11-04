@@ -1,4 +1,4 @@
-import { css, customElement, html, LitElement, query, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { httpClient } from '../../http-client';
 import { router } from '@fhms-wi/router';
 import { PageMixin } from '../page.mixin';
@@ -19,15 +19,15 @@ class SignInComponent extends PageMixin(LitElement) {
   ];
 
   @query('form')
-  form!: HTMLFormElement;
+  protected form!: HTMLFormElement;
 
   @query('#email')
-  emailElement!: HTMLInputElement;
+  protected emailElement!: HTMLInputElement;
 
   @query('#password')
-  passwordElement!: HTMLInputElement;
+  protected passwordElement!: HTMLInputElement;
 
-  render() {
+  protected render(): TemplateResult {
     return html`
       ${this.renderNotification()}
       <h1>Anmelden</h1>
@@ -47,8 +47,9 @@ class SignInComponent extends PageMixin(LitElement) {
     `;
   }
 
-  async submit() {
+  protected async submit(): Promise<void> {
     if (this.isFormValid()) {
+      // TODO: Create separate frontend userservice and create interfaces for login and signup data.
       const authData = {
         email: this.emailElement.value,
         password: this.passwordElement.value
@@ -64,7 +65,7 @@ class SignInComponent extends PageMixin(LitElement) {
     }
   }
 
-  isFormValid() {
+  protected isFormValid(): boolean {
     return this.form.checkValidity();
   }
 }

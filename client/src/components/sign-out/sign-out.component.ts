@@ -1,15 +1,15 @@
-import { customElement, html, LitElement } from 'lit-element';
+import { customElement, html, LitElement, TemplateResult } from 'lit-element';
 import { httpClient } from '../../http-client';
 import { PageMixin } from '../page.mixin';
 
 @customElement('app-sign-out')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class SignOutComponent extends PageMixin(LitElement) {
-  render() {
-    return html` ${this.renderNotification()} `;
+  protected render(): TemplateResult {
+    return html`${this.renderNotification()}`;
   }
 
-  async firstUpdated() {
+  protected async firstUpdated(): Promise<void> {
     try {
       await httpClient.delete('users/sign-out');
       this.setNotification({ infoMessage: 'Sie wurden erfolgreich abgemeldet!' });

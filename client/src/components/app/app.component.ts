@@ -1,5 +1,6 @@
-import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { router } from '@fhms-wi/router';
+import { RouteDefinition } from '../../models/route-definition';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
@@ -17,16 +18,16 @@ class AppComponent extends LitElement {
   ];
 
   @property()
-  title = 'Aufgabenverwaltung';
+  protected appTitle: string = 'Aufgabenverwaltung';
 
-  @property()
-  linkItems = [
+  @property({ type: Array })
+  protected linkItems: RouteDefinition[] = [
     { title: 'Konto erstellen', routePath: 'users/sign-up' },
     { title: 'Anmelden', routePath: 'users/sign-in' },
     { title: 'Abmelden', routePath: 'users/sign-out' }
   ];
 
-  firstUpdated() {
+  protected firstUpdated(): void {
     router.subscribe(() => this.requestUpdate());
     const path = localStorage.getItem('path');
     if (path) {
@@ -35,7 +36,7 @@ class AppComponent extends LitElement {
     }
   }
 
-  renderRouterOutlet() {
+  protected renderRouterOutlet(): TemplateResult {
     switch (router.getPath()) {
       case 'users/sign-in':
         return html`<app-sign-in></app-sign-in>`;
@@ -50,9 +51,9 @@ class AppComponent extends LitElement {
     }
   }
 
-  render() {
+  protected render(): TemplateResult {
     return html`
-      <app-header title="${this.title}" .linkItems=${this.linkItems}> </app-header>
+      <app-header title="${this.appTitle}" .linkItems=${this.linkItems}> </app-header>
       <div class="main container">
         ${this.renderRouterOutlet()}
       </div>

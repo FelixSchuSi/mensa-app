@@ -1,4 +1,4 @@
-import { css, customElement, html, LitElement, query, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { httpClient } from '../../http-client';
 import { router } from '@fhms-wi/router';
 import { PageMixin } from '../page.mixin';
@@ -9,7 +9,7 @@ const componentCSS = require('./sign-up.component.scss');
 @customElement('app-sign-up')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class SignUpComponent extends PageMixin(LitElement) {
-  static styles = [
+  protected static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
     `,
@@ -19,21 +19,21 @@ class SignUpComponent extends PageMixin(LitElement) {
   ];
 
   @query('form')
-  form!: HTMLFormElement;
+  protected form!: HTMLFormElement;
 
   @query('#name')
-  nameElement!: HTMLInputElement;
+  protected nameElement!: HTMLInputElement;
 
   @query('#email')
-  emailElement!: HTMLInputElement;
+  protected emailElement!: HTMLInputElement;
 
   @query('#password')
-  passwordElement!: HTMLInputElement;
+  protected passwordElement!: HTMLInputElement;
 
   @query('#password-check')
-  passwordCheckElement!: HTMLInputElement;
+  protected passwordCheckElement!: HTMLInputElement;
 
-  render() {
+  protected render(): TemplateResult {
     return html`
       ${this.renderNotification()}
       <h1>Konto erstellen</h1>
@@ -72,8 +72,9 @@ class SignUpComponent extends PageMixin(LitElement) {
     `;
   }
 
-  async submit() {
+  protected async submit(): Promise<void> {
     if (this.isFormValid()) {
+      // TODO: Create separate frontend userservice and create interfaces for login and signup data.
       const accountData = {
         name: this.nameElement.value,
         email: this.emailElement.value,
@@ -91,7 +92,7 @@ class SignUpComponent extends PageMixin(LitElement) {
     }
   }
 
-  isFormValid() {
+  protected isFormValid(): boolean {
     if (this.passwordElement.value !== this.passwordCheckElement.value) {
       this.passwordCheckElement.setCustomValidity('Passwörter müssen gleich sein');
     } else {

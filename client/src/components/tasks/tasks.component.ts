@@ -1,15 +1,11 @@
-import { css, customElement, html, LitElement, property, query, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 import { httpClient } from '../../http-client';
 import { router } from '@fhms-wi/router';
 import { PageMixin } from '../page.mixin';
+import { Task } from '../../models/task';
 
-interface Task {
-  id: string;
-  title: string;
-  status: 'open' | 'done';
-}
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./tasks.component.scss');
@@ -26,11 +22,13 @@ class TasksComponent extends PageMixin(LitElement) {
     `
   ];
 
-  @query('#title') titleElement!: HTMLInputElement;
+  @query('#title')
+  protected titleElement!: HTMLInputElement;
 
-  @property() private tasks: Task[] = [];
+  @property({ type: Array })
+  protected tasks: Task[] = [];
 
-  async firstUpdated() {
+  protected async firstUpdated(): Promise<void> {
     try {
       const response = await httpClient.get('tasks' + location.search);
       this.tasks = (await response.json()).results;
@@ -43,7 +41,7 @@ class TasksComponent extends PageMixin(LitElement) {
     }
   }
 
-  render() {
+  protected render(): TemplateResult {
     return html`
       ${this.renderNotification()}
       <h1>Aufgaben</h1>
@@ -62,12 +60,12 @@ class TasksComponent extends PageMixin(LitElement) {
       </form>
       <div class="tasks">
         ${guard(
-          [this.tasks],
-          () => html`
+      [this.tasks],
+      () => html`
             ${repeat(
-              this.tasks,
-              task => task.id,
-              task => html`
+        this.tasks,
+        task => task.id,
+        task => html`
                 <app-task
                   status="${task.status}"
                   @apptaskstatusclick=${() => this.toggleTask(task)}
@@ -76,14 +74,14 @@ class TasksComponent extends PageMixin(LitElement) {
                   <span slot="title">${task.title}</span>
                 </app-task>
               `
-            )}
+      )}
           `
-        )}
+    )}
       </div>
     `;
   }
 
-  async toggleTask(taskToToggle: Task) {
+  protected async toggleTask(taskToToggle: Task): Promise<void> {
     const updatedTask: Task = {
       ...taskToToggle,
       status: taskToToggle.status === 'open' ? 'done' : 'open'
@@ -91,9 +89,9 @@ class TasksComponent extends PageMixin(LitElement) {
 
     try {
       await httpClient.patch('tasks/' + updatedTask.id, updatedTask);
-      this.tasks = this.tasks.map(task =>
+      this.tasks = this.tasks.map((task: Task) =>
         task === taskToToggle
-          ? ({ ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } as Task)
+          ? ({ ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' })
           : task
       );
     } catch ({ message }) {
@@ -101,7 +99,7 @@ class TasksComponent extends PageMixin(LitElement) {
     }
   }
 
-  async removeTask(taskToRemove: Task) {
+  protected async removeTask(taskToRemove: Task): Promise<void> {
     try {
       await httpClient.delete('tasks/' + taskToRemove.id);
       this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
@@ -110,7 +108,7 @@ class TasksComponent extends PageMixin(LitElement) {
     }
   }
 
-  async submit(event: Event) {
+  protected async submit(event: Event): Promise<void> {
     event.preventDefault();
     const partialTask: Partial<Task> = { title: this.titleElement.value };
     try {

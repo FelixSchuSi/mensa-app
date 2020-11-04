@@ -1,5 +1,6 @@
 import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
+import { RouteDefinition } from '../../../models/route-definition';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./header.component.scss');
@@ -16,19 +17,19 @@ class HeaderComponent extends LitElement {
     `
   ];
 
-  @property()
-  title = '';
+  @property({ type: String })
+  public appTitle: string = '';
 
-  @property()
-  linkItems: Array<{ title: string; routePath: string }> = [];
+  @property({ type: Array })
+  public linkItems: RouteDefinition[] = [];
 
-  @property()
-  navbarOpen = false;
+  @property({ type: Boolean })
+  protected navbarOpen: boolean = false;
 
   render() {
     return html`
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="/"><span class="logo"></span>${this.title}</a>
+        <a class="navbar-brand" href="/"><span class="logo"></span>${this.appTitle}</a>
         <button
           @click="${this.toggle}"
           class="navbar-toggler"
@@ -43,19 +44,19 @@ class HeaderComponent extends LitElement {
         </button>
         <div
           class=${classMap({
-            'collapse': true,
-            'navbar-collapse': true,
-            'justify-content-end': true,
-            'show': this.navbarOpen
-          })}
+      'collapse': true,
+      'navbar-collapse': true,
+      'justify-content-end': true,
+      'show': this.navbarOpen
+    })}
           id="navbarNav"
         >
           <ul class="navbar-nav">
             ${this.linkItems.map(
-              linkItem => html`
+      linkItem => html`
                 <li class="nav-item"><a class="nav-link" href="${linkItem.routePath}">${linkItem.title}</a></li>
               `
-            )}
+    )}
           </ul>
         </div>
       </nav>
