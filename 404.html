@@ -1,0 +1,9 @@
+<html>
+<script>
+    debugger;
+    const path = window.location.pathname.slice(1).split('mensa-app/')[1];
+    localStorage.setItem('path', path);
+    window.location.href = window.location.origin + '/mensa-app/';
+</script>
+
+</html>
