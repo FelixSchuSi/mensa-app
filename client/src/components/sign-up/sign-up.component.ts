@@ -9,7 +9,7 @@ const componentCSS = require('./sign-up.component.scss');
 @customElement('app-sign-up')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class SignUpComponent extends PageMixin(LitElement) {
-  protected static styles = [
+  static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
     `,

@@ -1,7 +1,8 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin= require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -41,6 +42,9 @@ module.exports = {
       ],
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new DefinePlugin({
+      ISPROD: JSON.stringify(true)
+    })
   ]
 };
