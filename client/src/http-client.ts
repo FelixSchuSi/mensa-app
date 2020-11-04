@@ -1,7 +1,7 @@
 import { HttpClient } from '@fhms-wi/http-client';
 
-// local development
-// export const httpClient = new HttpClient({ baseURL: 'http:' + '//' + location.hostname + ':3443/api/' });
+const isProd = !!process.env.ISPROD;
 
-// production
-export const httpClient = new HttpClient({ baseURL: 'https://mensa-app-5jrmv.ondigitalocean.app/api/' });
+const baseURL: string = isProd ? 'https://mensa-app-5jrmv.ondigitalocean.app/api/' : `http://${location.hostname}:3443/api/`;
+
+export const httpClient = new HttpClient({ baseURL });
