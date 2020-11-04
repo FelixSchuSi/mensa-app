@@ -1,6 +1,9 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin= require('copy-webpack-plugin');
+const path = require('path');
+
 module.exports = {
   mode: 'production',
   resolve: { extensions: ['.ts', '.js'] },
@@ -30,6 +33,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '404.html'),
+        },
+      ],
+    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin()
   ]

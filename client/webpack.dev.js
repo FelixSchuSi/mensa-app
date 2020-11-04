@@ -1,12 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin= require('copy-webpack-plugin');
 const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: {
-      rewrites: [{ from: /^\/[a-z]*/, to: '/mensa-app/index.html' }]
+      rewrites: [{ from: /^\/[a-z]*/, to: '/mensa-app/404.html' }]
     },
     host: '0.0.0.0',
     port: 8080,
@@ -45,5 +47,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })]
+  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' }), new CopyPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, '404.html'),
+      },
+    ],
+  })]
 };

@@ -2,16 +2,12 @@ import express, { Express, Request } from 'express';
 import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import * as jwt from 'jsonwebtoken';
-import * as fs from 'fs';
-// import * as https from 'https';
 import * as http from 'http';
-import * as path from 'path';
 import tasks from './routes/tasks';
 import users from './routes/users';
 import startDB from './db';
 
 const port = process.env.PORT || 3443;
-// const certDir = path.join(__dirname, 'certs');
 
 function configureApp(app: Express) {
   app.get('/', (req, res) => {

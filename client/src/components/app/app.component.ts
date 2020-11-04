@@ -28,6 +28,11 @@ class AppComponent extends LitElement {
 
   firstUpdated() {
     router.subscribe(() => this.requestUpdate());
+    const path = localStorage.getItem('path');
+    if (path) {
+      localStorage.removeItem('path');
+      router.navigate(path);
+    }
   }
 
   renderRouterOutlet() {
