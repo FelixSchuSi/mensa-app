@@ -37,12 +37,6 @@ function configureApp(app: Express) {
       res.locals.user = jwt.verify(token, 'mysecret');
       next();
     } catch (error) {
-      console.log('##################### Cookies #####################');
-      console.log(req.cookies);
-      console.log('##################### Error #####################');
-      console.log(error);
-      console.log('##################### Request #####################');
-      console.log(req);
       res.status(401).json({ message: 'Bitte melden Sie sich an!' });
     }
   });
@@ -63,18 +57,12 @@ async function start() {
 
   configureApp(app);
   await startDB(app, process.argv[2]);
-  startHttpsServer(app);
+  startHttpServer(app);
 }
 
-function startHttpsServer(app: Express) {
-  // const options = {
-  //   key: fs.readFileSync(path.join(certDir, 'server.key.pem')),
-  //   cert: fs.readFileSync(path.join(certDir, 'server.cert.pem')),
-  //   ca: fs.readFileSync(path.join(certDir, 'intermediate-ca.cert.pem'))
-  // };
-  // const httpsServer = https.createServer(options, app);
-  const httpsServer = http.createServer(app);
-  httpsServer.listen(port, () => {
+function startHttpServer(app: Express) {
+  const httpServer = http.createServer(app);
+  httpServer.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
 }
