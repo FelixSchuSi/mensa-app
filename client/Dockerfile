@@ -1,10 +1,10 @@
 FROM node:12
 
-COPY /package*.json ./
+WORKDIR /app
+
+COPY . ./
 
 RUN npm install
-
-COPY /. ./
 
 ENV PORT=8080
 
