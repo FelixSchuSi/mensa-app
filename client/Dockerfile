@@ -1,15 +1,15 @@
 FROM node:12
 
-WORKDIR /server
+WORKDIR /client
 
 COPY /package*.json ./
 
 RUN npm install
 
-COPY /. .
+COPY /. ./
 
-ENV PORT=3443
+ENV PORT=8080
 
-EXPOSE 3443
+EXPOSE 8080
 
 CMD [ "npm", "start" ]

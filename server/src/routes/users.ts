@@ -1,10 +1,12 @@
-import express from 'express';
+import express, { CookieOptions } from 'express';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { GenericDAO } from '../models/generic.dao';
 import { User } from '../models/user';
 
 const router = express.Router();
+const isProd: boolean = !!process.env.ISPROD;
+const cookieOptions: CookieOptions = isProd ? { sameSite: 'none', secure: true } : { sameSite: 'lax' };
 
 router.post('/', async (req, res) => {
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
@@ -33,8 +35,10 @@ router.post('/', async (req, res) => {
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, 10)
   });
-  res.cookie('jwt-token', createToken(createdUser), { sameSite: 'none', secure: true});
-  
+
+
+  res.cookie('jwt-token', createToken(createdUser), cookieOptions);
+
   res.status(201).json(createdUser);
 });
 
@@ -51,8 +55,8 @@ router.post('/sign-in', async (req, res) => {
   const user = await userDAO.findOne(filter);
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
-    
-    res.cookie('jwt-token', createToken(user), { sameSite: 'none', secure: true});
+
+    res.cookie('jwt-token', createToken(user), cookieOptions);
     res.status(201).json(user);
   } else {
     res.clearCookie('jwt-token');
