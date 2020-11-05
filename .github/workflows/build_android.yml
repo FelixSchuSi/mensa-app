@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build APK
-        uses: sparkfabrik/android-build-action@v1.0.0
+        uses: sparkfabrik/android-build-action@v0.8.2
         with:
           project-path: client/android
           output-path: mensa-app.apk
