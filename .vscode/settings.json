@@ -4,7 +4,7 @@
       "**/*.js": { "when": "$(basename).ts" },
       "**/*.js.map": true
     },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "lit-plugin.rules.no-unknown-tag-name": "warning",
     "lit-plugin.rules.no-unknown-attribute": "warning",
