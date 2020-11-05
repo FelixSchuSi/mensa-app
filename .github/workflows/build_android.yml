@@ -20,8 +20,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
         - uses: actions/checkout@v2
-        
+
+        - name: Build APK
         - uses: sparkfabrik/android-build-action@v1.0.0
-        with:
-            project-path: client/android
-            output-path: mensa-app.apk
+            with:
+                project-path: client/android
+                output-path: mensa-app.apk
