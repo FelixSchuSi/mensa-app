@@ -6,9 +6,6 @@ const { DefinePlugin } = require('webpack');
 module.exports = {
   mode: 'production',
   resolve: { extensions: ['.ts', '.js'] },
-  watchOptions:{
-
-  },
   module: {
     rules: [
       { test: /\.ts$/, use: 'ts-loader' },

@@ -8,6 +8,7 @@
   "scripts": {
     "start": "webpack serve --config ./webpack.dev.js",
     "build": "webpack --config ./webpack.prod.js --progress",
+    "build:capcitor": "webpack --config ./webpack.watch.js --progress",
     "build:watch": "webpack --config ./webpack.watch.js --watch --progress",
     "lint": "eslint . --ext .ts",
     "test": "karma start",

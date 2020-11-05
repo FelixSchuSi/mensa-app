@@ -1,0 +1,4 @@
+- uses: sparkfabrik/android-build-action@v1.0.0
+  with:
+    project-path: client/android
+    output-path: mensa-app.apk
