@@ -24,38 +24,45 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Grant execute permission for gradle
+      - name: Grant execute permission for gradle.
         run: |
-          echo pwd
+          pwd
           cd client/android
-          echo pwd
+          pwd
           chmod +x gradle
 
-      - name: set up Node.js
+      - name: Set up Node.js.
         uses: actions/setup-node@v1
         with:
           node-version: "12"
 
-      - name: install dependencies
+      - name: Install dependencies.
         run: |
-          echo pwd
+          pwd
           cd client
-          echo pwd
+          pwd
           npm i
 
-      - name: webpack build
+      - name: Webpack build.
         run: |
-          echo pwd
+          pwd
           cd client
-          echo pwd
+          pwd
           npm run build:capacitor
 
-      - name: copy webpack build
+      - name: Copy webpack build.
         run: |
           cd client
           npx cap sync
 
-      - name: build apks
+      - name: Build apks.
         run: |
           cd client/android
           gradle build
+
+      - name: check if apks were created.
+        run: |
+          cd client/android/app/build/outputs/apk/debug
+          ls -lh
+          cd ../release/
+          ls -lh
