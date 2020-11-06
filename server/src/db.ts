@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { Db, MongoClient } from 'mongodb';
 import { Client } from 'pg';
 import { Express } from 'express';
 import { MongoGenericDAO } from './models/mongo-generic.dao';
@@ -28,24 +28,23 @@ function startInMemoryDB(app: Express) {
 }
 
 async function startMongoDB(app: Express) {
-  const db = isProd ? (await connectToProdMongoDB())!.db('mensa-app-db') : (await connectToDevMongoDB())!.db('taskman');
-
+  const db: Db = isProd ? await connectToProdMongoDB() : await connectToDevMongoDB();
   app.locals.taskDAO = new MongoGenericDAO<Task>(db, 'tasks');
   app.locals.userDAO = new MongoGenericDAO<User>(db, 'users');
 }
 
-async function connectToProdMongoDB() {
+async function connectToProdMongoDB(): Promise<Db> {
   const url = String(process.env.DBURL);
-
   try {
-    return await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+    const mongoClient = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+    return mongoClient.db('mensa-app-db');
   } catch (err) {
     console.log('Could not connect to MongoDB: ', err.stack);
     process.exit(1);
   }
 }
 
-async function connectToDevMongoDB() {
+async function connectToDevMongoDB(): Promise<Db> {
   const url = 'mongodb://localhost:27017';
   const options = {
     useNewUrlParser: true,
@@ -54,7 +53,8 @@ async function connectToDevMongoDB() {
   };
 
   try {
-    return await MongoClient.connect(url, options);
+    const mongoClient = await MongoClient.connect(url, options);
+    return mongoClient.db('mensa-app-db');
   } catch (err) {
     console.log('Could not connect to MongoDB: ', err.stack);
     process.exit(1);
