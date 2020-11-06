@@ -58,23 +58,23 @@ jobs:
           cd client
           npx cap sync
 
-      - name: Build apks.
-        run: |
-          cd client/android
-          gradle build
+      # - name: Build apks.
+      #   run: |
+      #     cd client/android
+      #     gradle build
 
-      - name: Check if apks were created.
-        run: |
-          cd client/android/app/build/outputs/apk/debug
-          ls -lh
-          cd ../release/
-          ls -lh
+      # - name: Check if apks were created.
+      #   run: |
+      #     cd client/android/app/build/outputs/apk/debug
+      #     ls -lh
+      #     cd ../release/
+      #     ls -lh
 
-      - name: Upload debug apk.
-        uses: actions/upload-artifact@v2
-        with:
-          name: mensa-app-debug
-          path: client/android/app/build/outputs/apk/debug/app-debug.apk
+      # - name: Upload debug apk.
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: mensa-app-debug
+      #     path: client/android/app/build/outputs/apk/debug/app-debug.apk
 
       # - name: Upload regular apk.
       #   uses: actions/upload-artifact@v2
@@ -89,18 +89,20 @@ jobs:
         id: timestampjob
         run: echo "::set-output name=timestamp::$now"
 
+      - name: Echo timestamp.
+        run: echo ${{needs.timestampjob.outputs.timestamp}}
+
       - name: Create release.
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: tag_${{needs.timestampjob.outputs.timestamp}}
-          release_name: Release_${{needs.timestampjob.outputs.timestamp}}
+          tag_name: tag_${{ needs.timestampjob.outputs.timestamp }}
+          release_name: Release_${{ needs.timestampjob.outputs.timestamp }}
           body: |
             Changes in this Release
-            - First Change
-            - Second Change
+            - The devs were too lazy to tell you what changed.
           draft: false
           prerelease: false
 
