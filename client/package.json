@@ -8,8 +8,8 @@
   "scripts": {
     "start": "webpack serve --config ./webpack.dev.js --hot",
     "build": "webpack --config ./webpack.prod.js --progress",
-    "build:capcitor": "webpack --config ./webpack.capcitor.js --progress",
-    "build:watch": "webpack --config ./webpack.capcitor.js --watch --progress",
+    "build:capacitor": "webpack --config ./webpack.capacitor.js --progress",
+    "build:watch": "webpack --config ./webpack.capacitor.js --watch --progress",
     "lint": "eslint . --ext .ts",
     "test": "karma start",
     "e2e": "tsc -p e2e && jasmine JASMINE_CONFIG_PATH=e2e/jasmine.json",
