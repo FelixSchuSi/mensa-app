@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      timestamp: ${{ steps.timestamp.outputs.timestamp }}
+      timestamp: ${{ steps.timestampjob.outputs.timestamp }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -83,8 +83,8 @@ jobs:
       #     path: client/android/app/build/outputs/apk/release/app-release-unsigned.apk
 
       - name: Set current timestamp.
-        id: timestamp
-        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%dT%H:%M:%S')"
+        id: timestampjob
+        run: echo "::set-output name=timestamp::$(echo date +'%Y-%m-%dT%H:%M:%S')"
 
       - name: Create release.
         id: create_release
@@ -92,8 +92,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: tag_${{needs.timestamp.outputs.timestamp}}
-          release_name: Release_${{needs.timestamp.outputs.timestamp}}
+          tag_name: tag_${{needs.timestampjob.outputs.timestamp}}
+          release_name: Release_${{needs.timestampjob.outputs.timestamp}}
           body: |
             Changes in this Release
             - First Change
