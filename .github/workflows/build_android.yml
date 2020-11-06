@@ -12,14 +12,24 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  timestampjob:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      timestamp: ${{ steps.timestampstep.outputs.timestamp }}
+    steps:
+      - name: Set timestamp as env var.
+        run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
+
+      - name: Set timestamp as output.
+        id: timestampstep
+        run: echo "::set-output name=test::$now"
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    outputs:
-      timestamp: ${{ steps.timestampjob.outputs.timestamp }}
-
+    needs: timestampjob
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
@@ -82,15 +92,15 @@ jobs:
       #     name: mensa-app
       #     path: client/android/app/build/outputs/apk/release/app-release-unsigned.apk
 
-      - name: Set current date as env variable.
-        run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
+      # - name: Set current date as env variable.
+      #   run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
 
-      - name: Set current timestamp.
-        id: timestampjob
-        run: echo "::set-output name=timestamp::$now"
+      # - name: Set current timestamp.
+      #   id: timestampjob
+      #   run: echo "::set-output name=timestamp::$now"
 
-      - name: Echo timestamp.
-        run: echo ${{needs.timestampjob.outputs.timestamp}}
+      # - name: Echo timestamp.
+      #   run: echo ${{needs.timestampjob.outputs.timestamp}}
 
       - name: Create release.
         id: create_release
@@ -105,14 +115,13 @@ jobs:
             - The devs were too lazy to tell you what changed.
           draft: false
           prerelease: false
-
-      - name: Upload release asset.
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: client/android/app/build/outputs/apk/debug/app-debug.apk
-          asset_name: app-debug.apk
-          asset_content_type: application/zip
+      # - name: Upload release asset.
+      #   id: upload-release-asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+      #     asset_path: client/android/app/build/outputs/apk/debug/app-debug.apk
+      #     asset_name: app-debug.apk
+      #     asset_content_type: application/zip
