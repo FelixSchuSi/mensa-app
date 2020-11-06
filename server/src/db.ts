@@ -7,6 +7,8 @@ import { InMemoryGenericDAO } from './models/in-memory-generic.dao';
 import { Task } from './models/task';
 import { User } from './models/user';
 
+const isProd: boolean = !!process.env.ISPROD;
+
 export default async function startDB(app: Express, dbms = 'in-memory-db') {
   switch (dbms) {
     case 'mongodb':
@@ -26,18 +28,31 @@ function startInMemoryDB(app: Express) {
 }
 
 async function startMongoDB(app: Express) {
-  const db = (await connectToMongoDB())!.db('taskman');
+  const db = isProd ? (await connectToProdMongoDB())!.db('mensa-app-db') : (await connectToDevMongoDB())!.db('taskman');
+
   app.locals.taskDAO = new MongoGenericDAO<Task>(db, 'tasks');
   app.locals.userDAO = new MongoGenericDAO<User>(db, 'users');
 }
 
-async function connectToMongoDB() {
+async function connectToProdMongoDB() {
+  const url = String(process.env.DBURL);
+
+  try {
+    return await MongoClient.connect(url, { useNewUrlParser: true });
+  } catch (err) {
+    console.log('Could not connect to MongoDB: ', err.stack);
+    process.exit(1);
+  }
+}
+
+async function connectToDevMongoDB() {
   const url = 'mongodb://localhost:27017';
   const options = {
     useNewUrlParser: true,
     auth: { user: 'taskman', password: 'wifhm' },
     authSource: 'taskman'
   };
+
   try {
     return await MongoClient.connect(url, options);
   } catch (err) {
