@@ -17,6 +17,9 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    outputs:
+      timestamp: ${{ steps.timestamp.outputs.timestamp }}
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
@@ -79,11 +82,9 @@ jobs:
       #     name: mensa-app
       #     path: client/android/app/build/outputs/apk/release/app-release-unsigned.apk
 
-      - name: Set current date as env variable.
-        run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
-
-      - name: Echo current date.
-        run: echo $now
+      - name: Set current timestamp.
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%dT%H:%M:%S')"
 
       - name: Create release.
         id: create_release
@@ -91,8 +92,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: tag_${{ GITHUB_SHA }}
-          release_name: Release_${{ GITHUB_SHA }}
+          tag_name: tag_${{needs.timestamp.outputs.timestamp}}
+          release_name: Release_${{needs.timestamp.outputs.timestamp}}
           body: |
             Changes in this Release
             - First Change
