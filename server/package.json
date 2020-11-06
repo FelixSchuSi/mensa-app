@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node src/app mongodb",
+    "start": "tsc && node src/app",
     "start:dev": "tsc && nodemon -e ts --exec \"npm run start\"",
     "lint": "eslint . --ext .ts",
     "test": "tsc && nyc jasmine JASMINE_CONFIG_PATH=jasmine.json"
