@@ -6,6 +6,7 @@ FROM node:12
 
 WORKDIR /server
 
+
 COPY /server/package*.json ./
 
 RUN npm install
