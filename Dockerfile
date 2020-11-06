@@ -6,7 +6,6 @@ FROM node:12
 
 WORKDIR /server
 
-RUN curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/anchor_ipv4/address
 
 COPY /server/. .
 
