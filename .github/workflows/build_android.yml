@@ -91,8 +91,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ now }}
-          release_name: Release ${{ now }}
+          tag_name: ${{ GITHUB_WORKFLOW }}
+          release_name: Release ${{ GITHUB_WORKFLOW }}
           body: |
             Changes in this Release
             - First Change
