@@ -82,9 +82,12 @@ jobs:
       #     name: mensa-app
       #     path: client/android/app/build/outputs/apk/release/app-release-unsigned.apk
 
+      - name: Set current date as env variable.
+        run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
+
       - name: Set current timestamp.
         id: timestampjob
-        run: echo "::set-output name=timestamp::$(echo date +'%Y-%m-%dT%H:%M:%S')"
+        run: echo "::set-output name=timestamp::${{ now }}"
 
       - name: Create release.
         id: create_release
