@@ -6,11 +6,9 @@ FROM node:12
 
 WORKDIR /server
 
-COPY /server/package*.json ./
+COPY /server/. .
 
 RUN npm install
-
-COPY /server/. .
 
 ENV PORT=3443
 
