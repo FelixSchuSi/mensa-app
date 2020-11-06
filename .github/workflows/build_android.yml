@@ -94,8 +94,7 @@ jobs:
           release_name: Release_${{needs.timestampjob.outputs.timestamp}}
           body: |
             Changes in this Release
-            - First Change
-            - Second Change
+            - The devs were too lazy to tell you what changed.
           draft: false
           prerelease: false
 
