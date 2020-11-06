@@ -87,7 +87,7 @@ jobs:
 
       - name: Set current timestamp.
         id: timestampjob
-        run: echo "::set-output name=timestamp::${{ now }}"
+        run: echo "::set-output name=timestamp::$now"
 
       - name: Create release.
         id: create_release
