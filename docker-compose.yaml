@@ -1,17 +1,33 @@
-version: "3.6"
-services:
+version: '3.8'
+services: 
     client:
-        build:
-            context: ./client
-            dockerfile: Dockerfile
-        environment:
-            client_PORT: "8080"
-            API_HOST: "http:localhost:8080"
-        ports:
+        build: ./client/.
+        ports: 
             - "8080:8080"
         volumes:
-            - ./client/src:/app/src/
+            - ./client/src:/app/src
+    server:
+        build: ./server/.
+        ports:
+            - "3443:3443"
+        volumes:
+            - ./server/src:/app/src
     # server:
     #     build: ./server/.
     #     ports:
     #         - "3443:3443"
+
+# version: "3.8"
+# services:
+#     client:
+#         build:
+#             context: ./client
+#             dockerfile: Dockerfile
+#         environment:
+#             client_PORT: "8080"
+#             API_HOST: "http:localhost:8080"
+#         ports:
+#             - "8080:8080"
+#         volumes:
+#             - ./client/src:/app/src/
+
