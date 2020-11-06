@@ -1,6 +1,6 @@
 import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { httpClient } from '../../http-client';
-import { router } from '@fhms-wi/router';
+import { router } from '../../../client-packages/router/router';
 import { PageMixin } from '../page.mixin';
 
 const sharedCSS = require('../shared.scss');

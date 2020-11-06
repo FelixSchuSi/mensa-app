@@ -1,5 +1,5 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
-import { router } from '@fhms-wi/router';
+import { router } from '../../../client-packages/router/router';
 import { RouteDefinition } from '../../models/route-definition';
 
 const sharedCSS = require('../shared.scss');

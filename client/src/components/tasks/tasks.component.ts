@@ -2,7 +2,7 @@ import { css, customElement, html, LitElement, property, query, TemplateResult, 
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 import { httpClient } from '../../http-client';
-import { router } from '@fhms-wi/router';
+import { router } from '../../../client-packages/router/router';
 import { PageMixin } from '../page.mixin';
 import { Task } from '../../models/task';
 

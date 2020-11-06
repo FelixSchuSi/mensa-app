@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: {
-      rewrites: [{ from: /^\/[a-z]*/, to: '/mensa-app/404.html' }]
+      rewrites: [{ from: /^\/[a-z]*/, to: '/mensa-app/index.html' }]
     },
     host: '0.0.0.0',
     port: 8080,
@@ -48,7 +48,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' }), new CopyPlugin({
+  plugins: [new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }), new CopyPlugin({
     patterns: [
       {
         from: path.resolve(__dirname, '404.html'),
