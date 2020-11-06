@@ -21,8 +21,39 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build APK
-        uses: sparkfabrik/android-build-action
+      - name: set up Node.js
+        uses: actions/setup-node@v1
         with:
-          project-path: client/android
-          output-path: mensa-app.apk
+          node-version: "12"
+
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: install dependencies
+        run: |
+          echo pwd
+          cd client
+          echo pwd
+          npm i
+
+      - name: webpack build
+        run: |
+          echo pwd
+          cd client
+          echo pwd
+          npm run build:capacitor
+
+      - name: copy webpack build
+        run: |
+          cd client
+          npx cap sync
+
+      - name: build apks
+        run: |
+          cd client/android
+          gradle build
