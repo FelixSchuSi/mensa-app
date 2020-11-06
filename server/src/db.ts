@@ -38,7 +38,7 @@ async function connectToProdMongoDB() {
   const url = String(process.env.DBURL);
 
   try {
-    return await MongoClient.connect(url, { useNewUrlParser: true });
+    return await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
   } catch (err) {
     console.log('Could not connect to MongoDB: ', err.stack);
     process.exit(1);
