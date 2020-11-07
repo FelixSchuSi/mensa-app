@@ -19,8 +19,9 @@ jobs:
       timestamp: ${{ steps.timestampstep.outputs.timestamp }}
     steps:
       - name: Set timestamp as env var.
-        run: echo "now=$(date +'Y%YM%mD%dH%HM%M')"
+        run: echo "now=asdf"
 
+        # run: echo "now=$(date +'Y%YM%mD%dH%HM%M')"
       - name: Set timestamp as output.
         id: timestampstep
         run: echo "::set-output name=test::$now"
