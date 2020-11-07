@@ -4,16 +4,18 @@ Informiere dich über aktuelle Gerichte der Mensen in Münster, verabrede dich z
 Die Anwendung kannn entweder lokal, oder mit Docker entwicklet werden.
 
 ### Entwicklung ohne Docker
-- Frontend
-   1. `cd client`
-   2. `npm install`
-   3. `npm start`
-   4. Das Frontend ist jetzt unter https://localhost:8080/mensa-app/ erreichbar.
-- Backend
-    1. `cd server`
-    2. `npm install`
-    3. `npm start`
-    4. Das Backend wartet unter http://localhost:3443/app/ auf Anfragen.
+Wenn ohne Docker entwicklet wird muss das Frontend und das Backend separat gestartet werden.
+#### Frontend
+- `cd client`
+- `npm install`
+- `npm start`
+- Das Frontend ist jetzt unter https://localhost:8080/mensa-app/ erreichbar.
+#### Backend
+- `cd server`
+- `npm install`
+- `npm run dev` Alternativ kann die Produktionsdatenbank mit `npm run prod` angesteuert werden.
+- Das Backend wartet unter http://localhost:3443/app/ auf Anfragen.
+
 
 ### Entwicklung mit Docker
 1. `docker-compose up`

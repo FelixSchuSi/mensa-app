@@ -6,3 +6,4 @@ db/**/*.map
 .nyc_output/
 coverage/
 db-data.txt
+src/secrets.json

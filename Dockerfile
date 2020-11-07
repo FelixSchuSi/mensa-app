@@ -14,4 +14,4 @@ ENV PORT=3443
 
 EXPOSE 3443
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "prod" ]

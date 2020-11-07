@@ -6,8 +6,10 @@ import { PsqlGenericDAO } from './models/psql-generic.dao';
 import { InMemoryGenericDAO } from './models/in-memory-generic.dao';
 import { Task } from './models/task';
 import { User } from './models/user';
+import { getSecrets } from './getSecrets';
+import { Secrets } from './models/secrets';
 
-const isProd: boolean = !!process.env.ISPROD;
+const useProdDB: boolean = String(process.argv[3]) === 'prodDB';
 
 export default async function startDB(app: Express, dbms = 'in-memory-db') {
   switch (dbms) {
@@ -28,13 +30,14 @@ function startInMemoryDB(app: Express) {
 }
 
 async function startMongoDB(app: Express) {
-  const db: Db = isProd ? await connectToProdMongoDB() : await connectToDevMongoDB();
+  const db: Db = useProdDB ? await connectToProdMongoDB() : await connectToDevMongoDB();
   app.locals.taskDAO = new MongoGenericDAO<Task>(db, 'tasks');
   app.locals.userDAO = new MongoGenericDAO<User>(db, 'users');
 }
 
 async function connectToProdMongoDB(): Promise<Db> {
-  const url = String(process.env.DBURL);
+  const secrets: Secrets = await getSecrets();
+  const url: string = secrets.DBURL;
   try {
     const mongoClient = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
     return mongoClient.db('mensa-app-db');
@@ -48,8 +51,9 @@ async function connectToDevMongoDB(): Promise<Db> {
   const url = 'mongodb://localhost:27017';
   const options = {
     useNewUrlParser: true,
-    auth: { user: 'taskman', password: 'wifhm' },
-    authSource: 'taskman'
+    useUnifiedTopology: true,
+    auth: { user: 'mensa-app-user', password: 'm3ns4-4pp++' },
+    authSource: 'mensa-app-db'
   };
 
   try {
