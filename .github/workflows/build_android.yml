@@ -12,13 +12,22 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  timestampjob:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      timestamp: ${{ steps.timestampstep.outputs.timestamp }}
+    steps:
+      - name: Set timestamp as env var.
+        run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
+
+      - name: Set timestamp as output.
+        id: timestampstep
+        run: echo "::set-output name=test::$now"
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    outputs:
-      timestamp: ${{ steps.timestampjob.outputs.timestamp }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -77,12 +86,12 @@ jobs:
           name: mensa-app-debug
           path: client/android/app/build/outputs/apk/debug/app-debug.apk
 
-      - name: Set current date as env variable.
-        run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
+      # - name: Set current date as env variable.
+      #   run: echo "now=$(date +'%Y-%m-%dT%H:%M:%S')"
 
-      - name: Set current timestamp.
-        id: timestampjob
-        run: echo "::set-output name=timestamp::$now"
+      # - name: Set current timestamp.
+      #   id: timestampjob
+      #   run: echo "::set-output name=timestamp::$now"
 
       - name: Create release.
         id: create_release
@@ -90,8 +99,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: ${{ needs.timestampjob.outputs.timestamp }}
+          release_name: Release ${{ needs.timestampjob.outputs.timestamp }}
           body: |
             Changes in this Release
             - The devs were too lazy to tell you what changed.
