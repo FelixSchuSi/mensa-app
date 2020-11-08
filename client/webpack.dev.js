@@ -14,11 +14,7 @@ module.exports = {
     host: '0.0.0.0',
     port: 8080,
     public: '0.0.0.0:8080',
-    publicPath: '/mensa-app/',
-    https: true,
-    key: fs.readFileSync('./certs/server.key.pem'),
-    cert: fs.readFileSync('./certs/server.cert.pem'),
-    ca: fs.readFileSync('./certs/intermediate-ca.cert.pem')
+    publicPath: '/mensa-app/'
   },
   resolve: { extensions: ['.ts', '.js'] },
   module: {
