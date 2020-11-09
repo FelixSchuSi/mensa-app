@@ -64,6 +64,7 @@ jobs:
           cd client/android/app/build/outputs/apk/release
           ls -lh
 
+      #
       # - name: Upload release apk.
       #   uses: actions/upload-artifact@v2
       #   with:
