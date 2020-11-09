@@ -48,7 +48,7 @@ jobs:
       - name: Copy webpack build.
         run: |
           cd client
-          npx cap sync
+          npx cap sync android
 
       - name: Build apks.
         env:
