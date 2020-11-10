@@ -1,5 +1,5 @@
 import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
-import { router } from '../../../client-packages/router/router';
+import { routerService } from '../../services/router.service';
 import { httpService } from '../../services/http.service';
 import { PageMixin } from '../page.mixin';
 
@@ -56,7 +56,7 @@ class SignInComponent extends PageMixin(LitElement) {
       };
       try {
         await httpService.post('users/sign-in', authData);
-        router.navigate('tasks');
+        routerService.navigate('tasks');
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }

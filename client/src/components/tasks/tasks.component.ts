@@ -1,7 +1,7 @@
 import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
-import { router } from '../../../client-packages/router/router';
+import { routerService } from '../../services/router.service';
 import { PageMixin } from '../page.mixin';
 import { Task } from '../../models/task';
 import { httpService } from '../../services/http.service';
@@ -33,7 +33,7 @@ class TasksComponent extends PageMixin(LitElement) {
       this.tasks = (await response.json()).results;
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {
-        router.navigate('users/sign-in');
+        routerService.navigate('users/sign-in');
       } else {
         this.setNotification({ errorMessage: message });
       }

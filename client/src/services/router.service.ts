@@ -1,6 +1,6 @@
 export type RouteListener = (relUrl: string) => void;
 export type Unsubscribe = () => void;
-export class Router {
+export class RouterService {
   private listeners: RouteListener[] = [];
   private rootPath = '/';
 
@@ -29,22 +29,22 @@ export class Router {
     };
   }
 
-  navigate(relUrl: string) {
+  navigate(relUrl: string): void {
     history.pushState(null, '', this.withRootPath(relUrl));
     this.notifyListeners();
   }
 
   // e. g. 'user/sign-in' (without leading slash)
-  getPath() {
+  getPath(): string {
     return this.withoutRootPath(location.pathname);
   }
 
-  private notifyListeners() {
+  private notifyListeners(): void {
     const path = this.getPath();
     this.listeners.forEach(listener => listener(path));
   }
 
-  private shouldIgnoreEvent(event: MouseEvent) {
+  private shouldIgnoreEvent(event: MouseEvent): boolean {
     return (
       event.defaultPrevented || event.button !== 0 || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey
     );
@@ -63,11 +63,11 @@ export class Router {
     return elem && this.isAnchor(elem) ? elem : null;
   }
 
-  private isAnchor(elem: HTMLElement) {
-    return elem.nodeName && elem.nodeName.toLowerCase() === 'a';
+  private isAnchor(elem: HTMLElement): boolean {
+    return !!elem.nodeName && elem.nodeName.toLowerCase() === 'a';
   }
 
-  private shouldIgnoreAnchor(anchor: HTMLAnchorElement) {
+  private shouldIgnoreAnchor(anchor: HTMLAnchorElement): boolean {
     if (anchor.target && anchor.target.toLowerCase() !== '_self') {
       return true; // it has a non-default target
     }
@@ -84,9 +84,10 @@ export class Router {
     if (origin !== window.location.origin) {
       return true; // target is external to the app
     }
+    return false;
   }
 
-  private getAnchorOrigin(anchor: HTMLAnchorElement) {
+  private getAnchorOrigin(anchor: HTMLAnchorElement): string {
     const port = anchor.port;
     const protocol = anchor.protocol;
     const defaultHttp = protocol === 'http:' && port === '80';
@@ -95,7 +96,7 @@ export class Router {
     return `${protocol}//${host}`;
   }
 
-  private withRootPath(relURL: string) {
+  private withRootPath(relURL: string): string {
     if (relURL.startsWith(this.rootPath)) {
       return relURL;
     } else {
@@ -103,7 +104,7 @@ export class Router {
     }
   }
 
-  private withoutRootPath(relURL: string) {
+  private withoutRootPath(relURL: string): string {
     if (relURL.startsWith(this.rootPath)) {
       return relURL.substring(this.rootPath.length);
     } else {
@@ -112,4 +113,4 @@ export class Router {
   }
 }
 
-export const router = new Router();
+export const routerService = new RouterService();

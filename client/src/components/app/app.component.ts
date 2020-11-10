@@ -1,5 +1,5 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
-import { router } from '../../../client-packages/router/router';
+import { routerService } from '../../services/router.service';
 import { RouteDefinition } from '../../models/route-definition';
 
 const sharedCSS = require('../shared.scss');
@@ -28,16 +28,16 @@ class AppComponent extends LitElement {
   ];
 
   protected firstUpdated(): void {
-    router.subscribe(() => this.requestUpdate());
+    routerService.subscribe(() => this.requestUpdate());
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');
-      router.navigate(path);
+      routerService.navigate(path);
     }
   }
 
   protected renderRouterOutlet(): TemplateResult {
-    switch (router.getPath()) {
+    switch (routerService.getPath()) {
       case 'users/sign-in':
         return html`<app-sign-in></app-sign-in>`;
       case 'users/sign-up':
