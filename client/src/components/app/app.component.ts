@@ -18,7 +18,7 @@ class AppComponent extends LitElement {
   ];
 
   @property()
-  protected appTitle: string = 'Aufgabenverwaltung';
+  protected appTitle = 'Aufgabenverwaltung';
 
   @property({ type: Array })
   protected linkItems: RouteDefinition[] = [
@@ -54,9 +54,7 @@ class AppComponent extends LitElement {
   protected render(): TemplateResult {
     return html`
       <app-header title="${this.appTitle}" .linkItems=${this.linkItems}> </app-header>
-      <div class="main container">
-        ${this.renderRouterOutlet()}
-      </div>
+      <div class="main container">${this.renderRouterOutlet()}</div>
     `;
   }
 }

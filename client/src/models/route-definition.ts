@@ -1,4 +1,4 @@
 export interface RouteDefinition {
-    title: string;
-    routePath: string;
+  title: string;
+  routePath: string;
 }

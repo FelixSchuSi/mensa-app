@@ -10,10 +10,10 @@ class NotificationComponent extends LitElement {
   `;
 
   @property()
-  public error: string = '';
+  public error = '';
 
   @property()
-  public info: string = '';
+  public info = '';
 
   render() {
     return html`

@@ -18,13 +18,13 @@ class HeaderComponent extends LitElement {
   ];
 
   @property({ type: String })
-  public appTitle: string = '';
+  public appTitle = '';
 
   @property({ type: Array })
   public linkItems: RouteDefinition[] = [];
 
   @property({ type: Boolean })
-  protected navbarOpen: boolean = false;
+  protected navbarOpen = false;
 
   render() {
     return html`
@@ -44,19 +44,19 @@ class HeaderComponent extends LitElement {
         </button>
         <div
           class=${classMap({
-      'collapse': true,
-      'navbar-collapse': true,
-      'justify-content-end': true,
-      'show': this.navbarOpen
-    })}
+            'collapse': true,
+            'navbar-collapse': true,
+            'justify-content-end': true,
+            'show': this.navbarOpen
+          })}
           id="navbarNav"
         >
           <ul class="navbar-nav">
             ${this.linkItems.map(
-      linkItem => html`
+              linkItem => html`
                 <li class="nav-item"><a class="nav-link" href="${linkItem.routePath}">${linkItem.title}</a></li>
               `
-    )}
+            )}
           </ul>
         </div>
       </nav>

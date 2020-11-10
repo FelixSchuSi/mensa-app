@@ -4,10 +4,10 @@ import { LitElement, property, html, TemplateResult } from 'lit-element';
 export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T) => {
   class Page extends base {
     @property()
-    private errorMessage: string = '';
+    private errorMessage = '';
 
     @property()
-    private infoMessage: string = '';
+    private infoMessage = '';
 
     private onDestroyCallbacks: (() => void)[] = [];
 

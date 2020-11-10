@@ -1,3 +1,4 @@
+const { DefinePlugin } = require('webpack');
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -39,7 +40,11 @@ module.exports = function (config) {
             ]
           }
         ]
-      }
+      },
+      plugins: [
+        new DefinePlugin({
+          ISPROD: JSON.stringify(false)
+        })]
     }
   });
 };

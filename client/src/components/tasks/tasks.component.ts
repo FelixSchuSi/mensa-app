@@ -1,11 +1,10 @@
 import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
-import { httpClient } from '../../http-client';
 import { router } from '../../../client-packages/router/router';
 import { PageMixin } from '../page.mixin';
 import { Task } from '../../models/task';
-
+import { httpService } from '../../services/http.service';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./tasks.component.scss');
@@ -30,7 +29,7 @@ class TasksComponent extends PageMixin(LitElement) {
 
   protected async firstUpdated(): Promise<void> {
     try {
-      const response = await httpClient.get('tasks' + location.search);
+      const response = await httpService.get('tasks' + location.search);
       this.tasks = (await response.json()).results;
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {
@@ -88,11 +87,9 @@ class TasksComponent extends PageMixin(LitElement) {
     };
 
     try {
-      await httpClient.patch('tasks/' + updatedTask.id, updatedTask);
+      await httpService.patch('tasks/' + updatedTask.id, updatedTask);
       this.tasks = this.tasks.map((task: Task) =>
-        task === taskToToggle
-          ? ({ ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' })
-          : task
+        task === taskToToggle ? { ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } : task
       );
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
@@ -101,7 +98,7 @@ class TasksComponent extends PageMixin(LitElement) {
 
   protected async removeTask(taskToRemove: Task): Promise<void> {
     try {
-      await httpClient.delete('tasks/' + taskToRemove.id);
+      await httpService.delete('tasks/' + taskToRemove.id);
       this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
@@ -112,7 +109,7 @@ class TasksComponent extends PageMixin(LitElement) {
     event.preventDefault();
     const partialTask: Partial<Task> = { title: this.titleElement.value };
     try {
-      const response = await httpClient.post('tasks', partialTask);
+      const response = await httpService.post('tasks', partialTask);
       const task: Task = await response.json();
       this.tasks = [...this.tasks, task];
       this.titleElement.value = '';

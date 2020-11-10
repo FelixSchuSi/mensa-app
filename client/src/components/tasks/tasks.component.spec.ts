@@ -1,5 +1,5 @@
-import { httpClient } from '../../http-client';
 import { LitElement } from 'lit-element';
+import { httpService } from '../../services/http.service';
 import './tasks.component';
 
 describe('app-tasks', () => {
@@ -17,9 +17,9 @@ describe('app-tasks', () => {
   });
 
   it('should fetch the tasks on first update', async () => {
-    spyOn(httpClient, 'get');
+    spyOn(httpService, 'get');
     await element.updateComplete;
-    expect(httpClient.get).toHaveBeenCalledTimes(1);
+    expect(httpService.get).toHaveBeenCalledTimes(1);
   });
 
   it('should render the fetched tasks', async () => {
@@ -28,7 +28,7 @@ describe('app-tasks', () => {
       { id: 2, title: 'Aufgabe 2', status: 'open' }
     ];
 
-    spyOn(httpClient, 'get').and.returnValue(
+    spyOn(httpService, 'get').and.returnValue(
       Promise.resolve({
         json() {
           return Promise.resolve({ results: tasks });

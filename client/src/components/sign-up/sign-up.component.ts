@@ -1,6 +1,6 @@
 import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
-import { httpClient } from '../../http-client';
 import { router } from '../../../client-packages/router/router';
+import { httpService } from '../../services/http.service';
 import { PageMixin } from '../page.mixin';
 
 const sharedCSS = require('../shared.scss');
@@ -82,7 +82,7 @@ class SignUpComponent extends PageMixin(LitElement) {
         passwordCheck: this.passwordCheckElement.value
       };
       try {
-        await httpClient.post('users', accountData);
+        await httpService.post('users', accountData);
         router.navigate('tasks');
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });

@@ -8,7 +8,7 @@ export class Router {
     window.onpopstate = () => this.notifyListeners();
     document.addEventListener('click', (event: MouseEvent) => {
       if (!this.shouldIgnoreEvent(event)) {
-        let anchor = this.getAnchor(event); // a-Element ermitteln
+        const anchor = this.getAnchor(event); // a-Element ermitteln
         if (anchor && !this.shouldIgnoreAnchor(anchor)) {
           // nur interne Links
           event.preventDefault();
@@ -51,7 +51,7 @@ export class Router {
   }
 
   private getAnchor(event: MouseEvent): HTMLAnchorElement {
-    for (let target of event.composedPath ? event.composedPath() : []) {
+    for (const target of event.composedPath ? event.composedPath() : []) {
       if (this.isAnchor(target as HTMLElement)) {
         return target as HTMLAnchorElement;
       }
