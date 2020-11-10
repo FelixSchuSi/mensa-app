@@ -9,15 +9,15 @@ class HttpService {
     return this.createFetch('GET', url);
   }
 
-  public post(url: string, body: Record<string, unknown>): Promise<Response> {
+  public post(url: string, body: unknown): Promise<Response> {
     return this.createFetch('POST', url, body);
   }
 
-  public put(url: string, body: Record<string, unknown>): Promise<Response> {
+  public put(url: string, body: unknown): Promise<Response> {
     return this.createFetch('PUT', url, body);
   }
 
-  public patch(url: string, body: Record<string, unknown>): Promise<Response> {
+  public patch(url: string, body: unknown): Promise<Response> {
     return this.createFetch('PATCH', url, body);
   }
 
@@ -25,7 +25,7 @@ class HttpService {
     return this.createFetch('DELETE', url);
   }
 
-  private async createFetch(method: string, url: string, body?: any): Promise<Response> {
+  private async createFetch(method: string, url: string, body?: unknown): Promise<Response> {
     const requestInit: RequestInit = {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       method: method,
