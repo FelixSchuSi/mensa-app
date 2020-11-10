@@ -4,7 +4,7 @@ import { PageMixin } from '../page.mixin';
 
 @customElement('app-sign-out')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class SignOutComponent extends PageMixin(LitElement) {
+class SignOutPage extends PageMixin(LitElement) {
   protected render(): TemplateResult {
     return html`${this.renderNotification()}`;
   }

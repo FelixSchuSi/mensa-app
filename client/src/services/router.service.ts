@@ -58,6 +58,7 @@ export class RouterService {
         return target as HTMLAnchorElement;
       }
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let elem: any = event.target;
     while (elem && !this.isAnchor(elem)) {
       elem = elem.parentNode;

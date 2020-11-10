@@ -41,6 +41,7 @@ class HttpService {
       let message: string = await response.text();
       try {
         message = JSON.parse(message).message;
+        // eslint-disable-next-line no-empty
       } catch (e) {}
       message = message || response.statusText;
       return Promise.reject({ message, statusCode: response.status });
@@ -48,6 +49,7 @@ class HttpService {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const baseURL: string = ISPROD
   ? 'https://mensa-app-5jrmv.ondigitalocean.app/api/'

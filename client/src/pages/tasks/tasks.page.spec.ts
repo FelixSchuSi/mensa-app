@@ -1,6 +1,6 @@
 import { LitElement } from 'lit-element';
 import { httpService } from '../../services/http.service';
-import './tasks.component';
+import './tasks.page';
 
 describe('app-tasks', () => {
   let element: LitElement;

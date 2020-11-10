@@ -7,12 +7,12 @@ import { Task } from '../../models/task';
 import { httpService } from '../../services/http.service';
 import { ROUTES } from '../../routes';
 
-const sharedCSS = require('../shared.scss');
-const componentCSS = require('./tasks.component.scss');
+const sharedCSS = require('../../shared.scss');
+const componentCSS = require('./tasks.page.scss');
 
 @customElement('app-tasks')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class TasksComponent extends PageMixin(LitElement) {
+class TasksPage extends PageMixin(LitElement) {
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}

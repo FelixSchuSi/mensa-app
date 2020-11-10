@@ -1,7 +1,7 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
-import { routerService } from '../../services/router.service';
-import { LinkItem } from '../../models/route-definition';
-import { ROUTES } from '../../routes';
+import { routerService } from '../services/router.service';
+import { LinkItem } from '../models/route-definition';
+import { ROUTES } from '../routes';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');

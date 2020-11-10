@@ -1,11 +1,11 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
-import { TaskStatus } from '../../../models/task-status';
+import { TaskStatus } from '../../models/task-status';
 
-const componentCSS = require('./task.component.scss');
+const componentCSS = require('./task.widget.scss');
 
 @customElement('app-task')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class TaskComponent extends LitElement {
+class TaskWidget extends LitElement {
   static styles = css`
     ${unsafeCSS(componentCSS)}
   `;

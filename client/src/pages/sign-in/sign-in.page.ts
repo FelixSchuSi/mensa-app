@@ -4,12 +4,12 @@ import { httpService } from '../../services/http.service';
 import { PageMixin } from '../page.mixin';
 import { ROUTES } from '../../routes';
 
-const sharedCSS = require('../shared.scss');
-const componentCSS = require('./sign-in.component.scss');
+const sharedCSS = require('../../shared.scss');
+const componentCSS = require('./sign-in.page.scss');
 
 @customElement('app-sign-in')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class SignInComponent extends PageMixin(LitElement) {
+class SignInPage extends PageMixin(LitElement) {
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}

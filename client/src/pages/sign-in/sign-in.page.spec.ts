@@ -1,5 +1,5 @@
 import { LitElement } from 'lit-element';
-import './sign-in.component';
+import './sign-in.page';
 
 describe('app-sign-in', () => {
   let element: LitElement;

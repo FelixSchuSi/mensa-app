@@ -1,14 +1,14 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { LinkItem } from '../../../models/route-definition';
-import { ROUTES } from '../../../routes';
+import { LinkItem } from '../../models/route-definition';
+import { ROUTES } from '../../routes';
 
 const sharedCSS = require('../../shared.scss');
-const componentCSS = require('./header.component.scss');
+const componentCSS = require('./header.widget.scss');
 
 @customElement('app-header')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class HeaderComponent extends LitElement {
+class HeaderWidget extends LitElement {
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}

@@ -4,7 +4,7 @@ const sharedCSS = require('../../shared.scss');
 
 @customElement('app-notification')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class NotificationComponent extends LitElement {
+class NotificationWidget extends LitElement {
   static styles = css`
     ${unsafeCSS(sharedCSS)}
   `;

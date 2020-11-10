@@ -1,9 +1,9 @@
 import './index.scss';
-import './components/app/app.component.ts';
-import './components/sign-in/sign-in.component.ts';
-import './components/sign-up/sign-up.component.ts';
-import './components/widgets/header/header.component.ts';
-import './components/widgets/notification/notification.component.ts';
-import './components/sign-out/sign-out.component.ts';
-import './components/tasks/tasks.component.ts';
-import './components/widgets/task/task.component.ts';
+import './pages/app.component.ts';
+import './pages/sign-in/sign-in.page.ts';
+import './pages/sign-up/sign-up.page.ts';
+import './widgets/header/header.widget.ts';
+import './widgets/notification/notification.widget.ts';
+import './pages/sign-out/sign-out.page.ts';
+import './pages/tasks/tasks.page.ts';
+import './widgets/task/task.widget.ts';
