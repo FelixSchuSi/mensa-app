@@ -3,21 +3,21 @@ interface HttpServiceConfig {
 }
 
 class HttpService {
-  constructor(private config: HttpServiceConfig) { }
+  constructor(private config: HttpServiceConfig) {}
 
   public get(url: string): Promise<Response> {
     return this.createFetch('GET', url);
   }
 
-  public post(url: string, body: any): Promise<Response> {
+  public post(url: string, body: Record<string, unknown>): Promise<Response> {
     return this.createFetch('POST', url, body);
   }
 
-  public put(url: string, body: any): Promise<Response> {
+  public put(url: string, body: Record<string, unknown>): Promise<Response> {
     return this.createFetch('PUT', url, body);
   }
 
-  public patch(url: string, body: any): Promise<Response> {
+  public patch(url: string, body: Record<string, unknown>): Promise<Response> {
     return this.createFetch('PATCH', url, body);
   }
 
@@ -41,7 +41,7 @@ class HttpService {
       let message: string = await response.text();
       try {
         message = JSON.parse(message).message;
-      } catch (e) { }
+      } catch (e) {}
       message = message || response.statusText;
       return Promise.reject({ message, statusCode: response.status });
     }
@@ -49,5 +49,7 @@ class HttpService {
 }
 
 // @ts-ignore
-const baseURL: string = ISPROD ? 'https://mensa-app-5jrmv.ondigitalocean.app/api/' : `http://${location.hostname}:3443/api/`;
+const baseURL: string = ISPROD
+  ? 'https://mensa-app-5jrmv.ondigitalocean.app/api/'
+  : `http://${location.hostname}:3443/api/`;
 export const httpService: HttpService = new HttpService({ baseURL });

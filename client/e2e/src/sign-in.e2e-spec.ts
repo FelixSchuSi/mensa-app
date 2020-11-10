@@ -21,7 +21,7 @@ describe('sign-in', () => {
   });
 });
 
-async function getShadowRoot(shadowHost: WebElement) {
+async function getShadowRoot(shadowHost: WebElement): Promise<WebElement> {
   const script = 'return arguments[0].shadowRoot';
   return (await shadowHost.getDriver().executeScript(script, shadowHost)) as WebElement;
 }

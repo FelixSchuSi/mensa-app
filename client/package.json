@@ -11,6 +11,7 @@
     "build:capacitor": "webpack --config ./webpack.capacitor.js --progress",
     "build:watch": "webpack --config ./webpack.capacitor.js --watch --progress",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "test": "karma start",
     "e2e": "tsc -p e2e && jasmine JASMINE_CONFIG_PATH=e2e/jasmine.json",
     "predeploy": "npm run build",

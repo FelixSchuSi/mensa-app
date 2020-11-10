@@ -1,4 +1,4 @@
-import { customElement, html, css, unsafeCSS, LitElement, property } from 'lit-element';
+import { customElement, html, css, unsafeCSS, LitElement, property, TemplateResult } from 'lit-element';
 
 const sharedCSS = require('../../shared.scss');
 
@@ -15,7 +15,7 @@ class NotificationComponent extends LitElement {
   @property()
   public info = '';
 
-  render() {
+  protected render(): TemplateResult {
     return html`
       ${this.error ? html`<div class="alert alert-danger">${this.error}</div>` : ''}
       ${this.info ? html`<div class="alert alert-info">${this.info}</div>` : ''}

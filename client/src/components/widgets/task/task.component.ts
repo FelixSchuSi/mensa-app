@@ -15,11 +15,14 @@ class TaskComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <span class="toggle-task" @click="${() => this.dispatchEvent(new CustomEvent('apptaskstatusclick'))}"
+      <span class="toggle-task" @click="${(): boolean => this.dispatchEvent(new CustomEvent('apptaskstatusclick'))}"
         >${this.status === 'done' ? html`<span class="status"></span>` : ''}</span
       >
       <slot name="title"></slot>
-      <span class="remove-task" @click="${() => this.dispatchEvent(new CustomEvent('apptaskremoveclick'))}"></span>
+      <span
+        class="remove-task"
+        @click="${(): boolean => this.dispatchEvent(new CustomEvent('apptaskremoveclick'))}"
+      ></span>
     `;
   }
 }

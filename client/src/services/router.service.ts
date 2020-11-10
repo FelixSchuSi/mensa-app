@@ -5,7 +5,7 @@ export class RouterService {
   private rootPath = '/';
 
   constructor() {
-    window.onpopstate = () => this.notifyListeners();
+    window.onpopstate = (): void => this.notifyListeners();
     document.addEventListener('click', (event: MouseEvent) => {
       if (!this.shouldIgnoreEvent(event)) {
         const anchor = this.getAnchor(event); // a-Element ermitteln
@@ -21,21 +21,21 @@ export class RouterService {
     }
   }
 
-  subscribe(listener: RouteListener): Unsubscribe {
+  public subscribe(listener: RouteListener): Unsubscribe {
     this.listeners.push(listener);
-    return () => {
+    return (): void => {
       // unsubscribe function
       this.listeners = this.listeners.filter(other => other !== listener);
     };
   }
 
-  navigate(relUrl: string): void {
+  public navigate(relUrl: string): void {
     history.pushState(null, '', this.withRootPath(relUrl));
     this.notifyListeners();
   }
 
   // e. g. 'user/sign-in' (without leading slash)
-  getPath(): string {
+  public getPath(): string {
     return this.withoutRootPath(location.pathname);
   }
 

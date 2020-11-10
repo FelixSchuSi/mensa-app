@@ -59,23 +59,23 @@ class TasksComponent extends PageMixin(LitElement) {
       </form>
       <div class="tasks">
         ${guard(
-      [this.tasks],
-      () => html`
+          [this.tasks],
+          () => html`
             ${repeat(
-        this.tasks,
-        task => task.id,
-        task => html`
+              this.tasks,
+              task => task.id,
+              task => html`
                 <app-task
                   status="${task.status}"
-                  @apptaskstatusclick=${() => this.toggleTask(task)}
-                  @apptaskremoveclick=${() => this.removeTask(task)}
+                  @apptaskstatusclick=${(): Promise<void> => this.toggleTask(task)}
+                  @apptaskremoveclick=${(): Promise<void> => this.removeTask(task)}
                 >
                   <span slot="title">${task.title}</span>
                 </app-task>
               `
-      )}
+            )}
           `
-    )}
+        )}
       </div>
     `;
   }

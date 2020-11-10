@@ -1,4 +1,4 @@
-import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { RouteDefinition } from '../../../models/route-definition';
 
@@ -26,7 +26,7 @@ class HeaderComponent extends LitElement {
   @property({ type: Boolean })
   protected navbarOpen = false;
 
-  render() {
+  protected render(): TemplateResult {
     return html`
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/"><span class="logo"></span>${this.appTitle}</a>
@@ -63,7 +63,7 @@ class HeaderComponent extends LitElement {
     `;
   }
 
-  toggle() {
+  protected toggle(): void {
     this.navbarOpen = !this.navbarOpen;
   }
 }
