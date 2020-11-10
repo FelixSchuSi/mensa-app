@@ -1,4 +1,4 @@
-export interface RouteDefinition {
+export interface LinkItem {
   title: string;
   routePath: string;
 }

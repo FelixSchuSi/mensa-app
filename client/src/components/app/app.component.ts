@@ -1,6 +1,6 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { routerService } from '../../services/router.service';
-import { RouteDefinition } from '../../models/route-definition';
+import { LinkItem } from '../../models/route-definition';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
@@ -21,7 +21,7 @@ class AppComponent extends LitElement {
   protected appTitle = 'Aufgabenverwaltung';
 
   @property({ type: Array })
-  protected linkItems: RouteDefinition[] = [
+  protected linkItems: LinkItem[] = [
     { title: 'Konto erstellen', routePath: 'users/sign-up' },
     { title: 'Anmelden', routePath: 'users/sign-in' },
     { title: 'Abmelden', routePath: 'users/sign-out' }
@@ -53,7 +53,7 @@ class AppComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <app-header title="${this.appTitle}" .linkItems=${this.linkItems}> </app-header>
+      <app-header title="${this.appTitle}" .linkItems=${this.linkItems}></app-header>
       <div class="main container">${this.renderRouterOutlet()}</div>
     `;
   }

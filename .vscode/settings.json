@@ -1,15 +1,17 @@
 {
-    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
-    "files.exclude": {
-      "**/*.js": { "when": "$(basename).ts" },
-      "**/*.js.map": true
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "files.exclude": {
+    "**/*.js": {
+      "when": "$(basename).ts"
     },
-    // "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "lit-plugin.rules.no-unknown-tag-name": "warning",
-    "lit-plugin.rules.no-unknown-attribute": "warning",
-    "lit-plugin.rules.no-unknown-property": "warning",
-    "lit-plugin.rules.no-unknown-event": "warning",
-    "lit-plugin.rules.no-unknown-slot": "warning",
-    "lit-plugin.no-property-visibility-mismatch": "warning"
+    "**/*.js.map": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "lit-plugin.rules.no-unknown-tag-name": "warning",
+  "lit-plugin.rules.no-unknown-attribute": "warning",
+  "lit-plugin.rules.no-unknown-property": "warning",
+  "lit-plugin.rules.no-unknown-event": "warning",
+  "lit-plugin.rules.no-unknown-slot": "warning",
+  "lit-plugin.no-property-visibility-mismatch": "warning"
 }

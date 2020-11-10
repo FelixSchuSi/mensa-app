@@ -1,6 +1,6 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { RouteDefinition } from '../../../models/route-definition';
+import { LinkItem } from '../../../models/route-definition';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./header.component.scss');
@@ -21,7 +21,7 @@ class HeaderComponent extends LitElement {
   public appTitle = '';
 
   @property({ type: Array })
-  public linkItems: RouteDefinition[] = [];
+  public linkItems: LinkItem[] = [];
 
   @property({ type: Boolean })
   protected navbarOpen = false;
@@ -44,19 +44,19 @@ class HeaderComponent extends LitElement {
         </button>
         <div
           class=${classMap({
-            'collapse': true,
-            'navbar-collapse': true,
-            'justify-content-end': true,
-            'show': this.navbarOpen
-          })}
+      'collapse': true,
+      'navbar-collapse': true,
+      'justify-content-end': true,
+      'show': this.navbarOpen
+    })}
           id="navbarNav"
         >
           <ul class="navbar-nav">
             ${this.linkItems.map(
-              linkItem => html`
+      linkItem => html`
                 <li class="nav-item"><a class="nav-link" href="${linkItem.routePath}">${linkItem.title}</a></li>
               `
-            )}
+    )}
           </ul>
         </div>
       </nav>
