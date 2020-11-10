@@ -1,8 +1,7 @@
 import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
-import { routerService } from '../../services/router.service';
-import { httpService } from '../../services/http.service';
 import { PageMixin } from '../page.mixin';
-import { ROUTES } from '../../routes';
+import { SignUpData } from '../../models/sign-up-data';
+import { userService } from '../../services/user.service';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -75,16 +74,14 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected async submit(): Promise<void> {
     if (this.isFormValid()) {
-      // TODO: Create separate frontend userservice and create interfaces for login and signup data.
-      const accountData = {
+      const signUpData: SignUpData = {
         name: this.nameElement.value,
         email: this.emailElement.value,
         password: this.passwordElement.value,
         passwordCheck: this.passwordCheckElement.value
       };
       try {
-        await httpService.post('users', accountData);
-        routerService.navigate(ROUTES.TASKS);
+        await userService.signUp(signUpData);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }

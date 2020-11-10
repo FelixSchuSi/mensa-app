@@ -1,6 +1,6 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { routerService } from '../services/router.service';
-import { LinkItem } from '../models/route-definition';
+import { LinkItem } from '../models/link-item';
 import { ROUTES } from '../routes';
 
 const sharedCSS = require('../shared.scss');

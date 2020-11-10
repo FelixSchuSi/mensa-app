@@ -1,6 +1,6 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
-import { LinkItem } from '../../models/route-definition';
+import { LinkItem } from '../../models/link-item';
 import { ROUTES } from '../../routes';
 
 const sharedCSS = require('../../shared.scss');

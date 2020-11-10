@@ -1,5 +1,5 @@
 import { customElement, html, LitElement, TemplateResult } from 'lit-element';
-import { httpService } from '../../services/http.service';
+import { userService } from '../../services/user.service';
 import { PageMixin } from '../page.mixin';
 
 @customElement('app-sign-out')
@@ -11,7 +11,7 @@ class SignOutPage extends PageMixin(LitElement) {
 
   protected async firstUpdated(): Promise<void> {
     try {
-      await httpService.delete('users/sign-out');
+      await userService.logOut();
       this.setNotification({ infoMessage: 'Sie wurden erfolgreich abgemeldet!' });
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
