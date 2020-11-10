@@ -1,6 +1,7 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { routerService } from '../../services/router.service';
 import { LinkItem } from '../../models/route-definition';
+import { ROUTES } from '../../routes';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
@@ -22,9 +23,9 @@ class AppComponent extends LitElement {
 
   @property({ type: Array })
   protected linkItems: LinkItem[] = [
-    { title: 'Konto erstellen', routePath: 'users/sign-up' },
-    { title: 'Anmelden', routePath: 'users/sign-in' },
-    { title: 'Abmelden', routePath: 'users/sign-out' }
+    { title: 'Konto erstellen', routePath: ROUTES.SIGN_UP },
+    { title: 'Anmelden', routePath: ROUTES.SIGN_IN },
+    { title: 'Abmelden', routePath: ROUTES.SIGN_UP }
   ];
 
   protected firstUpdated(): void {
@@ -32,19 +33,19 @@ class AppComponent extends LitElement {
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');
-      routerService.navigate(path);
+      routerService.navigate(<ROUTES>path);
     }
   }
 
   protected renderRouterOutlet(): TemplateResult {
     switch (routerService.getPath()) {
-      case 'users/sign-in':
+      case ROUTES.SIGN_IN:
         return html`<app-sign-in></app-sign-in>`;
-      case 'users/sign-up':
+      case ROUTES.SIGN_UP:
         return html`<app-sign-up></app-sign-up>`;
-      case 'users/sign-out':
+      case ROUTES.SIGN_OUT:
         return html`<app-sign-out></app-sign-out>`;
-      case 'tasks':
+      case ROUTES.TASKS:
         return html`<app-tasks></app-tasks>`;
       default:
         return html`<app-tasks></app-tasks>`;

@@ -1,5 +1,5 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
-import { TaskStatus } from '../../../models/task';
+import { TaskStatus } from '../../../models/task-status';
 
 const componentCSS = require('./task.component.scss');
 

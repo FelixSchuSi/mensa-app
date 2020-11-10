@@ -2,6 +2,7 @@ import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS 
 import { routerService } from '../../services/router.service';
 import { httpService } from '../../services/http.service';
 import { PageMixin } from '../page.mixin';
+import { ROUTES } from '../../routes';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./sign-in.component.scss');
@@ -56,7 +57,7 @@ class SignInComponent extends PageMixin(LitElement) {
       };
       try {
         await httpService.post('users/sign-in', authData);
-        routerService.navigate('tasks');
+        routerService.navigate(ROUTES.TASKS);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }
