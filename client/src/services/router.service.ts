@@ -1,4 +1,4 @@
-import { ROUTES } from '../routes';
+import { Routes } from '../routes';
 
 export type RouteListener = (relUrl: string) => void;
 export type Unsubscribe = () => void;
@@ -14,7 +14,7 @@ export class RouterService {
         if (anchor && !this.shouldIgnoreAnchor(anchor)) {
           // nur interne Links
           event.preventDefault();
-          this.navigate(<ROUTES>(anchor.pathname + anchor.search + anchor.hash));
+          this.navigate(<Routes>(anchor.pathname + anchor.search + anchor.hash));
         }
       }
     });
@@ -31,7 +31,7 @@ export class RouterService {
     };
   }
 
-  public navigate(relUrl: ROUTES): void {
+  public navigate(relUrl: Routes): void {
     history.pushState(null, '', this.withRootPath(relUrl));
     this.notifyListeners();
   }

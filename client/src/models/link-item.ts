@@ -1,6 +1,6 @@
-import { ROUTES } from '../routes';
+import { Routes } from '../routes';
 
 export interface LinkItem {
   title: string;
-  routePath: ROUTES;
+  routePath: Routes;
 }

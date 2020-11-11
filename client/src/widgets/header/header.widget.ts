@@ -1,7 +1,7 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { LinkItem } from '../../models/link-item';
-import { ROUTES } from '../../routes';
+import { Routes } from '../../routes';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./header.widget.scss');
@@ -30,7 +30,7 @@ class HeaderWidget extends LitElement {
   protected render(): TemplateResult {
     return html`
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href=${ROUTES.TASKS}><span class="logo"></span>${this.appTitle}</a>
+        <a class="navbar-brand" href=${Routes.TASKS}><span class="logo"></span>${this.appTitle}</a>
         <button
           @click="${this.toggle}"
           class="navbar-toggler"

@@ -5,7 +5,7 @@ import { routerService } from '../../services/router.service';
 import { PageMixin } from '../page.mixin';
 import { Task } from '../../models/task';
 import { httpService } from '../../services/http.service';
-import { ROUTES } from '../../routes';
+import { Routes } from '../../routes';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./tasks.page.scss');
@@ -34,7 +34,7 @@ class TasksPage extends PageMixin(LitElement) {
       this.tasks = (await response.json()).results;
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {
-        routerService.navigate(ROUTES.SIGN_IN);
+        routerService.navigate(Routes.SIGN_IN);
       } else {
         this.setNotification({ errorMessage: message });
       }
