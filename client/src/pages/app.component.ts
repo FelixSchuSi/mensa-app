@@ -1,7 +1,21 @@
-import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import {
+  css,
+  customElement,
+  html,
+  internalProperty,
+  LitElement,
+  property,
+  TemplateResult,
+  unsafeCSS
+} from 'lit-element';
 import { routerService } from '../services/router.service';
 import { LinkItem } from '../models/link-item';
 import { Routes } from '../routes';
+import { LanguageStrings } from '../models/language-strings';
+import { getBrowserLanguage } from '../i18n/get-browser-language';
+import { Language, Languages } from '../models/languages';
+import { german } from '../i18n/german';
+import { english } from '../i18n/english';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
@@ -28,6 +42,29 @@ class AppComponent extends LitElement {
     { title: 'Abmelden', routePath: Routes.SIGN_UP }
   ];
 
+  @internalProperty()
+  protected i18n!: LanguageStrings;
+
+  @internalProperty()
+  protected currentLanguage!: Language;
+
+  protected toggleLanguage(): void {
+    if (this.currentLanguage === Languages.GERMAN) {
+      this.currentLanguage = Languages.ENGLISH;
+      this.i18n = english;
+    } else {
+      this.currentLanguage = Languages.GERMAN;
+      this.i18n = german;
+    }
+    this.requestUpdate();
+  }
+
+  protected constructor() {
+    super();
+    this.currentLanguage = getBrowserLanguage();
+    this.i18n = this.currentLanguage === Languages.GERMAN ? german : english;
+  }
+
   protected firstUpdated(): void {
     routerService.subscribe(() => this.requestUpdate());
     const path = localStorage.getItem('path');
@@ -46,16 +83,18 @@ class AppComponent extends LitElement {
       case Routes.SIGN_OUT:
         return html`<app-sign-out></app-sign-out>`;
       case Routes.TASKS:
-        return html`<app-tasks></app-tasks>`;
+        return html`<app-tasks .i18n=${this.i18n}></app-tasks>`;
       default:
-        return html`<app-tasks></app-tasks>`;
+        return html`<app-tasks .i18n=${this.i18n}></app-tasks>`;
     }
   }
 
   protected render(): TemplateResult {
     return html`
       <app-header title="${this.appTitle}" .linkItems=${this.linkItems}></app-header>
+
       <div class="main container">${this.renderRouterOutlet()}</div>
+      <button @click=${this.toggleLanguage}>${this.i18n.HELLO_WORLD}</button>
     `;
   }
 }

@@ -6,6 +6,7 @@ import { PageMixin } from '../page.mixin';
 import { Task } from '../../models/task';
 import { httpService } from '../../services/http.service';
 import { Routes } from '../../routes';
+import { LanguageStrings } from '../../models/language-strings';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./tasks.page.scss');
@@ -28,6 +29,9 @@ class TasksPage extends PageMixin(LitElement) {
   @property({ type: Array })
   protected tasks: Task[] = [];
 
+  @property({ type: Object })
+  protected i18n!: LanguageStrings;
+
   protected async firstUpdated(): Promise<void> {
     try {
       const response = await httpService.get('tasks' + location.search);
@@ -42,6 +46,7 @@ class TasksPage extends PageMixin(LitElement) {
   }
 
   protected render(): TemplateResult {
+    console.log(this.i18n);
     return html`
       ${this.renderNotification()}
       <h1>Aufgaben</h1>
@@ -60,13 +65,14 @@ class TasksPage extends PageMixin(LitElement) {
       </form>
       <div class="tasks">
         ${guard(
-          [this.tasks],
+          [this.tasks, this.i18n],
           () => html`
             ${repeat(
               this.tasks,
               task => task.id,
               task => html`
                 <app-task
+                  .i18n=${this.i18n}
                   status="${task.status}"
                   @apptaskstatusclick=${(): Promise<void> => this.toggleTask(task)}
                   @apptaskremoveclick=${(): Promise<void> => this.removeTask(task)}

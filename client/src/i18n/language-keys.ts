@@ -1,1 +1,1 @@
-export type LanguageKeys = 'HELLO_WORLD' | 'BYE_WORLD';
+export type LanguageKeys = '_LANGUAGE' | 'HELLO_WORLD' | 'BYE_WORLD';
