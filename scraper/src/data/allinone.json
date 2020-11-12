@@ -1,1 +1,2535 @@
-[{"mensa":"aasee","menuDays":[{"date":"2020-11-12","meals":[{"title":"Nudelauflauf mit Blattspinat","additives":[],"allergens":["Weizen","Erdnüsse","Soja"],"otherInfo":["Vegan"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Paniertes Hähnchenbrustfilet","additives":["Farbstoff"],"allergens":["Weizen","Ei","Milch"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Käsesuppe mit Rinderhack","additives":["Farbstoff","Konservierungsstoffe"],"allergens":["Milch"],"otherInfo":["Rindfleisch"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Zwiebelreis, Kroketten Blumenkohl,Milchreis, Quark","additives":["Farbstoff"],"allergens":["Milch"],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.65,"employee":5.15,"guest":5.85}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-13","meals":[{"title":"Schupfnudelpfanne","additives":[],"allergens":["Weizen","Ei"],"otherInfo":["Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Seelachs Nuggets im Backteig","additives":[],"allergens":["Weizen","Fisch","Milch"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"x","additives":[],"allergens":[],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.65,"employee":5.15,"guest":5.85}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-16","meals":[{"title":"Auberginenpfanne","additives":["Antioxidationsmittel"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Schweineschnitzel \"Cordon bleu\" mit Kochschinken und Käsefüllung,","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel","Phosphat"],"allergens":["Weizen","Ei","Milch","Senf"],"otherInfo":["Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Reis, Herzoginkartoffeln, Möhren Golden Duo","additives":["Farbstoff"],"allergens":["Milch"],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.65,"employee":5.15,"guest":5.85}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-17","meals":[{"title":"Nudel-Gemüseauflauf","additives":["Farbstoff"],"allergens":["Weizen","Soja","Milch","Sellerie"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Putenragout \"Italia\"","additives":[],"allergens":[],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Eintopf","additives":[],"allergens":[],"otherInfo":[],"price":{"student":1.6,"employee":2.25,"guest":2.5}},{"title":"Bulgur, Kartoffeln-Münsterlandknolle Pfefferbohnen,Quarkspeise","additives":["Farbstoff"],"allergens":["Weizen","Milch"],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.95,"employee":5.5,"guest":6.25}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-18","meals":[{"title":"Krakauer Bratwurst vom Rost","additives":["Konservierungsstoffe","Antioxidationsmittel","Geschmacksverstärker","Phosphat"],"allergens":["Soja","Sellerie","Senf"],"otherInfo":["Rindfleisch","Schweinefleisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Linsenlasagne","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Weizen","Sellerie"],"otherInfo":["Vegan"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Eintopf","additives":[],"allergens":[],"otherInfo":[],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Schmorkartoffeln, Gemüsereis, Prinzeßbohnen,Beerengrütze mit Vanillesauce","additives":["Farbstoff"],"allergens":["Milch","Sellerie"],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Bowl","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Dessert","additives":[],"allergens":["Milch"],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.9,"employee":5.5,"guest":6.25}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-19","meals":[{"title":"Sojageschnetzeltes \"Chinesische Art\"","additives":["Konservierungsstoffe"],"allergens":["Weizen","Soja","Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Gegrillte Hähnchenkeule","additives":[],"allergens":["Senf"],"otherInfo":["Geflügel"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Eintopf","additives":[],"allergens":[],"otherInfo":[],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Curryreis, Pommes frites, Blumenkohl,Beerengrütze mit Vanillesauce","additives":["Farbstoff"],"allergens":["Milch"],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Bowl","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.9,"employee":5.5,"guest":6.25}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-20","meals":[{"title":"Gefüllte Tortillas mit Gemüsefüllung","additives":["Farbstoff"],"allergens":["Weizen"],"otherInfo":["Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Putenmedaillons","additives":["Farbstoff"],"allergens":[],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Eintopf","additives":[],"allergens":[],"otherInfo":["Rindfleisch"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Curryreis, Pommes frites, Blumenkohl,Beerengrütze mit Vanillesauce","additives":["Farbstoff"],"allergens":["Milch"],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Bowl","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.9,"employee":5.5,"guest":6.25}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-23","meals":[{"title":"Kichererbsen-Currypfanne","additives":["Antioxidationsmittel"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Hähnchenbrustfilet \"Milano\"","additives":["Konservierungsstoffe"],"allergens":["Weizen","Milch"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Winterlicher Grünkohleintopf","additives":["Farbstoff"],"allergens":["Sellerie"],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Petersilienkartoffeln Kroketten Broccoli,","additives":["Farbstoff"],"allergens":[],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.65,"employee":5.15,"guest":5.85}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-24","meals":[{"title":"Chili sin Carne","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Soja"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Seelachs Stixx","additives":["Konservierungsstoffe","Süßungsmitteln"],"allergens":["Weizen","Ei","Fisch","Milch","Senf"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"x","additives":[],"allergens":[],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.65,"employee":5.15,"guest":5.85}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-25","meals":[{"title":"Paprikaschote mit veganer Füllung","additives":[],"allergens":["Weizen","Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Rindergeschnetzeltes \"Stroganoff-Art\" mit Zwiebeln, Gurkenstreifen","additives":["Süßungsmitteln"],"allergens":["Gerste","Weizen","Milch","Senf"],"otherInfo":["Rindfleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"x","additives":[],"allergens":[],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.65,"employee":5.15,"guest":5.85}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]},{"date":"2020-11-26","meals":[{"title":"Sojapfanne \"Italia\"","additives":[],"allergens":["Soja","Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Spießbraten","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Gerste","Sellerie","Senf"],"otherInfo":["Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"x","additives":[],"allergens":[],"otherInfo":[],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat Teller","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.25,"guest":3.7}},{"title":"Bunter Falafel-Teller oder Hähnchendöner","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Milch","Schwefeloxid und Sulfite"],"otherInfo":["Geflügel","Vegan"],"price":{"student":3.65,"employee":5.15,"guest":5.85}},{"title":"Veggie-Grillwurst oder Bratwurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Weizen","Ei","Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch","Vegetarisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}}]}]},{"mensa":"davinci","menuDays":[{"date":"2020-11-12","meals":[{"title":"Nudeln mit Pesto","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Vegan: Gemüsepfanne","additives":[],"allergens":[],"otherInfo":["Vegan"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Rinderhacksteak","additives":[],"allergens":["Weizen"],"otherInfo":["Rindfleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Salat mit Essig/Öl","additives":["Antioxidationsmittel"],"allergens":["Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Farfalle Nudeln","additives":[],"allergens":["Weizen"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Kartoffel Wedges, frisch","additives":[],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Brechbohnen","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Leipziger Allerlei","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Fruchtjoghurt","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}}]},{"date":"2020-11-13","meals":[{"title":"Vegane Linsenlasagne","additives":[],"allergens":["Weizen","Sellerie"],"otherInfo":["Vegan"],"price":{"student":2.85,"employee":4,"guest":4.55}},{"title":"Gebackener Camembert","additives":[],"allergens":["Weizen","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.85,"employee":4,"guest":4.55}},{"title":"Seelachsfilet in einer würzigen Kartoffelpanade","additives":[],"allergens":["Weizen","Fisch","Milch"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-16","meals":[{"title":"Nudeln mit Pesto","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Vegan: Falafel auf syrische Art","additives":[],"allergens":["Weizen","Soja","Senf"],"otherInfo":["Vegan"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Chicken Nuggets","additives":[],"allergens":["Weizen","Sellerie","Senf"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Broccoli","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Asiagemüse","additives":["Farbstoff"],"allergens":["Weizen","Soja"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Gemüsebulgur","additives":["Farbstoff"],"allergens":["Weizen"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Farfalle Nudeln","additives":[],"allergens":["Weizen"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Farfalle Nudeln Tricolore","additives":[],"allergens":["Weizen"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat mit Essig/Öl","additives":["Antioxidationsmittel"],"allergens":["Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Fruchtjoghurt","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}}]},{"date":"2020-11-17","meals":[{"title":"Vegan: Broccoli-Dinkelauflauf ADI,AWE,F,I)","additives":["Farbstoff","Antioxidationsmittel","Geschmacksverstärker"],"allergens":["Soja","Schwefeloxid und Sulfite"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Kartoffel-Gemüsegratin","additives":["Farbstoff"],"allergens":["Milch","Schwefeloxid und Sulfite"],"otherInfo":["Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Rinderroulade nach Hausfrauen-Art, gefüllt mit Zwiebeln, Gurke und Speck","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel","Süßungsmitteln"],"allergens":["Senf"],"otherInfo":["Rindfleisch","Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Blumenkohl","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Apfelrotkohl","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Reis","additives":[],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Petersilienkartoffeln","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat mit Essig/Öl","additives":["Antioxidationsmittel"],"allergens":["Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Fruchtjoghurt","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}}]},{"date":"2020-11-18","meals":[{"title":"Gemüsestrudel","additives":["Antioxidationsmittel"],"allergens":["Weizen","Ei","Milch","Sellerie"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Rostbratwurst","additives":[],"allergens":["Senf"],"otherInfo":["Schweinefleisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Vegan: Gemüsepfanne","additives":[],"allergens":["Soja"],"otherInfo":["Vegan"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Fingermöhren","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Schwarzwurzelgemüse","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Vollkornspiralnudeln","additives":[],"allergens":["Weizen"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.96,"guest":1.15}},{"title":"Pommes frites","additives":[],"allergens":[],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat mit Essig/Öl","additives":["Antioxidationsmittel"],"allergens":["Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Fruchtjoghurt","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}}]},{"date":"2020-11-19","meals":[{"title":"Vegan: Grüne Tortellini mit Gemüsefüllung","additives":[],"allergens":["Weizen","Soja","Sellerie"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Gemüsestrudel","additives":["Antioxidationsmittel"],"allergens":["Weizen","Ei","Milch","Sellerie"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Hähnchenbrustfilet paniert","additives":["Farbstoff"],"allergens":["Weizen","Milch"],"otherInfo":["Geflügel"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Paprikaschnitte mit Schafskäse","additives":[],"allergens":["Weizen","Ei","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Salat mit Essig/Öl","additives":["Antioxidationsmittel"],"allergens":["Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Reis","additives":[],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Pommes frites","additives":[],"allergens":[],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Kohlrabi in Rahm","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Feine Erbsen","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Fruchtjoghurt","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}}]},{"date":"2020-11-20","meals":[{"title":"Schupfnudel-Gemüsepfanne","additives":["Farbstoff","Konservierungsstoffe"],"allergens":["Weizen","Ei","Milch","Sellerie","Senf"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Vegan: Kichererbsen-Currypfanne","additives":["Antioxidationsmittel"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Gebackenes Seelachsfilet","additives":["Konservierungsstoffe","Süßungsmitteln"],"allergens":["Weizen","Ei","Fisch","Milch","Senf"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Petersilienkartoffeln","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Country-Kartoffeln","additives":[],"allergens":["Weizen"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Prinzessbohnen","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Leipziger Allerlei","additives":["Farbstoff"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Salat mit Essig/Öl","additives":["Antioxidationsmittel"],"allergens":["Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":0.65,"employee":0.9,"guest":1.15}},{"title":"Fruchtjoghurt","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}}]}]},{"mensa":"denkpause","menuDays":[{"date":"2020-11-12","meals":[{"title":"Veganer Kichererbseneintopf","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}}]},{"date":"2020-11-13","meals":[{"title":"Rostbratwurst vom Grill","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Soja","Milch","Senf"],"otherInfo":["Schweinefleisch"],"price":{"student":2.45,"employee":3.45,"guest":3.9}}]},{"date":"2020-11-16","meals":[{"title":"Grüne Tortellini mit Gemüsefüllung","additives":[],"allergens":["Weizen","Milch","Sellerie"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.45,"employee":3.6,"guest":4.4}},{"title":"\"Nasi Goreng\"","additives":[],"allergens":["Weizen","Soja","Senf"],"otherInfo":["Geflügel"],"price":{"student":3.1,"employee":4.35,"guest":4.95}}]},{"date":"2020-11-17","meals":[{"title":"Gemüseschnitzel \"Italia\" mit Tomaten, Mozzarella und Sesam überbacken,","additives":["Farbstoff"],"allergens":["Dinkel","Weizen","Milch","Sellerie","Sesam"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.45,"employee":3.6,"guest":4.4}},{"title":"Mini Frikadellen","additives":[],"allergens":["Weizen","Ei","Milch","Senf"],"otherInfo":["Rindfleisch","Schweinefleisch"],"price":{"student":2.45,"employee":3.6,"guest":4.4}}]},{"date":"2020-11-18","meals":[{"title":"Hähnchenschnitzel","additives":["Antioxidationsmittel"],"allergens":["Weizen","Ei","Milch","Sellerie"],"otherInfo":["Geflügel"],"price":{"student":2.45,"employee":3.6,"guest":4.4}},{"title":"Veganer Erbseneintopf","additives":[],"allergens":["Sellerie"],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}}]},{"date":"2020-11-19","meals":[{"title":"Balkanröllchen","additives":[],"allergens":["Weizen","Ei","Milch","Senf"],"otherInfo":["Rindfleisch"],"price":{"student":2.45,"employee":3.6,"guest":4.4}},{"title":"Vegane Linsensuppe Rote Linsen, Blattspinat und Süßkartoffeln","additives":["Antioxidationsmittel"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}}]},{"date":"2020-11-20","meals":[{"title":"Seelachs Nuggets","additives":["Konservierungsstoffe"],"allergens":["Weizen","Ei","Fisch","Milch","Senf"],"otherInfo":["Fisch"],"price":{"student":2.85,"employee":4,"guest":4.55}}]}]},{"mensa":"ring","menuDays":[{"date":"2020-11-12","meals":[{"title":"Hausgemachter veganer Kichererbseneintopf","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Germknödel mit Pflaumenmus","additives":[],"allergens":["Weizen","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Hähnchen-Piccata","additives":[],"allergens":["Weizen","Milch"],"otherInfo":["Geflügel"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Broccolicremesuppe, Wildreis, Kartoffeln, Blumenkohl mit geröstetem Sesam,, hausgemachter Möhrensalat, Quarkspeise, Obst","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Gluten","Milch","Sesam"],"otherInfo":["Vegetarisch"],"price":{"student":0.65,"employee":0.9,"guest":1.15}}]},{"date":"2020-11-13","meals":[{"title":"Alaska Seelachsfilet in Knusperpanade","additives":["Farbstoff"],"allergens":["Weizen","Fisch","Soja"],"otherInfo":["Fisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}}]},{"date":"2020-11-16","meals":[{"title":"Mensa BURGER","additives":["Konservierungsstoffe","Süßungsmitteln"],"allergens":["Gluten","Ei","Milch","Schalenfrüchte","Sellerie","Senf","Sesam"],"otherInfo":["Rindfleisch"],"price":{"student":2.1,"employee":2.95,"guest":3.8}},{"title":"Grüne Tortellini mit Gemüsefüllung","additives":[],"allergens":["Weizen","Milch","Sellerie"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Hühnerfrikassee","additives":["Antioxidationsmittel"],"allergens":["Weizen","Milch"],"otherInfo":["Alkohol","Geflügel"],"price":{"student":2.95,"employee":4.15,"guest":5.3}}]},{"date":"2020-11-17","meals":[{"title":"Steckrübeneintopf","additives":["Farbstoff"],"allergens":[],"otherInfo":["Rindfleisch"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Mini Frikadellen","additives":["Farbstoff","Konservierungsstoffe","Süßungsmitteln"],"allergens":["Weizen","Ei","Senf"],"otherInfo":["Rindfleisch","Schweinefleisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Gemüseschnitzel \"Italia\" mit Tomaten, Mozzarella und Sesam überbacken","additives":[],"allergens":["Dinkel","Weizen","Milch","Sellerie","Sesam"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}}]},{"date":"2020-11-18","meals":[{"title":"Hausgemachter veganer Erbseneintopf","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel","Geschmacksverstärker"],"allergens":["Sellerie"],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Kartoffel-Lauch-Gratin","additives":[],"allergens":["Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Hähnchenschnitzel","additives":["Antioxidationsmittel"],"allergens":["Weizen","Ei","Milch","Sellerie"],"otherInfo":["Geflügel"],"price":{"student":2.95,"employee":4.15,"guest":5.3}}]},{"date":"2020-11-19","meals":[{"title":"Vegan: Hausgemachte Linsensuppe Rote Linsen, Blattspinat und Süßkartoffeln","additives":["Antioxidationsmittel"],"allergens":[],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Balkanröllchen","additives":[],"allergens":["Gluten","Ei","Milch","Senf"],"otherInfo":["Rindfleisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Chili-Cheese Nuggets","additives":["Farbstoff"],"allergens":["Weizen","Soja","Milch","Senf"],"otherInfo":["Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}}]},{"date":"2020-11-20","meals":[{"title":"Grillwurst oder Currywurst","additives":["Geschmacksverstärker","Phosphat"],"allergens":["Soja","Milch","Sellerie","Senf"],"otherInfo":["Schweinefleisch"],"price":{"student":1.6,"employee":2.25,"guest":2.5}},{"title":"Vegetarische Bratwurst","additives":["Farbstoff","Konservierungsstoffe","Süßungsmitteln"],"allergens":["Weizen","Ei","Senf"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Seelachs Nuggets","additives":["Farbstoff","Konservierungsstoffe"],"allergens":["Gerste","Weizen","Ei","Fisch","Soja","Milch","Senf"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-23","meals":[{"title":"Falafel","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Ei","Milch","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Rinderroulade nach Hausfrauen-Art mit Speck, Zwiebeln und Gurke","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel","Süßungsmitteln"],"allergens":["Senf"],"otherInfo":["Rindfleisch","Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-24","meals":[{"title":"Hausgemachter Linseneintopf mit Mettendchen und Speck","additives":["Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Sellerie","Senf"],"otherInfo":["Rindfleisch","Schweinefleisch"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"2 Stück Semmelknödel","additives":[],"allergens":["Weizen","Ei","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Putengeschnetzeltes in Käserahmsauce mit frischem Lauch","additives":["Farbstoff","Konservierungsstoffe"],"allergens":["Milch"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-25","meals":[{"title":"Hausgemachter Pichelsteiner Gemüseeintopf,","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel","Geschmacksverstärker","Phosphat"],"allergens":["Soja","Sellerie","Senf"],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Gebratene Mie-Nudeln mit Sojasprossen, Chinagemüse","additives":[],"allergens":["Weizen","Soja","Senf","Schwefeloxid und Sulfite"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Seelachsfilet \"Bordelaise\"","additives":["Antioxidationsmittel","Geschmacksverstärker"],"allergens":["Weizen","Fisch"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-26","meals":[{"title":"Hausgemachter Bulgureintopf","additives":[],"allergens":["Weizen"],"otherInfo":["Vegan"],"price":{"student":1.65,"employee":2.4,"guest":2.95}},{"title":"Vegane Pastapfanne","additives":[],"allergens":["Weizen","Walnüsse"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Putenschnitzel \"Hawaii\" mit Ananas und Käse überbacken","additives":["Farbstoff"],"allergens":["Weizen","Milch"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]}]},{"mensa":"steinfurt","menuDays":[{"date":"2020-11-12","meals":[{"title":"Vegan: Grünkern-Gemüsepfanne","additives":["Farbstoff"],"allergens":["Dinkel","Sellerie"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Paprikaschote mit Schweinemettfüllung","additives":["Farbstoff"],"allergens":["Weizen","Ei","Milch"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}},{"title":"Pasta mit Mangoldpesto und Tomaten","additives":[],"allergens":["Weizen","Ei","Haselnüsse"],"otherInfo":["Vegetarisch"],"price":{"student":3.4,"employee":4.8,"guest":5.45}}]},{"date":"2020-11-13","meals":[{"title":"Chili-Cheese Nuggets","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Weizen","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Gebratenes Seelachsfilet mehliert","additives":["Farbstoff","Konservierungsstoffe","Süßungsmitteln"],"allergens":["Weizen","Ei","Fisch","Milch","Senf"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-16","meals":[{"title":"Vegan: Asiatische Reispfanne mit Mini Frühlingsröllchen","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Weizen","Soja","Senf"],"otherInfo":["Vegan"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Hähnchenbrustfilet im Knuspermantel","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Weizen","Soja","Mandeln"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-17","meals":[{"title":"Vegan: Orientalischer Auberginenauflauf,","additives":[],"allergens":["Milch"],"otherInfo":["Vegan"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Frikadelle","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Weizen","Ei","Milch","Senf"],"otherInfo":["Rindfleisch","Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-18","meals":[{"title":"Kartoffelrösti","additives":["Antioxidationsmittel"],"allergens":["Hafer","Weizen","Ei","Sellerie"],"otherInfo":["Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Chili con Carne","additives":["Farbstoff","Antioxidationsmittel"],"allergens":[],"otherInfo":["Rindfleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-19","meals":[{"title":"Lasagne Mediterrane","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Weizen","Ei","Milch","Senf"],"otherInfo":["Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Grillsteak vom Schwein","additives":["Farbstoff"],"allergens":["Milch"],"otherInfo":["Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-20","meals":[{"title":"Veganer Gemüse-Knusper-Bagel","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Dinkel","Weizen","Ei","Milch","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Gebackenes Schollenfilet","additives":["Farbstoff","Konservierungsstoffe","Süßungsmitteln"],"allergens":["Weizen","Ei","Fisch","Milch","Senf"],"otherInfo":["Fisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-23","meals":[{"title":"Vegane Schupfnudelpfanne mit Gemüseallerlei und Kräuter,","additives":[],"allergens":["Weizen","Milch"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Gebratenes Hähnchenbrustfilet natur","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Ei","Milch","Sellerie","Senf"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-24","meals":[{"title":"Blätterteigtasche, gefüllt mit Spinat und Weißkäse,","additives":["Farbstoff","Antioxidationsmittel"],"allergens":["Weizen","Milch"],"otherInfo":["Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Schweineschnitzel \"Balkan Art\"","additives":["Farbstoff","Konservierungsstoffe","Süßungsmitteln"],"allergens":["Gerste","Roggen","Weizen","Ei","Senf"],"otherInfo":["Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-25","meals":[{"title":"Paprikaschote mit veganer Füllung","additives":["Farbstoff","Konservierungsstoffe"],"allergens":["Weizen","Milch","Sellerie","Senf"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.3,"employee":3.4,"guest":4.15}},{"title":"Putengyros","additives":["Geschmacksverstärker"],"allergens":["Milch","Senf"],"otherInfo":["Geflügel"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]},{"date":"2020-11-26","meals":[{"title":"Gemüsestrudel","additives":[],"allergens":["Weizen","Ei","Milch","Sellerie"],"otherInfo":["Vegan","Vegetarisch"],"price":{"student":2.95,"employee":4.15,"guest":5.3}},{"title":"Frische Metzger Bratwurst","additives":["Farbstoff","Konservierungsstoffe","Antioxidationsmittel"],"allergens":["Milch"],"otherInfo":["Schweinefleisch"],"price":{"student":3.3,"employee":4.6,"guest":5.95}}]}]}]
+[
+  {
+    "mensa": "aasee",
+    "menuDays": [
+      {
+        "date": "2020-11-12",
+        "meals": [
+          {
+            "title": "Nudelauflauf mit Blattspinat",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Erdnüsse", "en": "Peanuts" },
+              { "de": "Soja", "en": "Soy" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Paniertes Hähnchenbrustfilet",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Käsesuppe mit Rinderhack",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" }
+            ],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Zwiebelreis, Kroketten Blumenkohl,Milchreis, Quark",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.65, "employee": 5.15, "guest": 5.85 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-13",
+        "meals": [
+          {
+            "title": "Schupfnudelpfanne",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Seelachs Nuggets im Backteig",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "x",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.65, "employee": 5.15, "guest": 5.85 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-16",
+        "meals": [
+          {
+            "title": "Auberginenpfanne",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Schweineschnitzel \"Cordon bleu\" mit Kochschinken und Käsefüllung,",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Reis, Herzoginkartoffeln, Möhren Golden Duo",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.65, "employee": 5.15, "guest": 5.85 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-17",
+        "meals": [
+          {
+            "title": "Nudel-Gemüseauflauf",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Putenragout \"Italia\"",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Eintopf",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          },
+          {
+            "title": "Bulgur, Kartoffeln-Münsterlandknolle Pfefferbohnen,Quarkspeise",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.95, "employee": 5.5, "guest": 6.25 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-18",
+        "meals": [
+          {
+            "title": "Krakauer Bratwurst vom Rost",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Linsenlasagne",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Eintopf",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Schmorkartoffeln, Gemüsereis, Prinzeßbohnen,Beerengrütze mit Vanillesauce",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Bowl",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Dessert",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.9, "employee": 5.5, "guest": 6.25 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-19",
+        "meals": [
+          {
+            "title": "Sojageschnetzeltes \"Chinesische Art\"",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Gegrillte Hähnchenkeule",
+            "additives": [],
+            "allergens": [{ "de": "Senf", "en": "Mustard" }],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Eintopf",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Curryreis, Pommes frites, Blumenkohl,Beerengrütze mit Vanillesauce",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Bowl",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.9, "employee": 5.5, "guest": 6.25 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-20",
+        "meals": [
+          {
+            "title": "Gefüllte Tortillas mit Gemüsefüllung",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Putenmedaillons",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Eintopf",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Curryreis, Pommes frites, Blumenkohl,Beerengrütze mit Vanillesauce",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Bowl",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.9, "employee": 5.5, "guest": 6.25 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-23",
+        "meals": [
+          {
+            "title": "Kichererbsen-Currypfanne",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Hähnchenbrustfilet \"Milano\"",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Winterlicher Grünkohleintopf",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Sellerie", "en": "Celery" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Petersilienkartoffeln Kroketten Broccoli,",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.65, "employee": 5.15, "guest": 5.85 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-24",
+        "meals": [
+          {
+            "title": "Chili sin Carne",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [{ "de": "Soja", "en": "Soy" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Seelachs Stixx",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "x",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.65, "employee": 5.15, "guest": 5.85 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-25",
+        "meals": [
+          {
+            "title": "Paprikaschote mit veganer Füllung",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Rindergeschnetzeltes \"Stroganoff-Art\" mit Zwiebeln, Gurkenstreifen",
+            "additives": [{ "de": "Süßungsmitteln", "en": "Sweeteners" }],
+            "allergens": [
+              { "de": "Gerste", "en": "Barley" },
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "x",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.65, "employee": 5.15, "guest": 5.85 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-26",
+        "meals": [
+          {
+            "title": "Sojapfanne \"Italia\"",
+            "additives": [],
+            "allergens": [
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Spießbraten",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Gerste", "en": "Barley" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "x",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat Teller",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.25, "guest": 3.7 }
+          },
+          {
+            "title": "Bunter Falafel-Teller oder Hähnchendöner",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [
+              { "de": "Geflügel", "en": "Poultry" },
+              { "de": "Vegan", "en": "Vegan" }
+            ],
+            "price": { "student": 3.65, "employee": 5.15, "guest": 5.85 }
+          },
+          {
+            "title": "Veggie-Grillwurst oder Bratwurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Schweinefleisch", "en": "PorkMeat" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "mensa": "davinci",
+    "menuDays": [
+      {
+        "date": "2020-11-12",
+        "meals": [
+          {
+            "title": "Nudeln mit Pesto",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Vegan: Gemüsepfanne",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Rinderhacksteak",
+            "additives": [],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Salat mit Essig/Öl",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Farfalle Nudeln",
+            "additives": [],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Kartoffel Wedges, frisch",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Brechbohnen",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Leipziger Allerlei",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Fruchtjoghurt",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-13",
+        "meals": [
+          {
+            "title": "Vegane Linsenlasagne",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.85, "employee": 4, "guest": 4.55 }
+          },
+          {
+            "title": "Gebackener Camembert",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.85, "employee": 4, "guest": 4.55 }
+          },
+          {
+            "title": "Seelachsfilet in einer würzigen Kartoffelpanade",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-16",
+        "meals": [
+          {
+            "title": "Nudeln mit Pesto",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Vegan: Falafel auf syrische Art",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Chicken Nuggets",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Broccoli",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Asiagemüse",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Gemüsebulgur",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Farfalle Nudeln",
+            "additives": [],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Farfalle Nudeln Tricolore",
+            "additives": [],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat mit Essig/Öl",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Fruchtjoghurt",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-17",
+        "meals": [
+          {
+            "title": "Vegan: Broccoli-Dinkelauflauf ADI,AWE,F,I)",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" }
+            ],
+            "allergens": [
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Kartoffel-Gemüsegratin",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Rinderroulade nach Hausfrauen-Art, gefüllt mit Zwiebeln, Gurke und Speck",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [{ "de": "Senf", "en": "Mustard" }],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Blumenkohl",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Apfelrotkohl",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Reis",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Petersilienkartoffeln",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat mit Essig/Öl",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Fruchtjoghurt",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-18",
+        "meals": [
+          {
+            "title": "Gemüsestrudel",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Rostbratwurst",
+            "additives": [],
+            "allergens": [{ "de": "Senf", "en": "Mustard" }],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Vegan: Gemüsepfanne",
+            "additives": [],
+            "allergens": [{ "de": "Soja", "en": "Soy" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Fingermöhren",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Schwarzwurzelgemüse",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Vollkornspiralnudeln",
+            "additives": [],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.96, "guest": 1.15 }
+          },
+          {
+            "title": "Pommes frites",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat mit Essig/Öl",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Fruchtjoghurt",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-19",
+        "meals": [
+          {
+            "title": "Vegan: Grüne Tortellini mit Gemüsefüllung",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Gemüsestrudel",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Hähnchenbrustfilet paniert",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Paprikaschnitte mit Schafskäse",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Salat mit Essig/Öl",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Reis",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Pommes frites",
+            "additives": [],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Kohlrabi in Rahm",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Feine Erbsen",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Fruchtjoghurt",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-20",
+        "meals": [
+          {
+            "title": "Schupfnudel-Gemüsepfanne",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Vegan: Kichererbsen-Currypfanne",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Gebackenes Seelachsfilet",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Petersilienkartoffeln",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Country-Kartoffeln",
+            "additives": [],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Prinzessbohnen",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Leipziger Allerlei",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Salat mit Essig/Öl",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          },
+          {
+            "title": "Fruchtjoghurt",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "mensa": "denkpause",
+    "menuDays": [
+      {
+        "date": "2020-11-12",
+        "meals": [
+          {
+            "title": "Veganer Kichererbseneintopf",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-13",
+        "meals": [
+          {
+            "title": "Rostbratwurst vom Grill",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 2.45, "employee": 3.45, "guest": 3.9 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-16",
+        "meals": [
+          {
+            "title": "Grüne Tortellini mit Gemüsefüllung",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.45, "employee": 3.6, "guest": 4.4 }
+          },
+          {
+            "title": "\"Nasi Goreng\"",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.1, "employee": 4.35, "guest": 4.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-17",
+        "meals": [
+          {
+            "title": "Gemüseschnitzel \"Italia\" mit Tomaten, Mozzarella und Sesam überbacken,",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Dinkel", "en": "Spelled" },
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Sesam", "en": "Sesame" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.45, "employee": 3.6, "guest": 4.4 }
+          },
+          {
+            "title": "Mini Frikadellen",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 2.45, "employee": 3.6, "guest": 4.4 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-18",
+        "meals": [
+          {
+            "title": "Hähnchenschnitzel",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 2.45, "employee": 3.6, "guest": 4.4 }
+          },
+          {
+            "title": "Veganer Erbseneintopf",
+            "additives": [],
+            "allergens": [{ "de": "Sellerie", "en": "Celery" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-19",
+        "meals": [
+          {
+            "title": "Balkanröllchen",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [],
+            "price": { "student": 2.45, "employee": 3.6, "guest": 4.4 }
+          },
+          {
+            "title": "Vegane Linsensuppe Rote Linsen, Blattspinat und Süßkartoffeln",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-20",
+        "meals": [
+          {
+            "title": "Seelachs Nuggets",
+            "additives": [{ "de": "Konservierungsstoffe", "en": "Preservative" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 2.85, "employee": 4, "guest": 4.55 }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "mensa": "ring",
+    "menuDays": [
+      {
+        "date": "2020-11-12",
+        "meals": [
+          {
+            "title": "Hausgemachter veganer Kichererbseneintopf",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Germknödel mit Pflaumenmus",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Hähnchen-Piccata",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Broccolicremesuppe, Wildreis, Kartoffeln, Blumenkohl mit geröstetem Sesam,, hausgemachter Möhrensalat, Quarkspeise, Obst",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sesam", "en": "Sesame" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 0.65, "employee": 0.9, "guest": 1.15 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-13",
+        "meals": [
+          {
+            "title": "Alaska Seelachsfilet in Knusperpanade",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Soja", "en": "Soy" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-16",
+        "meals": [
+          {
+            "title": "Mensa BURGER",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Schalenfrüchte", "en": "Nuts" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" },
+              { "de": "Sesam", "en": "Sesame" }
+            ],
+            "otherInfo": [],
+            "price": { "student": 2.1, "employee": 2.95, "guest": 3.8 }
+          },
+          {
+            "title": "Grüne Tortellini mit Gemüsefüllung",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Hühnerfrikassee",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [
+              { "de": "Alkohol", "en": "Alcohol" },
+              { "de": "Geflügel", "en": "Poultry" }
+            ],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-17",
+        "meals": [
+          {
+            "title": "Steckrübeneintopf",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Mini Frikadellen",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Gemüseschnitzel \"Italia\" mit Tomaten, Mozzarella und Sesam überbacken",
+            "additives": [],
+            "allergens": [
+              { "de": "Dinkel", "en": "Spelled" },
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Sesam", "en": "Sesame" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-18",
+        "meals": [
+          {
+            "title": "Hausgemachter veganer Erbseneintopf",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" }
+            ],
+            "allergens": [{ "de": "Sellerie", "en": "Celery" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Kartoffel-Lauch-Gratin",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Hähnchenschnitzel",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-19",
+        "meals": [
+          {
+            "title": "Vegan: Hausgemachte Linsensuppe Rote Linsen, Blattspinat und Süßkartoffeln",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Balkanröllchen",
+            "additives": [],
+            "allergens": [
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Chili-Cheese Nuggets",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-20",
+        "meals": [
+          {
+            "title": "Grillwurst oder Currywurst",
+            "additives": [
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 1.6, "employee": 2.25, "guest": 2.5 }
+          },
+          {
+            "title": "Vegetarische Bratwurst",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Seelachs Nuggets",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" }
+            ],
+            "allergens": [
+              { "de": "Gerste", "en": "Barley" },
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-23",
+        "meals": [
+          {
+            "title": "Falafel",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Rinderroulade nach Hausfrauen-Art mit Speck, Zwiebeln und Gurke",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [{ "de": "Senf", "en": "Mustard" }],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-24",
+        "meals": [
+          {
+            "title": "Hausgemachter Linseneintopf mit Mettendchen und Speck",
+            "additives": [
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "2 Stück Semmelknödel",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Putengeschnetzeltes in Käserahmsauce mit frischem Lauch",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" }
+            ],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-25",
+        "meals": [
+          {
+            "title": "Hausgemachter Pichelsteiner Gemüseeintopf,",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" },
+              { "de": "Phosphat", "en": "Phosphate" }
+            ],
+            "allergens": [
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Gebratene Mie-Nudeln mit Sojasprossen, Chinagemüse",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Senf", "en": "Mustard" },
+              { "de": "Schwefeloxid und Sulfite", "en": "Sulfur" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Seelachsfilet \"Bordelaise\"",
+            "additives": [
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" },
+              { "de": "Geschmacksverstärker", "en": "FlavorEnhancer" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Fisch", "en": "Fish" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-26",
+        "meals": [
+          {
+            "title": "Hausgemachter Bulgureintopf",
+            "additives": [],
+            "allergens": [{ "de": "Weizen", "en": "Wheat" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 1.65, "employee": 2.4, "guest": 2.95 }
+          },
+          {
+            "title": "Vegane Pastapfanne",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Walnüsse", "en": "Walnuts" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Putenschnitzel \"Hawaii\" mit Ananas und Käse überbacken",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "mensa": "steinfurt",
+    "menuDays": [
+      {
+        "date": "2020-11-12",
+        "meals": [
+          {
+            "title": "Vegan: Grünkern-Gemüsepfanne",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Dinkel", "en": "Spelled" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Paprikaschote mit Schweinemettfüllung",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          },
+          {
+            "title": "Pasta mit Mangoldpesto und Tomaten",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Haselnüsse", "en": "Hazelnuts" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 3.4, "employee": 4.8, "guest": 5.45 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-13",
+        "meals": [
+          {
+            "title": "Chili-Cheese Nuggets",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Gebratenes Seelachsfilet mehliert",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-16",
+        "meals": [
+          {
+            "title": "Vegan: Asiatische Reispfanne mit Mini Frühlingsröllchen",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Hähnchenbrustfilet im Knuspermantel",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Soja", "en": "Soy" },
+              { "de": "Mandeln", "en": "Almonds" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-17",
+        "meals": [
+          {
+            "title": "Vegan: Orientalischer Auberginenauflauf,",
+            "additives": [],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Vegan", "en": "Vegan" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Frikadelle",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-18",
+        "meals": [
+          {
+            "title": "Kartoffelrösti",
+            "additives": [{ "de": "Antioxidationsmittel", "en": "Antioxidants" }],
+            "allergens": [
+              { "de": "Hafer", "en": "Oats" },
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Chili con Carne",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [],
+            "otherInfo": [],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-19",
+        "meals": [
+          {
+            "title": "Lasagne Mediterrane",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Grillsteak vom Schwein",
+            "additives": [{ "de": "Farbstoff", "en": "Dye" }],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-20",
+        "meals": [
+          {
+            "title": "Veganer Gemüse-Knusper-Bagel",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Dinkel", "en": "Spelled" },
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Gebackenes Schollenfilet",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Fisch", "en": "Fish" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Fisch", "en": "Fish" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-23",
+        "meals": [
+          {
+            "title": "Vegane Schupfnudelpfanne mit Gemüseallerlei und Kräuter,",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Gebratenes Hähnchenbrustfilet natur",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-24",
+        "meals": [
+          {
+            "title": "Blätterteigtasche, gefüllt mit Spinat und Weißkäse,",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" }
+            ],
+            "otherInfo": [{ "de": "Vegetarisch", "en": "Vegetarian" }],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Schweineschnitzel \"Balkan Art\"",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Süßungsmitteln", "en": "Sweeteners" }
+            ],
+            "allergens": [
+              { "de": "Gerste", "en": "Barley" },
+              { "de": "Roggen", "en": "Rye" },
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-25",
+        "meals": [
+          {
+            "title": "Paprikaschote mit veganer Füllung",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" }
+            ],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.3, "employee": 3.4, "guest": 4.15 }
+          },
+          {
+            "title": "Putengyros",
+            "additives": [{ "de": "Geschmacksverstärker", "en": "FlavorEnhancer" }],
+            "allergens": [
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Senf", "en": "Mustard" }
+            ],
+            "otherInfo": [{ "de": "Geflügel", "en": "Poultry" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      },
+      {
+        "date": "2020-11-26",
+        "meals": [
+          {
+            "title": "Gemüsestrudel",
+            "additives": [],
+            "allergens": [
+              { "de": "Weizen", "en": "Wheat" },
+              { "de": "Ei", "en": "Egg" },
+              { "de": "Milch", "en": "Milk" },
+              { "de": "Sellerie", "en": "Celery" }
+            ],
+            "otherInfo": [
+              { "de": "Vegan", "en": "Vegan" },
+              { "de": "Vegetarisch", "en": "Vegetarian" }
+            ],
+            "price": { "student": 2.95, "employee": 4.15, "guest": 5.3 }
+          },
+          {
+            "title": "Frische Metzger Bratwurst",
+            "additives": [
+              { "de": "Farbstoff", "en": "Dye" },
+              { "de": "Konservierungsstoffe", "en": "Preservative" },
+              { "de": "Antioxidationsmittel", "en": "Antioxidants" }
+            ],
+            "allergens": [{ "de": "Milch", "en": "Milk" }],
+            "otherInfo": [{ "de": "Schweinefleisch", "en": "PorkMeat" }],
+            "price": { "student": 3.3, "employee": 4.6, "guest": 5.95 }
+          }
+        ]
+      }
+    ]
+  }
+]

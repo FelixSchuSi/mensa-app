@@ -1,9 +1,10 @@
+import { LangString } from './langString';
 import { Price } from './price';
 
 export type Meal = {
   title: string;
-  additives: string[];
-  allergens: string[];
-  otherInfo: string[];
+  additives: LangString[];
+  allergens: LangString[];
+  otherInfo: LangString[];
   price: Price;
 };

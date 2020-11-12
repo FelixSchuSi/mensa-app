@@ -1,17 +1,19 @@
 import { LangString } from './langString';
+import { Ref } from './refs';
 
-const OtherMealInfoDict: Map<string, LangString> = new Map([
-  ['Rin', { de: 'Rindfleisch', en: 'Beef' }],
-  ['Sch', { de: 'Schweinefleisch', en: 'PorkMeat' }],
-  ['Vgt', { de: 'Vegetarisch', en: 'Vegetarian' }],
-  ['Vgn', { de: 'Vegan', en: 'Vegan' }],
-  ['Fis', { de: 'Fisch', en: 'Fish' }],
-  ['Gfl', { de: 'Geflügel', en: 'Poultry' }],
-  ['Alk', { de: 'Alkohol', en: 'Alcohol' }]
-]);
+export type OtherMealInfoStrings = Record<OtherMealInfoKeys, string>;
+
+// const OtherMealInfoDict: Map<string, LangString> = new Map([
+//   ['Rin', { de: 'Rindfleisch', en: 'Beef' }],
+//   ['Sch', { de: 'Schweinefleisch', en: 'PorkMeat' }],
+//   ['Vgt', { de: 'Vegetarisch', en: 'Vegetarian' }],
+//   ['Vgn', { de: 'Vegan', en: 'Vegan' }],
+//   ['Fis', { de: 'Fisch', en: 'Fish' }],
+//   ['Gfl', { de: 'Geflügel', en: 'Poultry' }],
+//   ['Alk', { de: 'Alkohol', en: 'Alcohol' }]
+// ]);
 
 export enum OtherMealInfoKeys {
-  _language = 'language',
   Beef = 'Rin',
   PorkMeat = 'Sch',
   Vegetarian = 'Vgt',
@@ -22,7 +24,6 @@ export enum OtherMealInfoKeys {
 }
 
 const deOtherMealInfo: Record<OtherMealInfoKeys, string> = {
-  language: 'de',
   Rin: 'Rindfleisch',
   Sch: 'Schweinefleisch',
   Vgt: 'Vegetarisch',
@@ -33,7 +34,6 @@ const deOtherMealInfo: Record<OtherMealInfoKeys, string> = {
 };
 
 const enOtherMealInfo: Record<OtherMealInfoKeys, string> = {
-  language: 'eng',
   Rin: 'Beef',
   Sch: 'PorkMeat',
   Vgt: 'Vegetarian',
@@ -45,4 +45,10 @@ const enOtherMealInfo: Record<OtherMealInfoKeys, string> = {
 
 function getOtherMealInfoLangStrings(key: OtherMealInfoKeys): LangString {
   return { de: deOtherMealInfo[key], en: enOtherMealInfo[key] };
+}
+
+export function getOtherMealInfoLangFromRefs(refs: Ref[]): LangString[] {
+  // @ts-ignore
+  const filteredRefs: OtherMealInfoKeys[] = refs.filter(ref => Object.values(OtherMealInfoKeys).indexOf(ref) > 0);
+  return filteredRefs.map(getOtherMealInfoLangStrings);
 }

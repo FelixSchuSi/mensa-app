@@ -1,5 +1,5 @@
-import { AdditivesKeys } from './additives';
-import { AllergenesKeys } from './allergenes';
-import { OtherMealInfoKeys } from './other-meal-info';
+import { AdditivesStrings } from './additives';
+import { AllergenesStrings } from './allergenes';
+import { OtherMealInfoStrings } from './other-meal-info';
 
-export type Ref = AdditivesKeys | AllergenesKeys | OtherMealInfoKeys;
+export type Ref = keyof AllergenesStrings | keyof AdditivesStrings | keyof OtherMealInfoStrings;
