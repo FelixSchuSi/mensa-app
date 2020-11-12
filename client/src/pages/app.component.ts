@@ -16,6 +16,7 @@ import { getBrowserLanguage } from '../i18n/get-browser-language';
 import { Language, Languages } from '../models/languages';
 import { german } from '../i18n/german';
 import { english } from '../i18n/english';
+import { PageContext } from '../models/page-context';
 
 const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
@@ -32,37 +33,34 @@ class AppComponent extends LitElement {
     `
   ];
 
+  public constructor() {
+    super();
+    const i18n: LanguageStrings = getBrowserLanguage() === Languages.GERMAN ? german : english;
+    this.pageContext = { i18n };
+  }
+
   @property()
   protected appTitle = 'Aufgabenverwaltung';
 
+  @internalProperty()
+  protected pageContext!: PageContext;
+
   @property({ type: Array })
-  protected linkItems: LinkItem[] = [
-    { title: 'Konto erstellen', routePath: Routes.SIGN_UP },
-    { title: 'Anmelden', routePath: Routes.SIGN_IN },
-    { title: 'Abmelden', routePath: Routes.SIGN_UP }
-  ];
-
-  @internalProperty()
-  protected i18n!: LanguageStrings;
-
-  @internalProperty()
-  protected currentLanguage!: Language;
-
-  protected toggleLanguage(): void {
-    if (this.currentLanguage === Languages.GERMAN) {
-      this.currentLanguage = Languages.ENGLISH;
-      this.i18n = english;
-    } else {
-      this.currentLanguage = Languages.GERMAN;
-      this.i18n = german;
-    }
-    this.requestUpdate();
+  protected get linkItems(): LinkItem[] {
+    return [
+      { title: this.pageContext?.i18n.SIGN_UP, routePath: Routes.SIGN_UP },
+      { title: this.pageContext?.i18n.SIGN_IN, routePath: Routes.SIGN_IN },
+      { title: this.pageContext?.i18n.SIGN_OUT, routePath: Routes.SIGN_OUT }
+    ];
   }
 
-  protected constructor() {
-    super();
-    this.currentLanguage = getBrowserLanguage();
-    this.i18n = this.currentLanguage === Languages.GERMAN ? german : english;
+  protected toggleLanguage(): void {
+    debugger;
+    if (this.pageContext.i18n._LANGUAGE === Languages.GERMAN) {
+      this.pageContext = { ...this.pageContext, i18n: english };
+    } else {
+      this.pageContext = { ...this.pageContext, i18n: german };
+    }
   }
 
   protected firstUpdated(): void {
@@ -83,18 +81,19 @@ class AppComponent extends LitElement {
       case Routes.SIGN_OUT:
         return html`<app-sign-out></app-sign-out>`;
       case Routes.TASKS:
-        return html`<app-tasks .i18n=${this.i18n}></app-tasks>`;
+        return html`<app-tasks></app-tasks>`;
       default:
-        return html`<app-tasks .i18n=${this.i18n}></app-tasks>`;
+        return html`<app-tasks></app-tasks>`;
     }
   }
 
   protected render(): TemplateResult {
+    debugger;
     return html`
       <app-header title="${this.appTitle}" .linkItems=${this.linkItems}></app-header>
 
       <div class="main container">${this.renderRouterOutlet()}</div>
-      <button @click=${this.toggleLanguage}>${this.i18n.HELLO_WORLD}</button>
+      <button @click=${this.toggleLanguage}>${this.pageContext.i18n.HELLO_WORLD}</button>
     `;
   }
 }
