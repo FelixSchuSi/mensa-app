@@ -63,7 +63,7 @@ async function main() {
   const mensen: string[] = ['aasee', 'davinci', 'denkpause', 'ring', 'steinfurt'];
   const promises: Promise<MensaPlan>[] = mensen.map(mensa => parseMensa(mensa));
   const result: MensaPlan[] = await Promise.all(promises);
-  writeFileSync(join(__dirname, '/data/allinone.json'), JSON.stringify(result));
+  writeFileSync(join(__dirname, '..', '/data/allinone.json'), JSON.stringify(result));
 }
 
 main();

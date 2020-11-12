@@ -2,7 +2,7 @@ import { LangString } from './langString';
 import { Ref } from './refs';
 
 export type AdditivesStrings = Record<AdditivesKeys, string>;
-export enum AdditivesKeys {
+enum AdditivesKeys {
   _language,
   dye,
   Preservative,

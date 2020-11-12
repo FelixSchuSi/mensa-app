@@ -7,3 +7,4 @@ db/**/*.map
 coverage/
 db-data.txt
 src/secrets.json
+data/*.json

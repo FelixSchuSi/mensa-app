@@ -3,7 +3,7 @@ import { Ref } from './refs';
 
 export type AllergenesStrings = Record<AllergenesKeys, string>;
 
-export enum AllergenesKeys {
+enum AllergenesKeys {
   Gluten = 'A',
   Spelled = 'ADI',
   Barley = 'AGE',
@@ -95,37 +95,6 @@ const deAllergenes: Record<AllergenesKeys, string> = {
   M: 'Weichtiere',
   N: 'Schwefeloxid und Sulfite'
 };
-
-const AllergensDict: Map<string, LangString> = new Map([
-  ['A', { de: 'Gluten', en: 'Gluten' }],
-  ['ADI', { de: 'Dinkel', en: 'Spelled' }],
-  ['AGE', { de: 'Gerste', en: 'Barley' }],
-  ['AHA', { de: 'Hafer', en: 'Oats' }],
-  ['AKA', { de: 'Kamut', en: 'Kamut' }],
-  ['ARO', { de: 'Roggen', en: 'Rye' }],
-  ['AWE', { de: 'Weizen', en: 'Wheat' }],
-  ['B', { de: 'Krebstiere', en: 'Crustaceans' }],
-  ['C', { de: 'Ei', en: 'Egg' }],
-  ['D', { de: 'Fisch', en: 'Fish' }],
-  ['E', { de: 'Erdnüsse', en: 'Peanuts' }],
-  ['F', { de: 'Soja', en: 'Soy' }],
-  ['G', { de: 'Milch', en: 'Milk' }],
-  ['H', { de: 'Schalenfrüchte', en: 'Nuts' }],
-  ['HMA', { de: 'Mandeln', en: 'Almonds' }],
-  ['HHA', { de: 'Haselnüsse', en: 'Hazelnuts' }],
-  ['HWA', { de: 'Walnüsse', en: 'Walnuts' }],
-  ['HCA', { de: 'Cashewkerne', en: 'Cashew' }],
-  ['HPE', { de: 'Pecannüsse', en: 'Peacans' }],
-  ['HPA', { de: 'Paranüsse', en: 'BrazilNuts' }],
-  ['HPI', { de: 'Pistazien', en: 'Pistachios' }],
-  ['HQU', { de: 'Macadamianüsse', en: 'QueenslandNuts' }],
-  ['I', { de: 'Sellerie', en: 'Celery' }],
-  ['J', { de: 'Senf', en: 'Mustard' }],
-  ['K', { de: 'Sesam', en: 'Sesame' }],
-  ['L', { de: 'Lupinen', en: 'Lupins' }],
-  ['M', { de: 'Weichtiere', en: 'Molluscs' }],
-  ['N', { de: 'Schwefeloxid und Sulfite', en: 'Sulfur' }]
-]);
 
 function getAllergenesLangStrings(key: AllergenesKeys): LangString {
   return { de: deAllergenes[key], en: enAllergenes[key] };

@@ -3,17 +3,7 @@ import { Ref } from './refs';
 
 export type OtherMealInfoStrings = Record<OtherMealInfoKeys, string>;
 
-// const OtherMealInfoDict: Map<string, LangString> = new Map([
-//   ['Rin', { de: 'Rindfleisch', en: 'Beef' }],
-//   ['Sch', { de: 'Schweinefleisch', en: 'PorkMeat' }],
-//   ['Vgt', { de: 'Vegetarisch', en: 'Vegetarian' }],
-//   ['Vgn', { de: 'Vegan', en: 'Vegan' }],
-//   ['Fis', { de: 'Fisch', en: 'Fish' }],
-//   ['Gfl', { de: 'Geflügel', en: 'Poultry' }],
-//   ['Alk', { de: 'Alkohol', en: 'Alcohol' }]
-// ]);
-
-export enum OtherMealInfoKeys {
+enum OtherMealInfoKeys {
   Beef = 'Rin',
   PorkMeat = 'Sch',
   Vegetarian = 'Vgt',
