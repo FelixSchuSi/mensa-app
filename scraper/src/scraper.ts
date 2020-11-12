@@ -2,9 +2,11 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import { LangString } from './models/langString';
 import { Meal } from './models/meal';
-import { Mensa } from './models/mensa';
 import { MenuDay } from './models/menu-day';
 import { Price } from './models/price';
+import { MensaPlan } from './models/mensa-plan';
+import { join } from 'path';
+import { writeFileSync } from 'fs';
 
 const AdditivesDict: Map<string, LangString> = new Map([
   ['1', { de: 'Farbstoff', en: 'Dye' }],
@@ -59,69 +61,42 @@ const OtherMealInfoDict: Map<string, LangString> = new Map([
   ['Gfl', { de: 'Geflügel', en: 'Poultry' }],
   ['Alk', { de: 'Alkohol', en: 'Alcohol' }]
 ]);
-async function parseMensenList(url: string): Promise<Mensa[]> {
-  const mensen: Mensa[] = [];
-  try {
-    const response = await axios(url);
-    const html = response.data;
-    const $ = cheerio.load(html);
-    const mensaList = $('#mensalist > li:not([data-role="list-divider"])');
 
-    mensaList.each(function () {
-      const name = $(this).find('a.mensalistentry').text().trim();
-      const link = $(this).find('a.mensalistentry').attr('href');
-      mensen.push({ name, link });
+async function parseMensa(mensa: string): Promise<MensaPlan> {
+  const url: string = 'https://muenster.my-mensa.de/essen.php?v=5348990&hyp=1&lang=de&mensa=' + mensa;
+  const response = await axios(url);
+  const $: cheerio.Root = cheerio.load(response.data);
+  const dayList: cheerio.Element[] = $('div.essenliste').toArray();
+
+  const menuDays: MenuDay[] = dayList.map((dayElement: cheerio.Element) => {
+    const mealList: cheerio.Element[] = $(dayElement).find('div[data-role="content"] > ul > li.conditional').toArray();
+
+    const unfilteredMeals: (Meal | null)[] = mealList.map((mealElement: cheerio.Element) => {
+      const title = $(mealElement)
+        .find('a > h3.text2share')
+        .text()
+        .trim()
+        .replace(/\xAD/g, '')
+        .replace(/\s?\([^)]+\)/g, '');
+      if (title === '+') return null;
+      const unparsedPrice = $(mealElement).find('a > p.text2share.next').text().trim();
+      const references = $(mealElement).attr('ref');
+      const refArray = JSON.parse(references!);
+      const additives = resolveDict(AdditivesDict, refArray);
+      const allergens = resolveDict(AllergensDict, refArray);
+      const otherInfo = resolveDict(OtherMealInfoDict, refArray);
+      const price = parsePrice(unparsedPrice);
+      return { title, additives, allergens, otherInfo, price };
     });
-    return mensen;
-  } catch (err: any) {
-    throw err;
-  }
+
+    const meals: Meal[] = <Meal[]>unfilteredMeals.filter(potentialMeal => potentialMeal !== null);
+    return { date: $(dayElement).attr('data-date2')!, meals };
+  });
+
+  return { mensa, menuDays };
 }
-async function parseMensa(url: string): Promise<MenuDay[]> {
-  try {
-    const response = await axios(url);
-    const html = response.data;
-    const $: cheerio.Root = cheerio.load(html);
-    const dayList: cheerio.Cheerio = $('div.essenliste');
-    const days: MenuDay[] = [];
-    dayList.each(function (index: number, element: cheerio.Element) {
-      const mealList = $(this).find('div[data-role="content"] > ul > li.conditional');
-      const meals: Meal[] = [];
-      mealList.each(function () {
-        const title = $(this)
-          .find('a > h3.text2share')
-          .text()
-          .trim()
-          .replace(/\xAD/g, '')
-          .replace(/\s?\([^)]+\)/g, '');
-        if (title === '+') return;
-        const price = $(this).find('a > p.text2share.next').text().trim();
-        const references = $(this).attr('ref');
-        const refArray = parseJSStyleString(<string>references);
-        const additives = resolveDict(AdditivesDict, refArray);
-        const allergens = resolveDict(AllergensDict, refArray);
-        const other = resolveDict(OtherMealInfoDict, refArray);
-        const parsedPrice = parsePrice(price);
-        meals.push({
-          title,
-          additives,
-          allergens,
-          otherInfo: other,
-          price: parsedPrice
-        });
-      });
-      days.push({ date: $(this).attr('data-date2'), meals });
-    });
-    return days;
-  } catch (err: any) {
-    throw err;
-  }
-}
-function parseJSStyleString(str: string): string[] {
-  return str.replace(/[\[\]"]+/g, '').split(',');
-}
+
 function parsePrice(str: string): Price {
-  if (str.trim() === '-') return null;
   str = str.trim();
   const prices = str.split('/');
   const parsedPrices: number[] = prices.map(val => {
@@ -134,41 +109,27 @@ function parsePrice(str: string): Price {
     guest: parsedPrices[2]
   };
 }
+
 function resolveDict(dict: Map<string, LangString>, ref: string[]): string[] {
   const arr: string[] = [];
   ref.forEach(value => {
-    if (dict.get(value) !== undefined) {
-      arr.push(dict.get(value).de);
+    if (dict.has(value)) {
+      arr.push(dict.get(value)!.de);
     }
   });
   return arr;
 }
-function toJson(map: Map<string, MenuDay[]>) {
-  return JSON.stringify(Array.from(map.entries()));
-}
-type Pair = {
-  Mensa: string;
-  Plan: MenuDay[];
-};
-async function main() {
-  const mensen: Mensa[] = await parseMensenList('https://muenster.my-mensa.de/index.php?v=5348942&lang=en');
-  console.log(mensen);
 
-  // const mids: string[] = ["aasee", "davinci", "denkpause", "ring", "steinfurt"];
-  // const fs = require("fs");
-  // const m: Pair[] = [];
-  // const bar = new Promise((resolve, reject) => {
-  //   mids.forEach((value, index, array) => {
-  //     parseMensa(
-  //       "https://muenster.my-mensa.de/essen.php?v=5348990&hyp=1&lang=de&mensa=" +
-  //         value
-  //     ).then((res) => {
-  //       m.push({ Mensa: value, Plan: res });
-  //       if (index === array.length - 1) resolve();
-  //     });
-  //   });
-  // });
-  // await bar;
-  // fs.writeFileSync("./data/" + "allinone" + ".json", JSON.stringify(m));
+// function toJson(map: Map<string, MenuDay[]>) {
+//   return JSON.stringify(Array.from(map.entries()));
+// }
+
+async function main() {
+  // const mensen: Mensa[] = await parseMensenList('https://muenster.my-mensa.de/index.php?v=5348942&lang=en');
+  // console.log(mensen);
+  const mensen: string[] = ['aasee', 'davinci', 'denkpause', 'ring', 'steinfurt'];
+  const promises: Promise<MensaPlan>[] = mensen.map(mensa => parseMensa(mensa));
+  const result: MensaPlan[] = await Promise.all(promises);
+  writeFileSync(join(__dirname, '/data/allinone.json'), JSON.stringify(result));
 }
 main();
