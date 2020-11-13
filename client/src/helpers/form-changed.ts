@@ -11,6 +11,7 @@ export async function formChanged(event: CustomEvent<InputChangeEventDetail>): P
   const errorElement: any = ionicInputElement.parentNode!.parentNode!.querySelector('.error');
   const ionicLabelElement: any = ionicInputElement.parentNode!.querySelector('ion-label');
   errorElement.innerHTML = htmlInputElement.validationMessage;
+  if (htmlInputElement.validationMessage === 'Passwörter müssen gleich sein') htmlInputElement.setCustomValidity('');
   if (!htmlInputElement.validity.valid) {
     ionicLabelElement.setAttribute('color', 'danger');
     ionicInputElement.setAttribute('color', 'danger');
