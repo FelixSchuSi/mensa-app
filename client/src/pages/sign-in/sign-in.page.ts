@@ -32,23 +32,37 @@ class SignInPage extends PageMixin(LitElement) {
       ${this.renderNotification()}
       <h1>Anmelden</h1>
       <form>
-        <div class="form-group">
-          <label class="control-label" for="email">E-Mail</label>
-          <input class="form-control" type="email" autofocus required id="email" name="email" />
-          <div class="invalid-feedback">E-Mail ist erforderlich und muss gültig sein</div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="password">Passwort</label>
-          <input class="form-control" type="password" required id="password" name="password" />
-          <div class="invalid-feedback">Passwort ist erforderlich</div>
-        </div>
-        <button class="btn btn-primary" type="button" @click="${this.submit}">Anmelden</button>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="stacked" for="email">E-Mail</ion-label>
+            <ion-input
+              inputmode="email"
+              pattern="email"
+              type="email"
+              autofocus
+              required
+              id="email"
+              name="email"
+            ></ion-input>
+            <div class="invalid-feedback">E-Mail ist erforderlich und muss gültig sein</div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked" for="password">Passwort</ion-label>
+            <ion-input type="password" required id="password" name="password"></ion-input>
+            <!-- <div class="invalid-feedback">Passwort ist erforderlich</div> -->
+          </ion-item>
+        </ion-item-group>
+        <ion-button color="primary" type="button" @click="${this.submit}">Anmelden</ion-button>
       </form>
     `;
   }
 
   protected async submit(): Promise<void> {
-    if (this.isFormValid()) {
+    const isValid = this.isFormValid();
+    console.log(isValid);
+    console.log(this.form);
+    if (isValid) {
       const signInData: SignInData = {
         email: this.emailElement.value,
         password: this.passwordElement.value
@@ -59,7 +73,13 @@ class SignInPage extends PageMixin(LitElement) {
         this.setNotification({ errorMessage: message });
       }
     } else {
-      this.form.classList.add('was-validated');
+      // this.form.classList.add('was-validated');
+      // this.passwordElement.setCustomValidity('Passwort ist erforderlich');
+      //@ts-ignore
+      const pwInput: HTMLInputElement = await this.passwordElement.getInputElement();
+      pwInput.setCustomValidity('Passwort ist erforderlich');
+
+      // getInputElement();
     }
   }
 
