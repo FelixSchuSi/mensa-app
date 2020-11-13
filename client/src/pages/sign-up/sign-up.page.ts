@@ -2,6 +2,7 @@ import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS 
 import { PageMixin } from '../page.mixin';
 import { SignUpData } from '../../models/sign-up-data';
 import { userService } from '../../services/user.service';
+import { formChanged } from '../../helpers/form-changed';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -27,47 +28,63 @@ class SignUpPage extends PageMixin(LitElement) {
   @query('#email')
   protected emailElement!: HTMLInputElement;
 
-  @query('#password')
+  @query('#password > input')
   protected passwordElement!: HTMLInputElement;
 
-  @query('#password-check')
+  @query('#password-check > input')
   protected passwordCheckElement!: HTMLInputElement;
+
+  @query('.pw-repeat-error')
+  protected passwordRepeatError!: HTMLDivElement;
 
   protected render(): TemplateResult {
     return html`
       ${this.renderNotification()}
       <h1>Konto erstellen</h1>
-      <form novalidate>
-        <div class="form-group">
-          <label class="control-label" for="name">Name</label>
-          <input class="form-control" type="text" autofocus required id="name" name="name" />
-          <div class="invalid-feedback">Name ist erforderlich</div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="email">E-Mail</label>
-          <input class="form-control" type="email" required id="email" name="email" />
-          <div class="invalid-feedback">E-Mail ist erforderlich und muss gültig sein</div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="password">Passwort</label>
-          <input class="form-control" type="password" required minlength="10" id="password" name="password" />
-          <div class="invalid-feedback">Passwort ist erforderlich und muss mind. 10 Zeichen lang sein</div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="password-check">Passwort nochmals eingeben</label>
-          <input
-            class="form-control"
-            type="password"
-            required
-            minlength="10"
-            id="password-check"
-            name="passwordCheck"
-          />
-          <div class="invalid-feedback">
-            Erneute Passworteingabe ist erforderlich und muss mit der ersten Passworteingabe übereinstimmen
-          </div>
-        </div>
-        <button class="btn btn-primary" type="button" @click="${this.submit}">Konto erstellen</button>
+      <form novalidate @ionChange=${formChanged}>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" for="name">Name</ion-label>
+            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" for="email">E-Mail</ion-label>
+            <ion-input type="email" required id="email" name="email"></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" for="password">Passwort</ion-label>
+            <ion-input
+              clear-on-edit="false"
+              type="password"
+              required
+              minlength="10"
+              id="password"
+              name="password"
+            ></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" for="password-check">Passwort nochmals eingeben</ion-label>
+            <ion-input
+              clear-on-edit="false"
+              type="password"
+              required
+              minlength="10"
+              id="password-check"
+              name="passwordCheck"
+            ></ion-input>
+          </ion-item>
+          <div class="error pw-repeat-error"></div>
+        </ion-item-group>
+        <ion-button color="primary" type="button" @click="${this.submit}">Konto erstellen</ion-button>
       </form>
     `;
   }
@@ -85,14 +102,13 @@ class SignUpPage extends PageMixin(LitElement) {
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }
-    } else {
-      this.form.classList.add('was-validated');
     }
   }
 
   protected isFormValid(): boolean {
     if (this.passwordElement.value !== this.passwordCheckElement.value) {
       this.passwordCheckElement.setCustomValidity('Passwörter müssen gleich sein');
+      this.passwordRepeatError.innerHTML = this.passwordCheckElement.validationMessage;
     } else {
       this.passwordCheckElement.setCustomValidity('');
     }

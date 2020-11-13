@@ -1,8 +1,5 @@
 import { defineCustomElements } from '@ionic/core/loader';
-defineCustomElements(window).then(() => {
-  /* Ionic is loaded! */
-});
-
+defineCustomElements(window);
 import './index.scss';
 import './pages/app.component.ts';
 import './pages/sign-in/sign-in.page.ts';

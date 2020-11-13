@@ -5,3 +5,8 @@ h1 {
 form {
   margin-top: 1rem;
 }
+
+.error {
+  height: 1.5em; // should be ~22px
+  color: #eb445a; // TODO find out how to use: --ion-color-danger;
+}

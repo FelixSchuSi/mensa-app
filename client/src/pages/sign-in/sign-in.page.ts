@@ -2,6 +2,8 @@ import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS 
 import { PageMixin } from '../page.mixin';
 import { SignInData } from '../../models/sign-in-data';
 import { userService } from '../../services/user.service';
+import { formChanged } from '../../helpers/form-changed';
+// import { ion_input } from '@ionic/core/dist/esm/ion-input.entry';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-in.page.scss');
@@ -31,38 +33,44 @@ class SignInPage extends PageMixin(LitElement) {
     return html`
       ${this.renderNotification()}
       <h1>Anmelden</h1>
-      <form>
+      <form @ionChange=${formChanged}>
         <ion-item-group>
           <ion-item>
-            <ion-label position="stacked" for="email">E-Mail</ion-label>
+            <ion-label position="floating" for="email">E-Mail</ion-label>
             <ion-input
+              debounce="100"
               inputmode="email"
-              pattern="email"
               type="email"
               autofocus
               required
               id="email"
               name="email"
             ></ion-input>
-            <div class="invalid-feedback">E-Mail ist erforderlich und muss gültig sein</div>
           </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked" for="password">Passwort</ion-label>
-            <ion-input type="password" required id="password" name="password"></ion-input>
-            <!-- <div class="invalid-feedback">Passwort ist erforderlich</div> -->
-          </ion-item>
+          <div class="error" color="danger"></div>
         </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" for="password">Passwort</ion-label>
+            <ion-input
+              clear-on-edit="false"
+              debounce="100"
+              type="password"
+              required
+              id="password"
+              name="password"
+            ></ion-input>
+          </ion-item>
+          <div class="error" color="danger"></div>
+        </ion-item-group>
+
         <ion-button color="primary" type="button" @click="${this.submit}">Anmelden</ion-button>
       </form>
     `;
   }
 
   protected async submit(): Promise<void> {
-    const isValid = this.isFormValid();
-    console.log(isValid);
-    console.log(this.form);
-    if (isValid) {
+    if (this.form.checkValidity()) {
       const signInData: SignInData = {
         email: this.emailElement.value,
         password: this.passwordElement.value
@@ -72,18 +80,6 @@ class SignInPage extends PageMixin(LitElement) {
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }
-    } else {
-      // this.form.classList.add('was-validated');
-      // this.passwordElement.setCustomValidity('Passwort ist erforderlich');
-      //@ts-ignore
-      const pwInput: HTMLInputElement = await this.passwordElement.getInputElement();
-      pwInput.setCustomValidity('Passwort ist erforderlich');
-
-      // getInputElement();
     }
-  }
-
-  protected isFormValid(): boolean {
-    return this.form.checkValidity();
   }
 }
