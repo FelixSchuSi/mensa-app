@@ -25,7 +25,7 @@ class AppComponent extends LitElement {
   protected linkItems: LinkItem[] = [
     { title: 'Konto erstellen', routePath: ROUTES.SIGN_UP },
     { title: 'Anmelden', routePath: ROUTES.SIGN_IN },
-    { title: 'Abmelden', routePath: ROUTES.SIGN_UP }
+    { title: 'Abmelden', routePath: ROUTES.SIGN_OUT }
   ];
 
   protected firstUpdated(): void {
