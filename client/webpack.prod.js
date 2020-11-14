@@ -33,13 +33,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html', base:'/mensa-app/'}),
+    new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }),
     new CopyPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, '404.html')
         },
-      ],
+        { from: 'node_modules/@ionic/core/dist/ionic/svg', to: '/mensa-app/svg' }
+      ]
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),

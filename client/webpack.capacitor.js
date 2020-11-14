@@ -33,6 +33,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html', base: '/' }),
     new CleanWebpackPlugin(),
+    new CopyPlugin({ patterns: [{ from: 'node_modules/@ionic/core/dist/ionic/svg', to: './svg' }] }),
     new MiniCssExtractPlugin(),
     new DefinePlugin({
       ISPROD: JSON.stringify(true)

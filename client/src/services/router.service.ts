@@ -37,8 +37,8 @@ export class RouterService {
   }
 
   // e. g. 'user/sign-in' (without leading slash)
-  public getPath(): string {
-    return this.withoutRootPath(location.pathname);
+  public getPath(): Routes {
+    return <Routes>this.withoutRootPath(location.pathname);
   }
 
   private notifyListeners(): void {

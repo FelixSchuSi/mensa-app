@@ -6,7 +6,6 @@ import { PageMixin } from '../page.mixin';
 import { Task } from '../../models/task';
 import { httpService } from '../../services/http.service';
 import { Routes } from '../../routes';
-import { PageContext } from '../../models/page-context';
 import { LanguageStrings } from '../../models/language-strings';
 
 const sharedCSS = require('../../shared.scss');
@@ -30,9 +29,6 @@ class TasksPage extends PageMixin(LitElement) {
   @property({ type: Array })
   protected tasks: Task[] = [];
 
-  @property({ type: Object })
-  protected pageContext!: PageContext;
-
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
@@ -51,8 +47,8 @@ class TasksPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      ${this.renderNotification()}
       <h1>${this.i18n.TASKS}</h1>
+      ${this.renderNotification()}
       <form novalidate @submit="${this.submit}">
         <div>
           <input

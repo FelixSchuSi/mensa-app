@@ -42,6 +42,9 @@ class AppComponent extends LitElement {
   protected appTitle = 'mensa-app';
 
   @internalProperty()
+  protected currentRoute!: Routes;
+
+  @internalProperty()
   protected mode!: 'ios' | 'md';
 
   @internalProperty()
@@ -52,15 +55,6 @@ class AppComponent extends LitElement {
     return {
       '.i18n': this.i18n
     };
-  }
-
-  @property({ type: Array })
-  protected get linkItems(): LinkItem[] {
-    return [
-      { title: this.i18n.SIGN_UP, routePath: Routes.SIGN_UP },
-      { title: this.i18n.SIGN_IN, routePath: Routes.SIGN_IN },
-      { title: this.i18n.SIGN_OUT, routePath: Routes.SIGN_OUT }
-    ];
   }
 
   protected toggleLanguage(): void {
@@ -78,7 +72,10 @@ class AppComponent extends LitElement {
   }
 
   protected firstUpdated(): void {
-    routerService.subscribe(() => this.requestUpdate());
+    routerService.subscribe(() => {
+      this.currentRoute = routerService.getPath();
+      this.requestUpdate();
+    });
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');
@@ -107,13 +104,50 @@ class AppComponent extends LitElement {
     }
   }
 
-  protected render(): TemplateResult {
+  protected renderMain(): TemplateResult {
     return html`
-      <app-header title="${this.appTitle}" .linkItems=${this.linkItems}></app-header>
-
-      <div class="main container">${this.renderRouterOutlet()}</div>
+      ${this.renderRouterOutlet()}
       <button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</button>
       <button @click=${this.toggleMode}>Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode</button>
+    `;
+  }
+
+  protected render(): TemplateResult {
+    return html`
+      <ion-app>
+        <ion-tabs>
+          <ion-tab tab=${Routes.TASKS}>
+            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+          </ion-tab>
+          <ion-tab tab=${Routes.SIGN_IN}>
+            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+          </ion-tab>
+          <ion-tab tab=${Routes.SIGN_UP}>
+            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+          </ion-tab>
+          <ion-tab tab=${Routes.SIGN_OUT}>
+            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+          </ion-tab>
+          <ion-tab-bar selected-tab="${this.currentRoute}" slot="bottom">
+            <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
+              <ion-label>${this.i18n.TASKS}</ion-label>
+              <ion-icon name="list"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
+              <ion-label>${this.i18n.SIGN_IN}</ion-label>
+              <ion-icon name="log-in"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
+              <ion-label>${this.i18n.SIGN_UP}</ion-label>
+              <ion-icon name="create"></ion-icon>
+            </ion-tab-button>
+            <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
+              <ion-label>${this.i18n.SIGN_OUT}</ion-label>
+              <ion-icon name="log-out"></ion-icon>
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-tabs>
+      </ion-app>
     `;
   }
 }

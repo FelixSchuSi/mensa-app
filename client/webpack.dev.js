@@ -51,7 +51,8 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, '404.html')
-        }
+        },
+        { from: 'node_modules/@ionic/core/dist/ionic/svg', to: './svg' }
       ]
     }),
     new DefinePlugin({
