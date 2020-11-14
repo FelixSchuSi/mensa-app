@@ -12,12 +12,15 @@
     max-width: 768px;
     width: 768px;
     height: 100%;
-    border-left: 1px solid rgb(204, 204, 204);
-    border-right: 1px solid rgb(204, 204, 204);
+    border-left: 1px solid #ededed;
+    border-right: 1px solid #ededed;
   }
   .ion-app-container > .ion-page {
     position: static;
     height: 100%;
-    width: 100%;
+  }
+
+  .ion-app-container > .ion-page > ion-tabs {
+    position: static;
   }
 }

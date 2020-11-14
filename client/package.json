@@ -16,6 +16,7 @@
     "e2e": "tsc -p e2e && jasmine JASMINE_CONFIG_PATH=e2e/jasmine.json",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
+    "publish": "npm run deploy",
     "copyDist": "nodemon -e * --watch dist -x \"npx cap sync\"",
     "watch": "concurrently \"npm run copyDist\" \"npm run build:watch\""
   },

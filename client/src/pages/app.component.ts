@@ -106,8 +106,8 @@ class AppComponent extends LitElement {
   protected renderMain(): TemplateResult {
     return html`
       ${this.renderRouterOutlet()}
-      <button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</button>
-      <button @click=${this.toggleMode}>Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode</button>
+      <ion-button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
+      <ion-button @click=${this.toggleMode}>Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode</ion-button>
     `;
   }
 
