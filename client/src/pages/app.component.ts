@@ -9,7 +9,6 @@ import {
   unsafeCSS
 } from 'lit-element';
 import { routerService } from '../services/router.service';
-import { LinkItem } from '../models/link-item';
 import { Routes } from '../routes';
 import { LanguageStrings } from '../models/language-strings';
 import { getBrowserLanguage } from '../i18n/get-browser-language';
@@ -18,8 +17,8 @@ import { german } from '../i18n/german';
 import { english } from '../i18n/english';
 import { spread } from '@open-wc/lit-helpers';
 
-const sharedCSS = require('../shared.scss');
 const componentCSS = require('./app.component.scss');
+const sharedCSS = require('../shared.scss');
 
 @customElement('app-root')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -114,40 +113,44 @@ class AppComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <ion-app>
-        <ion-tabs>
-          <ion-tab tab=${Routes.TASKS}>
-            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
-          </ion-tab>
-          <ion-tab tab=${Routes.SIGN_IN}>
-            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
-          </ion-tab>
-          <ion-tab tab=${Routes.SIGN_UP}>
-            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
-          </ion-tab>
-          <ion-tab tab=${Routes.SIGN_OUT}>
-            <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
-          </ion-tab>
-          <ion-tab-bar selected-tab="${this.currentRoute}" slot="bottom">
-            <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
-              <ion-label>${this.i18n.TASKS}</ion-label>
-              <ion-icon name="list"></ion-icon>
-            </ion-tab-button>
-            <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
-              <ion-label>${this.i18n.SIGN_IN}</ion-label>
-              <ion-icon name="log-in"></ion-icon>
-            </ion-tab-button>
-            <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
-              <ion-label>${this.i18n.SIGN_UP}</ion-label>
-              <ion-icon name="create"></ion-icon>
-            </ion-tab-button>
-            <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
-              <ion-label>${this.i18n.SIGN_OUT}</ion-label>
-              <ion-icon name="log-out"></ion-icon>
-            </ion-tab-button>
-          </ion-tab-bar>
-        </ion-tabs>
-      </ion-app>
+      <div class="full-size">
+        <div class="ion-app-container">
+          <ion-app>
+            <ion-tabs>
+              <ion-tab tab=${Routes.TASKS}>
+                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+              </ion-tab>
+              <ion-tab tab=${Routes.SIGN_IN}>
+                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+              </ion-tab>
+              <ion-tab tab=${Routes.SIGN_UP}>
+                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+              </ion-tab>
+              <ion-tab tab=${Routes.SIGN_OUT}>
+                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+              </ion-tab>
+              <ion-tab-bar selected-tab="${this.currentRoute}" slot="bottom">
+                <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
+                  <ion-label>${this.i18n.TASKS}</ion-label>
+                  <ion-icon name="list"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
+                  <ion-label>${this.i18n.SIGN_IN}</ion-label>
+                  <ion-icon name="log-in"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
+                  <ion-label>${this.i18n.SIGN_UP}</ion-label>
+                  <ion-icon name="create"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
+                  <ion-label>${this.i18n.SIGN_OUT}</ion-label>
+                  <ion-icon name="log-out"></ion-icon>
+                </ion-tab-button>
+              </ion-tab-bar>
+            </ion-tabs>
+          </ion-app>
+        </div>
+      </div>
     `;
   }
 }

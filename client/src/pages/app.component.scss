@@ -1,5 +1,21 @@
 @import '../variables.scss';
 
-.main {
-  margin-top: 5rem;
+@media (min-width: 768px) {
+  .full-size {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+  .full-size > .ion-app-container {
+    max-width: 768px;
+    width: 768px;
+    height: 100%;
+  }
+  .ion-app-container > .ion-page {
+    position: static;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 58px 0px rgba(0, 0, 0, 0.1);
+  }
 }
