@@ -20,6 +20,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.ts$/, use: { loader: 'ts-loader', options: { transpileOnly: true } } },
+      // { test: /.css$/, use: ['style-loader', { loader: 'css-loader', options: { sourceMap: true } }] },
       {
         test: /\.scss$/,
         include: /index\.scss$/,
@@ -30,7 +31,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         exclude: /index\.scss$/,
         use: [
           'to-string-loader',
@@ -44,14 +45,17 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }), new CopyPlugin({
-    patterns: [
-      {
-        from: path.resolve(__dirname, '404.html'),
-      },
-    ],
-  }),
-  new DefinePlugin({
-    ISPROD: JSON.stringify(false)
-  })]
+  plugins: [
+    new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '404.html')
+        }
+      ]
+    }),
+    new DefinePlugin({
+      ISPROD: JSON.stringify(false)
+    })
+  ]
 };

@@ -1,0 +1,10 @@
+# Generated files
+src/**/*.js
+src/**/*.map
+db/**/*.js
+db/**/*.map
+.nyc_output/
+coverage/
+db-data.txt
+src/secrets.json
+data/*.json
