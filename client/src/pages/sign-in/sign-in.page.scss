@@ -8,5 +8,6 @@ form {
 
 .error {
   height: 1.5em; // should be ~22px
+  font-size: 0.7em;
   color: #eb445a; // TODO find out how to use: --ion-color-danger;
 }
