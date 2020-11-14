@@ -39,7 +39,7 @@ class AppComponent extends LitElement {
   }
 
   @property()
-  protected appTitle = 'Aufgabenverwaltung';
+  protected appTitle = 'mensa-app';
 
   @internalProperty()
   protected mode!: 'ios' | 'md';
