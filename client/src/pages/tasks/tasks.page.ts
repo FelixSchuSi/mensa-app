@@ -7,6 +7,7 @@ import { Task } from '../../models/task';
 import { httpService } from '../../services/http.service';
 import { Routes } from '../../routes';
 import { PageContext } from '../../models/page-context';
+import { LanguageStrings } from '../../models/language-strings';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./tasks.page.scss');
@@ -32,6 +33,9 @@ class TasksPage extends PageMixin(LitElement) {
   @property({ type: Object })
   protected pageContext!: PageContext;
 
+  @property({ type: Object, attribute: false })
+  protected i18n!: LanguageStrings;
+
   protected async firstUpdated(): Promise<void> {
     try {
       const response = await httpService.get('tasks' + location.search);
@@ -48,7 +52,7 @@ class TasksPage extends PageMixin(LitElement) {
   protected render(): TemplateResult {
     return html`
       ${this.renderNotification()}
-      <h1>Aufgaben</h1>
+      <h1>${this.i18n.TASKS}</h1>
       <form novalidate @submit="${this.submit}">
         <div>
           <input
@@ -58,7 +62,7 @@ class TasksPage extends PageMixin(LitElement) {
             required
             id="title"
             name="title"
-            placeholder="Neue Aufgabe"
+            placeholder="${this.i18n.NEW_TASK}"
           />
         </div>
       </form>

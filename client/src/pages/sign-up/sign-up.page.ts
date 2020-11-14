@@ -1,8 +1,10 @@
-import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { SignUpData } from '../../models/sign-up-data';
 import { userService } from '../../services/user.service';
 import { formChanged } from '../../helpers/form-changed';
+import { LanguageStrings } from '../../models/language-strings';
+import { InputChangeEventDetail } from '@ionic/core';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -37,28 +39,31 @@ class SignUpPage extends PageMixin(LitElement) {
   @query('.pw-repeat-error')
   protected passwordRepeatError!: HTMLDivElement;
 
+  @property({ type: Object, attribute: false })
+  protected i18n!: LanguageStrings;
+
   protected render(): TemplateResult {
     return html`
       ${this.renderNotification()}
-      <h1>Konto erstellen</h1>
-      <form novalidate @ionChange=${formChanged}>
+      <h1>${this.i18n.SIGN_UP}</h1>
+      <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
         <ion-item-group>
           <ion-item>
-            <ion-label position="floating" for="name">Name</ion-label>
+            <ion-label position="floating" for="name">${this.i18n.NAME}</ion-label>
             <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
           </ion-item>
           <div class="error"></div>
         </ion-item-group>
         <ion-item-group>
           <ion-item>
-            <ion-label position="floating" for="email">E-Mail</ion-label>
+            <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
             <ion-input type="email" required id="email" name="email"></ion-input>
           </ion-item>
           <div class="error"></div>
         </ion-item-group>
         <ion-item-group>
           <ion-item>
-            <ion-label position="floating" for="password">Passwort</ion-label>
+            <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
             <ion-input
               clear-on-edit="false"
               type="password"
@@ -72,7 +77,7 @@ class SignUpPage extends PageMixin(LitElement) {
         </ion-item-group>
         <ion-item-group>
           <ion-item>
-            <ion-label position="floating" for="password-check">Passwort nochmals eingeben</ion-label>
+            <ion-label position="floating" for="password-check">${this.i18n.PASSWORD_CONFIRM}</ion-label>
             <ion-input
               clear-on-edit="false"
               type="password"
@@ -84,7 +89,7 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-item>
           <div class="error pw-repeat-error"></div>
         </ion-item-group>
-        <ion-button color="primary" type="button" @click="${this.submit}">Konto erstellen</ion-button>
+        <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
       </form>
     `;
   }
@@ -107,7 +112,7 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected isFormValid(): boolean {
     if (this.passwordElement.value !== this.passwordCheckElement.value) {
-      this.passwordCheckElement.setCustomValidity('Passwörter müssen gleich sein');
+      this.passwordCheckElement.setCustomValidity(this.i18n.PASSWORD_NOT_IDENTICAL);
       this.passwordRepeatError.innerHTML = this.passwordCheckElement.validationMessage;
     } else {
       this.passwordCheckElement.setCustomValidity('');

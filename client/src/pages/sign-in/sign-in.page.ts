@@ -1,9 +1,10 @@
-import { css, customElement, html, LitElement, query, TemplateResult, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { SignInData } from '../../models/sign-in-data';
 import { userService } from '../../services/user.service';
 import { formChanged } from '../../helpers/form-changed';
-// import { ion_input } from '@ionic/core/dist/esm/ion-input.entry';
+import { LanguageStrings } from '../../models/language-strings';
+import { InputChangeEventDetail } from '@ionic/core';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-in.page.scss');
@@ -29,14 +30,18 @@ class SignInPage extends PageMixin(LitElement) {
   @query('#password')
   protected passwordElement!: HTMLInputElement;
 
+  @property({ type: Object, attribute: false })
+  protected i18n!: LanguageStrings;
+
   protected render(): TemplateResult {
+    debugger;
     return html`
       ${this.renderNotification()}
-      <h1>Anmelden</h1>
-      <form @ionChange=${formChanged}>
+      <h1>${this.i18n.SIGN_IN}</h1>
+      <form @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
         <ion-item-group>
           <ion-item>
-            <ion-label position="floating" for="email">E-Mail</ion-label>
+            <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
             <ion-input
               debounce="100"
               inputmode="email"
@@ -51,7 +56,7 @@ class SignInPage extends PageMixin(LitElement) {
         </ion-item-group>
         <ion-item-group>
           <ion-item>
-            <ion-label position="floating" for="password">Passwort</ion-label>
+            <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
             <ion-input
               clear-on-edit="false"
               debounce="100"
@@ -64,7 +69,7 @@ class SignInPage extends PageMixin(LitElement) {
           <div class="error" color="danger"></div>
         </ion-item-group>
 
-        <ion-button color="primary" type="button" @click="${this.submit}">Anmelden</ion-button>
+        <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_IN}</ion-button>
       </form>
     `;
   }
