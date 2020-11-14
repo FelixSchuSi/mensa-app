@@ -39,7 +39,7 @@ module.exports = {
         {
           from: path.resolve(__dirname, '404.html')
         },
-        { from: path.resolve(__dirname, 'node_modules/@ionic/core/dist/ionic/svg'), to: './mensa-app/svg' }
+        { from: path.resolve(__dirname, 'node_modules/@ionic/core/dist/ionic/svg'), to: '/mensa-app/svg' }
       ]
     }),
     new CleanWebpackPlugin(),
