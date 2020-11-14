@@ -34,7 +34,6 @@ class SignInPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   protected render(): TemplateResult {
-    debugger;
     return html`
       ${this.renderNotification()}
       <h1>${this.i18n.SIGN_IN}</h1>

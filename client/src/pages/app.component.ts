@@ -16,7 +16,6 @@ import { getBrowserLanguage } from '../i18n/get-browser-language';
 import { Languages } from '../models/languages';
 import { german } from '../i18n/german';
 import { english } from '../i18n/english';
-import { PageContext } from '../models/page-context';
 import { spread } from '@open-wc/lit-helpers';
 
 const sharedCSS = require('../shared.scss');
@@ -41,6 +40,9 @@ class AppComponent extends LitElement {
 
   @property()
   protected appTitle = 'Aufgabenverwaltung';
+
+  @internalProperty()
+  protected mode!: 'ios' | 'md';
 
   @internalProperty()
   protected i18n!: LanguageStrings;
@@ -69,12 +71,24 @@ class AppComponent extends LitElement {
     }
   }
 
+  protected toggleMode(): void {
+    this.mode = this.mode === 'md' ? 'ios' : 'md';
+    localStorage.setItem('mode', this.mode);
+    location.reload();
+  }
+
   protected firstUpdated(): void {
     routerService.subscribe(() => this.requestUpdate());
     const path = localStorage.getItem('path');
     if (path) {
       localStorage.removeItem('path');
       routerService.navigate(<Routes>path);
+    }
+    const mode = localStorage.getItem('mode');
+    if (mode) {
+      this.mode = <'ios' | 'md'>mode;
+      const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
+      htmlElement.setAttribute('mode', this.mode);
     }
   }
 
@@ -99,6 +113,7 @@ class AppComponent extends LitElement {
 
       <div class="main container">${this.renderRouterOutlet()}</div>
       <button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</button>
+      <button @click=${this.toggleMode}>Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode</button>
     `;
   }
 }
