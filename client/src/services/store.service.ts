@@ -1,21 +1,21 @@
-import { Storage } from '@ionic/storage';
+import localForage from 'localforage';
 
 class StoreService {
-  private store: any;
+  private store: LocalForage;
   constructor() {
-    this.store = new Storage({}, {});
+    this.store = localForage.createInstance({});
   }
 
-  public async get(key: string): Promise<any> {
-    return await this.store.get(key);
+  public async get(key: string): Promise<unknown> {
+    return await this.store.getItem(key);
   }
 
   public async set(key: string, value: any): Promise<any> {
-    return await this.store.set(key, value);
+    return await this.store.setItem(key, value);
   }
 
   public async remove(key: string): Promise<any> {
-    return await this.store.remove(key);
+    return await this.store.removeItem(key);
   }
 
   public async clear(): Promise<void> {

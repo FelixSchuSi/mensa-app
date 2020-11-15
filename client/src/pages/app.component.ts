@@ -36,6 +36,14 @@ class AppComponent extends LitElement {
   public constructor() {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
+
+    // mode button has to use localstorage since its synchronus and delays rendering.
+    const mode = localStorage.getItem('mode');
+    if (mode) {
+      this.mode = <'ios' | 'md'>mode;
+      const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
+      htmlElement.setAttribute('mode', this.mode);
+    }
   }
 
   @property()
@@ -67,7 +75,7 @@ class AppComponent extends LitElement {
 
   protected async toggleMode(): Promise<void> {
     this.mode = this.mode === 'md' ? 'ios' : 'md';
-    await storeService.set('mode', this.mode);
+    localStorage.setItem('mode', this.mode);
     location.reload();
   }
 
@@ -76,16 +84,11 @@ class AppComponent extends LitElement {
       this.currentRoute = routerService.getPath();
       this.requestUpdate();
     });
+
     const path = await storeService.get('path');
     if (path) {
       await storeService.remove('path');
       routerService.navigate(<Routes>path);
-    }
-    const mode = await storeService.get('mode');
-    if (mode) {
-      this.mode = <'ios' | 'md'>mode;
-      const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
-      htmlElement.setAttribute('mode', this.mode);
     }
   }
 

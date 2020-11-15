@@ -73,6 +73,7 @@
     "@ionic/core": "^5.4.3",
     "@open-wc/lit-helpers": "^0.3.11",
     "bootstrap": "^4.5.3",
-    "lit-element": "^2.4.0"
+    "lit-element": "^2.4.0",
+    "localforage": "^1.9.0"
   }
 }
