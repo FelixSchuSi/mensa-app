@@ -22,10 +22,7 @@ class SignOutPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   protected render(): TemplateResult {
-    return html`
-      <h1>${this.i18n.SIGN_OUT}</h1>
-      ${this.renderNotification()}
-    `;
+    return html` ${this.renderNotification()} `;
   }
 
   protected async firstUpdated(): Promise<void> {

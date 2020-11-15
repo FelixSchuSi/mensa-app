@@ -44,7 +44,6 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <h1>${this.i18n.SIGN_UP}</h1>
       ${this.renderNotification()}
       <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
         <ion-item-group>

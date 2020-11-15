@@ -35,7 +35,6 @@ class SignInPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <h1>${this.i18n.SIGN_IN}</h1>
       ${this.renderNotification()}
       <form @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
         <ion-item-group>

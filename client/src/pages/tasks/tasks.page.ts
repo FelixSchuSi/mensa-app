@@ -47,7 +47,6 @@ class TasksPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <h1>${this.i18n.TASKS}</h1>
       ${this.renderNotification()}
       <form novalidate @submit="${this.submit}">
         <div>

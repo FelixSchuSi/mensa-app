@@ -11,6 +11,10 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
 
     private onDestroyCallbacks: (() => void)[] = [];
 
+    protected createRenderRoot() {
+      return this;
+    }
+
     disconnectedCallback(): void {
       super.disconnectedCallback();
       this.onDestroyCallbacks.forEach((callback: () => void) => callback());

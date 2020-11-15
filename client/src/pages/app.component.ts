@@ -103,6 +103,21 @@ class AppComponent extends LitElement {
     }
   }
 
+  protected renderTitle(): string {
+    switch (routerService.getPath()) {
+      case Routes.SIGN_IN:
+        return this.i18n.SIGN_IN;
+      case Routes.SIGN_UP:
+        return this.i18n.SIGN_UP;
+      case Routes.SIGN_OUT:
+        return this.i18n.SIGN_OUT;
+      case Routes.TASKS:
+        return this.i18n.TASKS;
+      default:
+        return this.i18n.TASKS;
+    }
+  }
+
   protected renderMain(): TemplateResult {
     return html`
       ${this.renderRouterOutlet()}
@@ -116,6 +131,11 @@ class AppComponent extends LitElement {
       <div class="full-size">
         <div class="ion-app-container">
           <ion-app>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>${this.renderTitle()}</ion-title>
+              </ion-toolbar>
+            </ion-header>
             <ion-tabs>
               <ion-tab tab=${Routes.TASKS}>
                 <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
