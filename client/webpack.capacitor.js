@@ -41,6 +41,9 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new DefinePlugin({
       ISPROD: JSON.stringify(true)
+    }),
+    new InjectManifest({
+      swSrc: './src/sw.js'
     })
   ]
 };
