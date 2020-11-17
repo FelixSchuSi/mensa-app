@@ -16,6 +16,7 @@ import { Languages } from '../models/languages';
 import { german } from '../i18n/german';
 import { english } from '../i18n/english';
 import { spread } from '@open-wc/lit-helpers';
+import { storeService } from '../services/store.service';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -35,6 +36,14 @@ class AppComponent extends LitElement {
   public constructor() {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
+
+    // mode button has to use localstorage since its synchronus and delays rendering.
+    const mode = localStorage.getItem('mode');
+    if (mode) {
+      this.mode = <'ios' | 'md'>mode;
+      const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
+      htmlElement.setAttribute('mode', this.mode);
+    }
   }
 
   @property()
@@ -64,27 +73,22 @@ class AppComponent extends LitElement {
     }
   }
 
-  protected toggleMode(): void {
+  protected async toggleMode(): Promise<void> {
     this.mode = this.mode === 'md' ? 'ios' : 'md';
     localStorage.setItem('mode', this.mode);
     location.reload();
   }
 
-  protected firstUpdated(): void {
+  protected async firstUpdated(): Promise<void> {
     routerService.subscribe(() => {
       this.currentRoute = routerService.getPath();
       this.requestUpdate();
     });
-    const path = localStorage.getItem('path');
+
+    const path = await storeService.get('path');
     if (path) {
-      localStorage.removeItem('path');
+      await storeService.remove('path');
       routerService.navigate(<Routes>path);
-    }
-    const mode = localStorage.getItem('mode');
-    if (mode) {
-      this.mode = <'ios' | 'md'>mode;
-      const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
-      htmlElement.setAttribute('mode', this.mode);
     }
   }
 
