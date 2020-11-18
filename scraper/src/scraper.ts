@@ -1,14 +1,14 @@
 import cheerio from 'cheerio';
 import { getAllergenesFromRefs } from './models/allergenes';
 import { getOtherMealInfoLangFromRefs } from './models/other-meal-info';
-import { getAdditivesFromRefs } from './models/additives';
+import { parseAdditivesFromRefs } from './models/additives';
 import { gethtmlFromUrl } from './helpers/gethtmlFromUrl';
 import { FlatMeal } from './models/flatMeal';
 import { MongoGenericDAO } from '../../server/src/models/mongo-generic.dao';
 import { DbFlatMeal } from './models/dbFlatMeal';
 import { connectToDb } from './db';
 import { getUniqueDateMensaCombinations } from './helpers/getUniqueDateMensaCombinations';
-import { parsePrice } from './parse/parsePrice';
+import { parsePrice } from './helpers/parsePrice';
 
 function parseMealsFromHTML(html: string): FlatMeal[] {
   const $: cheerio.Root = cheerio.load(html);
@@ -36,7 +36,7 @@ function parseMealsFromHTML(html: string): FlatMeal[] {
       const unparsedPrice = $(mealElement).find('a > p.text2share.next').text().trim();
       const references = $(mealElement).attr('ref')!;
       const refArray = JSON.parse(references || '[]');
-      const additives = getAdditivesFromRefs(refArray);
+      const additives = parseAdditivesFromRefs(refArray);
       const allergens = getAllergenesFromRefs(refArray);
       const otherInfo = getOtherMealInfoLangFromRefs(refArray);
       const price = parsePrice(unparsedPrice);
