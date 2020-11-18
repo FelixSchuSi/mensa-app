@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   const taskDAO: GenericDAO<Task> = req.app.locals.taskDAO;
-  await taskDAO.delete(req.params.id);
+  await taskDAO.deleteOne(req.params.id);
   res.status(200).end();
 });
 
