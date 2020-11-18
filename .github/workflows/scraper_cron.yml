@@ -1,0 +1,27 @@
+name: Scraper Cronjob
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js.
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Install npm packages.
+        run: |
+          cd scraper
+          npm i
+      - name: Run scraper.
+        env:
+          DBURL: ${{ secrets.DBURL }}
+        run: |
+          cd scraper
+          npm start
