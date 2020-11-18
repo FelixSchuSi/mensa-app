@@ -1,77 +1,65 @@
-import axios from 'axios';
 import cheerio from 'cheerio';
-import { Meal } from './models/meal';
-import { MenuDay } from './models/menu-day';
-import { Price } from './models/price';
-import { MensaPlan } from './models/mensa-plan';
 import { getAllergenesFromRefs } from './models/allergenes';
 import { getOtherMealInfoLangFromRefs } from './models/other-meal-info';
 import { getAdditivesFromRefs } from './models/additives';
+import { gethtmlFromUrl } from './helpers/gethtmlFromUrl';
 import { FlatMeal } from './models/flatMeal';
 import { MongoGenericDAO } from '../../server/src/models/mongo-generic.dao';
 import { DbFlatMeal } from './models/dbFlatMeal';
 import { connectToDb } from './db';
 import { getUniqueDateMensaCombinations } from './helpers/getUniqueDateMensaCombinations';
-import { mensaPlanstoFlatMeals } from './helpers/mensaPlanstoFlatMeals';
+import { parsePrice } from './parse/parsePrice';
 
-async function parseMensa(mensa: string): Promise<MensaPlan> {
-  const url: string = 'https://muenster.my-mensa.de/essen.php?v=5348990&hyp=1&lang=de&mensa=' + mensa;
-  const response = await axios(url);
-  const $: cheerio.Root = cheerio.load(response.data);
+function parseMealsFromHTML(html: string): FlatMeal[] {
+  const $: cheerio.Root = cheerio.load(html);
+  const mensaString: string = $('.mensatitle').first().text();
+  const mensa: string = mensaString
+    .split(' ')
+    .filter(substr => ['Mensa', 'Am', 'Bistro'].indexOf(substr) < 0)
+    .join('')
+    .toLowerCase();
+
   const dayList: cheerio.Element[] = $('div.essenliste').toArray();
 
-  const menuDays: MenuDay[] = dayList.map((dayElement: cheerio.Element) => {
-    const mealList: cheerio.Element[] = $(dayElement).find('div[data-role="content"] > ul > li.conditional').toArray();
+  let flatMeals: FlatMeal[] = [];
 
-    const unfilteredMeals: (Meal | null)[] = mealList.map((mealElement: cheerio.Element) => {
+  dayList.forEach((dayElement: cheerio.Element, i) => {
+    const mealList: cheerio.Element[] = $(dayElement).find('div[data-role="content"] > ul > li.conditional').toArray();
+    const unfilteredMeals: FlatMeal[] = mealList.map((mealElement: cheerio.Element) => {
       const title = $(mealElement)
         .find('a > h3.text2share')
         .text()
         .trim()
         .replace(/\xAD/g, '')
         .replace(/\s?\([^)]+\)/g, '');
-      if (title === '+') return null;
 
       const unparsedPrice = $(mealElement).find('a > p.text2share.next').text().trim();
-      const references = $(mealElement).attr('ref');
-      const refArray = JSON.parse(references!);
+      const references = $(mealElement).attr('ref')!;
+      const refArray = JSON.parse(references || '[]');
       const additives = getAdditivesFromRefs(refArray);
       const allergens = getAllergenesFromRefs(refArray);
       const otherInfo = getOtherMealInfoLangFromRefs(refArray);
       const price = parsePrice(unparsedPrice);
-      return { title, additives, allergens, otherInfo, price };
+      const date = $(dayElement).attr('data-date2')!;
+      return { title, additives, allergens, otherInfo, price, mensa, date };
     });
-
-    const meals: Meal[] = <Meal[]>unfilteredMeals.filter(potentialMeal => potentialMeal !== null);
-    return { date: $(dayElement).attr('data-date2')!, meals };
+    flatMeals = [...flatMeals, ...unfilteredMeals.filter(meal => meal.title !== '+')];
   });
-  return { mensa, menuDays, rawHTML: $('body').html() || '' };
-}
-
-function parsePrice(str: string): Price {
-  str = str.trim();
-  const prices = str.split('/');
-  const parsedPrices: number[] = prices.map(val => {
-    return parseFloat(val.replace('€', '').replace(',', '.').trim());
-  });
-
-  return {
-    student: parsedPrices[0],
-    employee: parsedPrices[1],
-    guest: parsedPrices[2]
-  };
+  return flatMeals;
 }
 
 async function main() {
-  const mensen: string[] = ['aasee', 'davinci', 'denkpause', 'ring', 'steinfurt'];
-  const promises: Promise<MensaPlan>[] = mensen.map(mensa => parseMensa(mensa));
-  const mensaPlans: MensaPlan[] = await Promise.all(promises);
-  const flatMeals: FlatMeal[] = mensaPlanstoFlatMeals(mensaPlans);
   const mealDAO: MongoGenericDAO<DbFlatMeal> = await connectToDb();
+  const mensen: string[] = ['aasee', 'davinci', 'denkpause', 'ring', 'steinfurt'];
+
+  const scrapedHtmlStrings: string[] = await Promise.all(
+    mensen.map(mensa => gethtmlFromUrl('https://muenster.my-mensa.de/essen.php?v=5348990&hyp=1&lang=de&mensa=' + mensa))
+  );
+  const flatMeals: FlatMeal[] = scrapedHtmlStrings.map(html => parseMealsFromHTML(html)).flat();
 
   // Delete Meals that contain the same date-mensa combination since updated meals are present in this scrape.
   // We could alternatively update all meals with identical date-mensa-title combination, however this would
-  // leave meals in the db that were taken off the menu in the last scrape
+  // leave meals in the db that were taken off the menu in the last scrape.
   const dateMensaCombos = getUniqueDateMensaCombinations(flatMeals);
   await Promise.all(dateMensaCombos.map(uniqueScrape => mealDAO.deleteAll(uniqueScrape)));
 

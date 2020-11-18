@@ -44,13 +44,13 @@ const enAdditives: Record<AdditivesKeys, string> = {
   10: 'Phenylalanine'
 };
 
-function getAdditivesLangStrings(key: AdditivesKeys): LangString {
+function parseAdditivesLangStrings(key: AdditivesKeys): LangString {
   return { de: deAdditives[key], en: enAdditives[key] };
 }
 
-export function getAdditivesFromRefs(refs: Ref[]): LangString[] {
+export function parseAdditivesFromRefs(refs: Ref[]): LangString[] {
   const filteredKeys: string[] = Object.values(AdditivesKeys).map(String);
   // @ts-ignore
   const filteredRefs: AdditivesKeys[] = refs.filter(ref => filteredKeys.indexOf(ref) > 0);
-  return filteredRefs.map(getAdditivesLangStrings);
+  return filteredRefs.map(parseAdditivesLangStrings);
 }
