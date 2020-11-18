@@ -1,16 +1,18 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import { Db, MongoClient } from 'mongodb';
 import { Meal } from './models/meal';
 import { MenuDay } from './models/menu-day';
 import { Price } from './models/price';
 import { MensaPlan } from './models/mensa-plan';
-import { join } from 'path';
-import { writeFileSync } from 'fs';
 import { getAllergenesFromRefs } from './models/allergenes';
 import { getOtherMealInfoLangFromRefs } from './models/other-meal-info';
 import { getAdditivesFromRefs } from './models/additives';
-
+import { FlatMeal } from './models/flatMeal';
+import { MongoGenericDAO } from '../../server/src/models/mongo-generic.dao';
+import { DbFlatMeal } from './models/dbFlatMeal';
+import { connectToDb } from './db';
+import { getUniqueDateMensaCombinations } from './helpers/getUniqueDateMensaCombinations';
+import { mensaPlanstoFlatMeals } from './helpers/mensaPlanstoFlatMeals';
 
 async function parseMensa(mensa: string): Promise<MensaPlan> {
   const url: string = 'https://muenster.my-mensa.de/essen.php?v=5348990&hyp=1&lang=de&mensa=' + mensa;
@@ -43,7 +45,7 @@ async function parseMensa(mensa: string): Promise<MensaPlan> {
     const meals: Meal[] = <Meal[]>unfilteredMeals.filter(potentialMeal => potentialMeal !== null);
     return { date: $(dayElement).attr('data-date2')!, meals };
   });
-  return { mensa, menuDays,rawHTML: $('body').html() || ''};
+  return { mensa, menuDays, rawHTML: $('body').html() || '' };
 }
 
 function parsePrice(str: string): Price {
@@ -61,34 +63,21 @@ function parsePrice(str: string): Price {
 }
 
 async function main() {
-  const dburl: string = process.env.DBURL || 'mongodb://localhost:27017';
-  try {
-    var mongoClient = await MongoClient.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true });
-  } catch (err) {
-    console.log('Could not connect to MongoDB: ', err.stack);
-    process.exit(1);
-  }
-  const db:any = mongoClient.db('mensa-app-db');
   const mensen: string[] = ['aasee', 'davinci', 'denkpause', 'ring', 'steinfurt'];
   const promises: Promise<MensaPlan>[] = mensen.map(mensa => parseMensa(mensa));
-  const result: MensaPlan[] = await Promise.all(promises);
-  const writePromises: Promise<Boolean>[] = result.map((plan) => {
-    const day: MenuDay[] = plan.menuDays;
-    const writtenDays = day.map((day)=>{
-      return db.collection('plan').updateOne({date:day.date,mensa:plan.mensa},{$set: {date:day.date,meals:day.meals,mensa:plan.mensa}},{upsert:true});
-    });
-    return new Promise(async (resolve,reject) => {
-      try {
-        await Promise.all(writtenDays);
-        await db.collection('html').insertOne({mensa:plan.mensa,html:plan.rawHTML});
-        resolve(true);
-      }catch(err: any) {
-        reject(false);
-      }
-    });
-  });
-  await Promise.all(writePromises);
-  console.log("Done");
+  const mensaPlans: MensaPlan[] = await Promise.all(promises);
+  const flatMeals: FlatMeal[] = mensaPlanstoFlatMeals(mensaPlans);
+  const mealDAO: MongoGenericDAO<DbFlatMeal> = await connectToDb();
+
+  // Delete Meals that contain the same date-mensa combination since updated meals are present in this scrape.
+  // We could alternatively update all meals with identical date-mensa-title combination, however this would
+  // leave meals in the db that were taken off the menu in the last scrape
+  const dateMensaCombos = getUniqueDateMensaCombinations(flatMeals);
+  await Promise.all(dateMensaCombos.map(uniqueScrape => mealDAO.deleteAll(uniqueScrape)));
+
+  // Write every Meal to Meals
+  await Promise.all(flatMeals.map((flatMeal: FlatMeal) => mealDAO.create(flatMeal)));
+
   process.exit(0);
 }
 
