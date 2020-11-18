@@ -9,5 +9,7 @@ export interface GenericDAO<T extends Entity> {
 
   update(entity: Partial<T>): Promise<boolean>;
 
-  delete(id: string): Promise<boolean>;
+  deleteAll(entity: Partial<T>): Promise<boolean>;
+
+  deleteOne(id: string): Promise<boolean>;
 }

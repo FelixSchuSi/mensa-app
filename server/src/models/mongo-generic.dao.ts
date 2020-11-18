@@ -1,4 +1,4 @@
-import { Db } from 'mongodb';
+import { Db, DeleteWriteOpResultObject } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 import { Entity } from './entity';
 import { GenericDAO } from './generic.dao';
@@ -25,8 +25,13 @@ export class MongoGenericDAO<T extends Entity> implements GenericDAO<T> {
     return !!result.modifiedCount;
   }
 
-  public async delete(id: string) {
+  public async deleteOne(id: string) {
     const result = await this.db.collection(this.collection).deleteOne({ id });
+    return !!result.deletedCount;
+  }
+
+  public async deleteAll(entityFilter: Partial<T>) {
+    const result: DeleteWriteOpResultObject = await this.db.collection(this.collection).deleteMany(entityFilter);
     return !!result.deletedCount;
   }
 }

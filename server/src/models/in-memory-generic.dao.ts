@@ -39,7 +39,12 @@ export class InMemoryGenericDAO<T extends Entity> implements GenericDAO<T> {
     }
   }
 
-  public async delete(id: string) {
+  public async deleteAll(entityFilter: Partial<T>) {
+    throw Error('deleteAll not implemented yet for in-memory');
+    return false;
+  }
+
+  public async deleteOne(id: string) {
     return Promise.resolve(this.entities.delete(id));
   }
 
