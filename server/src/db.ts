@@ -35,7 +35,7 @@ async function startMongoDB(app: Express) {
   app.locals.userDAO = new MongoGenericDAO<User>(db, 'users');
 }
 
-async function connectToProdMongoDB(): Promise<Db> {
+export async function connectToProdMongoDB(): Promise<Db> {
   const secrets: Secrets = await getSecrets();
   const url: string = secrets.DBURL;
   try {
@@ -47,7 +47,7 @@ async function connectToProdMongoDB(): Promise<Db> {
   }
 }
 
-async function connectToDevMongoDB(): Promise<Db> {
+export async function connectToDevMongoDB(): Promise<Db> {
   const url = 'mongodb://localhost:27017';
   const options = {
     useNewUrlParser: true,

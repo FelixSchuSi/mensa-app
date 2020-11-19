@@ -33,7 +33,7 @@ export class PsqlGenericDAO<T extends Entity> implements GenericDAO<T> {
     return result && result.rows ? result.rows[0] : null;
   }
 
-  public async delete(id: string) {
+  public async deleteOne(id: string) {
     const query = 'DELETE FROM ' + this.table + ' WHERE id = ' + toColumnValue(id);
     await this.db.query(query);
     return true;
@@ -43,6 +43,11 @@ export class PsqlGenericDAO<T extends Entity> implements GenericDAO<T> {
     const query = 'UPDATE ' + this.table + ' ' + createSetClause(entity) + ' WHERE id = ' + toColumnValue(entity.id);
     await this.db.query(query);
     return true;
+  }
+
+  public async deleteAll(entityFilter: Partial<T>) {
+    throw Error('deleteAll not implemented yet for psql');
+    return false;
   }
 }
 

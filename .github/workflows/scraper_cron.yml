@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [master]
   schedule:
-    - cron: '0 0 * * *'  # every day at midnight
+    - cron: "0 0 * * *" # every day at midnight
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,4 +24,4 @@ jobs:
           DBURL: ${{ secrets.DBURL }}
         run: |
           cd scraper
-          npm start
+          npm run prod
