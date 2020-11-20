@@ -8,3 +8,9 @@ import './widgets/notification/notification.widget.ts';
 import './pages/sign-out/sign-out.page.ts';
 import './pages/tasks/tasks.page.ts';
 import './widgets/task/task.widget.ts';
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
+  });
+}
