@@ -20,5 +20,14 @@ registerRoute(
   new NetworkOnly({
     // If NetworkFirst was used instead, cached responses would be used.
     plugins: [bgSyncPlugin]
-  })
+  }),
+  'POST'
+);
+
+registerRoute(
+  /https\:\/\/mensa-app-5jrmv\.ondigitalocean\.app\/api/,
+  new NetworkOnly({
+    // If NetworkFirst was used instead, cached responses would be used.
+    plugins: [bgSyncPlugin]
+  }) // When no http method is passed 'GET' is implied
 );
