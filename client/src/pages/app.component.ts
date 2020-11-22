@@ -5,6 +5,7 @@ import {
   internalProperty,
   LitElement,
   property,
+  query,
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
@@ -37,12 +38,19 @@ class AppComponent extends LitElement {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
 
-    window.addEventListener('offline', function (event) {
+    window.addEventListener('offline', event => {
       console.log('📵 offline');
+      this.connectionStatus = 'offline';
     });
 
-    window.addEventListener('online', function (event) {
+    window.addEventListener('online', event => {
       console.log('✅ online again');
+      this.connectionStatus = 'online';
+    });
+
+    window.addEventListener('sync', event => {
+      console.log('♻ synching from app component ...');
+      this.connectionStatus = 'syncing';
     });
 
     // mode button has to use localstorage since its synchronus and delays rendering.
@@ -53,6 +61,9 @@ class AppComponent extends LitElement {
       htmlElement.setAttribute('mode', this.mode);
     }
   }
+
+  @property()
+  protected connectionStatus: 'online' | 'offline' | 'syncing' = 'offline';
 
   @property()
   protected appTitle = 'mensa-app';
@@ -73,6 +84,29 @@ class AppComponent extends LitElement {
     };
   }
 
+  @query('#connectionStatusElem')
+  protected connectionStatusElem!: HTMLDivElement;
+
+  protected get connectionStatusBar(): TemplateResult {
+    switch (this.connectionStatus) {
+      case 'online':
+        return html``;
+      case 'offline':
+        return html`<div
+          id="connectionStatusElem"
+          style="background-color: grey; height: 25px; width: 100%; text-align: center"
+        >
+          offline
+        </div>`;
+      case 'syncing':
+        return html`<div
+          id="connectionStatusElem"
+          style="background-color: blue; height: 25px; width: 100%; text-align: center"
+        >
+          syncing
+        </div>`;
+    }
+  }
   protected toggleLanguage(): void {
     if (this.i18n._LANGUAGE === Languages.GERMAN) {
       this.i18n = english;
@@ -139,6 +173,7 @@ class AppComponent extends LitElement {
   }
 
   protected render(): TemplateResult {
+    debugger;
     return html`
       <div class="full-size">
         <div class="ion-app-container">
@@ -161,24 +196,27 @@ class AppComponent extends LitElement {
               <ion-tab tab=${Routes.SIGN_OUT}>
                 <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
               </ion-tab>
-              <ion-tab-bar selected-tab="${this.currentRoute}" slot="bottom">
-                <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
-                  <ion-label>${this.i18n.TASKS}</ion-label>
-                  <ion-icon name="list"></ion-icon>
-                </ion-tab-button>
-                <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
-                  <ion-label>${this.i18n.SIGN_IN}</ion-label>
-                  <ion-icon name="log-in"></ion-icon>
-                </ion-tab-button>
-                <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
-                  <ion-label>${this.i18n.SIGN_UP}</ion-label>
-                  <ion-icon name="create"></ion-icon>
-                </ion-tab-button>
-                <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
-                  <ion-label>${this.i18n.SIGN_OUT}</ion-label>
-                  <ion-icon name="log-out"></ion-icon>
-                </ion-tab-button>
-              </ion-tab-bar>
+              <div id="bottom-content" slot="bottom">
+                ${this.connectionStatusBar}
+                <ion-tab-bar selected-tab="${this.currentRoute}">
+                  <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
+                    <ion-label>${this.i18n.TASKS}</ion-label>
+                    <ion-icon name="list"></ion-icon>
+                  </ion-tab-button>
+                  <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
+                    <ion-label>${this.i18n.SIGN_IN}</ion-label>
+                    <ion-icon name="log-in"></ion-icon>
+                  </ion-tab-button>
+                  <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
+                    <ion-label>${this.i18n.SIGN_UP}</ion-label>
+                    <ion-icon name="create"></ion-icon>
+                  </ion-tab-button>
+                  <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
+                    <ion-label>${this.i18n.SIGN_OUT}</ion-label>
+                    <ion-icon name="log-out"></ion-icon>
+                  </ion-tab-button>
+                </ion-tab-bar>
+              </div>
             </ion-tabs>
           </ion-app>
         </div>
