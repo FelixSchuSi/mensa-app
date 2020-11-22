@@ -37,6 +37,14 @@ class AppComponent extends LitElement {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
 
+    window.addEventListener('offline', function (event) {
+      console.log('📵 offline');
+    });
+
+    window.addEventListener('online', function (event) {
+      console.log('✅ online again');
+    });
+
     // mode button has to use localstorage since its synchronus and delays rendering.
     const mode = localStorage.getItem('mode');
     if (mode) {

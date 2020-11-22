@@ -6,7 +6,7 @@ import { registerRoute } from 'workbox-routing/registerRoute';
 console.log('⚙️ Service Worker attached!');
 
 self.addEventListener('sync', function (event) {
-  console.log('online again 😎');
+  console.log('♻ synching ...');
 });
 
 precacheAndRoute(self.__WB_MANIFEST);
@@ -14,6 +14,8 @@ precacheAndRoute(self.__WB_MANIFEST);
 const bgSyncPlugin = new BackgroundSyncPlugin('offline-queue', {
   maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
 });
+
+// TODO: how do you deal with replayed requests???
 
 registerRoute(
   /https\:\/\/mensa-app-5jrmv\.ondigitalocean\.app\/api/,
