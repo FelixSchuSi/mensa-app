@@ -55,6 +55,25 @@ class AppComponent extends LitElement {
       this.connectionStatus = ConnectionStatus.SYNCING;
     });
 
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
+        navigator.serviceWorker.addEventListener('message', (msg: any) => {
+          console.log('incoming message from worker, msg:', msg);
+          switch (msg.data.type) {
+            case 'sync-failure':
+              this.connectionStatus = ConnectionStatus.SYNC_FAILURE; // TODO Timeout and refresh
+              break;
+            case 'sync-success':
+              this.connectionStatus = ConnectionStatus.SYNC_SUCESS; // TODO Timeout and hide statusbar
+              break;
+            case 'sync-started':
+              this.connectionStatus = ConnectionStatus.SYNCING;
+          }
+        });
+      });
+    }
+
     // mode button has to use localstorage since its synchronus and delays rendering.
     const mode = localStorage.getItem('mode');
     const htmlElement: HTMLHtmlElement = document.querySelector('html')!;

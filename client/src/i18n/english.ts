@@ -18,5 +18,6 @@ export const english: LanguageStrings = {
   NETWORK_SYNCING: 'Synchronizing...',
   NETWORK_OFFLINE: 'Offline',
   NETWORK_ONLINE: 'Online',
-  NETWORK_FAILURE: 'Synchronization failed'
+  NETWORK_SYNC_FAILURE: 'Synchronization failed',
+  NETWORK_SYNC_SUCESS: 'successfully synced'
 };

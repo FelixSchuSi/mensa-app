@@ -24,16 +24,20 @@ class ConnectionStatusBar extends LitElement {
 
   protected render(): TemplateResult {
     switch (this.connectionStatus) {
-      case ConnectionStatus.BASESTATE:
-        return html``;
-      case ConnectionStatus.FAILURE:
-        return this.stautusBarTemplate(this.i18n.NETWORK_FAILURE);
       case ConnectionStatus.OFFLINE:
         return this.stautusBarTemplate(this.i18n.NETWORK_OFFLINE);
       case ConnectionStatus.ONLINE:
         return this.stautusBarTemplate(this.i18n.NETWORK_ONLINE);
       case ConnectionStatus.SYNCING:
         return this.stautusBarTemplate(this.i18n.NETWORK_SYNCING);
+      case ConnectionStatus.SYNC_SUCESS:
+        return this.stautusBarTemplate(this.i18n.NETWORK_SYNC_SUCESS);
+      case ConnectionStatus.SYNC_FAILURE:
+        return this.stautusBarTemplate(this.i18n.NETWORK_SYNC_FAILURE);
+      case ConnectionStatus.BASESTATE:
+        return html``;
+      default:
+        return html``;
     }
   }
 

@@ -7,8 +7,13 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 console.log('⚙️ Service Worker attached!');
 
-self.addEventListener('sync', function (event) {
+self.addEventListener('sync', async event => {
   console.log('♻ synching ...');
+  const allClients = await self.clients.matchAll();
+  allClients.map(client => {
+    console.log('sending succes msg to client: ', client);
+    client.postMessage({ type: 'sync-started', content: {} });
+  });
 });
 
 const onSync = async callBackOptions => {

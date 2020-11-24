@@ -3,8 +3,6 @@
   width: 100%;
   text-align: center;
   font-size: 0.8em;
-  // letter-spacing: 0.1em;
-  // font-size: 14px;
   font-weight: 500;
   color: var(--ion-text-color);
   letter-spacing: 0.06em;
@@ -31,7 +29,8 @@
     --progress-background: var(--ion-color-danger-tint);
   }
 }
-#connectionStatusElem.online {
+#connectionStatusElem.online,
+#connectionStatusElem.success {
   ion-progress-bar {
     --progress-background: var(--ion-color-success);
   }
