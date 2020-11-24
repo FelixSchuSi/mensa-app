@@ -3,19 +3,34 @@ import { NetworkOnly } from 'workbox-strategies/NetworkOnly';
 import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute';
 import { registerRoute } from 'workbox-routing/registerRoute';
 
+precacheAndRoute(self.__WB_MANIFEST);
+
 console.log('⚙️ Service Worker attached!');
 
 self.addEventListener('sync', function (event) {
   console.log('♻ synching ...');
 });
 
-precacheAndRoute(self.__WB_MANIFEST);
+const onSync = async callBackOptions => {
+  const allClients = await self.clients.matchAll();
+  try {
+    await callBackOptions.queue.replayRequests();
+    allClients.map(client => {
+      console.log('sending succes msg to client: ', client);
+      client.postMessage({ type: 'sync-success', content: {} });
+    });
+  } catch (e) {
+    console.log('Error when syncing: ', e);
+    if (allClients) {
+      allClients.map(client => client.postMessage({ type: 'sync-failure', content: {} }));
+    }
+  }
+};
 
 const bgSyncPlugin = new BackgroundSyncPlugin('offline-queue', {
-  maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
+  maxRetentionTime: 24 * 60, // Retry for max of 24 Hours (specified in minutes)
+  onSync
 });
-
-// TODO: how do you deal with replayed requests???
 
 registerRoute(
   /https\:\/\/mensa-app-5jrmv\.ondigitalocean\.app\/api/,
