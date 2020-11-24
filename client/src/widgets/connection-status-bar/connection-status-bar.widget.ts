@@ -38,12 +38,14 @@ class ConnectionStatusBar extends LitElement {
   }
 
   protected stautusBarTemplate(i18nString: string): TemplateResult {
-    return html` <div class="${this.connectionStatus}" id="connectionStatusElem">
-      <ion-progress-bar
-        type="${this.connectionStatus === 'syncing' ? 'indeterminate' : 'determinate'}"
-        value="1"
-      ></ion-progress-bar>
-      <ion-label>${i18nString}</ion-label>
-    </div>`;
+    return html`
+      <div class="${this.connectionStatus}" id="connectionStatusElem">
+        <ion-progress-bar
+          type="${this.connectionStatus === 'syncing' ? 'indeterminate' : 'determinate'}"
+          value="1"
+        ></ion-progress-bar>
+        <ion-label>${i18nString}</ion-label>
+      </div>
+    `;
   }
 }

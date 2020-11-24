@@ -5,7 +5,6 @@ import {
   internalProperty,
   LitElement,
   property,
-  query,
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
