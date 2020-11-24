@@ -14,5 +14,9 @@ export const german: LanguageStrings = {
   PASSWORD_NOT_IDENTICAL: 'Passwörter müssen gleich sein',
   SIGN_OUT_MESSAGE: 'Sie wurden erfolgreich abgemeldet',
   TASKS: 'Aufgaben',
-  NEW_TASK: 'Neue Aufgabe'
+  NEW_TASK: 'Neue Aufgabe',
+  NETWORK_SYNCING: 'Synchronisiere...',
+  NETWORK_OFFLINE: 'Offline',
+  NETWORK_ONLINE: 'Online',
+  NETWORK_FAILURE: 'Synchronisation fehlgeschlagen'
 };

@@ -14,5 +14,9 @@ export const english: LanguageStrings = {
   PASSWORD_NOT_IDENTICAL: 'Passwords need to be identical',
   SIGN_OUT_MESSAGE: 'You have been signed out successfully',
   TASKS: 'Tasks',
-  NEW_TASK: 'New task'
+  NEW_TASK: 'New task',
+  NETWORK_SYNCING: 'Synchronizing...',
+  NETWORK_OFFLINE: 'Offline',
+  NETWORK_ONLINE: 'Online',
+  NETWORK_FAILURE: 'Synchronization failed'
 };

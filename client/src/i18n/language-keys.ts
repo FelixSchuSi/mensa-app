@@ -11,4 +11,8 @@ export type LanguageKeys =
   | 'PASSWORD_NOT_IDENTICAL'
   | 'SIGN_OUT_MESSAGE'
   | 'TASKS'
-  | 'NEW_TASK';
+  | 'NEW_TASK'
+  | 'NETWORK_SYNCING'
+  | 'NETWORK_OFFLINE'
+  | 'NETWORK_ONLINE'
+  | 'NETWORK_FAILURE';

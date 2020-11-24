@@ -18,6 +18,7 @@ import { german } from '../i18n/german';
 import { english } from '../i18n/english';
 import { spread } from '@open-wc/lit-helpers';
 import { storeService } from '../services/store.service';
+import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -37,33 +38,33 @@ class AppComponent extends LitElement {
   public constructor() {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
-
+    if (this.darkmode) document.body.classList.add('dark');
     window.addEventListener('offline', event => {
       console.log('📵 offline');
-      this.connectionStatus = 'offline';
+      this.connectionStatus = ConnectionStatus.OFFLINE;
     });
 
     window.addEventListener('online', event => {
       console.log('✅ online again');
-      this.connectionStatus = 'online';
+      this.connectionStatus = ConnectionStatus.ONLINE;
     });
 
     window.addEventListener('sync', event => {
       console.log('♻ synching from app component ...');
-      this.connectionStatus = 'syncing';
+      this.connectionStatus = ConnectionStatus.SYNCING;
     });
 
     // mode button has to use localstorage since its synchronus and delays rendering.
     const mode = localStorage.getItem('mode');
+    const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
     if (mode) {
       this.mode = <'ios' | 'md'>mode;
-      const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
       htmlElement.setAttribute('mode', this.mode);
     }
   }
 
   @property()
-  protected connectionStatus: 'online' | 'offline' | 'syncing' = 'offline';
+  protected connectionStatus: ConnectionStatus = ConnectionStatus.BASESTATE;
 
   @property()
   protected appTitle = 'mensa-app';
@@ -75,38 +76,19 @@ class AppComponent extends LitElement {
   protected mode!: 'ios' | 'md';
 
   @internalProperty()
+  protected darkmode: boolean = true;
+
+  @internalProperty()
   protected i18n!: LanguageStrings;
 
   @internalProperty()
   protected get pageContext(): object {
     return {
-      '.i18n': this.i18n
+      '.i18n': this.i18n,
+      '.connectionStatus': this.connectionStatus
     };
   }
 
-  @query('#connectionStatusElem')
-  protected connectionStatusElem!: HTMLDivElement;
-
-  protected get connectionStatusBar(): TemplateResult {
-    switch (this.connectionStatus) {
-      case 'online':
-        return html``;
-      case 'offline':
-        return html`<div
-          id="connectionStatusElem"
-          style="background-color: grey; height: 25px; width: 100%; text-align: center"
-        >
-          offline
-        </div>`;
-      case 'syncing':
-        return html`<div
-          id="connectionStatusElem"
-          style="background-color: blue; height: 25px; width: 100%; text-align: center"
-        >
-          syncing
-        </div>`;
-    }
-  }
   protected toggleLanguage(): void {
     if (this.i18n._LANGUAGE === Languages.GERMAN) {
       this.i18n = english;
@@ -173,7 +155,6 @@ class AppComponent extends LitElement {
   }
 
   protected render(): TemplateResult {
-    debugger;
     return html`
       <div class="full-size">
         <div class="ion-app-container">
@@ -197,7 +178,7 @@ class AppComponent extends LitElement {
                 <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
               </ion-tab>
               <div id="bottom-content" slot="bottom">
-                ${this.connectionStatusBar}
+                <app-connection-status-bar ...=${spread(this.pageContext)}></app-connection-status-bar>
                 <ion-tab-bar selected-tab="${this.currentRoute}">
                   <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
                     <ion-label>${this.i18n.TASKS}</ion-label>

@@ -1,0 +1,49 @@
+#connectionStatusElem {
+  height: 19px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8em;
+  // letter-spacing: 0.1em;
+  // font-size: 14px;
+  font-weight: 500;
+  color: var(--ion-text-color);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: grid;
+
+  ion-progress-bar {
+    height: 100%;
+    width: 100%;
+    z-index: -100;
+    grid-area: 1 / 1;
+  }
+  ion-label {
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    grid-area: 1 / 1;
+    color: white;
+  }
+}
+
+#connectionStatusElem.failure {
+  ion-progress-bar {
+    --progress-background: var(--ion-color-danger-tint);
+  }
+}
+#connectionStatusElem.online {
+  ion-progress-bar {
+    --progress-background: var(--ion-color-success);
+  }
+}
+#connectionStatusElem.offline {
+  ion-progress-bar {
+    --progress-background: var(--ion-color-medium-tint);
+  }
+}
+#connectionStatusElem.syncing {
+  ion-progress-bar {
+    --progress-background: var(--ion-color-primary-tint);
+    --background: var(--ion-color-primary-shade);
+  }
+}
