@@ -19,6 +19,8 @@ import { english } from '../i18n/english';
 import { spread } from '@open-wc/lit-helpers';
 import { storeService } from '../services/store.service';
 import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
+import { getTitleString } from '../helpers/get-title-string';
+import { toggleIosMd } from '../helpers/toggle-ios-md';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -97,12 +99,6 @@ class AppComponent extends LitElement {
     }
   }
 
-  protected async toggleMode(): Promise<void> {
-    this.mode = this.mode === 'md' ? 'ios' : 'md';
-    localStorage.setItem('mode', this.mode);
-    location.reload();
-  }
-
   protected async firstUpdated(): Promise<void> {
     routerService.subscribe(() => {
       this.currentRoute = routerService.getPath();
@@ -117,40 +113,30 @@ class AppComponent extends LitElement {
   }
 
   protected renderRouterOutlet(): TemplateResult {
+    let pageContent: TemplateResult = html``;
     switch (routerService.getPath()) {
       case Routes.SIGN_IN:
-        return html`<app-sign-in ...=${spread(this.pageContext)}></app-sign-in>`;
+        pageContent = html`<app-sign-in ...=${spread(this.pageContext)}></app-sign-in>`;
+        break;
       case Routes.SIGN_UP:
-        return html`<app-sign-up ...=${spread(this.pageContext)}></app-sign-up>`;
+        pageContent = html`<app-sign-up ...=${spread(this.pageContext)}></app-sign-up>`;
+        break;
       case Routes.SIGN_OUT:
-        return html`<app-sign-out ...=${spread(this.pageContext)}></app-sign-out>`;
+        pageContent = html`<app-sign-out ...=${spread(this.pageContext)}></app-sign-out>`;
+        break;
       case Routes.TASKS:
-        return html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
+        pageContent = html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
+        break;
       default:
-        return html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
+        pageContent = html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
+        break;
     }
-  }
 
-  protected renderTitle(): string {
-    switch (routerService.getPath()) {
-      case Routes.SIGN_IN:
-        return this.i18n.SIGN_IN;
-      case Routes.SIGN_UP:
-        return this.i18n.SIGN_UP;
-      case Routes.SIGN_OUT:
-        return this.i18n.SIGN_OUT;
-      case Routes.TASKS:
-        return this.i18n.TASKS;
-      default:
-        return this.i18n.TASKS;
-    }
-  }
-
-  protected renderMain(): TemplateResult {
+    // TODO: move buttons to settings and return value in switch statement.
     return html`
-      ${this.renderRouterOutlet()}
       <ion-button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
-      <ion-button @click=${this.toggleMode}>Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode</ion-button>
+      <ion-button @click=${toggleIosMd}>Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode</ion-button>
+      ${pageContent}
     `;
   }
 
@@ -161,21 +147,21 @@ class AppComponent extends LitElement {
           <ion-app>
             <ion-header>
               <ion-toolbar>
-                <ion-title>${this.renderTitle()}</ion-title>
+                <ion-title>${getTitleString(this.i18n)}</ion-title>
               </ion-toolbar>
             </ion-header>
             <ion-tabs>
               <ion-tab tab=${Routes.TASKS}>
-                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
               </ion-tab>
               <ion-tab tab=${Routes.SIGN_IN}>
-                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
               </ion-tab>
               <ion-tab tab=${Routes.SIGN_UP}>
-                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
               </ion-tab>
               <ion-tab tab=${Routes.SIGN_OUT}>
-                <ion-content class="ion-padding"> ${this.renderMain()} </ion-content>
+                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
               </ion-tab>
               <div id="bottom-content" slot="bottom">
                 <app-connection-status-bar ...=${spread(this.pageContext)}></app-connection-status-bar>
