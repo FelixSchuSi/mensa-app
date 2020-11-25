@@ -54,11 +54,11 @@ class AppComponent extends LitElement {
       this.connectionStatus = ConnectionStatus.SYNCING;
     });
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
-      });
-    }
+    // if ('serviceWorker' in navigator) {
+    //   window.addEventListener('load', () => {
+    //     navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
+    //   });
+    // }
 
     // mode button has to use localstorage since its synchronus and delays rendering.
     const mode = localStorage.getItem('mode');
