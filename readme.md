@@ -33,5 +33,3 @@ Wenn ohne Docker entwickelt wird muss das Frontend und das Backend separat gesta
 
 Das Frontend wird mithilfe von Github Pages bereitgestellt. Soll ein neuer Stand des Frontends live geschaltet werden kann dies mit `cd client && npm run deploy` getätigt werden.
 Das Backend wird auf DigitalOcean's app platform gehostet. Mit jedem push in diesem Repository wird automatisch der neuste Stand des Backends bereitgestellt.
-
-Test
