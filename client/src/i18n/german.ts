@@ -15,5 +15,6 @@ export const german: LanguageStrings = {
   SIGN_OUT_MESSAGE: 'Sie wurden erfolgreich abgemeldet',
   TASKS: 'Aufgaben',
   NEW_TASK: 'Neue Aufgabe',
-  USER_STATUS: 'Status'
+  USER_STATUS: 'Status',
+  INDIGESTIBILITY: 'Unvertraeglichkeit'
 };

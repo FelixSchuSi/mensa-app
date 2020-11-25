@@ -15,5 +15,6 @@ export const english: LanguageStrings = {
   SIGN_OUT_MESSAGE: 'You have been signed out successfully',
   TASKS: 'Tasks',
   NEW_TASK: 'New task',
-  USER_STATUS: 'Status'
+  USER_STATUS: 'Status',
+  INDIGESTIBILITY: 'Indigestibility'
 };

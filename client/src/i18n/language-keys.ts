@@ -12,4 +12,5 @@ export type LanguageKeys =
   | 'SIGN_OUT_MESSAGE'
   | 'TASKS'
   | 'NEW_TASK'
-  | 'USER_STATUS';
+  | 'USER_STATUS'
+  | 'INDIGESTIBILITY';
