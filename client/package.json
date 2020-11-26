@@ -28,6 +28,7 @@
     "@types/jasmine": "^3.5.14",
     "@types/node": "^14.11.10",
     "@types/selenium-webdriver": "^4.0.9",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "clean-webpack-plugin": "^3.0.0",
@@ -80,6 +81,7 @@
     "@open-wc/lit-helpers": "^0.3.11",
     "bootstrap": "^4.5.3",
     "lit-element": "^2.4.0",
-    "localforage": "^1.9.0"
+    "localforage": "^1.9.0",
+    "uuid": "^8.3.1"
   }
 }
