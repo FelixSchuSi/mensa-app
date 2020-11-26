@@ -1,7 +1,7 @@
 import { Entity } from './entity';
 
 export interface GenericDAO<T extends Entity> {
-  create(partEntity: Omit<T, keyof Entity>): Promise<T>;
+  create(partEntity: Partial<T>): Promise<T>;
 
   findAll(entityFilter?: Partial<T>): Promise<T[]>;
 

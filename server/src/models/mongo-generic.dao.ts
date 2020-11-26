@@ -6,8 +6,12 @@ import { GenericDAO } from './generic.dao';
 export class MongoGenericDAO<T extends Entity> implements GenericDAO<T> {
   constructor(private db: Db, private collection: string) {}
 
-  public async create(partEntity: Omit<T, keyof Entity>) {
-    const entity = { ...partEntity, id: uuidv4(), createdAt: new Date().getTime() };
+  public async create(partEntity: Partial<T>) {
+    const entity = {
+      ...partEntity,
+      id: partEntity.id ?? uuidv4(),
+      createdAt: partEntity.createdAt ?? new Date().getTime()
+    };
     await this.db.collection(this.collection).insertOne(entity);
     return entity as T;
   }
