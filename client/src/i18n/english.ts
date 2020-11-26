@@ -16,5 +16,10 @@ export const english: LanguageStrings = {
   TASKS: 'Tasks',
   NEW_TASK: 'New task',
   USER_STATUS: 'Status',
-  INDIGESTIBILITY: 'Indigestibility'
+  INDIGESTIBILITY: 'Indigestibility',
+  NETWORK_SYNCING: 'Synchronizing...',
+  NETWORK_OFFLINE: 'Offline',
+  NETWORK_ONLINE: 'Online',
+  NETWORK_SYNC_FAILURE: 'Synchronization failed',
+  NETWORK_SYNC_SUCESS: 'successfully synced'
 };

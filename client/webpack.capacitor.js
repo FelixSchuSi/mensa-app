@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { DefinePlugin } = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -11,6 +12,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.ts$/, use: 'ts-loader' },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       {
         test: /\.scss$/,
         include: /index\.scss$/,
@@ -41,6 +43,10 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new DefinePlugin({
       ISPROD: JSON.stringify(true)
+    }),
+    new InjectManifest({
+      swSrc: './service-worker.js',
+      swDest: 'service-worker.js'
     })
   ]
 };

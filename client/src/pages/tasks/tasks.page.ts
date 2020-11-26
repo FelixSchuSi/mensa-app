@@ -3,10 +3,11 @@ import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 import { routerService } from '../../services/router.service';
 import { PageMixin } from '../page.mixin';
-import { Task } from '../../models/task';
 import { httpService } from '../../services/http.service';
 import { Routes } from '../../routes';
 import { LanguageStrings } from '../../models/language-strings';
+import { createEntity } from '../../helpers/create-entity';
+import { Task } from '../../models/task';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./tasks.page.scss');
@@ -92,33 +93,34 @@ class TasksPage extends PageMixin(LitElement) {
 
     try {
       await httpService.patch('tasks/' + updatedTask.id, updatedTask);
-      this.tasks = this.tasks.map((task: Task) =>
-        task === taskToToggle ? { ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } : task
-      );
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
+    this.tasks = this.tasks.map((task: Task) =>
+      task === taskToToggle ? { ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } : task
+    );
   }
 
   protected async removeTask(taskToRemove: Task): Promise<void> {
     try {
       await httpService.delete('tasks/' + taskToRemove.id);
-      this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
+    this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
   }
 
   protected async submit(event: Event): Promise<void> {
     event.preventDefault();
-    const partialTask: Partial<Task> = { title: this.titleElement.value };
+    let task: Task = { ...createEntity(), title: this.titleElement.value, status: 'open' };
     try {
-      const response = await httpService.post('tasks', partialTask);
-      const task: Task = await response.json();
-      this.tasks = [...this.tasks, task];
-      this.titleElement.value = '';
+      const response = await httpService.post('tasks', task);
+      task = await response.json();
+      console.log('task', task);
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
+    this.tasks = [...this.tasks, task];
+    this.titleElement.value = '';
   }
 }
