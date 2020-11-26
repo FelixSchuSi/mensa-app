@@ -12,6 +12,8 @@ export type LanguageKeys =
   | 'SIGN_OUT_MESSAGE'
   | 'TASKS'
   | 'NEW_TASK'
+  | 'USER_STATUS'
+  | 'INDIGESTIBILITY'
   | 'NETWORK_SYNCING'
   | 'NETWORK_OFFLINE'
   | 'NETWORK_ONLINE'

@@ -6,8 +6,12 @@ import { GenericDAO } from './generic.dao';
 export class PsqlGenericDAO<T extends Entity> implements GenericDAO<T> {
   constructor(private db: Client, private table: string) {}
 
-  public async create(partEntity: Omit<T, keyof Entity>) {
-    const entity = { ...partEntity, id: uuidv4(), createdAt: new Date().getTime() };
+  public async create(partEntity: Partial<Entity>) {
+    const entity = {
+      ...partEntity,
+      id: partEntity.id ?? uuidv4(),
+      createdAt: partEntity.createdAt ?? new Date().getTime()
+    };
 
     const propertyNames = getPropertyNames(entity);
     const columnNames = propertyNames.map(prop => toColumnName(prop));
