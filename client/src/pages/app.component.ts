@@ -189,6 +189,7 @@ class AppComponent extends LitElement {
           </ion-app>
         </div>
       </div>
+      <ion-progress-bar style="display:none"></ion-progress-bar>
     `;
   }
 }
