@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { DefinePlugin } = require('webpack');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 const path = require('path');
 
@@ -21,6 +22,7 @@ module.exports = {
     rules: [
       { test: /\.ts$/, use: { loader: 'ts-loader', options: { transpileOnly: true } } },
       // { test: /.css$/, use: ['style-loader', { loader: 'css-loader', options: { sourceMap: true } }] },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       {
         test: /\.scss$/,
         include: /index\.scss$/,
@@ -31,7 +33,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(scss|css)$/,
+        test: /\.scss$/,
         exclude: /index\.scss$/,
         use: [
           'to-string-loader',
@@ -53,5 +55,9 @@ module.exports = {
     new DefinePlugin({
       ISPROD: JSON.stringify(false)
     })
+    // new InjectManifest({
+    //   swSrc: './service-worker.js',
+    //   swDest: 'service-worker.js'
+    // })
   ]
 };
