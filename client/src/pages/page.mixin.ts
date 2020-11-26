@@ -29,6 +29,7 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
     }
 
     protected setNotification({ errorMessage = '', infoMessage = '' }): void {
+      if (errorMessage === '_ignoreMe' || infoMessage === '_ignoreMe') return;
       this.errorMessage = errorMessage;
       this.infoMessage = infoMessage;
       if (errorMessage || infoMessage) {

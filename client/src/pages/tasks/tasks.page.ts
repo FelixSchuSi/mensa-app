@@ -93,21 +93,21 @@ class TasksPage extends PageMixin(LitElement) {
 
     try {
       await httpService.patch('tasks/' + updatedTask.id, updatedTask);
-      this.tasks = this.tasks.map((task: Task) =>
-        task === taskToToggle ? { ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } : task
-      );
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
+    this.tasks = this.tasks.map((task: Task) =>
+      task === taskToToggle ? { ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } : task
+    );
   }
 
   protected async removeTask(taskToRemove: Task): Promise<void> {
     try {
       await httpService.delete('tasks/' + taskToRemove.id);
-      this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
+    this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
   }
 
   protected async submit(event: Event): Promise<void> {
@@ -116,6 +116,7 @@ class TasksPage extends PageMixin(LitElement) {
     try {
       const response = await httpService.post('tasks', task);
       task = await response.json();
+      console.log('task', task);
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }

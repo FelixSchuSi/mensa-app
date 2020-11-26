@@ -59,7 +59,6 @@ class HttpService {
     const request: Request = this.buildRequest(method, url, body);
 
     const response: Response = request.method === 'GET' ? await this.networkFirst(request) : await this.bgSync(request);
-
     if (response.ok) {
       return response;
     } else {
@@ -101,13 +100,12 @@ class HttpService {
   }
 
   private async bgSync(request: Request): Promise<Response> {
-    const NO_INTERNET = { message: 'Es konnte keine Verbindung hergestellt werden', statusCode: 503 };
     if (navigator.onLine) {
       return await fetch(request);
     } else {
       console.log('putting request in network queue');
       this.queue.push(request);
-      return Promise.reject(NO_INTERNET);
+      return Promise.reject({ message: '_ignoreMe' });
     }
   }
 
