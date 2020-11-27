@@ -91,15 +91,15 @@ class SignUpPage extends PageMixin(LitElement) {
         <ion-item-group>
           <ion-item>
             <ion-label position="left" for="status">${this.i18n.USER_STATUS}</ion-label>
-            <ion-chip color="secondary">
+            <ion-chip color="primary">
               <ion-label color="dark">Studierender</ion-label>
             </ion-chip>
             <ion-label position="floating" for="status">${this.i18n.USER_STATUS}</ion-label>
-            <ion-chip color="secondary">
+            <ion-chip color="primary">
               <ion-label color="dark">Mitarbeiter</ion-label>
             </ion-chip>
             <ion-label position="floating" for="status">${this.i18n.USER_STATUS}</ion-label>
-            <ion-chip color="secondary">
+            <ion-chip color="primary">
               <ion-label color="dark">Gast</ion-label>
             </ion-chip>
           </ion-item>
