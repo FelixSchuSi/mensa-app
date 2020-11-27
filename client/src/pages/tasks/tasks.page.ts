@@ -3,11 +3,10 @@ import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 import { routerService } from '../../services/router.service';
 import { PageMixin } from '../page.mixin';
-import { httpService } from '../../services/http.service';
 import { Routes } from '../../routes';
 import { LanguageStrings } from '../../models/language-strings';
-import { createEntity } from '../../helpers/create-entity';
 import { Task } from '../../models/task';
+import { taskService, TaskService } from '../../services/task.service';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./tasks.page.scss');
@@ -33,10 +32,14 @@ class TasksPage extends PageMixin(LitElement) {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
+  protected taskService: TaskService = taskService;
+
   protected async firstUpdated(): Promise<void> {
     try {
-      const response = await httpService.get('tasks' + location.search);
-      this.tasks = (await response.json()).results;
+      taskService.subscribe((tasks: Task[]) => {
+        this.tasks = tasks;
+      });
+      await taskService.init();
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {
         routerService.navigate(Routes.SIGN_IN);
@@ -86,41 +89,28 @@ class TasksPage extends PageMixin(LitElement) {
   }
 
   protected async toggleTask(taskToToggle: Task): Promise<void> {
-    const updatedTask: Task = {
-      ...taskToToggle,
-      status: taskToToggle.status === 'open' ? 'done' : 'open'
-    };
-
     try {
-      await httpService.patch('tasks/' + updatedTask.id, updatedTask);
+      await taskService.toggleTask(taskToToggle);
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
-    this.tasks = this.tasks.map((task: Task) =>
-      task === taskToToggle ? { ...task, status: (task.status || 'open') === 'open' ? 'done' : 'open' } : task
-    );
   }
 
   protected async removeTask(taskToRemove: Task): Promise<void> {
     try {
-      await httpService.delete('tasks/' + taskToRemove.id);
+      await taskService.removeTask(taskToRemove);
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
-    this.tasks = this.tasks.filter(task => task.id !== taskToRemove.id);
   }
 
   protected async submit(event: Event): Promise<void> {
     event.preventDefault();
-    let task: Task = { ...createEntity(), title: this.titleElement.value, status: 'open' };
     try {
-      const response = await httpService.post('tasks', task);
-      task = await response.json();
-      console.log('task', task);
+      await taskService.createTask(this.titleElement.value);
+      this.titleElement.value = '';
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
-    this.tasks = [...this.tasks, task];
-    this.titleElement.value = '';
   }
 }

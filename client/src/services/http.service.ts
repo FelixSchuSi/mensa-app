@@ -58,7 +58,7 @@ class HttpService {
 
     const request: Request = this.buildRequest(method, url, body);
 
-    const response: Response = request.method === 'GET' ? await this.networkFirst(request) : await this.bgSync(request);
+    const response: Response = request.method === 'GET' ? await fetch(request) : await this.bgSync(request);
     if (response.ok) {
       return response;
     } else {
@@ -85,19 +85,19 @@ class HttpService {
     return new Request(this.config.baseURL + url, requestInit);
   }
 
-  private async networkFirst(request: Request): Promise<Response> {
-    const NO_INTERNET = { message: 'Es konnte keine Verbindung hergestellt werden', statusCode: 503 };
-    if (navigator.onLine) {
-      const response = await fetch(request);
-      if (response.ok) await this.cache.put(request, response.clone());
-      return response;
-    } else {
-      console.log('returning from network cache');
-      const cacheResult = await this.cache.match(request);
-      if (cacheResult === undefined) return Promise.reject(NO_INTERNET);
-      return cacheResult;
-    }
-  }
+  // private async networkFirst(request: Request): Promise<Response> {
+  //   const NO_INTERNET = { message: 'Es konnte keine Verbindung hergestellt werden', statusCode: 503 };
+  //   if (navigator.onLine) {
+  //     const response = await fetch(request);
+  //     if (response.ok) await this.cache.put(request, response.clone());
+  //     return response;
+  //   } else {
+  //     console.log('returning from network cache');
+  //     const cacheResult = await this.cache.match(request);
+  //     if (cacheResult === undefined) return Promise.reject(NO_INTERNET);
+  //     return cacheResult;
+  //   }
+  // }
 
   private async bgSync(request: Request): Promise<Response> {
     if (navigator.onLine) {
