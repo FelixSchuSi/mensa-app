@@ -20,6 +20,7 @@ import { storeService } from '../services/store.service';
 import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
 import { getTitleString } from '../helpers/get-title-string';
 import { toggleIosMd } from '../helpers/toggle-ios-md';
+import { httpService } from '../services/http.service';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -39,21 +40,10 @@ class AppComponent extends LitElement {
   public constructor() {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
-    window.addEventListener('offline', event => {
-      console.log('📵 offline');
-      this.connectionStatus = ConnectionStatus.OFFLINE;
-    });
 
-    window.addEventListener('online', event => {
-      console.log('✅ online again');
-      this.connectionStatus = ConnectionStatus.ONLINE;
+    httpService.subscribeConnectionStatus((connectionStatus: ConnectionStatus) => {
+      this.connectionStatus = connectionStatus;
     });
-
-    window.addEventListener('sync', event => {
-      console.log('♻ synching from app component ...');
-      this.connectionStatus = ConnectionStatus.SYNCING;
-    });
-
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);

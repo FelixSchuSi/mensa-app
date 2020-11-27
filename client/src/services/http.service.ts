@@ -1,10 +1,11 @@
+import { sleep } from '../helpers/sleep';
 import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
 
 interface HttpServiceConfig {
   baseURL: string;
 }
 
-type syncListener = (syncState: ConnectionStatus) => {};
+type connectionStatusListener = (syncState: ConnectionStatus) => void;
 
 // Is regular array but type protectes myself
 // from using wrong methods such as pop().
@@ -18,18 +19,23 @@ class HttpService {
   private cache!: Cache;
   private queue: NetworkQueue = [];
   private requestReplayLock: Promise<void> = Promise.resolve();
-  private syncListeners: syncListener[] = [];
+  private connectionStatusListeners: connectionStatusListener[] = [];
 
   constructor(private config: HttpServiceConfig) {
-    window.addEventListener('online', () => {
-      console.log('starting sync');
-      this.requestReplayLock = this.replayRequests();
-      console.log('started sync');
+    window.addEventListener('offline', () => {
+      console.log('📵 offline');
+      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.OFFLINE));
     });
-  }
-
-  private async initCache(): Promise<void> {
-    this.cache = await caches.open('offline-cache');
+    window.addEventListener('online', async () => {
+      console.log('starting sync');
+      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.SYNCING));
+      this.requestReplayLock = this.replayRequests();
+      await Promise.all([this.requestReplayLock, sleep(1500)]); // show syncing for at least 1,5 secs
+      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.ONLINE));
+      console.log('finished sync -> online');
+      await sleep(1500); // show online for 1,5 secs
+      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.BASESTATE));
+    });
   }
 
   public async get(url: string): Promise<Response> {
@@ -53,7 +59,6 @@ class HttpService {
   }
 
   private async createFetch(method: string, url: string, body?: unknown): Promise<Response> {
-    if (!this.cache) await this.initCache();
     await this.requestReplayLock;
 
     const request: Request = this.buildRequest(method, url, body);
@@ -111,18 +116,16 @@ class HttpService {
 
   private async replayRequests(): Promise<void> {
     if (this.queue.length > 0) {
-      this.syncListeners.forEach(listener => listener(ConnectionStatus.SYNCING));
       while (this.queue.length > 0) {
         const request: Request = this.queue.shift()!;
         // TODO: Error handling
         await fetch(request);
       }
-      this.syncListeners.forEach(listener => listener(ConnectionStatus.ONLINE));
     }
   }
 
-  public subscribeSync(listener: syncListener): void {
-    this.syncListeners.push(listener);
+  public subscribeConnectionStatus(listener: connectionStatusListener): void {
+    this.connectionStatusListeners.push(listener);
   }
 }
 
