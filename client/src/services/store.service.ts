@@ -1,6 +1,6 @@
 import localForage from 'localforage';
 
-class StoreService {
+export class StoreService {
   private store: LocalForage;
   constructor() {
     this.store = localForage.createInstance({});

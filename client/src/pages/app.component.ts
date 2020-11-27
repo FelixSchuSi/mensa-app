@@ -20,6 +20,7 @@ import { storeService } from '../services/store.service';
 import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
 import { getTitleString } from '../helpers/get-title-string';
 import { toggleIosMd } from '../helpers/toggle-ios-md';
+import { connectionStatusService } from '../services/connection.status.service';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -39,38 +40,14 @@ class AppComponent extends LitElement {
   public constructor() {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
-    if (this.darkmode) document.body.classList.add('dark');
-    window.addEventListener('offline', event => {
-      console.log('📵 offline');
-      this.connectionStatus = ConnectionStatus.OFFLINE;
-    });
 
-    window.addEventListener('online', event => {
-      console.log('✅ online again');
-      this.connectionStatus = ConnectionStatus.ONLINE;
-    });
-
-    window.addEventListener('sync', event => {
-      console.log('♻ synching from app component ...');
-      this.connectionStatus = ConnectionStatus.SYNCING;
+    connectionStatusService.subscribe((status: ConnectionStatus) => {
+      this.connectionStatus = status;
     });
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
-        navigator.serviceWorker.addEventListener('message', (msg: any) => {
-          console.log('incoming message from worker, msg:', msg);
-          switch (msg.data.type) {
-            case 'sync-failure':
-              this.connectionStatus = ConnectionStatus.SYNC_FAILURE; // TODO Timeout and refresh
-              break;
-            case 'sync-success':
-              this.connectionStatus = ConnectionStatus.SYNC_SUCESS; // TODO Timeout and hide statusbar
-              break;
-            case 'sync-started':
-              this.connectionStatus = ConnectionStatus.SYNCING;
-          }
-        });
       });
     }
 
@@ -94,9 +71,6 @@ class AppComponent extends LitElement {
 
   @internalProperty()
   protected mode!: 'ios' | 'md';
-
-  @internalProperty()
-  protected darkmode: boolean = true;
 
   @internalProperty()
   protected i18n!: LanguageStrings;
@@ -206,6 +180,7 @@ class AppComponent extends LitElement {
           </ion-app>
         </div>
       </div>
+      <ion-progress-bar style="display:none"></ion-progress-bar>
     `;
   }
 }

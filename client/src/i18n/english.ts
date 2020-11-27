@@ -21,5 +21,7 @@ export const english: LanguageStrings = {
   NETWORK_OFFLINE: 'Offline',
   NETWORK_ONLINE: 'Online',
   NETWORK_SYNC_FAILURE: 'Synchronization failed',
-  NETWORK_SYNC_SUCESS: 'successfully synced'
+  NETWORK_SYNC_SUCESS: 'successfully synced',
+  INTERNET_NEEDED_FOR_SIGN_IN: 'You need to be online to log in.',
+  INTERNET_NEEDED_FOR_SIGN_UP: 'You need to be online to sign up.'
 };

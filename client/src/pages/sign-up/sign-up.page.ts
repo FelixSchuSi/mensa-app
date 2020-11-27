@@ -126,7 +126,7 @@ class SignUpPage extends PageMixin(LitElement) {
         passwordCheck: this.passwordCheckElement.value
       };
       try {
-        await userService.signUp(signUpData);
+        await userService.signUp(signUpData, this.i18n);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }

@@ -79,7 +79,7 @@ class SignInPage extends PageMixin(LitElement) {
         password: this.passwordElement.value
       };
       try {
-        await userService.signIn(signInData);
+        await userService.signIn(signInData, this.i18n);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }
