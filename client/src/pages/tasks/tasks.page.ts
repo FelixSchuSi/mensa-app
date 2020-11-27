@@ -112,5 +112,6 @@ class TasksPage extends PageMixin(LitElement) {
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }
+    this.titleElement.value = '';
   }
 }
