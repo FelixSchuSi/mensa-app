@@ -29,8 +29,7 @@ class HttpService {
     window.addEventListener('online', async () => {
       console.log('starting sync');
       this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.SYNCING));
-      this.requestReplayLock = this.replayRequests();
-      await Promise.all([this.requestReplayLock, sleep(1500)]); // show syncing for at least 1,5 secs
+      await Promise.all([this.replayRequests(), sleep(1500)]); // show syncing for at least 1,5 secs
       this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.ONLINE));
       console.log('finished sync -> online');
       await sleep(1500); // show online for 1,5 secs
@@ -115,6 +114,7 @@ class HttpService {
   }
 
   private async replayRequests(): Promise<void> {
+    this.requestReplayLock = new Promise(() => {});
     if (this.queue.length > 0) {
       while (this.queue.length > 0) {
         const request: Request = this.queue.shift()!;
@@ -122,6 +122,7 @@ class HttpService {
         await fetch(request);
       }
     }
+    this.requestReplayLock = Promise.resolve();
   }
 
   public subscribeConnectionStatus(listener: connectionStatusListener): void {

@@ -8,22 +8,18 @@ export type TasksListener = (tasks: Task[]) => void;
 export class TaskService {
   protected TASKKEY: string = 'tasks';
   protected _tasks: Task[] = [];
-  protected ready: boolean = false;
   private listeners: TasksListener[] = [];
 
   public async init(): Promise<void> {
-    if (!this.ready) {
-      if (navigator.onLine) {
-        const response = await httpService.get('tasks' + location.search);
-        let tasks = <Task[]>(await response.json()).results;
-        await this.setTasks(tasks);
-        this.ready = true;
-      } else {
-        let tasks = <Task[] | null>await storeService.get('TASKKEY');
-        if (tasks === null) tasks = [];
-        await this.setTasks(tasks);
-        this.ready = true;
-      }
+    if (navigator.onLine) {
+      const response = await httpService.get('tasks' + location.search);
+      let tasks = <Task[]>(await response.json()).results;
+      await this.setTasks(tasks);
+    } else {
+      let tasks = <Task[] | null>await storeService.get(this.TASKKEY);
+      debugger;
+      if (tasks === null) tasks = [];
+      await this.setTasks(tasks);
     }
   }
 
