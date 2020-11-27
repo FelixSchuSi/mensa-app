@@ -1,12 +1,6 @@
-import { sleep } from '../helpers/sleep';
-import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
-
 interface HttpServiceConfig {
   baseURL: string;
 }
-
-type connectionStatusListener = (syncState: ConnectionStatus) => void;
-
 // Is regular array but type protectes myself
 // from using wrong methods such as pop().
 interface NetworkQueue {
@@ -16,26 +10,10 @@ interface NetworkQueue {
 }
 
 class HttpService {
-  private cache!: Cache;
   private queue: NetworkQueue = [];
   private requestReplayLock: Promise<void> = Promise.resolve();
-  private connectionStatusListeners: connectionStatusListener[] = [];
 
-  constructor(private config: HttpServiceConfig) {
-    window.addEventListener('offline', () => {
-      console.log('📵 offline');
-      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.OFFLINE));
-    });
-    window.addEventListener('online', async () => {
-      console.log('starting sync');
-      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.SYNCING));
-      await Promise.all([this.replayRequests(), sleep(1500)]); // show syncing for at least 1,5 secs
-      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.ONLINE));
-      console.log('finished sync -> online');
-      await sleep(1500); // show online for 1,5 secs
-      this.connectionStatusListeners.forEach(listener => listener(ConnectionStatus.BASESTATE));
-    });
-  }
+  constructor(private config: HttpServiceConfig) {}
 
   public async get(url: string): Promise<Response> {
     return this.createFetch('GET', url);
@@ -89,20 +67,6 @@ class HttpService {
     return new Request(this.config.baseURL + url, requestInit);
   }
 
-  // private async networkFirst(request: Request): Promise<Response> {
-  //   const NO_INTERNET = { message: 'Es konnte keine Verbindung hergestellt werden', statusCode: 503 };
-  //   if (navigator.onLine) {
-  //     const response = await fetch(request);
-  //     if (response.ok) await this.cache.put(request, response.clone());
-  //     return response;
-  //   } else {
-  //     console.log('returning from network cache');
-  //     const cacheResult = await this.cache.match(request);
-  //     if (cacheResult === undefined) return Promise.reject(NO_INTERNET);
-  //     return cacheResult;
-  //   }
-  // }
-
   private async bgSync(request: Request): Promise<Response> {
     if (navigator.onLine) {
       return await fetch(request);
@@ -113,7 +77,7 @@ class HttpService {
     }
   }
 
-  private async replayRequests(): Promise<void> {
+  public async replayRequests(): Promise<void> {
     this.requestReplayLock = new Promise(() => {});
     if (this.queue.length > 0) {
       while (this.queue.length > 0) {
@@ -123,10 +87,6 @@ class HttpService {
       }
     }
     this.requestReplayLock = Promise.resolve();
-  }
-
-  public subscribeConnectionStatus(listener: connectionStatusListener): void {
-    this.connectionStatusListeners.push(listener);
   }
 }
 

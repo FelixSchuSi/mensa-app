@@ -20,7 +20,7 @@ import { storeService } from '../services/store.service';
 import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
 import { getTitleString } from '../helpers/get-title-string';
 import { toggleIosMd } from '../helpers/toggle-ios-md';
-import { httpService } from '../services/http.service';
+import { connectionStatusService } from '../services/connection.status.service';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -41,9 +41,10 @@ class AppComponent extends LitElement {
     super();
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
 
-    httpService.subscribeConnectionStatus((connectionStatus: ConnectionStatus) => {
-      this.connectionStatus = connectionStatus;
+    connectionStatusService.subscribe((status: ConnectionStatus) => {
+      this.connectionStatus = status;
     });
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
