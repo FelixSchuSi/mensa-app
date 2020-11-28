@@ -71,12 +71,13 @@ class HttpService {
     return new Request(this.config.baseURL + url, requestInit);
   }
 
-  private async bgSync(request: Request, onSyncFail: () => void): Promise<Response> {
+  private async bgSync(request: Request, onSyncFail?: () => void): Promise<Response> {
     if (navigator.onLine) {
       return await fetch(request);
     } else {
       console.log('putting request in network queue');
-      this.queue.push({ request, onSyncFail });
+      const syncFail = onSyncFail === undefined ? () => {} : onSyncFail;
+      this.queue.push({ request, onSyncFail: syncFail });
       return Promise.reject({ message: '_ignoreMe' });
     }
   }
