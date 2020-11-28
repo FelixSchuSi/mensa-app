@@ -4,8 +4,8 @@ interface HttpServiceConfig {
 // Is regular array but type protectes myself
 // from using wrong methods such as pop().
 interface NetworkQueue {
-  shift(): Request | undefined;
-  push(...items: Request[]): number;
+  shift(): { request: Request; onSyncFail: () => void } | undefined;
+  push(...items: { request: Request; onSyncFail: () => void }[]): number;
   length: number;
 }
 
@@ -15,32 +15,36 @@ class HttpService {
 
   constructor(private config: HttpServiceConfig) {}
 
-  public async get(url: string): Promise<Response> {
-    return this.createFetch('GET', url);
+  public async get(url: string, onSyncFail?: () => void): Promise<Response> {
+    return this.createFetch('GET', url, { onSyncFail });
   }
 
-  public post(url: string, body: unknown): Promise<Response> {
-    return this.createFetch('POST', url, body);
+  public post(url: string, body: unknown, onSyncFail?: () => void): Promise<Response> {
+    return this.createFetch('POST', url, { body, onSyncFail });
   }
 
-  public put(url: string, body: unknown): Promise<Response> {
-    return this.createFetch('PUT', url, body);
+  public put(url: string, body: unknown, onSyncFail?: () => void): Promise<Response> {
+    return this.createFetch('PUT', url, { body, onSyncFail });
   }
 
-  public patch(url: string, body: unknown): Promise<Response> {
-    return this.createFetch('PATCH', url, body);
+  public patch(url: string, body: unknown, onSyncFail?: () => void): Promise<Response> {
+    return this.createFetch('PATCH', url, { body, onSyncFail });
   }
 
-  public delete(url: string): Promise<Response> {
-    return this.createFetch('DELETE', url);
+  public delete(url: string, onSyncFail?: () => void): Promise<Response> {
+    return this.createFetch('DELETE', url, { onSyncFail });
   }
 
-  private async createFetch(method: string, url: string, body?: unknown): Promise<Response> {
+  private async createFetch(
+    method: string,
+    url: string,
+    { body, onSyncFail }: { body?: unknown; onSyncFail?: () => void } = { onSyncFail: () => {} }
+  ): Promise<Response> {
     await this.requestReplayLock;
 
     const request: Request = this.buildRequest(method, url, body);
 
-    const response: Response = request.method === 'GET' ? await fetch(request) : await this.bgSync(request);
+    const response: Response = request.method === 'GET' ? await fetch(request) : await this.bgSync(request, onSyncFail);
     if (response.ok) {
       return response;
     } else {
@@ -67,12 +71,12 @@ class HttpService {
     return new Request(this.config.baseURL + url, requestInit);
   }
 
-  private async bgSync(request: Request): Promise<Response> {
+  private async bgSync(request: Request, onSyncFail: () => void): Promise<Response> {
     if (navigator.onLine) {
       return await fetch(request);
     } else {
       console.log('putting request in network queue');
-      this.queue.push(request);
+      this.queue.push({ request, onSyncFail });
       return Promise.reject({ message: '_ignoreMe' });
     }
   }
@@ -81,9 +85,13 @@ class HttpService {
     this.requestReplayLock = new Promise(() => {});
     if (this.queue.length > 0) {
       while (this.queue.length > 0) {
-        const request: Request = this.queue.shift()!;
-        // TODO: Error handling
-        await fetch(request);
+        const { request, onSyncFail } = this.queue.shift()!;
+        try {
+          await fetch(request);
+        } catch (e) {
+          console.log('error during sync: ' + e);
+          await onSyncFail();
+        }
       }
     }
     this.requestReplayLock = Promise.resolve();

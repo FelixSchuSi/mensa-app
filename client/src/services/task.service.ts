@@ -28,12 +28,14 @@ export class TaskService {
   }
 
   protected async setTasks(newTasks: Task[]) {
-    // TODO: notify listeners, save to store
     this._tasks = newTasks;
     await storeService.set(this.TASKKEY, this.tasks);
     this.notifyListeners();
   }
 
+  private async onSyncFail(): Promise<void> {
+    await storeService.remove(this.TASKKEY);
+  }
   public subscribe(listener: TasksListener): void {
     this.listeners.push(listener);
   }
@@ -52,7 +54,7 @@ export class TaskService {
     );
     await this.setTasks(newTasks);
     try {
-      await httpService.patch('tasks/' + updatedTask.id, updatedTask);
+      await httpService.patch('tasks/' + updatedTask.id, updatedTask, this.onSyncFail);
     } catch ({ message }) {
       throw { message };
     }
@@ -61,7 +63,7 @@ export class TaskService {
   public async removeTask(taskToRemove: Task): Promise<void> {
     await this.setTasks(this.tasks.filter(task => task.id !== taskToRemove.id));
     try {
-      await httpService.delete('tasks/' + taskToRemove.id);
+      await httpService.delete('tasks/' + taskToRemove.id, this.onSyncFail);
     } catch ({ message }) {
       throw { message };
     }
@@ -71,7 +73,7 @@ export class TaskService {
     let task: Task = { ...createEntity(), title, status: 'open' };
 
     try {
-      const response = await httpService.post('tasks', task);
+      const response = await httpService.post('tasks', task, this.onSyncFail);
       task = await response.json();
       await this.setTasks([...this.tasks, task]);
       console.log('task', task);
