@@ -53,16 +53,15 @@ class TasksPage extends PageMixin(LitElement) {
     return html`
       ${this.renderNotification()}
       <form novalidate @submit="${this.submit}">
-        <div>
-          <input
-            class="form-control form-control-lg"
+        <div class="inputField">
+          <ion-input
+            debounce="100"
             type="text"
             autofocus
-            required
             id="title"
             name="title"
             placeholder="${this.i18n.NEW_TASK}"
-          />
+          ></ion-input>
         </div>
       </form>
       <div class="tasks">

@@ -1,15 +1,19 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
-import { LanguageStrings } from '../../models/language-strings';
 import { TaskStatus } from '../../models/task-status';
 
 const componentCSS = require('./task.widget.scss');
-
+const sharedCSS = require('../../shared.scss');
 @customElement('app-task')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class TaskWidget extends LitElement {
-  static styles = css`
-    ${unsafeCSS(componentCSS)}
-  `;
+  static styles = [
+    css`
+      ${unsafeCSS(sharedCSS)}
+    `,
+    css`
+      ${unsafeCSS(componentCSS)}
+    `
+  ];
 
   @property()
   public status: TaskStatus = 'open';
