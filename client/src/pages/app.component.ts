@@ -39,6 +39,13 @@ class AppComponent extends LitElement {
 
   public constructor() {
     super();
+    // mode button has to use localstorage since its synchronus and delays rendering.
+    const mode = localStorage.getItem('mode');
+    const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
+    if (mode) {
+      this.mode = <'ios' | 'md'>mode;
+      htmlElement.setAttribute('mode', this.mode);
+    }
     this.i18n = getBrowserLanguage() === Languages.GERMAN ? german : english;
 
     connectionStatusService.subscribe((status: ConnectionStatus) => {
@@ -49,14 +56,6 @@ class AppComponent extends LitElement {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
       });
-    }
-
-    // mode button has to use localstorage since its synchronus and delays rendering.
-    const mode = localStorage.getItem('mode');
-    const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
-    if (mode) {
-      this.mode = <'ios' | 'md'>mode;
-      htmlElement.setAttribute('mode', this.mode);
     }
   }
 
@@ -127,7 +126,9 @@ class AppComponent extends LitElement {
     // TODO: move buttons to settings and return value in switch statement.
     return html`
       <ion-button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
-      <ion-button @click=${toggleIosMd}>Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode</ion-button>
+      <ion-button @click=${() => toggleIosMd(this.mode)}>
+        Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode
+      </ion-button>
       ${pageContent}
     `;
   }
