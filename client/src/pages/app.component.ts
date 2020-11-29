@@ -141,6 +141,11 @@ class AppComponent extends LitElement {
             <ion-header>
               <ion-toolbar>
                 <ion-title>${getTitleString(this.i18n)}</ion-title>
+                <ion-buttons slot="primary">
+                  <ion-button>
+                    <ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
               </ion-toolbar>
             </ion-header>
             <ion-tabs>
