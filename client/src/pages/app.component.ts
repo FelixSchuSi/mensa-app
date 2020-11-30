@@ -125,11 +125,31 @@ class AppComponent extends LitElement {
 
     // TODO: move buttons to settings and return value in switch statement.
     return html`
-      <ion-button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
-      <ion-button @click=${() => toggleIosMd(this.mode)}>
-        Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode
-      </ion-button>
-      ${pageContent}
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>${getTitleString(this.i18n)}</ion-title>
+          <ion-buttons slot="primary">
+            <ion-button>
+              <ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" fullscreen>
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${getTitleString(this.i18n)}</ion-title>
+          </ion-toolbar>
+          <ion-toolbar>
+            <ion-searchbar></ion-searchbar>
+          </ion-toolbar>
+        </ion-header>
+        ${pageContent}
+        <ion-button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
+        <ion-button @click=${() => toggleIosMd(this.mode)}>
+          Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode
+        </ion-button>
+      </ion-content>
     `;
   }
 
@@ -138,29 +158,11 @@ class AppComponent extends LitElement {
       <div class="full-size">
         <div class="ion-app-container">
           <ion-app>
-            <ion-header>
-              <ion-toolbar>
-                <ion-title>${getTitleString(this.i18n)}</ion-title>
-                <ion-buttons slot="primary">
-                  <ion-button>
-                    <ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon>
-                  </ion-button>
-                </ion-buttons>
-              </ion-toolbar>
-            </ion-header>
             <ion-tabs>
-              <ion-tab tab=${Routes.TASKS}>
-                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
-              </ion-tab>
-              <ion-tab tab=${Routes.SIGN_IN}>
-                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
-              </ion-tab>
-              <ion-tab tab=${Routes.SIGN_UP}>
-                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
-              </ion-tab>
-              <ion-tab tab=${Routes.SIGN_OUT}>
-                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
-              </ion-tab>
+              <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet()} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet()} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet()} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet()} </ion-tab>
               <div id="bottom-content" slot="bottom">
                 <app-connection-status-bar ...=${spread(this.pageContext)}></app-connection-status-bar>
                 <ion-tab-bar selected-tab="${this.currentRoute}">
