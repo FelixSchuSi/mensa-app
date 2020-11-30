@@ -90,18 +90,12 @@ class SignUpPage extends PageMixin(LitElement) {
         </ion-item-group>
         <ion-item-group>
           <ion-item>
-            <ion-label position="left" for="status">${this.i18n.USER_STATUS}</ion-label>
-            <ion-chip color="primary">
-              <ion-label color="dark">Studierender</ion-label>
-            </ion-chip>
-            <ion-label position="floating" for="status">${this.i18n.USER_STATUS}</ion-label>
-            <ion-chip color="primary">
-              <ion-label color="dark">Mitarbeiter</ion-label>
-            </ion-chip>
-            <ion-label position="floating" for="status">${this.i18n.USER_STATUS}</ion-label>
-            <ion-chip color="primary">
-              <ion-label color="dark">Gast</ion-label>
-            </ion-chip>
+            <ion-label>Status</ion-label>
+            <ion-select placeholder="Wähle eins aus">
+              <ion-select-option value="f">Studierender</ion-select-option>
+              <ion-select-option value="m">Mitarbeiter</ion-select-option>
+              <ion-select-option value="m">Gast</ion-select-option>
+            </ion-select>
           </ion-item>
           <div class="error"></div>
         </ion-item-group>
