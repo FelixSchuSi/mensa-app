@@ -112,6 +112,13 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-item>
           <div class="error"></div>
         </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" for="name">${this.i18n.PREFERENCE}</ion-label>
+            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
         <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
       </form>
     `;

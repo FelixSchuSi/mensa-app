@@ -14,6 +14,7 @@ export type LanguageKeys =
   | 'NEW_TASK'
   | 'USER_STATUS'
   | 'INDIGESTIBILITY'
+  | 'PREFERENCE'
   | 'NETWORK_SYNCING'
   | 'NETWORK_OFFLINE'
   | 'NETWORK_ONLINE'

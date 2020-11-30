@@ -17,6 +17,7 @@ export const german: LanguageStrings = {
   NEW_TASK: 'Neue Aufgabe',
   USER_STATUS: 'Status',
   INDIGESTIBILITY: 'Unvertraeglichkeit',
+  PREFERENCE: 'Vorliebe',
   NETWORK_SYNCING: 'Synchronisiere...',
   NETWORK_OFFLINE: 'Offline',
   NETWORK_ONLINE: 'Online',
