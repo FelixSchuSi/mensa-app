@@ -91,10 +91,10 @@ class SignUpPage extends PageMixin(LitElement) {
         <ion-item-group>
           <ion-item>
             <ion-label>Status</ion-label>
-            <ion-select placeholder="Wähle eins aus">
-              <ion-select-option value="f">Studierender</ion-select-option>
-              <ion-select-option value="m">Mitarbeiter</ion-select-option>
-              <ion-select-option value="m">Gast</ion-select-option>
+            <ion-select placeholder="${this.i18n.CHOOSE_STATUS}">
+              <ion-select-option value="f">${this.i18n.STUDENT}</ion-select-option>
+              <ion-select-option value="m">${this.i18n.EMPLOYEE}</ion-select-option>
+              <ion-select-option value="h">${this.i18n.GUEST}</ion-select-option>
             </ion-select>
           </ion-item>
           <div class="error"></div>
