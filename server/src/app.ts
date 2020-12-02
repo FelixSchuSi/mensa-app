@@ -5,6 +5,7 @@ import * as jwt from 'jsonwebtoken';
 import * as http from 'http';
 import tasks from './routes/tasks';
 import users from './routes/users';
+import groups from './routes/groups';
 import startDB from './db';
 
 const port = process.env.PORT || 3443;
@@ -42,6 +43,7 @@ function configureApp(app: Express) {
   });
   app.use('/api/tasks', tasks);
   app.use('/api/tasks', tasks);
+  app.use('/api/groups', groups);
 }
 
 function isPreflight(req: Request) {
