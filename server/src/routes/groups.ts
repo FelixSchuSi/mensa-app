@@ -1,6 +1,7 @@
 import express from 'express';
 import { GenericDAO } from '../models/generic.dao';
 import { Group } from '../models/group';
+import { User } from '../models/user';
 import { encrypt, decrypt } from '../services/crypto.service';
 
 const router = express.Router();
@@ -9,6 +10,7 @@ const codeLength = 8;
 
 router.get('/', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  //Filter by joinCode
   const groups = (await groupDAO.findAll()).map(group => {
     return { ...group, title: decrypt(group.name) };
   });
@@ -32,31 +34,92 @@ router.delete('/:id', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
-  const filter: Partial<Group> = { id: res.locals.group.id };
-  const group = await groupDAO.findOne(filter);
-  if (group === null) {
-    res.status(404).json({ message: 'Group id is unkown' });
-  }
-  if (!req.body.members) {
-    //Nothing to do here if not update members?
-    res.status(200).end();
-    return;
-  }
-  const newMembers = group?.members.filter(member => {
-    return req.body.members.remove !== member;
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+
+  const memberOperations: Array<GroupMemberOperation> = req.body.members ?? [];
+  const tasks = memberOperations.map(async op => {
+    let response: Response;
+    switch (op.operation) {
+      case 'add':
+        response = await addMembership(groupDAO, req.params.id, userDAO, op.user ?? req.app.locals.user.id);
+        break;
+      case 'remove':
+        response = await removeMembership(groupDAO, req.params.id, userDAO, op.user ?? req.app.locals.user.id);
+        break;
+      default:
+        response = { status: 123, message: 'Unkown Operation' };
+    }
+    return response;
   });
-  if (req.body.members.add) {
-    newMembers?.push(req.body.members.add);
-  }
-  await groupDAO.update({ id: req.params.id, members: newMembers });
+  //TODO Check for success
+  Promise.all(tasks);
   res.status(200).end();
 });
-function createJoinCode(length: number) {
+
+function createJoinCode(length: number): string {
   const charArrrayLength = codeCharacters.length;
   let code = '';
   for (let i = 0; i < length; i++) {
     code += codeCharacters.charAt(Math.floor(Math.random() * charArrrayLength));
   }
   return code;
+}
+interface GroupMemberOperation {
+  operation: string;
+  user: string;
+}
+interface Response {
+  status: number;
+  message?: string;
+}
+async function addMembership(
+  groupDAO: GenericDAO<Group>,
+  groupID: string,
+  userDAO: GenericDAO<User>,
+  userID: string
+): Promise<Response> {
+  const filter: Partial<Group> = { id: userID };
+  const user = await userDAO.findOne(filter);
+  if (!user) return { status: 404, message: 'Unkown user' };
+
+  const group = await groupDAO.findOne({ id: groupID });
+  if (!group) return { status: 404, message: 'Unkown group' };
+
+  group!.members.push(user.id);
+  user!.groupMemberships.push(group.id);
+  try {
+    await userDAO.update({ ...user });
+    await groupDAO.update({ ...group });
+  } catch (err) {
+    return { status: 500, message: 'Unexpected error occured' };
+  }
+  return { status: 200 };
+}
+async function removeMembership(
+  groupDAO: GenericDAO<Group>,
+  groupID: string,
+  userDAO: GenericDAO<User>,
+  userID: string
+): Promise<Response> {
+  const filter: Partial<Group> = { id: userID };
+  const user = await userDAO.findOne(filter);
+  if (!user) return { status: 404, message: 'Unkown user' };
+
+  const group = await groupDAO.findOne({ id: groupID });
+  if (!group) return { status: 404, message: 'Unkown group' };
+
+  const newGroupMembers = group!.members.filter(member => {
+    return member === user.id;
+  });
+  const newUserMemberships = user!.groupMemberships.filter(groupID => {
+    return groupID === group.id;
+  });
+  try {
+    await userDAO.update({ ...user, groupMemberships: newUserMemberships });
+    await groupDAO.update({ ...group, members: newGroupMembers });
+  } catch (err) {
+    return { status: 500, message: 'Unexpected error occured' };
+  }
+  return { status: 200, message: '' };
 }
 export default router;
