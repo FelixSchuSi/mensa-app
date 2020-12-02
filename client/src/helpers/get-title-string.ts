@@ -12,6 +12,8 @@ export function getTitleString(i18n: LanguageStrings): string {
       return i18n.SIGN_OUT;
     case Routes.TASKS:
       return i18n.TASKS;
+    case Routes.GROUPS:
+      return i18n.GROUPS;
     default:
       return i18n.TASKS;
   }

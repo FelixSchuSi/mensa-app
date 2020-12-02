@@ -118,6 +118,9 @@ class AppComponent extends LitElement {
       case Routes.TASKS:
         pageContent = html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
         break;
+      case Routes.GROUPS:
+        pageContent = html`<app-groups ...=${spread(this.pageContext)}></app-groups>`;
+        break;
       default:
         pageContent = html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
         break;
@@ -147,6 +150,9 @@ class AppComponent extends LitElement {
               <ion-tab tab=${Routes.TASKS}>
                 <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
               </ion-tab>
+              <ion-tab tab=${Routes.GROUPS}>
+                <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
+              </ion-tab>
               <ion-tab tab=${Routes.SIGN_IN}>
                 <ion-content class="ion-padding"> ${this.renderRouterOutlet()} </ion-content>
               </ion-tab>
@@ -161,6 +167,10 @@ class AppComponent extends LitElement {
                 <ion-tab-bar selected-tab="${this.currentRoute}">
                   <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
                     <ion-label>${this.i18n.TASKS}</ion-label>
+                    <ion-icon name="list"></ion-icon>
+                  </ion-tab-button>
+                  <ion-tab-button @click=${() => routerService.navigate(Routes.GROUPS)} tab=${Routes.GROUPS}>
+                    <ion-label>${this.i18n.GROUPS}</ion-label>
                     <ion-icon name="list"></ion-icon>
                   </ion-tab-button>
                   <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>

@@ -5,6 +5,7 @@ export const english: LanguageStrings = {
   _LANGUAGE: Languages.ENGLISH,
   SWITCH_LANGUAGE: 'Change language',
   SIGN_UP: 'Sign up',
+  GROUPS: 'Groups',
   SIGN_IN: 'Sign in',
   SIGN_OUT: 'Sign out',
   E_MAIL: 'E-Mail',

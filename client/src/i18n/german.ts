@@ -4,6 +4,7 @@ import { Languages } from '../models/languages';
 export const german: LanguageStrings = {
   _LANGUAGE: Languages.GERMAN,
   SWITCH_LANGUAGE: 'Sprache wechseln',
+  GROUPS: 'Gruppen',
   SIGN_UP: 'Konto erstellen',
   SIGN_IN: 'Anmelden',
   SIGN_OUT: 'Abmelden',

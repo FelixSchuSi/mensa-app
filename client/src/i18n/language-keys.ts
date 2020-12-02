@@ -2,6 +2,7 @@ export type LanguageKeys =
   | '_LANGUAGE'
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'
+  | 'GROUPS'
   | 'SIGN_IN'
   | 'SIGN_OUT'
   | 'E_MAIL'
