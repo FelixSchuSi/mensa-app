@@ -12,8 +12,8 @@ const port = process.env.PORT || 3443;
 function configureApp(app: Express) {
   app.get('/', (req, res) => {
     console.log('health check!');
-    res.send('ok')
-  })
+    res.send('ok');
+  });
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());

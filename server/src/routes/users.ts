@@ -5,7 +5,7 @@ import { GenericDAO } from '../models/generic.dao';
 import { User } from '../models/user';
 
 const router = express.Router();
-const isProd: boolean = !!process.env.ISPROD;
+const isProd = !!process.env.ISPROD;
 const cookieOptions: CookieOptions = isProd ? { sameSite: 'none', secure: true } : { sameSite: 'lax' };
 
 router.post('/', async (req, res) => {
@@ -36,7 +36,6 @@ router.post('/', async (req, res) => {
     password: await bcrypt.hash(req.body.password, 10)
   });
 
-
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);
 
   res.status(201).json(createdUser);
@@ -55,7 +54,6 @@ router.post('/sign-in', async (req, res) => {
   const user = await userDAO.findOne(filter);
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
-
     res.cookie('jwt-token', createToken(user), cookieOptions);
     res.status(201).json(user);
   } else {
