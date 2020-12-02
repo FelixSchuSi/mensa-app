@@ -34,7 +34,21 @@ class HttpService {
   public delete(url: string, onSyncFail?: () => void): Promise<Response> {
     return this.createFetch('DELETE', url, { onSyncFail });
   }
-
+  public async replayRequests(): Promise<void> {
+    this.requestReplayLock = new Promise(() => {});
+    if (this.queue.length > 0) {
+      while (this.queue.length > 0) {
+        const { request, onSyncFail } = this.queue.shift()!;
+        try {
+          await fetch(request);
+        } catch (e) {
+          console.log('error during sync: ' + e);
+          await onSyncFail();
+        }
+      }
+    }
+    this.requestReplayLock = Promise.resolve();
+  }
   private async createFetch(
     method: string,
     url: string,
@@ -80,22 +94,6 @@ class HttpService {
       this.queue.push({ request, onSyncFail: syncFail });
       return Promise.reject({ message: '_ignoreMe' });
     }
-  }
-
-  public async replayRequests(): Promise<void> {
-    this.requestReplayLock = new Promise(() => {});
-    if (this.queue.length > 0) {
-      while (this.queue.length > 0) {
-        const { request, onSyncFail } = this.queue.shift()!;
-        try {
-          await fetch(request);
-        } catch (e) {
-          console.log('error during sync: ' + e);
-          await onSyncFail();
-        }
-      }
-    }
-    this.requestReplayLock = Promise.resolve();
   }
 }
 
