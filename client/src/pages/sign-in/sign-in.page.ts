@@ -34,7 +34,6 @@ export class SignInPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   protected render(): TemplateResult {
-    debugger;
     return html`
       ${this.renderNotification()}
       <form @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>

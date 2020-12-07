@@ -1,15 +1,5 @@
-:host(#content) {
-  height: 100% !important;
-  width: 100% !important;
-  position: relative;
-  background-color: green;
-  color: green;
-}
-
 :host(#content) > ion-nav {
   height: 100% !important;
   width: 100% !important;
   position: relative;
-  background-color: green;
-  color: green;
 }

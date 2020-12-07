@@ -22,7 +22,6 @@ import { ConnectionStatus } from '../widgets/connection-status-bar/connection-st
 import { getTitleString } from '../helpers/get-title-string';
 import { toggleIosMd } from '../helpers/toggle-ios-md';
 import { connectionStatusService } from '../services/connection.status.service';
-import { SignInPage } from './sign-in/sign-in.page';
 import { ComponentProps } from '@ionic/core';
 
 const componentCSS = require('./app.component.scss');
@@ -110,26 +109,7 @@ export class AppComponent extends LitElement {
     }
   }
 
-  protected renderRouterOutlet(route: Routes): TemplateResult {
-    let component = '';
-    switch (route) {
-      case Routes.SIGN_IN:
-        component = 'app-sign-in';
-        break;
-      case Routes.SIGN_UP:
-        component = 'app-sign-up';
-        break;
-      case Routes.SIGN_OUT:
-        component = 'app-sign-out';
-        break;
-      case Routes.TASKS:
-        component = 'app-tasks';
-        break;
-      default:
-        component = 'app-tasks';
-        break;
-    }
-
+  protected renderRouterOutlet(route: Routes, component: string): TemplateResult {
     // TODO: move buttons to settings and return value in switch statement.
     return html`
       <ion-header>
@@ -169,10 +149,10 @@ export class AppComponent extends LitElement {
         <div class="ion-app-container">
           <ion-app>
             <ion-tabs>
-              <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS)} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet(Routes.SIGN_IN)} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet(Routes.SIGN_UP)} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet(Routes.SIGN_OUT)} </ion-tab>
+              <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet(Routes.SIGN_IN, 'app-sign-in')} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet(Routes.SIGN_UP, 'app-sign-up')} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet(Routes.SIGN_OUT, 'app-sign-out')} </ion-tab>
               <div id="bottom-content" slot="bottom">
                 <app-connection-status-bar ...=${spread(this.pageContext)}></app-connection-status-bar>
                 <ion-tab-bar selected-tab="${this.currentRoute}">
