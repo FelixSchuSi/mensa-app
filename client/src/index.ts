@@ -9,3 +9,4 @@ import './pages/sign-out/sign-out.page.ts';
 import './pages/tasks/tasks.page.ts';
 import './widgets/task/task.widget.ts';
 import './widgets/connection-status-bar/connection-status-bar.widget';
+import './widgets/tab-container/tab-container.component';

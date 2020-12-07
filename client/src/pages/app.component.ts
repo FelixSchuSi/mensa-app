@@ -5,6 +5,7 @@ import {
   internalProperty,
   LitElement,
   property,
+  queryAsync,
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
@@ -21,13 +22,18 @@ import { ConnectionStatus } from '../widgets/connection-status-bar/connection-st
 import { getTitleString } from '../helpers/get-title-string';
 import { toggleIosMd } from '../helpers/toggle-ios-md';
 import { connectionStatusService } from '../services/connection.status.service';
+import { SignInPage } from './sign-in/sign-in.page';
+import { ComponentProps } from '@ionic/core';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
 
 @customElement('app-root')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class AppComponent extends LitElement {
+export class AppComponent extends LitElement {
+  // createRenderRoot() {
+  //   return this;
+  // }
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
@@ -75,10 +81,11 @@ class AppComponent extends LitElement {
   protected i18n!: LanguageStrings;
 
   @internalProperty()
-  protected get pageContext(): object {
+  protected get pageContext(): ComponentProps {
     return {
-      '.i18n': this.i18n,
-      '.connectionStatus': this.connectionStatus
+      i18n: this.i18n,
+      connectionStatus: this.connectionStatus,
+      currentRoute: this.currentRoute
     };
   }
 
@@ -103,23 +110,23 @@ class AppComponent extends LitElement {
     }
   }
 
-  protected renderRouterOutlet(): TemplateResult {
-    let pageContent: TemplateResult = html``;
-    switch (routerService.getPath()) {
+  protected renderRouterOutlet(route: Routes): TemplateResult {
+    let component = '';
+    switch (route) {
       case Routes.SIGN_IN:
-        pageContent = html`<app-sign-in ...=${spread(this.pageContext)}></app-sign-in>`;
+        component = 'app-sign-in';
         break;
       case Routes.SIGN_UP:
-        pageContent = html`<app-sign-up ...=${spread(this.pageContext)}></app-sign-up>`;
+        component = 'app-sign-up';
         break;
       case Routes.SIGN_OUT:
-        pageContent = html`<app-sign-out ...=${spread(this.pageContext)}></app-sign-out>`;
+        component = 'app-sign-out';
         break;
       case Routes.TASKS:
-        pageContent = html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
+        component = 'app-tasks';
         break;
       default:
-        pageContent = html`<app-tasks ...=${spread(this.pageContext)}></app-tasks>`;
+        component = 'app-tasks';
         break;
     }
 
@@ -144,7 +151,9 @@ class AppComponent extends LitElement {
             <ion-searchbar></ion-searchbar>
           </ion-toolbar>
         </ion-header>
-        ${pageContent}
+        <div style="width:100%; height:100%">
+          <app-tab-container id="content" component="${component}" .pageContext=${this.pageContext}></app-tab-container>
+        </div>
         <ion-button @click=${this.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
         <ion-button @click=${() => toggleIosMd(this.mode)}>
           Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode
@@ -155,14 +164,15 @@ class AppComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
+      <div></div>
       <div class="full-size">
         <div class="ion-app-container">
           <ion-app>
             <ion-tabs>
-              <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet()} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet()} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet()} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet()} </ion-tab>
+              <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS)} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet(Routes.SIGN_IN)} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet(Routes.SIGN_UP)} </ion-tab>
+              <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet(Routes.SIGN_OUT)} </ion-tab>
               <div id="bottom-content" slot="bottom">
                 <app-connection-status-bar ...=${spread(this.pageContext)}></app-connection-status-bar>
                 <ion-tab-bar selected-tab="${this.currentRoute}">
