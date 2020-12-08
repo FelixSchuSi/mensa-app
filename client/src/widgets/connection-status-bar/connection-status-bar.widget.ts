@@ -1,5 +1,7 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { LanguageStrings } from '../../models/language-strings';
+import { connectionStatusService } from '../../services/connection-status.service';
+import { i18nService } from '../../services/i18n.service';
 import { ConnectionStatus } from './connection-status-enum';
 
 const componentCSS = require('./connection-status-bar.widget.scss');
@@ -16,11 +18,20 @@ class ConnectionStatusBar extends LitElement {
     `
   ];
 
-  @property({ type: String })
-  protected connectionStatus!: ConnectionStatus;
+  @property()
+  protected connectionStatus: ConnectionStatus = ConnectionStatus.BASESTATE;
 
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
+
+  constructor(...args: any[]) {
+    super();
+    this.i18n = i18nService.getStrings();
+    i18nService.subscribe(i18n => (this.i18n = i18n));
+    connectionStatusService.subscribe((status: ConnectionStatus) => {
+      this.connectionStatus = status;
+    });
+  }
 
   protected render(): TemplateResult {
     switch (this.connectionStatus) {
