@@ -43,11 +43,21 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      ${this.renderNotification()}
-      <ion-button @click=${i18nService.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
-      <ion-button @click=${() => toggleIosMd(this.mode)}>
-        Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode
-      </ion-button>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+          </ion-buttons>
+          <ion-title>Moin Meister!</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content fullscreen class="ion-padding">
+        ${this.renderNotification()}
+        <ion-button @click=${i18nService.toggleLanguage}>${this.i18n.SWITCH_LANGUAGE}</ion-button>
+        <ion-button @click=${() => toggleIosMd(this.mode)}>
+          Switch to ${this.mode === 'md' ? 'ios' : 'md'} mode
+        </ion-button>
+      </ion-content>
     `;
   }
 }

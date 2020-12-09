@@ -34,15 +34,12 @@ export class AppComponent extends LitElement {
     `
   ];
 
+  createRenderRoot() {
+    return this;
+  }
+
   constructor() {
     super();
-    // mode button has to use localstorage since its synchronus and delays rendering.
-    const mode = localStorage.getItem('mode');
-    const htmlElement: HTMLHtmlElement = document.querySelector('html')!;
-    if (mode) {
-      this.mode = <'ios' | 'md'>mode;
-      htmlElement.setAttribute('mode', this.mode);
-    }
     this.currentRoute = routerService.getPath();
     this.i18n = i18nService.getStrings();
     i18nService.subscribe(i18n => (this.i18n = i18n));
@@ -59,9 +56,6 @@ export class AppComponent extends LitElement {
 
   @internalProperty()
   protected currentRoute!: Routes;
-
-  @internalProperty()
-  protected mode!: 'ios' | 'md';
 
   @internalProperty()
   protected i18n!: LanguageStrings;
@@ -88,7 +82,7 @@ export class AppComponent extends LitElement {
         <ion-toolbar>
           <ion-title>${getTitleString(this.i18n)}</ion-title>
           <ion-buttons slot="primary">
-            <ion-button>
+            <ion-button @click=${() => this.pushRootNav('app-settings')}>
               <ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon>
             </ion-button>
           </ion-buttons>
@@ -110,42 +104,47 @@ export class AppComponent extends LitElement {
     `;
   }
 
+  protected async pushRootNav(component: string): Promise<void> {
+    const rootNav: HTMLIonNavElement = <HTMLIonNavElement>document.querySelector('#root-nav');
+    const res = await rootNav.push(component);
+  }
+
   protected render(): TemplateResult {
     return html`
       <div></div>
-      <div class="full-size">
-        <div class="ion-app-container">
-          <ion-app>
-            <ion-tabs>
-              <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet(Routes.SIGN_IN, 'app-sign-in')} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet(Routes.SIGN_UP, 'app-sign-up')} </ion-tab>
-              <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet(Routes.SIGN_OUT, 'app-sign-out')} </ion-tab>
-              <div id="bottom-content" slot="bottom">
-                <app-connection-status-bar></app-connection-status-bar>
-                <ion-tab-bar>
-                  <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
-                    <ion-label>${this.i18n.TASKS}</ion-label>
-                    <ion-icon name="list"></ion-icon>
-                  </ion-tab-button>
-                  <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
-                    <ion-label>${this.i18n.SIGN_IN}</ion-label>
-                    <ion-icon name="log-in"></ion-icon>
-                  </ion-tab-button>
-                  <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
-                    <ion-label>${this.i18n.SIGN_UP}</ion-label>
-                    <ion-icon name="create"></ion-icon>
-                  </ion-tab-button>
-                  <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
-                    <ion-label>${this.i18n.SIGN_OUT}</ion-label>
-                    <ion-icon name="log-out"></ion-icon>
-                  </ion-tab-button>
-                </ion-tab-bar>
-              </div>
-            </ion-tabs>
-          </ion-app>
-        </div>
-      </div>
+      <!-- <div class="full-size">
+        <div class="ion-app-container"> -->
+      <ion-app>
+        <ion-tabs>
+          <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
+          <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet(Routes.SIGN_IN, 'app-sign-in')} </ion-tab>
+          <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet(Routes.SIGN_UP, 'app-sign-up')} </ion-tab>
+          <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet(Routes.SIGN_OUT, 'app-sign-out')} </ion-tab>
+          <div id="bottom-content" slot="bottom">
+            <app-connection-status-bar></app-connection-status-bar>
+            <ion-tab-bar>
+              <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
+                <ion-label>${this.i18n.TASKS}</ion-label>
+                <ion-icon name="list"></ion-icon>
+              </ion-tab-button>
+              <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
+                <ion-label>${this.i18n.SIGN_IN}</ion-label>
+                <ion-icon name="log-in"></ion-icon>
+              </ion-tab-button>
+              <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
+                <ion-label>${this.i18n.SIGN_UP}</ion-label>
+                <ion-icon name="create"></ion-icon>
+              </ion-tab-button>
+              <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
+                <ion-label>${this.i18n.SIGN_OUT}</ion-label>
+                <ion-icon name="log-out"></ion-icon>
+              </ion-tab-button>
+            </ion-tab-bar>
+          </div>
+        </ion-tabs>
+      </ion-app>
+      <!-- </div>
+      </div> -->
       <ion-progress-bar style="display:none"></ion-progress-bar>
     `;
   }
