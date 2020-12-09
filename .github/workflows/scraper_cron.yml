@@ -17,7 +17,9 @@ jobs:
           node-version: "14"
       - name: Install npm packages.
         run: |
-          cd scraper
+          cd server
+          npm i	          
+          cd ../scraper
           npm i
       - name: Run scraper.
         env:
