@@ -35,9 +35,17 @@ body {
   #root-nav {
     // ion-nav::part(ion-app)
     position: static;
+    display: block;
     height: 100%;
     width: 100%;
   }
+  // #root-nav::part(app-root) {
+  //   // ion-nav::part(ion-app)
+  //   max-width: 768px;
+  //   width: 768px;
+  //   height: 100%;
+  //   display: block;
+  // }
 
   @media (prefers-color-scheme: dark) {
     .full-size {

@@ -23,5 +23,8 @@ export const german: LanguageStrings = {
   NETWORK_SYNC_FAILURE: 'Synchronisation fehlgeschlagen',
   NETWORK_SYNC_SUCESS: 'erfolgreich synchronisiert',
   INTERNET_NEEDED_FOR_SIGN_IN: 'Du musst online sein um dich anzumelden.',
-  INTERNET_NEEDED_FOR_SIGN_UP: 'Du musst online sein um dich zu registrieren.'
+  INTERNET_NEEDED_FOR_SIGN_UP: 'Du musst online sein um dich zu registrieren.',
+  SETTINGS: 'Einstellungen',
+  GERMAN: 'Deutsch',
+  ENGLISH: 'Englisch'
 };
