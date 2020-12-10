@@ -83,7 +83,14 @@ export class AppComponent extends LitElement {
           <ion-title>${getTitleString(this.i18n)}</ion-title>
           <ion-buttons slot="primary">
             <ion-button @click=${() => this.pushRootNav('app-settings')}>
-              <ion-icon slot="icon-only" ios="settings-outline" md="settings-outline"></ion-icon>
+              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+              <!-- TODO: Make Google style avatar work -->
+              <!-- <ion-avatar style="border-radius: 0px" slot="end">
+                <img
+                  style="width: 60px; height:60px"
+                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
+                />
+              </ion-avatar> -->
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
