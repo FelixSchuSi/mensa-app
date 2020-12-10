@@ -26,5 +26,8 @@ export const german: LanguageStrings = {
   INTERNET_NEEDED_FOR_SIGN_UP: 'Du musst online sein um dich zu registrieren.',
   SETTINGS: 'Einstellungen',
   GERMAN: 'Deutsch',
-  ENGLISH: 'Englisch'
+  ENGLISH: 'Englisch',
+  LANGUAGE: 'Sprache',
+  APPEARANCE: 'Aussehen',
+  BACK: 'Zurück'
 };

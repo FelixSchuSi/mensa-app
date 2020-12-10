@@ -28,6 +28,7 @@ class SignUpPage extends PageMixin(LitElement) {
       ${unsafeCSS(componentCSS)}
     `
   ];
+
   createRenderRoot() {
     return this;
   }
@@ -50,7 +51,7 @@ class SignUpPage extends PageMixin(LitElement) {
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button .text="${this.mode === 'ios' ? this.i18n.BACK : null}"></ion-back-button>
           </ion-buttons>
           <ion-title>${this.i18n.SETTINGS}</ion-title>
         </ion-toolbar>
@@ -64,13 +65,12 @@ class SignUpPage extends PageMixin(LitElement) {
         ${this.renderNotification()}
         <ion-list>
           <ion-item>
-            <ion-label>Language</ion-label>
+            <ion-label>${this.i18n.LANGUAGE}</ion-label>
             <div slot="end">
-              <ion-segment value=${this.i18n._LANGUAGE}>
+              <ion-segment mode="ios" value=${this.i18n._LANGUAGE}>
                 <ion-segment-button
                   @click=${() => {
                     i18nService.language = Languages.ENGLISH;
-                    console.log(this.i18n);
                   }}
                   value="${Languages.ENGLISH}"
                 >
@@ -79,7 +79,6 @@ class SignUpPage extends PageMixin(LitElement) {
                 <ion-segment-button
                   @click=${() => {
                     i18nService.language = Languages.GERMAN;
-                    console.log(this.i18n);
                   }}
                   value="${Languages.GERMAN}"
                 >
@@ -89,14 +88,14 @@ class SignUpPage extends PageMixin(LitElement) {
             </div>
           </ion-item>
           <ion-item>
-            <ion-label>Theme</ion-label>
+            <ion-label>${this.i18n.APPEARANCE}</ion-label>
             <div slot="end">
-              <ion-segment value=${this.mode}>
+              <ion-segment mode="ios" value=${this.mode}>
                 <ion-segment-button @click=${() => toggleIosMd(this.mode)} value="ios">
-                  <ion-label>IOS</ion-label>
+                  <ion-icon name="logo-apple"></ion-icon>
                 </ion-segment-button>
                 <ion-segment-button @click=${() => toggleIosMd(this.mode)} value="md">
-                  <ion-label>Android</ion-label>
+                  <ion-icon name="logo-android"></ion-icon>
                 </ion-segment-button>
               </ion-segment>
             </div>

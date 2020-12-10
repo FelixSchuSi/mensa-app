@@ -23,4 +23,7 @@ export type LanguageKeys =
   | 'INTERNET_NEEDED_FOR_SIGN_UP'
   | 'SETTINGS'
   | 'GERMAN'
-  | 'ENGLISH';
+  | 'ENGLISH'
+  | 'LANGUAGE'
+  | 'APPEARANCE'
+  | 'BACK';

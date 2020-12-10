@@ -26,5 +26,8 @@ export const english: LanguageStrings = {
   INTERNET_NEEDED_FOR_SIGN_UP: 'You need to be online to sign up.',
   SETTINGS: 'Settings',
   GERMAN: 'German',
-  ENGLISH: 'English'
+  ENGLISH: 'English',
+  LANGUAGE: 'Language',
+  APPEARANCE: 'Appearance',
+  BACK: 'Back'
 };
