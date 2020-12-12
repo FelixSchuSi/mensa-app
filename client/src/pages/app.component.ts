@@ -84,6 +84,7 @@ export class AppComponent extends LitElement {
           <ion-buttons slot="primary">
             <ion-button @click=${() => this.pushRootNav('app-settings')}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+              <!-- <ion-icon name="person-circle"></ion-icon> -->
               <!-- TODO: Make Google style avatar work -->
               <!-- <ion-avatar style="border-radius: 0px" slot="end">
                 <img
