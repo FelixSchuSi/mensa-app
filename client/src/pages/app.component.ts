@@ -120,18 +120,13 @@ export class AppComponent extends LitElement {
             <ion-searchbar></ion-searchbar>
           </ion-toolbar>
         </ion-header>
-        <div style="width:100%; height:100%">
-          <app-tab-container id="content" component="${component}"></app-tab-container>
-        </div>
+        <app-tab-container id="content" component="${component}"></app-tab-container>
       </ion-content>
     `;
   }
 
   protected render(): TemplateResult {
     return html`
-      <div></div>
-      <!-- <div class="full-size">
-        <div class="ion-app-container"> -->
       <ion-app>
         <ion-tabs>
           <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
@@ -161,8 +156,6 @@ export class AppComponent extends LitElement {
           </div>
         </ion-tabs>
       </ion-app>
-      <!-- </div>
-      </div> -->
       <ion-progress-bar style="display:none"></ion-progress-bar>
     `;
   }
