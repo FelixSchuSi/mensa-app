@@ -15,7 +15,7 @@ import { LanguageStrings } from '../models/language-strings';
 import { storeService } from '../services/store.service';
 import { getTitleString } from '../helpers/get-title-string';
 import { i18nService } from '../services/i18n.service';
-import { pushRootNav } from '../helpers/push-root-nav';
+import { clearRootNav, pushToRootNav } from '../helpers/root-nav-util';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -65,24 +65,24 @@ export class AppComponent extends LitElement {
   protected tabsComponent!: HTMLIonTabsElement;
 
   protected async firstUpdated(): Promise<void> {
-    routerService.subscribe(() => {
+    routerService.subscribe(async () => {
       this.currentRoute = routerService.getPath();
-      if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
-        this.tabsComponent.select(Routes.SIGN_IN);
-      } else if (this.currentRoute.startsWith(Routes.SIGN_OUT)) {
-        this.tabsComponent.select(Routes.SIGN_IN);
-      } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
-        this.tabsComponent.select(Routes.SIGN_IN);
-      } else if (this.currentRoute.startsWith(Routes.TASKS)) {
-        this.tabsComponent.select(Routes.SIGN_IN);
+      if (this.currentRoute.startsWith(Routes.TASKS)) {
+        await clearRootNav();
+        this.tabsComponent.select(Routes.TASKS);
       }
       // RootRoutes start here
       // RootRoutes are not assignable to one tab,
       // therefore RootRoutes are displayed fullscreen without tabs.
       else if (this.currentRoute.startsWith(Routes.SETTINGS)) {
-        pushRootNav('app-settings');
+        pushToRootNav('app-settings');
+      } else if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
+        pushToRootNav('app-sign-in');
+      } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
+        pushToRootNav('app-sign-up');
       }
     });
+
     const path = await storeService.get('path');
     if (path) {
       await storeService.remove('path');
@@ -130,9 +130,6 @@ export class AppComponent extends LitElement {
       <ion-app>
         <ion-tabs>
           <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
-          <ion-tab tab=${Routes.SIGN_IN}> ${this.renderRouterOutlet(Routes.SIGN_IN, 'app-sign-in')} </ion-tab>
-          <ion-tab tab=${Routes.SIGN_UP}> ${this.renderRouterOutlet(Routes.SIGN_UP, 'app-sign-up')} </ion-tab>
-          <ion-tab tab=${Routes.SIGN_OUT}> ${this.renderRouterOutlet(Routes.SIGN_OUT, 'app-sign-out')} </ion-tab>
           <div id="bottom-content" slot="bottom">
             <app-connection-status-bar></app-connection-status-bar>
             <ion-tab-bar>
@@ -147,10 +144,6 @@ export class AppComponent extends LitElement {
               <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
                 <ion-label>${this.i18n.SIGN_UP}</ion-label>
                 <ion-icon name="create"></ion-icon>
-              </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_OUT)} tab=${Routes.SIGN_OUT}>
-                <ion-label>${this.i18n.SIGN_OUT}</ion-label>
-                <ion-icon name="log-out"></ion-icon>
               </ion-tab-button>
             </ion-tab-bar>
           </div>

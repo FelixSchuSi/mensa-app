@@ -42,7 +42,7 @@ class TasksPage extends PageMixin(LitElement) {
       await taskService.init();
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {
-        routerService.navigate(Routes.SIGN_IN);
+        // routerService.navigate(Routes.SIGN_IN);
       } else {
         this.setNotification({ errorMessage: message });
       }

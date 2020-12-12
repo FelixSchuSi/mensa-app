@@ -17,7 +17,6 @@ export class TaskService {
       await this.setTasks(tasks);
     } else {
       let tasks = <Task[] | null>await storeService.get(this.TASKKEY);
-      debugger;
       if (tasks === null) tasks = [];
       await this.setTasks(tasks);
     }
@@ -76,7 +75,6 @@ export class TaskService {
       const response = await httpService.post('tasks', task, this.onSyncFail);
       task = await response.json();
       await this.setTasks([...this.tasks, task]);
-      console.log('task', task);
     } catch ({ message }) {
       await this.setTasks([...this.tasks, task]);
       throw { message };

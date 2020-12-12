@@ -16,7 +16,6 @@ class I18nService {
   }
 
   public set language(language: Languages) {
-    // debugger;
     this._language = language;
     const newLangStrings: LanguageStrings = language === Languages.GERMAN ? german : english;
     this.strings = newLangStrings;
@@ -30,10 +29,6 @@ class I18nService {
   public getStrings(): LanguageStrings {
     return this.strings;
   }
-  // public toggleLanguage(): void {
-  //   debugger;
-  //   this.language = this.language === Languages.GERMAN ? Languages.ENGLISH : Languages.GERMAN;
-  // }
 
   public subscribe(listener: i18nListener): void {
     this.listeners.push(listener);

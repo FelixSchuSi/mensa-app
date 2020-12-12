@@ -8,10 +8,14 @@ import {
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
+import { popFromRootNav } from '../../helpers/root-nav-util';
 import { toggleIosMd } from '../../helpers/toggle-ios-md';
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';
+import { Routes } from '../../routes';
 import { i18nService } from '../../services/i18n.service';
+import { routerService } from '../../services/router.service';
+import { userService } from '../../services/user.service';
 import { PageMixin } from '../page.mixin';
 
 const sharedCSS = require('../../shared.scss');
@@ -52,7 +56,10 @@ class SignUpPage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
-              @click=${() => history.back()}
+              @click=${async () => {
+                await popFromRootNav();
+                history.back();
+              }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>
           </ion-buttons>
@@ -103,8 +110,44 @@ class SignUpPage extends PageMixin(LitElement) {
               </ion-segment>
             </div>
           </ion-item>
+          <ion-list-header> User-Area </ion-list-header>
+          ${!!this.userInfo
+            ? html`
+                <ion-item>
+                  <ion-label>${this.i18n.SIGN_OUT}</ion-label>
+                  <ion-button @click=${this.logOut}>${this.i18n.SIGN_OUT}</ion-button>
+                </ion-item>
+              `
+            : html`
+                <ion-item>
+                  <ion-label>${this.i18n.SIGN_IN}</ion-label>
+                  <ion-button
+                    @click=${() => {
+                      routerService.navigate(Routes.SIGN_IN);
+                    }}
+                    >${this.i18n.SIGN_IN}</ion-button
+                  >
+                </ion-item>
+                <ion-item>
+                  <ion-label>${this.i18n.SIGN_UP}</ion-label>
+                  <ion-button
+                    @click=${() => {
+                      routerService.navigate(Routes.SIGN_UP);
+                    }}
+                    >${this.i18n.SIGN_UP}</ion-button
+                  >
+                </ion-item>
+              `}
         </ion-list>
       </ion-content>
     `;
+  }
+  protected async logOut(): Promise<void> {
+    try {
+      await userService.logOut();
+      this.setNotification({ infoMessage: this.i18n.SIGN_OUT_MESSAGE + '!' });
+    } catch ({ message }) {
+      this.setNotification({ errorMessage: message });
+    }
   }
 }
