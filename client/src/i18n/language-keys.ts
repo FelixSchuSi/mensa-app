@@ -31,4 +31,7 @@ export type LanguageKeys =
   | 'ENGLISH'
   | 'LANGUAGE'
   | 'APPEARANCE'
-  | 'BACK';
+  | 'BACK'
+  | 'MEALS_TODAY'
+  | 'MEALS_FUTURE'
+  | 'GROUPS';

@@ -34,5 +34,8 @@ export const german: LanguageStrings = {
   ENGLISH: 'Englisch',
   LANGUAGE: 'Sprache',
   APPEARANCE: 'Aussehen',
-  BACK: 'Zurück'
+  BACK: 'Zurück',
+  MEALS_TODAY: 'Heutige Gerichte',
+  MEALS_FUTURE: 'Gerichte',
+  GROUPS: 'Gruppen'
 };

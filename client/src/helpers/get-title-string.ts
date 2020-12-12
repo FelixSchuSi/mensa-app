@@ -10,6 +10,12 @@ export function getTitleString(i18n: LanguageStrings): string {
       return i18n.SIGN_UP;
     case Routes.TASKS:
       return i18n.TASKS;
+    case Routes.MEALS_FUTURE:
+      return i18n.MEALS_FUTURE;
+    case Routes.MEALS_TODAY:
+      return i18n.MEALS_TODAY;
+    case Routes.GROUPS:
+      return i18n.GROUPS;
     default:
       return i18n.TASKS;
   }

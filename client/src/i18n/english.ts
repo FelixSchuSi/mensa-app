@@ -34,5 +34,8 @@ export const english: LanguageStrings = {
   ENGLISH: 'English',
   LANGUAGE: 'Language',
   APPEARANCE: 'Appearance',
-  BACK: 'Back'
+  BACK: 'Back',
+  MEALS_TODAY: 'Todays Meals',
+  MEALS_FUTURE: 'Meals',
+  GROUPS: 'Groups'
 };

@@ -70,6 +70,15 @@ export class AppComponent extends LitElement {
       if (this.currentRoute.startsWith(Routes.TASKS)) {
         await clearRootNav();
         this.tabsComponent.select(Routes.TASKS);
+      } else if (this.currentRoute.startsWith(Routes.MEALS_TODAY)) {
+        await clearRootNav();
+        this.tabsComponent.select(Routes.MEALS_TODAY);
+      } else if (this.currentRoute.startsWith(Routes.MEALS_FUTURE)) {
+        await clearRootNav();
+        this.tabsComponent.select(Routes.MEALS_FUTURE);
+      } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
+        await clearRootNav();
+        this.tabsComponent.select(Routes.GROUPS);
       }
       // RootRoutes start here
       // RootRoutes are not assignable to one tab,
@@ -93,7 +102,7 @@ export class AppComponent extends LitElement {
   protected renderRouterOutlet(route: Routes, component: string): TemplateResult {
     // TODO: move buttons to settings and return value in switch statement.
     return html`
-      <ion-header>
+      <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-title>${getTitleString(this.i18n)}</ion-title>
           <ion-buttons slot="primary">
@@ -130,6 +139,13 @@ export class AppComponent extends LitElement {
       <ion-app>
         <ion-tabs>
           <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
+          <ion-tab tab=${Routes.MEALS_TODAY}>
+            ${this.renderRouterOutlet(Routes.MEALS_TODAY, 'app-meals-today')}
+          </ion-tab>
+          <ion-tab tab=${Routes.MEALS_FUTURE}>
+            ${this.renderRouterOutlet(Routes.MEALS_FUTURE, 'app-meals-future')}
+          </ion-tab>
+          <ion-tab tab=${Routes.GROUPS}> ${this.renderRouterOutlet(Routes.GROUPS, 'app-groups')} </ion-tab>
           <div id="bottom-content" slot="bottom">
             <app-connection-status-bar></app-connection-status-bar>
             <ion-tab-bar>
@@ -137,13 +153,17 @@ export class AppComponent extends LitElement {
                 <ion-label>${this.i18n.TASKS}</ion-label>
                 <ion-icon name="list"></ion-icon>
               </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_IN)} tab=${Routes.SIGN_IN}>
-                <ion-label>${this.i18n.SIGN_IN}</ion-label>
-                <ion-icon name="log-in"></ion-icon>
+              <ion-tab-button @click=${() => routerService.navigate(Routes.MEALS_TODAY)} tab=${Routes.MEALS_TODAY}>
+                <ion-label>${this.i18n.MEALS_TODAY}</ion-label>
+                <ion-icon name="home"></ion-icon>
               </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.SIGN_UP)} tab=${Routes.SIGN_UP}>
-                <ion-label>${this.i18n.SIGN_UP}</ion-label>
-                <ion-icon name="create"></ion-icon>
+              <ion-tab-button @click=${() => routerService.navigate(Routes.MEALS_FUTURE)} tab=${Routes.MEALS_FUTURE}>
+                <ion-label>${this.i18n.MEALS_FUTURE}</ion-label>
+                <ion-icon name="calendar"></ion-icon>
+              </ion-tab-button>
+              <ion-tab-button @click=${() => routerService.navigate(Routes.GROUPS)} tab=${Routes.GROUPS}>
+                <ion-label>${this.i18n.GROUPS}</ion-label>
+                <ion-icon name="people"></ion-icon>
               </ion-tab-button>
             </ion-tab-bar>
           </div>
