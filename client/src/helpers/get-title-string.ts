@@ -8,8 +8,6 @@ export function getTitleString(i18n: LanguageStrings): string {
       return i18n.SIGN_IN;
     case Routes.SIGN_UP:
       return i18n.SIGN_UP;
-    case Routes.SIGN_OUT:
-      return i18n.SIGN_OUT;
     case Routes.TASKS:
       return i18n.TASKS;
     default:
