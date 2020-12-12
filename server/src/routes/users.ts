@@ -7,7 +7,7 @@ import { User } from '../models/user';
 const router = express.Router();
 const isProd: boolean = !!process.env.ISPROD;
 const cookieOptions: CookieOptions = isProd
-  ? { sameSite: 'none', secure: true, httpOnly: false, domain: 'felixschusi.github.io' }
+  ? { sameSite: 'none', secure: true, httpOnly: false, domain: 'github.io' }
   : { sameSite: 'lax', httpOnly: false };
 
 router.post('/', async (req, res) => {
