@@ -6,7 +6,9 @@ import { User } from '../models/user';
 
 const router = express.Router();
 const isProd: boolean = !!process.env.ISPROD;
-const cookieOptions: CookieOptions = isProd ? { sameSite: 'none', secure: true } : { sameSite: 'lax' };
+const cookieOptions: CookieOptions = isProd
+  ? { sameSite: 'none', secure: true, httpOnly: false }
+  : { sameSite: 'lax', httpOnly: false };
 
 router.post('/', async (req, res) => {
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
@@ -36,7 +38,6 @@ router.post('/', async (req, res) => {
     password: await bcrypt.hash(req.body.password, 10)
   });
 
-
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);
 
   res.status(201).json(createdUser);
@@ -55,7 +56,6 @@ router.post('/sign-in', async (req, res) => {
   const user = await userDAO.findOne(filter);
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
-
     res.cookie('jwt-token', createToken(user), cookieOptions);
     res.status(201).json(user);
   } else {
@@ -65,7 +65,7 @@ router.post('/sign-in', async (req, res) => {
 });
 
 router.delete('/sign-out', (req, res) => {
-  res.clearCookie('jwt-token');
+  res.clearCookie('jwt-token', cookieOptions);
   res.status(200).end();
 });
 
