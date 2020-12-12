@@ -51,7 +51,10 @@ class SignUpPage extends PageMixin(LitElement) {
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button .text="${this.mode === 'ios' ? this.i18n.BACK : null}"></ion-back-button>
+            <ion-back-button
+              @click=${() => history.back()}
+              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
+            ></ion-back-button>
           </ion-buttons>
           <ion-title>${this.i18n.SETTINGS}</ion-title>
         </ion-toolbar>

@@ -15,6 +15,7 @@ import { LanguageStrings } from '../models/language-strings';
 import { storeService } from '../services/store.service';
 import { getTitleString } from '../helpers/get-title-string';
 import { i18nService } from '../services/i18n.service';
+import { pushRootNav } from '../helpers/push-root-nav';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -66,7 +67,21 @@ export class AppComponent extends LitElement {
   protected async firstUpdated(): Promise<void> {
     routerService.subscribe(() => {
       this.currentRoute = routerService.getPath();
-      this.requestUpdate();
+      if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
+        this.tabsComponent.select(Routes.SIGN_IN);
+      } else if (this.currentRoute.startsWith(Routes.SIGN_OUT)) {
+        this.tabsComponent.select(Routes.SIGN_IN);
+      } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
+        this.tabsComponent.select(Routes.SIGN_IN);
+      } else if (this.currentRoute.startsWith(Routes.TASKS)) {
+        this.tabsComponent.select(Routes.SIGN_IN);
+      }
+      // RootRoutes start here
+      // RootRoutes are not assignable to one tab,
+      // therefore RootRoutes are displayed fullscreen without tabs.
+      else if (this.currentRoute.startsWith(Routes.SETTINGS)) {
+        pushRootNav('app-settings');
+      }
     });
     const path = await storeService.get('path');
     if (path) {
@@ -82,7 +97,7 @@ export class AppComponent extends LitElement {
         <ion-toolbar>
           <ion-title>${getTitleString(this.i18n)}</ion-title>
           <ion-buttons slot="primary">
-            <ion-button @click=${() => this.pushRootNav('app-settings')}>
+            <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
               <!-- <ion-icon name="person-circle"></ion-icon> -->
               <!-- TODO: Make Google style avatar work -->
@@ -110,11 +125,6 @@ export class AppComponent extends LitElement {
         </div>
       </ion-content>
     `;
-  }
-
-  protected async pushRootNav(component: string): Promise<void> {
-    const rootNav: HTMLIonNavElement = <HTMLIonNavElement>document.querySelector('#root-nav');
-    const res = await rootNav.push(component);
   }
 
   protected render(): TemplateResult {
