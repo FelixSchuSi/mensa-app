@@ -1,6 +1,7 @@
 import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute';
 const newVersion = '1';
 const oldVersion = localStorage.getItem('_sw_version');
+if (oldVersion === null) localStorage.setItem('_sw_version', newVersion);
 if (Number(newVersion) !== Number(oldVersion)) {
   console.log('New SW Version found - clearing network cache.');
   caches.keys().then(cacheNames => {
