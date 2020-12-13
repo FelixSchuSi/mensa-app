@@ -1,5 +1,5 @@
 import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute';
-const version = 1;
+const version = '1';
 
 precacheAndRoute({ ...self.__WB_MANIFEST, revision: version });
 console.log('⚙️ Service Worker attached! ', self.__WB_MANIFEST);
