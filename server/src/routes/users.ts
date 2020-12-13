@@ -59,8 +59,6 @@ router.post('/sign-in', async (req, res) => {
   const filter: Partial<User> = { email: req.body.email };
   const errors: string[] = [];
 
-  res.clearCookie('jwt-token');
-
   if (!hasRequiredFields(req.body, ['email', 'password'], errors)) {
     res.status(400).json({ message: errors.join('\n') });
     return;
