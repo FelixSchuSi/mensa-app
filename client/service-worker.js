@@ -1,8 +1,16 @@
-import { BackgroundSyncPlugin } from 'workbox-background-sync';
-import { NetworkOnly } from 'workbox-strategies/NetworkOnly';
 import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute';
-import { registerRoute } from 'workbox-routing/registerRoute';
 
 precacheAndRoute(self.__WB_MANIFEST);
+console.log('⚙️ Service Worker attached! ', self.__WB_MANIFEST);
 
-console.log('⚙️ Service Worker attached!');
+// then.addEventListener('activate', function (event) {
+//   var cacheWhitelist = ['v2'];
+
+//   event.waitUntil(
+//     caches.forEach(function (cache, cacheName) {
+//       if (cacheWhitelist.indexOf(cacheName) == -1) {
+//         return caches.delete(cacheName);
+//       }
+//     })
+//   );
+// });
