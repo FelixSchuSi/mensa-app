@@ -73,7 +73,7 @@ class HttpService {
 
   private async bgSync(request: Request, onSyncFail?: () => void): Promise<Response> {
     if (navigator.onLine) {
-      return await fetch(request);
+      return fetch(request);
     } else {
       console.log('putting request in network queue');
       const syncFail = onSyncFail === undefined ? () => {} : onSyncFail;

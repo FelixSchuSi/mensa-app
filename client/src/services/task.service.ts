@@ -10,7 +10,11 @@ export class TaskService {
   protected _tasks: Task[] = [];
   private listeners: TasksListener[] = [];
 
-  public async init(): Promise<void> {
+  public async clear(): Promise<void> {
+    this.setTasks([]);
+  }
+
+  public async getTasks(): Promise<void> {
     if (navigator.onLine) {
       const response = await httpService.get('tasks' + location.search);
       let tasks = <Task[]>(await response.json()).results;

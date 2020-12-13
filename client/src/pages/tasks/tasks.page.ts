@@ -1,12 +1,11 @@
 import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
-import { routerService } from '../../services/router.service';
 import { PageMixin } from '../page.mixin';
-import { Routes } from '../../routes';
 import { LanguageStrings } from '../../models/language-strings';
 import { Task } from '../../models/task';
 import { taskService, TaskService } from '../../services/task.service';
+import { userService } from '../../services/user.service';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./tasks.page.scss');
@@ -35,11 +34,17 @@ class TasksPage extends PageMixin(LitElement) {
   protected taskService: TaskService = taskService;
 
   protected async firstUpdated(): Promise<void> {
+    userService.subscribe(status => {
+      if (status !== undefined) {
+        taskService.getTasks();
+      }
+    });
+
     try {
       taskService.subscribe((tasks: Task[]) => {
         this.tasks = tasks;
       });
-      await taskService.init();
+      await taskService.getTasks();
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {
         // routerService.navigate(Routes.SIGN_IN);
@@ -64,6 +69,7 @@ class TasksPage extends PageMixin(LitElement) {
           ></ion-input>
         </div>
       </form>
+      ${this.userInfo === undefined ? html`Sign in to create Tasks.` : html``}
       <div class="tasks">
         ${guard(
           [this.tasks],
