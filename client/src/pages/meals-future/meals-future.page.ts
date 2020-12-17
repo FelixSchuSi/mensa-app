@@ -3,11 +3,11 @@ import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { httpService } from '../../services/http.service';
 import { Meal } from '../../../../server/src/models/meal';
-import { AdditivesKeys } from '../../../../scraper/src/models/additives';
-import { AllergenesKeys } from '../../../../scraper/src/models/allergenes';
-import { OtherMealInfoKeys } from '../../../../scraper/src/models/other-meal-info';
+import { AdditivesKeys } from '../../../../server/src/models/additives';
+import { AllergenesKeys } from '../../../../server/src/models/allergenes';
+import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
 import { LanguageKeys } from '../../i18n/language-keys';
-import { Price } from '../../../../scraper/src/models/price';
+import { Price } from '../../../../server/src/models/price';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');

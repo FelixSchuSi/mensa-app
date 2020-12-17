@@ -1,3 +1,3 @@
 import { Entity } from './entity';
-import { FlatMeal } from '../../../scraper/src/models/flatMeal';
+import { FlatMeal } from './flatMeal';
 export interface Meal extends Entity, FlatMeal {}
