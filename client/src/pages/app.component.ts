@@ -71,7 +71,7 @@ export class AppComponent extends LitElement {
     const path = localStorage.get('path');
     if (path) {
       routerService.navigate(<Routes>path);
-      // localStorage.remove('path');
+      localStorage.remove('path');
     }
   }
 
