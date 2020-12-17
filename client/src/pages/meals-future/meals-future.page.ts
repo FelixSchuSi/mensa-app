@@ -40,7 +40,7 @@ class MealsFuturePage extends PageMixin(LitElement) {
   }
 
   protected render(): TemplateResult {
-    return html` ${this.renderNotification()} Hier könnten Ihre Gerichte stehen!
+    return html` ${this.renderNotification()}
     ${this.meals.map(meal => {
       const { title, date, mensa, additives, allergens, otherInfo, price } = meal;
       const entries = Object.entries({ date, mensa, additives, allergens, otherInfo, price });

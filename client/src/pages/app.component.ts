@@ -68,10 +68,10 @@ export class AppComponent extends LitElement {
     routerService.subscribe(() => this.handleRouteChange());
     await this.handleRouteChange();
     console.log(this.currentRoute);
-    const path = await storeService.get('path');
+    const path = localStorage.get('path');
     if (path) {
-      await storeService.remove('path');
       routerService.navigate(<Routes>path);
+      // localStorage.remove('path');
     }
   }
 
