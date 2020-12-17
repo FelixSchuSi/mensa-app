@@ -15,7 +15,7 @@ export enum AdditivesKeys {
   Phenylalanine
 }
 
-const deAdditives: Record<AdditivesKeys, string> = {
+export const deAdditives: Record<AdditivesKeys, string> = {
   0: 'de',
   1: 'Farbstoff',
   2: 'Konservierungsstoffe',

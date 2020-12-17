@@ -19,7 +19,8 @@
   },
   "scripts": {
     "prod": "tsc && node src/scraper.js mongodb prodDB",
-    "dev": "tsc && node src/scraper.js mongodb devDB"
+    "dev": "tsc && node src/scraper.js mongodb devDB",
+    "migrate": "tsc && node src/db_migration.js mongodb prodDB"
   },
   "author": "",
   "license": "ISC"

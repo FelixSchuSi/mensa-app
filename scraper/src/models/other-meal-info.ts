@@ -12,7 +12,7 @@ export enum OtherMealInfoKeys {
   Alcohol = 'Alk'
 }
 
-const deOtherMealInfo: Record<OtherMealInfoKeys, string> = {
+export const deOtherMealInfo: Record<OtherMealInfoKeys, string> = {
   Rin: 'Rindfleisch',
   Sch: 'Schweinefleisch',
   Vgt: 'Vegetarisch',

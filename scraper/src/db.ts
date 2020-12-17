@@ -5,7 +5,7 @@ import { DbFlatMeal } from './models/dbFlatMeal';
 
 const useProdDB: boolean = String(process.argv[3]) === 'prodDB';
 
-export async function connectToDb(): Promise<MongoGenericDAO<DbFlatMeal>> {
+export async function connectToDb(collection = 'meals'): Promise<MongoGenericDAO<DbFlatMeal>> {
   const db: Db = useProdDB ? await connectToProdMongoDB() : await connectToDevMongoDB();
-  return new MongoGenericDAO<DbFlatMeal>(db, 'meals');
+  return new MongoGenericDAO<DbFlatMeal>(db, collection);
 }

@@ -64,7 +64,7 @@ const enAllergenes: AllergenesStrings = {
   N: 'Sulfur'
 };
 
-const deAllergenes: Record<AllergenesKeys, string> = {
+export const deAllergenes: Record<AllergenesKeys, string> = {
   A: 'Gluten',
   ADI: 'Dinkel',
   AGE: 'Gerste',
