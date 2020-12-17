@@ -65,37 +65,40 @@ export class AppComponent extends LitElement {
   protected tabsComponent!: HTMLIonTabsElement;
 
   protected async firstUpdated(): Promise<void> {
-    routerService.subscribe(async () => {
-      this.currentRoute = routerService.getPath();
-      if (this.currentRoute.startsWith(Routes.TASKS)) {
-        await clearRootNav();
-        this.tabsComponent.select(Routes.TASKS);
-      } else if (this.currentRoute.startsWith(Routes.MEALS_TODAY)) {
-        await clearRootNav();
-        this.tabsComponent.select(Routes.MEALS_TODAY);
-      } else if (this.currentRoute.startsWith(Routes.MEALS_FUTURE)) {
-        await clearRootNav();
-        this.tabsComponent.select(Routes.MEALS_FUTURE);
-      } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
-        await clearRootNav();
-        this.tabsComponent.select(Routes.GROUPS);
-      }
-      // RootRoutes start here
-      // RootRoutes are not assignable to one tab,
-      // therefore RootRoutes are displayed fullscreen without tabs.
-      else if (this.currentRoute.startsWith(Routes.SETTINGS)) {
-        pushToRootNav('app-settings');
-      } else if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
-        pushToRootNav('app-sign-in');
-      } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
-        pushToRootNav('app-sign-up');
-      }
-    });
-
+    routerService.subscribe(() => this.handleRouteChange());
+    await this.handleRouteChange();
+    console.log(this.currentRoute);
     const path = await storeService.get('path');
     if (path) {
       await storeService.remove('path');
       routerService.navigate(<Routes>path);
+    }
+  }
+
+  protected async handleRouteChange(): Promise<void> {
+    this.currentRoute = routerService.getPath();
+    if (this.currentRoute.startsWith(Routes.TASKS)) {
+      await clearRootNav();
+      this.tabsComponent.select(Routes.TASKS);
+    } else if (this.currentRoute.startsWith(Routes.MEALS_TODAY)) {
+      await clearRootNav();
+      this.tabsComponent.select(Routes.MEALS_TODAY);
+    } else if (this.currentRoute.startsWith(Routes.MEALS_FUTURE)) {
+      await clearRootNav();
+      this.tabsComponent.select(Routes.MEALS_FUTURE);
+    } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
+      await clearRootNav();
+      this.tabsComponent.select(Routes.GROUPS);
+    }
+    // RootRoutes start here
+    // RootRoutes are not assignable to one tab,
+    // therefore RootRoutes are displayed fullscreen without tabs.
+    else if (this.currentRoute.startsWith(Routes.SETTINGS)) {
+      pushToRootNav('app-settings');
+    } else if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
+      pushToRootNav('app-sign-in');
+    } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
+      pushToRootNav('app-sign-up');
     }
   }
 

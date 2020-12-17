@@ -68,7 +68,6 @@ class UserService {
   public set userInfo(userInfo: UserInfo | undefined) {
     this._userInfo = userInfo;
     if (this._userInfo === undefined) {
-      debugger;
       taskService.clear();
     }
     this.notifyListeners(this._userInfo);
