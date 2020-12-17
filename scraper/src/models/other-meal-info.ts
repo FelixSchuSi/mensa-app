@@ -1,9 +1,8 @@
-import { LangString } from './langString';
 import { Ref } from './refs';
 
 export type OtherMealInfoStrings = Record<OtherMealInfoKeys, string>;
 
-enum OtherMealInfoKeys {
+export enum OtherMealInfoKeys {
   Beef = 'Rin',
   PorkMeat = 'Sch',
   Vegetarian = 'Vgt',
@@ -33,12 +32,8 @@ const enOtherMealInfo: Record<OtherMealInfoKeys, string> = {
   Alk: 'Alcohol'
 };
 
-function getOtherMealInfoLangStrings(key: OtherMealInfoKeys): LangString {
-  return { de: deOtherMealInfo[key], en: enOtherMealInfo[key] };
-}
-
-export function getOtherMealInfoLangFromRefs(refs: Ref[]): LangString[] {
+export function getOtherMealInfoLangFromRefs(refs: Ref[]): OtherMealInfoKeys[] {
   // @ts-ignore
   const filteredRefs: OtherMealInfoKeys[] = refs.filter(ref => Object.values(OtherMealInfoKeys).indexOf(ref) > 0);
-  return filteredRefs.map(getOtherMealInfoLangStrings);
+  return filteredRefs;
 }

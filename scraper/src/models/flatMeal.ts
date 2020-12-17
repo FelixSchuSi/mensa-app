@@ -1,13 +1,14 @@
-import { Entity } from '../../../server/src/models/entity';
-import { LangString } from './langString';
+import { AdditivesKeys } from './additives';
+import { AllergenesKeys } from './allergenes';
+import { OtherMealInfoKeys } from './other-meal-info';
 import { Price } from './price';
 export interface FlatMeal {
   title: string;
   date: string;
   mensa: string;
-  additives: LangString[]; // TODO: only use string -> keys
-  allergens: LangString[];
-  otherInfo: LangString[];
+  additives: AdditivesKeys[]; // TODO: only use string -> keys
+  allergens: AllergenesKeys[];
+  otherInfo: OtherMealInfoKeys[];
   price: Price;
 }
 

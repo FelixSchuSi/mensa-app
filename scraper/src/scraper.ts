@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
-import { getAllergenesFromRefs } from './models/allergenes';
-import { getOtherMealInfoLangFromRefs } from './models/other-meal-info';
-import { parseAdditivesFromRefs } from './models/additives';
+import { AllergenesKeys, getAllergenesFromRefs } from './models/allergenes';
+import { getOtherMealInfoLangFromRefs, OtherMealInfoKeys } from './models/other-meal-info';
+import { AdditivesKeys, parseAdditivesFromRefs } from './models/additives';
 import { gethtmlFromUrl } from './helpers/gethtmlFromUrl';
 import { FlatMeal } from './models/flatMeal';
 import { MongoGenericDAO } from '../../server/src/models/mongo-generic.dao';
@@ -9,7 +9,8 @@ import { DbFlatMeal } from './models/dbFlatMeal';
 import { connectToDb } from './db';
 import { getUniqueDateMensaCombinations } from './helpers/getUniqueDateMensaCombinations';
 import { parsePrice } from './helpers/parsePrice';
-
+import { join } from 'path';
+import { writeFileSync } from 'fs';
 function parseMealsFromHTML(html: string): FlatMeal[] {
   const $: cheerio.Root = cheerio.load(html);
   const mensaString: string = $('.mensatitle').first().text();
@@ -36,9 +37,9 @@ function parseMealsFromHTML(html: string): FlatMeal[] {
       const unparsedPrice = $(mealElement).find('a > p.text2share.next').text().trim();
       const references = $(mealElement).attr('ref')!;
       const refArray = JSON.parse(references || '[]');
-      const additives = parseAdditivesFromRefs(refArray);
-      const allergens = getAllergenesFromRefs(refArray);
-      const otherInfo = getOtherMealInfoLangFromRefs(refArray);
+      const additives: AdditivesKeys[] = parseAdditivesFromRefs(refArray);
+      const allergens: AllergenesKeys[] = getAllergenesFromRefs(refArray);
+      const otherInfo: OtherMealInfoKeys[] = getOtherMealInfoLangFromRefs(refArray);
       const price = parsePrice(unparsedPrice);
       const date = $(dayElement).attr('data-date2')!;
       return { title, additives, allergens, otherInfo, price, mensa, date };
@@ -55,14 +56,20 @@ async function main() {
   const scrapedHtmlStrings: string[] = await Promise.all(
     mensen.map(mensa => gethtmlFromUrl('https://muenster.my-mensa.de/essen.php?v=5348990&hyp=1&lang=de&mensa=' + mensa))
   );
-  const flatMeals: FlatMeal[] = scrapedHtmlStrings.map(html => parseMealsFromHTML(html)).flat();
 
+  // writeFileSync(join(__dirname, 'html-backup-20-12-17.json'), JSON.stringify({ data: scrapedHtmlStrings }));
+  let flatMeals: FlatMeal[] = scrapedHtmlStrings.map(html => parseMealsFromHTML(html)).flat();
+
+  const closed_messages = ['Die Mensa Steinfurt bleibt', 'Das Bistro ist vom', 'Liebe Gäste,']; // The Information that a mensa is closed is displayed within a meal.
+  flatMeals = flatMeals.filter(
+    flatMeal => flatMeal.title !== '' && closed_messages.every(msg => !flatMeal.title.startsWith(msg))
+  );
   // Delete Meals that contain the same date-mensa combination since updated meals are present in this scrape.
   // We could alternatively update all meals with identical date-mensa-title combination, however this would
   // leave meals in the db that were taken off the menu in the last scrape.
   const dateMensaCombos = getUniqueDateMensaCombinations(flatMeals);
   await Promise.all(dateMensaCombos.map(uniqueScrape => mealDAO.deleteAll(uniqueScrape)));
-
+  console.log(flatMeals);
   // Write every Meal to Meals
   await Promise.all(flatMeals.map((flatMeal: FlatMeal) => mealDAO.create(flatMeal)));
 
