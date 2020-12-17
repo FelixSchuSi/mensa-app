@@ -8,6 +8,7 @@ import { Task } from './models/task';
 import { User } from './models/user';
 import { getSecrets } from './getSecrets';
 import { Secrets } from './models/secrets';
+import { Meal } from './models/meal';
 
 const useProdDB: boolean = String(process.argv[3]) === 'prodDB';
 
@@ -27,12 +28,14 @@ export default async function startDB(app: Express, dbms = 'in-memory-db') {
 function startInMemoryDB(app: Express) {
   app.locals.taskDAO = new InMemoryGenericDAO<Task>();
   app.locals.userDAO = new InMemoryGenericDAO<User>();
+  app.locals.userDAO = new InMemoryGenericDAO<Meal>();
 }
 
 async function startMongoDB(app: Express) {
   const db: Db = useProdDB ? await connectToProdMongoDB() : await connectToDevMongoDB();
   app.locals.taskDAO = new MongoGenericDAO<Task>(db, 'tasks');
   app.locals.userDAO = new MongoGenericDAO<User>(db, 'users');
+  app.locals.userDAO = new MongoGenericDAO<Meal>(db, 'meals');
 }
 
 export async function connectToProdMongoDB(): Promise<Db> {
@@ -69,6 +72,7 @@ async function startPsql(app: Express) {
   const client = await connectToPsql();
   app.locals.taskDAO = new PsqlGenericDAO<Task>(client!, 'tasks');
   app.locals.userDAO = new PsqlGenericDAO<User>(client!, 'users');
+  app.locals.userDAO = new PsqlGenericDAO<Meal>(client!, 'meals');
 }
 
 async function connectToPsql() {
