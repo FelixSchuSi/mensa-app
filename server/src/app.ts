@@ -5,6 +5,7 @@ import * as jwt from 'jsonwebtoken';
 import * as http from 'http';
 import tasks from './routes/tasks';
 import users from './routes/users';
+import meals from './routes/meals';
 import startDB from './db';
 
 const port = process.env.PORT || 3443;
@@ -30,6 +31,7 @@ function configureApp(app: Express) {
       next();
     }
   });
+  app.use('/api/meals', meals);
   app.use('/api/users', users);
   app.use((req, res, next) => {
     const token = req.cookies['jwt-token'] || '';
