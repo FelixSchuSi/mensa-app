@@ -1,4 +1,4 @@
-import { FlatMeal } from '../models/flatMeal';
+import { FlatMeal } from '../../../server/src/models/flatMeal';
 
 export function getUniqueDateMensaCombinations(flatMeals: FlatMeal[]): { date: string; mensa: string }[] {
   // Get all unique date - mensa combinations

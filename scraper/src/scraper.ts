@@ -1,9 +1,9 @@
 import cheerio from 'cheerio';
-import { AllergenesKeys, getAllergenesFromRefs } from './models/allergenes';
-import { getOtherMealInfoLangFromRefs, OtherMealInfoKeys } from './models/other-meal-info';
-import { AdditivesKeys, parseAdditivesFromRefs } from './models/additives';
+import { AllergenesKeys, getAllergenesFromRefs } from '../../server/src/models/allergenes';
+import { getOtherMealInfoLangFromRefs, OtherMealInfoKeys } from '../../server/src/models/other-meal-info';
+import { AdditivesKeys, parseAdditivesFromRefs } from '../../server/src/models/additives';
 import { gethtmlFromUrl } from './helpers/gethtmlFromUrl';
-import { FlatMeal } from './models/flatMeal';
+import { FlatMeal } from '../../server/src/models/flatMeal';
 import { MongoGenericDAO } from '../../server/src/models/mongo-generic.dao';
 import { DbFlatMeal } from './models/dbFlatMeal';
 import { connectToDb } from './db';

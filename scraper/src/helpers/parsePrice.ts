@@ -1,4 +1,4 @@
-import { Price } from '../models/price';
+import { Price } from '../../../server/src/models/price';
 
 export function parsePrice(str: string): Price {
   str = str.trim();
