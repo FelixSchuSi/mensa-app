@@ -35,7 +35,7 @@ async function startMongoDB(app: Express) {
   const db: Db = useProdDB ? await connectToProdMongoDB() : await connectToDevMongoDB();
   app.locals.taskDAO = new MongoGenericDAO<Task>(db, 'tasks');
   app.locals.userDAO = new MongoGenericDAO<User>(db, 'users');
-  app.locals.userDAO = new MongoGenericDAO<Meal>(db, 'meals');
+  app.locals.mealsDAO = new MongoGenericDAO<Meal>(db, 'meals');
 }
 
 export async function connectToProdMongoDB(): Promise<Db> {
