@@ -62,7 +62,10 @@ async function main() {
 
   const closed_messages = ['Die Mensa Steinfurt bleibt', 'Das Bistro ist vom', 'Liebe Gäste,']; // The Information that a mensa is closed is displayed within a meal.
   flatMeals = flatMeals.filter(
-    flatMeal => flatMeal.title !== '' && closed_messages.every(msg => !flatMeal.title.startsWith(msg))
+    flatMeal =>
+      flatMeal.title.toLowerCase() !== 'x' &&
+      flatMeal.title !== '' &&
+      closed_messages.every(msg => !flatMeal.title.startsWith(msg))
   );
   // Delete Meals that contain the same date-mensa combination since updated meals are present in this scrape.
   // We could alternatively update all meals with identical date-mensa-title combination, however this would
