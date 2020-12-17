@@ -1,4 +1,4 @@
-import { Ref } from '../../../scraper/src/models/refs';
+import { Ref } from './refs';
 
 export type OtherMealInfoStrings = Record<OtherMealInfoKeys, string>;
 

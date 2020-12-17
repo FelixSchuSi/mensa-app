@@ -1,3 +1,3 @@
 export interface Secrets {
-    DBURL: string;
+  DBURL: string;
 }
