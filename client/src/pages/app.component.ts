@@ -70,6 +70,7 @@ export class AppComponent extends LitElement {
     console.log(this.currentRoute);
     const path = localStorage.get('path');
     if (path) {
+      debugger;
       routerService.navigate(<Routes>path);
       localStorage.remove('path');
     }

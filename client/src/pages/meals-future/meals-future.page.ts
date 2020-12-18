@@ -35,7 +35,6 @@ class MealsFuturePage extends PageMixin(LitElement) {
       const res = await httpService.get('meals');
       const json = await res.json();
       this.meals = json.results;
-      console.log(json);
     } catch (e) {}
   }
 
