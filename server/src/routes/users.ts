@@ -24,6 +24,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
   const errors: string[] = [];
+  console.log(req.body);
 
   res.clearCookie('jwt-token');
 
@@ -47,7 +48,9 @@ router.post('/', async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, 10),
-    status: req.body.status
+    status: req.body.status,
+    diet: req.body.diet,
+    indigestibilities: req.body.indegestibilities
   });
 
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);

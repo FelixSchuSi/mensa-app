@@ -5,7 +5,7 @@ const componentCSS = require('./chip-select.widget.scss');
 const sharedCSS = require('../../shared.scss');
 
 @customElement('chip-select')
-class ChipSelectWidget extends LitElement {
+export class ChipSelectWidget extends LitElement {
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
@@ -25,6 +25,13 @@ class ChipSelectWidget extends LitElement {
 
   protected render(): TemplateResult {
     return html` <slot @slotchange=${this.handleSlotchange} class="slot-elem"> </slot> `;
+  }
+
+  public get value(): string[] {
+    this.chips = <HTMLIonChipElement[]>Array.from(this.querySelectorAll('ion-chip')!);
+    const selectedChips = <any[]>this.chips.filter(chip => chip.classList.contains('selected'));
+    debugger;
+    return selectedChips.map(chip => chip.id);
   }
 
   protected handleSlotchange(e: any) {

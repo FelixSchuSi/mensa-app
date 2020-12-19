@@ -10,6 +10,7 @@ import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 import { Languages } from '../../models/languages';
 import { LanguageKeys } from '../../i18n/language-keys';
+import { ChipSelectWidget } from '../../widgets/chip-select/chip-select.widget';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -47,6 +48,15 @@ class SignUpPage extends PageMixin(LitElement) {
 
   @query('.pw-repeat-error')
   protected passwordRepeatError!: HTMLDivElement;
+
+  @query('.status')
+  protected statusElement!: HTMLIonSegmentElement;
+
+  @query('.diet')
+  protected dietElement!: HTMLIonSegmentElement;
+
+  @query('.indigestibilities')
+  protected indigestibilitiesElement!: ChipSelectWidget;
 
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
@@ -121,7 +131,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-item>
               <ion-label>Status</ion-label>
               <div slot="end">
-                <ion-segment value="STUDENT">
+                <ion-segment value="STUDENT" class="status">
                   <ion-segment-button value="STUDENT">
                     <ion-label>${this.i18n.STUDENT}</ion-label>
                   </ion-segment-button>
@@ -140,7 +150,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-item>
               <ion-label>${this.i18n.PREFERENCE}</ion-label>
               <div slot="end">
-                <ion-segment value="NO_MEAT">
+                <ion-segment value="NO_MEAT" class="diet">
                   <ion-segment-button value="NO_MEAT">
                     <ion-label>${this.i18n.NO_MEAT}</ion-label>
                   </ion-segment-button>
@@ -157,7 +167,12 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-item-group>
           <ion-item-group>
             <ion-item>
-              <ion-label>${this.i18n.INDIGESTIBILITY}</ion-label>
+              <ion-label>${this.i18n.INDIGESTIBILITIES}</ion-label>
+              <chip-select class="indigestibilities">
+                <ion-chip id="G">${this.i18n.G}</ion-chip>
+                <ion-chip id="Sch">${this.i18n.Sch}</ion-chip>
+                <ion-chip id="A">${this.i18n.A}</ion-chip>
+              </chip-select>
             </ion-item>
             <div class="error"></div>
           </ion-item-group>
@@ -173,8 +188,12 @@ class SignUpPage extends PageMixin(LitElement) {
         name: this.nameElement.value,
         email: this.emailElement.value,
         password: this.passwordElement.value,
-        passwordCheck: this.passwordCheckElement.value
+        passwordCheck: this.passwordCheckElement.value,
+        status: <'STUDENT' | 'EMPLOYEE' | 'GUEST'>this.statusElement.value,
+        diet: <'NO_MEAT' | 'VEGETARIAN' | 'VEGAN'>this.dietElement.value,
+        indigestibilities: this.indigestibilitiesElement.value
       };
+      debugger;
       try {
         await userService.signUp(signUpData, this.i18n);
         routerService.navigate(Routes.TASKS);

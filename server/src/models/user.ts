@@ -4,6 +4,7 @@ export interface User extends Entity {
   name: string;
   email: string;
   password: string;
-  status: 'Student' | 'Guest' | 'Employee';
-  indigestibility: string;
+  status: 'STUDENT' | 'GUEST' | 'EMPLOYEE';
+  diet: 'NO_MEAT' | 'VEGETARIAN' | 'VEGAN';
+  indigestibilities: string[];
 }

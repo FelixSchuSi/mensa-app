@@ -39,9 +39,9 @@ class MealsTodayPage extends PageMixin(LitElement) {
         <ion-chip>asdfjklö</ion-chip>
       </chip-select>
       <ion-segment mode="ios" value=${this.mode}>
-        <ion-segment-button value="ios"> asdf </ion-segment-button>
-        <ion-segment-button value="md"> jklö </ion-segment-button>
-        <ion-segment-button value="sdf"> asdfjklö </ion-segment-button>
+        <ion-segment-button value="ios"> unten </ion-segment-button>
+        <ion-segment-button value="md"> mitte </ion-segment-button>
+        <ion-segment-button value="sdf"> oben </ion-segment-button>
       </ion-segment>
     `;
   }
