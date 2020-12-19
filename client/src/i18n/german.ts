@@ -91,5 +91,7 @@ export const german: LanguageStrings = {
   BACK: 'Zurück',
   MEALS_TODAY: 'Heutige Gerichte',
   MEALS_FUTURE: 'Gerichte',
-  GROUPS: 'Gruppen'
+  GROUPS: 'Gruppen',
+  READ_MORE: 'Mehr anzeigen',
+  SHOW_LESS: 'Weniger anzeigen'
 };

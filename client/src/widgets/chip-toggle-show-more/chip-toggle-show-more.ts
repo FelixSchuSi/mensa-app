@@ -1,4 +1,6 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import { LanguageStrings } from '../../models/language-strings';
+import { i18nService } from '../../services/i18n.service';
 import { ChipSelectWidget } from '../chip-select/chip-select.widget';
 
 const componentCSS = require('./chip-toggle-show-more.scss');
@@ -25,6 +27,15 @@ export class ChipToggleShowMore extends LitElement {
   @property({ type: Number, attribute: false })
   protected cutOffIndex: number = 1;
 
+  @property({ type: Object, attribute: false })
+  protected i18n!: LanguageStrings;
+
+  constructor() {
+    super();
+    this.i18n = i18nService.getStrings();
+    i18nService.subscribe(i18n => (this.i18n = i18n));
+  }
+
   protected firstUpdated(): void {
     this.toggle();
   }
@@ -32,7 +43,7 @@ export class ChipToggleShowMore extends LitElement {
   protected get showMoreChip(): TemplateResult {
     return html`
       <ion-chip class="readMoreToggle" @click=${this.toggle}>
-        Mehr Anzeigen
+        ${this.i18n.READ_MORE}
         <ion-icon color="primary" name="arrow-forward-outline"></ion-icon>
       </ion-chip>
     `;
@@ -41,7 +52,7 @@ export class ChipToggleShowMore extends LitElement {
   protected get showLessChip(): TemplateResult {
     return html`
       <ion-chip class="readMoreToggle" @click=${this.toggle}>
-        Weniger Anzeigen
+        ${this.i18n.SHOW_LESS}
         <ion-icon color="primary" name="arrow-up-outline"></ion-icon>
       </ion-chip>
     `;

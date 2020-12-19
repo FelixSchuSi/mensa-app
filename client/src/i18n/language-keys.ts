@@ -88,4 +88,6 @@ export type LanguageKeys =
   | 'BACK'
   | 'MEALS_TODAY'
   | 'MEALS_FUTURE'
-  | 'GROUPS';
+  | 'GROUPS'
+  | 'READ_MORE'
+  | 'SHOW_LESS';
