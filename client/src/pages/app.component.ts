@@ -67,11 +67,11 @@ export class AppComponent extends LitElement {
   protected async firstUpdated(): Promise<void> {
     routerService.subscribe(() => this.handleRouteChange());
     await this.handleRouteChange();
-    console.log(this.currentRoute);
-    const path = localStorage.get('path');
+    const path = localStorage.getItem('path');
     if (path) {
+      debugger;
       routerService.navigate(<Routes>path);
-      localStorage.remove('path');
+      localStorage.removeItem('path');
     }
   }
 

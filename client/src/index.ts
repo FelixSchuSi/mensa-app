@@ -11,7 +11,8 @@ import './pages/meals-future/meals-future.page';
 import './pages/meals-today/meals-today.page';
 import './pages/groups/groups.page';
 
-import './widgets/notification/notification.widget.ts';
-import './widgets/task/task.widget.ts';
+import './widgets/notification/notification.widget';
+import './widgets/task/task.widget';
 import './widgets/connection-status-bar/connection-status-bar.widget';
 import './widgets/tab-container/tab-container.component';
+import './widgets/chip-select/chip-select.widget';

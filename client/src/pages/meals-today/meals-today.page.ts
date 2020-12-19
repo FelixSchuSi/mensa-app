@@ -1,4 +1,13 @@
-import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import {
+  css,
+  customElement,
+  html,
+  LitElement,
+  property,
+  queryAssignedNodes,
+  TemplateResult,
+  unsafeCSS
+} from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 
@@ -21,6 +30,19 @@ class MealsTodayPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   protected render(): TemplateResult {
-    return html` ${this.renderNotification()} Hier könnten Ihre heutigen Gerichte stehen! `;
+    return html`
+      ${this.renderNotification()}
+      <p>Hier könnten Ihre heutigen Gerichte stehen!</p>
+      <chip-select @chip-select-change=${(e: any) => console.log(e.detail, e)}>
+        <ion-chip>asdf</ion-chip>
+        <ion-chip class="selected">jklö</ion-chip>
+        <ion-chip>asdfjklö</ion-chip>
+      </chip-select>
+      <ion-segment mode="ios" value=${this.mode}>
+        <ion-segment-button value="ios"> asdf </ion-segment-button>
+        <ion-segment-button value="md"> jklö </ion-segment-button>
+        <ion-segment-button value="sdf"> asdfjklö </ion-segment-button>
+      </ion-segment>
+    `;
   }
 }
