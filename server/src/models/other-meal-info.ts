@@ -5,8 +5,6 @@ export type OtherMealInfoStrings = Record<OtherMealInfoKeys, string>;
 export enum OtherMealInfoKeys {
   Beef = 'Rin',
   PorkMeat = 'Sch',
-  Vegetarian = 'Vgt',
-  Vegan = 'Vgn',
   Fish = 'Fis',
   Poultry = 'Gfl',
   Alcohol = 'Alk'
@@ -15,8 +13,6 @@ export enum OtherMealInfoKeys {
 const deOtherMealInfo: Record<OtherMealInfoKeys, string> = {
   Rin: 'Rindfleisch',
   Sch: 'Schweinefleisch',
-  Vgt: 'Vegetarisch',
-  Vgn: 'Vegan',
   Fis: 'Fisch',
   Gfl: 'Geflügel',
   Alk: 'Alkohol'
@@ -25,8 +21,6 @@ const deOtherMealInfo: Record<OtherMealInfoKeys, string> = {
 const enOtherMealInfo: Record<OtherMealInfoKeys, string> = {
   Rin: 'Beef',
   Sch: 'PorkMeat',
-  Vgt: 'Vegetarian',
-  Vgn: 'Vegan',
   Fis: 'Fish',
   Gfl: 'Poultry',
   Alk: 'Alcohol'

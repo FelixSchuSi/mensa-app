@@ -8,6 +8,8 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { popFromRootNav } from '../../helpers/root-nav-util';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { Languages } from '../../models/languages';
+import { LanguageKeys } from '../../i18n/language-keys';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -118,25 +120,44 @@ class SignUpPage extends PageMixin(LitElement) {
           <ion-item-group>
             <ion-item>
               <ion-label>Status</ion-label>
-              <ion-select placeholder="${this.i18n.CHOOSE_STATUS}">
-                <ion-select-option value="f">${this.i18n.STUDENT}</ion-select-option>
-                <ion-select-option value="m">${this.i18n.EMPLOYEE}</ion-select-option>
-                <ion-select-option value="h">${this.i18n.GUEST}</ion-select-option>
-              </ion-select>
+              <div slot="end">
+                <ion-segment value="STUDENT">
+                  <ion-segment-button value="STUDENT">
+                    <ion-label>${this.i18n.STUDENT}</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="EMPLOYEE">
+                    <ion-label>${this.i18n.EMPLOYEE}</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="GUEST">
+                    <ion-label>${this.i18n.GUEST}</ion-label>
+                  </ion-segment-button>
+                </ion-segment>
+              </div>
             </ion-item>
             <div class="error"></div>
           </ion-item-group>
           <ion-item-group>
             <ion-item>
-              <ion-label position="floating" for="name">${this.i18n.INDIGESTIBILITY}</ion-label>
-              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+              <ion-label>${this.i18n.PREFERENCE}</ion-label>
+              <div slot="end">
+                <ion-segment value="NO_MEAT">
+                  <ion-segment-button value="NO_MEAT">
+                    <ion-label>${this.i18n.NO_MEAT}</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="VEGETARIAN">
+                    <ion-label>${this.i18n.VEGETARIAN}</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="VEGAN">
+                    <ion-label>${this.i18n.VEGAN}</ion-label>
+                  </ion-segment-button>
+                </ion-segment>
+              </div>
             </ion-item>
             <div class="error"></div>
           </ion-item-group>
           <ion-item-group>
             <ion-item>
-              <ion-label position="floating" for="name">${this.i18n.PREFERENCE}</ion-label>
-              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+              <ion-label>${this.i18n.INDIGESTIBILITY}</ion-label>
             </ion-item>
             <div class="error"></div>
           </ion-item-group>

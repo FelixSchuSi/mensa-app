@@ -46,7 +46,8 @@ router.post('/', async (req, res) => {
   const createdUser = await userDAO.create({
     name: req.body.name,
     email: req.body.email,
-    password: await bcrypt.hash(req.body.password, 10)
+    password: await bcrypt.hash(req.body.password, 10),
+    status: req.body.status
   });
 
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);
