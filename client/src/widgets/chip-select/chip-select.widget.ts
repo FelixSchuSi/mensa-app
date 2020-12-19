@@ -21,21 +21,33 @@ export class ChipSelectWidget extends LitElement {
   @property({ type: String })
   protected mode: 'checkbox' | 'radio' = 'checkbox';
 
-  protected chips!: HTMLIonChipElement[];
+  protected get chips(): HTMLIonChipElement[] {
+    return <HTMLIonChipElement[]>Array.from(this.querySelectorAll('ion-chip')!);
+  }
 
   protected render(): TemplateResult {
     return html` <slot @slotchange=${this.handleSlotchange} class="slot-elem"> </slot> `;
   }
 
+  public toggle(cutOffIndex: number, action: 'expand' | 'collapse'): void {
+    this.chips.forEach((chip, i) => {
+      console.log(i, action, this.chips);
+      if (i > cutOffIndex && !chip.classList.contains('readMoreToggle')) {
+        if (action === 'collapse') {
+          chip.classList.remove('ghost');
+        } else if (action === 'expand') {
+          chip.classList.add('ghost');
+        }
+      }
+    });
+  }
+
   public get value(): string[] {
-    this.chips = <HTMLIonChipElement[]>Array.from(this.querySelectorAll('ion-chip')!);
     const selectedChips = <any[]>this.chips.filter(chip => chip.classList.contains('selected'));
-    debugger;
     return selectedChips.map(chip => chip.id);
   }
 
   protected handleSlotchange(e: any) {
-    this.chips = <HTMLIonChipElement[]>Array.from(this.querySelectorAll('ion-chip')!);
     this.chips.forEach((chip: HTMLIonChipElement) => {
       chip.addEventListener('click', event => {
         //@ts-ignore
@@ -43,19 +55,8 @@ export class ChipSelectWidget extends LitElement {
         //@ts-ignore
         targetChip = targetChip instanceof HTMLElement ? targetChip : event.path[0]; // sometimes the shadowroot is selected for some reason
         targetChip.classList.toggle('selected');
-        let selectedChips = this.chips.filter(chip => chip.classList.contains('selected'));
-        // TODO: Implement radio mode
-        // if (this.mode === 'radio') {
-        //   selectedChips.forEach(chip => {
-        //     // unselect the previously selected element
-        //     if (chip.classList.contains('selected') && chip !== targetChip) {
-        //       if(targetChip)chip.classList.remove('selected');
-        //     }
-        //   });
-        // }
-        selectedChips = this.chips.filter(chip => chip.classList.contains('selected'));
         const chipSelectEvent = new CustomEvent('chip-select-change', {
-          detail: selectedChips
+          detail: this.value
         });
         this.dispatchEvent(chipSelectEvent);
       });

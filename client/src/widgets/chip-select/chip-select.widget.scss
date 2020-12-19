@@ -11,3 +11,7 @@
     --background: var(--ion-color-dark-shade);
   }
 }
+
+::slotted(ion-chip.ghost) {
+  display: none;
+}

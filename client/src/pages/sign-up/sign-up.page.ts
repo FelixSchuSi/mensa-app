@@ -172,6 +172,7 @@ class SignUpPage extends PageMixin(LitElement) {
                 <ion-chip id="G">${this.i18n.G}</ion-chip>
                 <ion-chip id="Sch">${this.i18n.Sch}</ion-chip>
                 <ion-chip id="A">${this.i18n.A}</ion-chip>
+                <chip-toggle-show-more></chip-toggle-show-more>
               </chip-select>
             </ion-item>
             <div class="error"></div>

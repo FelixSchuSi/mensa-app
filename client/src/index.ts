@@ -16,3 +16,4 @@ import './widgets/task/task.widget';
 import './widgets/connection-status-bar/connection-status-bar.widget';
 import './widgets/tab-container/tab-container.component';
 import './widgets/chip-select/chip-select.widget';
+import './widgets/chip-toggle-show-more/chip-toggle-show-more';
