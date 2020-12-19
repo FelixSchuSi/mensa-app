@@ -157,6 +157,7 @@ export class FilterModalWidget extends LitElement {
                       <ion-chip id=${content} class="${isSelected ? 'selected' : ''}">${this.i18n[content]}</ion-chip>
                     `;
                   })}
+                  <chip-toggle-show-more></chip-toggle-show-more>
                 </chip-select>
               </div>
             </div>
