@@ -172,6 +172,36 @@ class SignUpPage extends PageMixin(LitElement) {
                 <ion-chip id="G">${this.i18n.G}</ion-chip>
                 <ion-chip id="Sch">${this.i18n.Sch}</ion-chip>
                 <ion-chip id="A">${this.i18n.A}</ion-chip>
+                <ion-chip id="B">${this.i18n.B}</ion-chip>
+                <ion-chip id="C">${this.i18n.C}</ion-chip>
+                <ion-chip id="D">${this.i18n.D}</ion-chip>
+                <ion-chip id="E">${this.i18n.E}</ion-chip>
+                <ion-chip id="F">${this.i18n.F}</ion-chip>
+                <ion-chip id="H">${this.i18n.H}</ion-chip>
+                <ion-chip id="I">${this.i18n.I}</ion-chip>
+                <ion-chip id="J">${this.i18n.J}</ion-chip>
+                <ion-chip id="K">${this.i18n.K}</ion-chip>
+                <ion-chip id="L">${this.i18n.L}</ion-chip>
+                <ion-chip id="M">${this.i18n.M}</ion-chip>
+                <ion-chip id="N">${this.i18n.N}</ion-chip>
+                <ion-chip id="Rin">${this.i18n.Rin}</ion-chip>
+                <ion-chip id="Fis">${this.i18n.Fis}</ion-chip>
+                <ion-chip id="Gfl">${this.i18n.Gfl}</ion-chip>
+                <ion-chip id="Alk">${this.i18n.Alk}</ion-chip>
+                <ion-chip id="ADI">${this.i18n.ADI}</ion-chip>
+                <ion-chip id="AGE">${this.i18n.AGE}</ion-chip>
+                <ion-chip id="AHA">${this.i18n.AHA}</ion-chip>
+                <ion-chip id="AKA">${this.i18n.AKA}</ion-chip>
+                <ion-chip id="ARO">${this.i18n.ARO}</ion-chip>
+                <ion-chip id="AWE">${this.i18n.AWE}</ion-chip>
+                <ion-chip id="HMA">${this.i18n.HMA}</ion-chip>
+                <ion-chip id="HHA">${this.i18n.HHA}</ion-chip>
+                <ion-chip id="HWA">${this.i18n.HWA}</ion-chip>
+                <ion-chip id="HCA">${this.i18n.HCA}</ion-chip>
+                <ion-chip id="HPE">${this.i18n.HPE}</ion-chip>
+                <ion-chip id="HPA">${this.i18n.HPA}</ion-chip>
+                <ion-chip id="HPI">${this.i18n.HPI}</ion-chip>
+                <ion-chip id="HQU">${this.i18n.HQU}</ion-chip>
                 <chip-toggle-show-more></chip-toggle-show-more>
               </chip-select>
             </ion-item>
