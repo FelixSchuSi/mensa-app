@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
     password: await bcrypt.hash(req.body.password, 10),
     status: req.body.status,
     diet: req.body.diet,
-    indigestibilities: req.body.indegestibilities
+    indigestibilities: req.body.indigestibilities
   });
 
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);
