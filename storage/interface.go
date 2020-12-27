@@ -15,6 +15,7 @@ const (
 type FileMetadata struct {
 	Owner         string            `json:"owner"`
 	ID            string            `json:"id"`
+	Size          int64             `json:"size"`
 	ContentType   string            `json:"content_type"`
 	FileExtension string            `json:"file_extension"`
 	Created       time.Time         `json:"created_date"`

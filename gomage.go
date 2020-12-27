@@ -1,7 +1,8 @@
-package gomagestore
+package main
 
 import (
 	"gomagestore/api"
+	"gomagestore/authorization"
 	"gomagestore/storage"
 	"log"
 	"net/http"
@@ -21,6 +22,10 @@ func main() {
 	router.HandleFunc("/media", api.PostFile).Methods("POST")
 	router.HandleFunc("/media/{id}", api.DeleteFile).Methods("DELETE")
 	router.HandleFunc("/media", api.ListFiles).Methods("GET")
+	router.PathPrefix("/").HandlerFunc(optionsHandler).Methods("OPTIONS")
+	router.HandleFunc("/", api.Index).Methods("GET")
+	amw := authorization.AuthorizationMiddleware{}
+	router.Use(amw.Middleware)
 	server := &http.Server{
 		Handler:      router,
 		Addr:         ":3000",
@@ -33,4 +38,20 @@ func main() {
 		log.Fatal(server.ListenAndServe())
 	}()
 	<-c
+}
+func cors(r *http.Request, w *http.ResponseWriter) {
+	ua := r.Header.Get("Origin")
+	// Fck CORS Mode :D
+	if ua == "" {
+		ua = "*"
+	}
+
+	(*w).Header().Set("Access-Control-Allow-Origin", ua)
+	(*w).Header().Set("Access-Control-Expose-Headers", "x-csrf-token")
+	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, PATCH")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
+func optionsHandler(w http.ResponseWriter, r *http.Request) {
+	cors(r, &w)
 }
