@@ -99,7 +99,7 @@ class HttpService {
   }
 }
 
-const ISPROD = false;
+const ISPROD = true;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const baseURL: string = ISPROD
