@@ -15,7 +15,7 @@ import (
 
 func main() {
 	log.Println("Starting Gomage...")
-	storage.SetInstance(storage.NewFileSystemDriver("./meta", "./content"))
+	storage.SetInstance(storage.NewFileSystemDriver("./data/meta", "./data/content"))
 	router := mux.NewRouter()
 	router.HandleFunc("/media/{id}", api.GetFile).Methods("GET")
 	router.HandleFunc("/raw/{id}", api.GetFileRaw).Methods("GET")

@@ -1,5 +1,6 @@
 .DS_Store
 content
+data
 meta
 gomagestore
 go.sum

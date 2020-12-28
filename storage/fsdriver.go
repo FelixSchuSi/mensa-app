@@ -24,11 +24,11 @@ type FileSystemDriver struct {
 }
 
 func NewFileSystemDriver(metaPath string, contentPath string) *FileSystemDriver {
-	createDirectoryIfNotExists(metaPath)
-	createDirectoryIfNotExists(contentPath)
+	createDirectoryIfNotExists(metaPath + "/")
+	createDirectoryIfNotExists(contentPath + "/")
 	return &FileSystemDriver{MetaPath: metaPath, ContentPath: contentPath}
 }
-func (*FileSystemDriver) Store(file *File) StorageDriverError {
+func (fs *FileSystemDriver) Store(file *File) StorageDriverError {
 	id := func() string {
 		var id string
 		defer func() {
@@ -43,29 +43,29 @@ func (*FileSystemDriver) Store(file *File) StorageDriverError {
 		return ErrUnexpected
 	}
 	file.MetaData.ID = id
-	if err := storeMetaData(file.MetaData); err != Success {
+	if err := fs.storeMetaData(file.MetaData); err != Success {
 		return err
 	}
-	if err := storeContent(file.MetaData.ID, file.Content); err != Success {
-		deleteMetaFile(file.MetaData.ID)
+	if err := fs.storeContent(file.MetaData.ID, file.Content); err != Success {
+		fs.deleteMetaFile(file.MetaData.ID)
 		return err
 	}
 	return Success
 }
-func (*FileSystemDriver) Load(id string) (*File, StorageDriverError) {
-	return getFile(id)
+func (fs *FileSystemDriver) Load(id string) (*File, StorageDriverError) {
+	return fs.getFile(id)
 }
-func (*FileSystemDriver) LoadMeta(id string) (*FileMetadata, StorageDriverError) {
-	return getFileMetaData(id)
+func (fs *FileSystemDriver) LoadMeta(id string) (*FileMetadata, StorageDriverError) {
+	return fs.getFileMetaData(id)
 }
-func (*FileSystemDriver) List() ([]FileMetadata, StorageDriverError) {
+func (fs *FileSystemDriver) List() ([]FileMetadata, StorageDriverError) {
 	var metaList []FileMetadata
-	mediaList, goErr := walkMatch("./meta", MetaDataFileExtension)
+	mediaList, goErr := walkMatch(fs.MetaPath, MetaDataFileExtension)
 	if goErr != nil {
 		return nil, ErrUnexpected
 	}
 	for _, v := range mediaList {
-		metadata, err := getFileMetaData(v)
+		metadata, err := fs.getFileMetaData(v)
 		if err != Success {
 			log.Printf("Error when reading %s\n", v)
 			continue
@@ -74,11 +74,11 @@ func (*FileSystemDriver) List() ([]FileMetadata, StorageDriverError) {
 	}
 	return metaList, Success
 }
-func (*FileSystemDriver) Delete(id string) StorageDriverError {
-	if err := deleteContentFile(id); err != Success {
+func (fs *FileSystemDriver) Delete(id string) StorageDriverError {
+	if err := fs.deleteContentFile(id); err != Success {
 		return err
 	}
-	return deleteMetaFile(id)
+	return fs.deleteMetaFile(id)
 }
 func walkMatch(root string, extension string) ([]string, error) {
 	var matches []string
@@ -107,12 +107,13 @@ func walkMatch(root string, extension string) ([]string, error) {
 		return nil
 	})
 	if err != nil {
+		log.Println(err.Error())
 		return nil, err
 	}
 	return matches, nil
 }
-func deleteContentFile(id string) StorageDriverError {
-	err := os.Remove(buildContentPath(id))
+func (fs *FileSystemDriver) deleteContentFile(id string) StorageDriverError {
+	err := os.Remove(fs.buildContentPath(id))
 	if err != nil {
 		if os.IsNotExist(err) {
 			return ErrFileNotFound
@@ -121,8 +122,8 @@ func deleteContentFile(id string) StorageDriverError {
 	}
 	return Success
 }
-func deleteMetaFile(id string) StorageDriverError {
-	err := os.Remove(buildMetaPath(id))
+func (fs *FileSystemDriver) deleteMetaFile(id string) StorageDriverError {
+	err := os.Remove(fs.buildMetaPath(id))
 	if err != nil {
 		if os.IsNotExist(err) {
 			return ErrFileNotFound
@@ -131,27 +132,27 @@ func deleteMetaFile(id string) StorageDriverError {
 	}
 	return Success
 }
-func getFile(filename string) (*File, StorageDriverError) {
-	meta, err := getFileMetaData(filename)
+func (fs *FileSystemDriver) getFile(filename string) (*File, StorageDriverError) {
+	meta, err := fs.getFileMetaData(filename)
 	if err != Success {
 		return nil, err
 	}
-	content, err := getFileContent(filename)
+	content, err := fs.getFileContent(filename)
 	if err != Success {
 		return nil, err
 	}
 	return &File{MetaData: meta, Content: content}, Success
 }
-func getFileContent(id string) ([]byte, StorageDriverError) {
-	data, err := loadFile(buildContentPath(id))
+func (fs *FileSystemDriver) getFileContent(id string) ([]byte, StorageDriverError) {
+	data, err := loadFile(fs.buildContentPath(id))
 	if err != Success {
 		return nil, err
 	}
 	return data, Success
 }
-func getFileMetaData(id string) (*FileMetadata, StorageDriverError) {
+func (fs *FileSystemDriver) getFileMetaData(id string) (*FileMetadata, StorageDriverError) {
 	var meta FileMetadata
-	err := parseJSONFile(&meta, buildMetaPath(id))
+	err := parseJSONFile(&meta, fs.buildMetaPath(id))
 	if err != Success {
 		return nil, err
 	}
@@ -184,11 +185,11 @@ func loadFile(path string) ([]byte, StorageDriverError) {
 	}
 	return data, Success
 }
-func storeContent(id string, content []byte) StorageDriverError {
-	return storeFile(content, buildContentPath(id))
+func (fs *FileSystemDriver) storeContent(id string, content []byte) StorageDriverError {
+	return storeFile(content, fs.buildContentPath(id))
 }
-func storeMetaData(meta *FileMetadata) StorageDriverError {
-	return storeJSONFile(*meta, buildMetaPath(meta.ID))
+func (fs *FileSystemDriver) storeMetaData(meta *FileMetadata) StorageDriverError {
+	return storeJSONFile(*meta, fs.buildMetaPath(meta.ID))
 }
 func storeJSONFile(s interface{}, path string) StorageDriverError {
 	data, goErr := json.Marshal(s)
@@ -207,14 +208,14 @@ func storeFile(data []byte, path string) StorageDriverError {
 	}
 	return Success
 }
-func buildMetaPath(id string) string {
-	return fmt.Sprintf("%s/%s.%s", "./meta", id, MetaDataFileExtension)
+func (fs *FileSystemDriver) buildMetaPath(id string) string {
+	return fmt.Sprintf("%s/%s.%s", fs.MetaPath, id, MetaDataFileExtension)
 }
-func buildContentPath(id string) string {
-	return fmt.Sprintf("%s/%s.%s", "./content", id, ContentFileExtension)
+func (fs *FileSystemDriver) buildContentPath(id string) string {
+	return fmt.Sprintf("%s/%s.%s", fs.ContentPath, id, ContentFileExtension)
 }
 func createDirectoryIfNotExists(path string) {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		os.Mkdir(path, 755)
+		os.MkdirAll(path, 0755)
 	}
 }
