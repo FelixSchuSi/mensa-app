@@ -5,6 +5,9 @@ import { userService } from '../../services/user.service';
 import { formChanged } from '../../helpers/form-changed';
 import { LanguageStrings } from '../../models/language-strings';
 import { InputChangeEventDetail } from '@ionic/core';
+import { popFromRootNav } from '../../helpers/root-nav-util';
+import { routerService } from '../../services/router.service';
+import { Routes } from '../../routes';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -20,6 +23,10 @@ class SignUpPage extends PageMixin(LitElement) {
       ${unsafeCSS(componentCSS)}
     `
   ];
+
+  createRenderRoot() {
+    return this;
+  }
 
   @query('form')
   protected form!: HTMLFormElement;
@@ -44,77 +51,98 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      ${this.renderNotification()}
-      <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="name">${this.i18n.NAME}</ion-label>
-            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
-            <ion-input type="email" required id="email" name="email"></ion-input>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
-            <ion-input
-              clear-on-edit="false"
-              type="password"
-              required
-              minlength="10"
-              id="password"
-              name="password"
-            ></ion-input>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="password-check">${this.i18n.PASSWORD_CONFIRM}</ion-label>
-            <ion-input
-              clear-on-edit="false"
-              type="password"
-              required
-              minlength="10"
-              id="password-check"
-              name="passwordCheck"
-            ></ion-input>
-          </ion-item>
-          <div class="error pw-repeat-error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label>Status</ion-label>
-            <ion-select placeholder="${this.i18n.CHOOSE_STATUS}">
-              <ion-select-option value="f">${this.i18n.STUDENT}</ion-select-option>
-              <ion-select-option value="m">${this.i18n.EMPLOYEE}</ion-select-option>
-              <ion-select-option value="h">${this.i18n.GUEST}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="name">${this.i18n.INDIGESTIBILITY}</ion-label>
-            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="name">${this.i18n.PREFERENCE}</ion-label>
-            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
-      </form>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button
+              @click=${async () => {
+                await popFromRootNav();
+                history.back();
+              }}
+              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
+            ></ion-back-button>
+          </ion-buttons>
+          <ion-title>${this.i18n.SIGN_UP}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content fullscreen class="ion-padding">
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${this.i18n.SIGN_UP}</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        ${this.renderNotification()}
+        <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="name">${this.i18n.NAME}</ion-label>
+              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+            </ion-item>
+            <div class="error"></div>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
+              <ion-input type="email" required id="email" name="email"></ion-input>
+            </ion-item>
+            <div class="error"></div>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
+              <ion-input
+                clear-on-edit="false"
+                type="password"
+                required
+                minlength="10"
+                id="password"
+                name="password"
+              ></ion-input>
+            </ion-item>
+            <div class="error"></div>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="password-check">${this.i18n.PASSWORD_CONFIRM}</ion-label>
+              <ion-input
+                clear-on-edit="false"
+                type="password"
+                required
+                minlength="10"
+                id="password-check"
+                name="passwordCheck"
+              ></ion-input>
+            </ion-item>
+            <div class="error pw-repeat-error"></div>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item>
+              <ion-label>Status</ion-label>
+              <ion-select placeholder="${this.i18n.CHOOSE_STATUS}">
+                <ion-select-option value="f">${this.i18n.STUDENT}</ion-select-option>
+                <ion-select-option value="m">${this.i18n.EMPLOYEE}</ion-select-option>
+                <ion-select-option value="h">${this.i18n.GUEST}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div class="error"></div>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="name">${this.i18n.INDIGESTIBILITY}</ion-label>
+              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+            </ion-item>
+            <div class="error"></div>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="name">${this.i18n.PREFERENCE}</ion-label>
+              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+            </ion-item>
+            <div class="error"></div>
+          </ion-item-group>
+          <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
+        </form>
+      </ion-content>
     `;
   }
 
@@ -128,6 +156,7 @@ class SignUpPage extends PageMixin(LitElement) {
       };
       try {
         await userService.signUp(signUpData, this.i18n);
+        routerService.navigate(Routes.TASKS);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }

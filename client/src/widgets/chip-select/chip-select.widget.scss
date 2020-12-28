@@ -1,0 +1,13 @@
+@import '../../shared.scss';
+
+::slotted(ion-chip.selected) {
+  --background: var(--ion-color-dark);
+  --color: var(--ion-color-light);
+}
+
+::slotted(ion-chip.selected:hover) {
+  --background: var(--ion-color-dark-tint);
+  @media (prefers-color-scheme: dark) {
+    --background: var(--ion-color-dark-shade);
+  }
+}

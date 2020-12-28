@@ -5,13 +5,16 @@ import { userService } from '../../services/user.service';
 import { formChanged } from '../../helpers/form-changed';
 import { LanguageStrings } from '../../models/language-strings';
 import { InputChangeEventDetail } from '@ionic/core';
+import { popFromRootNav } from '../../helpers/root-nav-util';
+import { Routes } from '../../routes';
+import { routerService } from '../../services/router.service';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-in.page.scss');
 
 @customElement('app-sign-in')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class SignInPage extends PageMixin(LitElement) {
+export class SignInPage extends PageMixin(LitElement) {
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
@@ -20,6 +23,10 @@ class SignInPage extends PageMixin(LitElement) {
       ${unsafeCSS(componentCSS)}
     `
   ];
+
+  createRenderRoot() {
+    return this;
+  }
 
   @query('form')
   protected form!: HTMLFormElement;
@@ -35,40 +42,61 @@ class SignInPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      ${this.renderNotification()}
-      <form @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
-            <ion-input
-              debounce="100"
-              inputmode="email"
-              type="email"
-              autofocus
-              required
-              id="email"
-              name="email"
-            ></ion-input>
-          </ion-item>
-          <div class="error" color="danger"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
-            <ion-input
-              clear-on-edit="false"
-              debounce="100"
-              type="password"
-              required
-              id="password"
-              name="password"
-            ></ion-input>
-          </ion-item>
-          <div class="error" color="danger"></div>
-        </ion-item-group>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button
+              @click=${async () => {
+                await popFromRootNav();
+                history.back();
+              }}
+              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
+            ></ion-back-button>
+          </ion-buttons>
+          <ion-title>${this.i18n.SIGN_IN}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content fullscreen class="ion-padding">
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${this.i18n.SIGN_IN}</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        ${this.renderNotification()}
+        <form @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
+              <ion-input
+                debounce="100"
+                inputmode="email"
+                type="email"
+                autofocus
+                required
+                id="email"
+                name="email"
+              ></ion-input>
+            </ion-item>
+            <div class="error" color="danger"></div>
+          </ion-item-group>
+          <ion-item-group>
+            <ion-item>
+              <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
+              <ion-input
+                clear-on-edit="false"
+                debounce="100"
+                type="password"
+                required
+                id="password"
+                name="password"
+              ></ion-input>
+            </ion-item>
+            <div class="error" color="danger"></div>
+          </ion-item-group>
 
-        <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_IN}</ion-button>
-      </form>
+          <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_IN}</ion-button>
+        </form>
+      </ion-content>
     `;
   }
 
@@ -80,6 +108,7 @@ class SignInPage extends PageMixin(LitElement) {
       };
       try {
         await userService.signIn(signInData, this.i18n);
+        routerService.navigate(Routes.TASKS);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }

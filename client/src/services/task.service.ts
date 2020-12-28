@@ -10,14 +10,17 @@ export class TaskService {
   protected _tasks: Task[] = [];
   private listeners: TasksListener[] = [];
 
-  public async init(): Promise<void> {
+  public async clear(): Promise<void> {
+    this.setTasks([]);
+  }
+
+  public async getTasks(): Promise<void> {
     if (navigator.onLine) {
       const response = await httpService.get('tasks' + location.search);
       let tasks = <Task[]>(await response.json()).results;
       await this.setTasks(tasks);
     } else {
       let tasks = <Task[] | null>await storeService.get(this.TASKKEY);
-      debugger;
       if (tasks === null) tasks = [];
       await this.setTasks(tasks);
     }
@@ -76,7 +79,6 @@ export class TaskService {
       const response = await httpService.post('tasks', task, this.onSyncFail);
       task = await response.json();
       await this.setTasks([...this.tasks, task]);
-      console.log('task', task);
     } catch ({ message }) {
       await this.setTasks([...this.tasks, task]);
       throw { message };

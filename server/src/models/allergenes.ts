@@ -1,9 +1,8 @@
-import { LangString } from './langString';
 import { Ref } from './refs';
 
 export type AllergenesStrings = Record<AllergenesKeys, string>;
 
-enum AllergenesKeys {
+export enum AllergenesKeys {
   Gluten = 'A',
   Spelled = 'ADI',
   Barley = 'AGE',
@@ -96,12 +95,8 @@ const deAllergenes: Record<AllergenesKeys, string> = {
   N: 'Schwefeloxid und Sulfite'
 };
 
-function getAllergenesLangStrings(key: AllergenesKeys): LangString {
-  return { de: deAllergenes[key], en: enAllergenes[key] };
-}
-
-export function getAllergenesFromRefs(refs: Ref[]): LangString[] {
+export function getAllergenesFromRefs(refs: Ref[]): AllergenesKeys[] {
   // @ts-ignore
   const filteredRefs: AllergenesKeys[] = refs.filter(ref => Object.values(AllergenesKeys).indexOf(ref) > 0);
-  return filteredRefs.map(getAllergenesLangStrings);
+  return filteredRefs;
 }

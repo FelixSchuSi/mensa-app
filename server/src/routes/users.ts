@@ -5,8 +5,21 @@ import { GenericDAO } from '../models/generic.dao';
 import { User } from '../models/user';
 
 const router = express.Router();
-const isProd = !!process.env.ISPROD;
-const cookieOptions: CookieOptions = isProd ? { sameSite: 'none', secure: true } : { sameSite: 'lax' };
+const isProd: boolean = !!process.env.ISPROD;
+const cookieOptions: CookieOptions = isProd
+  ? { sameSite: 'none', secure: true, httpOnly: false }
+  : { sameSite: 'lax', httpOnly: false };
+
+// Used to check if a user has a valid token.
+router.get('/', async (req, res) => {
+  const token = req.cookies['jwt-token'] || '';
+  try {
+    const { email, name } = <User>jwt.verify(token, 'mysecret');
+    res.status(200).json({ email, name });
+  } catch (error) {
+    res.status(401).json({ message: 'Bitte melden Sie sich an!' });
+  }
+});
 
 router.post('/', async (req, res) => {
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
@@ -63,13 +76,13 @@ router.post('/sign-in', async (req, res) => {
 });
 
 router.delete('/sign-out', (req, res) => {
-  res.clearCookie('jwt-token');
+  res.clearCookie('jwt-token', cookieOptions);
   res.status(200).end();
 });
 
 function createToken(user: User) {
   const claimsSet = { id: user.id, name: user.name, email: user.email };
-  return jwt.sign(claimsSet, 'mysecret', { algorithm: 'HS256', expiresIn: '1h' });
+  return jwt.sign(claimsSet, 'mysecret', { algorithm: 'HS256', expiresIn: '1y' });
 }
 
 function hasRequiredFields(object: { [key: string]: unknown }, requiredFields: string[], errors: string[]) {

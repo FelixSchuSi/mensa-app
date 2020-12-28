@@ -1,8 +1,7 @@
-import { LangString } from './langString';
 import { Ref } from './refs';
 
 export type AdditivesStrings = Record<AdditivesKeys, string>;
-enum AdditivesKeys {
+export enum AdditivesKeys {
   _language,
   dye,
   Preservative,
@@ -44,13 +43,9 @@ const enAdditives: Record<AdditivesKeys, string> = {
   10: 'Phenylalanine'
 };
 
-function parseAdditivesLangStrings(key: AdditivesKeys): LangString {
-  return { de: deAdditives[key], en: enAdditives[key] };
-}
-
-export function parseAdditivesFromRefs(refs: Ref[]): LangString[] {
+export function parseAdditivesFromRefs(refs: Ref[]): AdditivesKeys[] {
   const filteredKeys: string[] = Object.values(AdditivesKeys).map(String);
   // @ts-ignore
   const filteredRefs: AdditivesKeys[] = refs.filter(ref => filteredKeys.indexOf(ref) > 0);
-  return filteredRefs.map(parseAdditivesLangStrings);
+  return filteredRefs;
 }

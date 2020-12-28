@@ -1,7 +1,9 @@
 export enum Routes {
   SIGN_IN = 'users/sign-in',
   SIGN_UP = 'users/sign-up',
-  SIGN_OUT = 'users/sign-out',
   TASKS = 'tasks',
+  SETTINGS = 'settings',
+  MEALS_TODAY = 'meals/today',
+  MEALS_FUTURE = 'meals/future',
   GROUPS = 'groups'
 }
