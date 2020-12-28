@@ -18,10 +18,6 @@ import (
 func ListFiles(w http.ResponseWriter, r *http.Request) {
 	list, err := storage.GetInstance().List()
 	if err != storage.Success {
-		if err == storage.ErrFileNotFound {
-			w.WriteHeader(http.StatusNotFound)
-			return
-		}
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
