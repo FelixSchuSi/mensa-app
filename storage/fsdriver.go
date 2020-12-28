@@ -24,6 +24,8 @@ type FileSystemDriver struct {
 }
 
 func NewFileSystemDriver(metaPath string, contentPath string) *FileSystemDriver {
+	createDirectoryIfNotExists(metaPath)
+	createDirectoryIfNotExists(contentPath)
 	return &FileSystemDriver{MetaPath: metaPath, ContentPath: contentPath}
 }
 func (*FileSystemDriver) Store(file *File) StorageDriverError {
@@ -210,4 +212,9 @@ func buildMetaPath(id string) string {
 }
 func buildContentPath(id string) string {
 	return fmt.Sprintf("%s/%s.%s", "./content", id, ContentFileExtension)
+}
+func createDirectoryIfNotExists(path string) {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		os.Mkdir(path, 755)
+	}
 }
