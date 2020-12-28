@@ -9,21 +9,52 @@ const codeCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const codeLength = 8;
 
 router.get('/', async (req, res) => {
+  const filter: Partial<Group> = {};
+  let groups: Array<Group> = [];
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   //Filter by joinCode
-  const groups = (await groupDAO.findAll()).map(group => {
-    return { ...group, title: decrypt(group.name) };
-  });
+  if (req.query.joincode) {
+    filter.joinCode = <string>req.query.joincode;
+  }
+  if (req.query.scope) {
+    if (req.query.scope === 'me') {
+      const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+      const userFilter: Partial<User> = { id: res.locals.user.id };
+      const user = await userDAO.findOne(userFilter);
+
+      const groups = await Promise.all(
+        (user!.groupMemberships || []).map(async groupid => {
+          const group = await groupDAO.findOne({ id: groupid });
+          return { ...group, name: decrypt(group!.name) };
+        })
+      );
+      return res.status(200).json(groups);
+    } else {
+      return res.status(405).json({ message: 'Unkown scope' });
+    }
+  } else {
+    groups = (await groupDAO.findAll(filter)).map(group => {
+      return { ...group, name: decrypt(group.name) };
+    });
+  }
+
   res.json({ results: groups });
 });
 
 router.post('/', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const createdGroup = await groupDAO.create({
-    name: encrypt(res.locals.group.name),
-    joinCode: createJoinCode(codeLength)
+    name: encrypt(req.body.group.name),
+    joinCode: createJoinCode(codeLength),
+    owner: res.locals.user.id
   });
-  res.status(201).json({ ...createdGroup, title: decrypt(createdGroup.name) });
+  res.status(201).json({ ...createdGroup, name: decrypt(createdGroup.name) });
+});
+
+router.patch('/:id', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  await groupDAO.update({ id: req.params.id, name: encrypt(res.locals.group.name) });
+  res.status(200).end();
 });
 
 router.delete('/:id', async (req, res) => {
@@ -32,30 +63,25 @@ router.delete('/:id', async (req, res) => {
   res.status(200).end();
 });
 
-router.patch('/:id', async (req, res) => {
+router.post('/:id/membership', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
-
-  const memberOperations: Array<GroupMemberOperation> = req.body.members ?? [];
-  const tasks = memberOperations.map(async op => {
-    let response: Response;
-    switch (op.operation) {
-      case 'add':
-        response = await addMembership(groupDAO, req.params.id, userDAO, op.user ?? req.app.locals.user.id);
-        break;
-      case 'remove':
-        response = await removeMembership(groupDAO, req.params.id, userDAO, op.user ?? req.app.locals.user.id);
-        break;
-      default:
-        response = { status: 123, message: 'Unkown Operation' };
-    }
-    return response;
-  });
-  //TODO Check for success
-  Promise.all(tasks);
-  res.status(200).end();
+  const result = await addMembership(groupDAO, req.params.id, userDAO, res.locals.user.id);
+  res.status(result.status).json({ message: result.message || 'Success' });
 });
 
+router.delete('/:gid/membership/:uid', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+  const result = await removeMembership(groupDAO, req.params.gid, userDAO, req.params.uid);
+  res.status(result.status).json({ message: result.message || 'Success' });
+});
+router.delete('/:gid/membership', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+  const result = await removeMembership(groupDAO, req.params.gid, userDAO, res.locals.user.id);
+  res.status(result.status).json({ message: result.message || 'Success' });
+});
 function createJoinCode(length: number): string {
   const charArrrayLength = codeCharacters.length;
   let code = '';
@@ -85,6 +111,12 @@ async function addMembership(
   const group = await groupDAO.findOne({ id: groupID });
   if (!group) return { status: 404, message: 'Unkown group' };
 
+  if (!group!.members) {
+    group!.members = [];
+  }
+  if (!user!.groupMemberships) {
+    user!.groupMemberships = [];
+  }
   group!.members.push(user.id);
   user!.groupMemberships.push(group.id);
   try {
