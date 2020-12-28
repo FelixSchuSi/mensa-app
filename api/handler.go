@@ -21,7 +21,7 @@ func ListFiles(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	var targetList []types.FileResponse
+	var targetList []types.FileResponse = make([]types.FileResponse, 0)
 	for _, v := range list {
 		targetList = append(targetList, types.FileResponse{MetaData: &v, EmbedURL: getEmbedURL(&v)})
 	}

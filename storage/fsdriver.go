@@ -59,7 +59,7 @@ func (fs *FileSystemDriver) LoadMeta(id string) (*FileMetadata, StorageDriverErr
 	return fs.getFileMetaData(id)
 }
 func (fs *FileSystemDriver) List() ([]FileMetadata, StorageDriverError) {
-	var metaList []FileMetadata
+	var metaList []FileMetadata = make([]FileMetadata, 0)
 	mediaList, goErr := walkMatch(fs.MetaPath, MetaDataFileExtension)
 	if goErr != nil {
 		return nil, ErrUnexpected
