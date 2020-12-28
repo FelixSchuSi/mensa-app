@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -14,7 +15,12 @@ type AuthorizationMiddleware struct {
 
 func (*AuthorizationMiddleware) Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		token := r.Header.Get("Authorization")
+		var token string
+		split := strings.Split(r.Header.Get("Authorization")," ")
+		if len(split)> 1 {
+			//Remove bearer
+			token = split[1]
+		}
 		if token == "" {
 			token = r.Header.Get("X-Session-Token")
 			if token == "" {
@@ -31,7 +37,7 @@ func (*AuthorizationMiddleware) Middleware(next http.Handler) http.Handler {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 			}
-			return os.Getenv("JWT_SECRET"), nil
+			return []byte(os.Getenv("JWT_SECRET")), nil
 		})
 		if claims, ok := jwtToken.Claims.(jwt.MapClaims); err == nil && ok && jwtToken.Valid {
 			r.Header.Set("user", claims["email"].(string))
