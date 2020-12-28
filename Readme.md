@@ -78,7 +78,7 @@ Store a file. You can use <URL>/ HTML Page to test upload.
 
 #### Request
 Type: Multipart Form   
-Part name: file
+Part name: file  
 Required part header: Content-Type, Filename
 ### DELETE /media/[id]
 Delete media item.
