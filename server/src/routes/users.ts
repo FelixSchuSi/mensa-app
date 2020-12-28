@@ -5,7 +5,7 @@ import { GenericDAO } from '../models/generic.dao';
 import { User } from '../models/user';
 
 const router = express.Router();
-const isProd: boolean = !!process.env.ISPROD;
+const isProd = !!process.env.ISPROD;
 const cookieOptions: CookieOptions = isProd
   ? { sameSite: 'none', secure: true, httpOnly: false }
   : { sameSite: 'lax', httpOnly: false };

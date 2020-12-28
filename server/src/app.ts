@@ -6,6 +6,7 @@ import * as http from 'http';
 import tasks from './routes/tasks';
 import users from './routes/users';
 import meals from './routes/meals';
+import media from './routes/media';
 import startDB from './db';
 
 const port = process.env.PORT || 3443;
@@ -31,6 +32,7 @@ function configureApp(app: Express) {
       next();
     }
   });
+  app.use('/api/media', media);
   app.use('/api/meals', meals);
   app.use('/api/users', users);
   app.use((req, res, next) => {

@@ -55,7 +55,7 @@ export async function connectToDevMongoDB(): Promise<Db> {
   const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    auth: { user: 'mensa-app-user', password: 'm3ns4-4pp++' },
+    //auth: { user: 'mensa-app-user', password: 'm3ns4-4pp++' },
     authSource: 'mensa-app-db'
   };
 
