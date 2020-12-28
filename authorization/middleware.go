@@ -33,11 +33,14 @@ func (*AuthorizationMiddleware) Middleware(next http.Handler) http.Handler {
 			}
 			return os.Getenv("JWT_SECRET"), nil
 		})
-		if err != nil || !jwtToken.Valid {
+		if claims, ok := jwtToken.Claims.(jwt.MapClaims); err == nil && ok && jwtToken.Valid {
+			r.Header.Set("user", claims["email"].(string))
+			next.ServeHTTP(w, r)
+		} else {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 			log.Println("Forbidden request: ", err.Error())
 			return
 		}
-		next.ServeHTTP(w, r)
+
 	})
 }

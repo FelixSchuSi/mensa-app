@@ -42,6 +42,7 @@ func PostFile(w http.ResponseWriter, r *http.Request) {
 	meta.ContentType = handler.Header.Get("Content-Type")
 	meta.Size = handler.Size
 	meta.Created = time.Now().UTC()
+	meta.Owner = r.Header.Get("user")
 	_, extension := splitIDAndExtension(handler.Filename)
 	meta.FileExtension = extension
 
