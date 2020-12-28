@@ -25,7 +25,10 @@ func main() {
 	router.PathPrefix("/").HandlerFunc(optionsHandler).Methods("OPTIONS")
 	router.HandleFunc("/", api.Index).Methods("GET")
 	amw := authorization.AuthorizationMiddleware{}
-	router.Use(amw.Middleware)
+	if os.Getenv("SKIP_AUTH") != "true" {
+		router.Use(amw.Middleware)
+	}
+
 	server := &http.Server{
 		Handler:      router,
 		Addr:         ":3000",
