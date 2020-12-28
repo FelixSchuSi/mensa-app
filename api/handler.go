@@ -25,6 +25,7 @@ func ListFiles(w http.ResponseWriter, r *http.Request) {
 	for _, v := range list {
 		targetList = append(targetList, types.FileResponse{MetaData: &v, EmbedURL: getEmbedURL(&v)})
 	}
+	w.Header().Set("Content-Type", "application/json")
 	if goErr := json.NewEncoder(w).Encode(targetList); goErr != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -90,6 +91,7 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var res types.FileResponse = types.FileResponse{MetaData: meta, EmbedURL: getEmbedURL(meta)}
+	w.Header().Set("Content-Type", "application/json")
 	goErr := json.NewEncoder(w).Encode(res)
 	if goErr != nil {
 		w.WriteHeader(http.StatusInternalServerError)
