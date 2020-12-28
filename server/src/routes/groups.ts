@@ -108,11 +108,11 @@ async function removeMembership(
   const group = await groupDAO.findOne({ id: groupID });
   if (!group) return { status: 404, message: 'Unkown group' };
 
-  const newGroupMembers = group!.members.filter(member => {
-    return member === user.id;
+  const newGroupMembers = group.members.filter(member => {
+    return member !== user.id;
   });
-  const newUserMemberships = user!.groupMemberships.filter(groupID => {
-    return groupID === group.id;
+  const newUserMemberships = user.groupMemberships.filter(groupID => {
+    return groupID !== group.id;
   });
   try {
     await userDAO.update({ ...user, groupMemberships: newUserMemberships });
