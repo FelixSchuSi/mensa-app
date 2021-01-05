@@ -6,5 +6,6 @@ export enum Routes {
   MEALS_TODAY = 'meals/today',
   MEALS_FUTURE = 'meals/future',
   GROUPS = 'groups',
-  CREATEGROUP = 'create-group'
+  GROUPS_CREATE = 'groups/create',
+  GROUPS_DETAILS = 'groups/details'
 }

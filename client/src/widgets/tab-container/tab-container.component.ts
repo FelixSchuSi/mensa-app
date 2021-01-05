@@ -19,7 +19,12 @@ class TabContainerComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <ion-nav class="${this.component}-nav" root="${this.component}" .rootParams="${this.pageContext}"></ion-nav>
+      <ion-nav
+        id="${this.component}-nav"
+        class="${this.component}-nav"
+        root="${this.component}"
+        .rootParams="${this.pageContext}"
+      ></ion-nav>
     `;
   }
 }

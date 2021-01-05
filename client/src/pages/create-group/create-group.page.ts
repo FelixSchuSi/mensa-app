@@ -24,9 +24,6 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   protected render(): TemplateResult {
-    return html` ${this.renderNotification()}
-      <div>
-        <h1>Test</h1>
-      </div>`;
+    return html`<h1>Test</h1>`;
   }
 }

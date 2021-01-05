@@ -73,7 +73,11 @@ class GroupsPage extends PageMixin(LitElement) {
           )}
         </ion-list>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button @click=${(): void => routerService.navigate(Routes.CREATEGROUP)}>
+          <ion-fab-button
+            @click=${(): void => {
+              routerService.navigate(Routes.GROUPS_CREATE);
+            }}
+          >
             <ion-icon name="enter-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab>

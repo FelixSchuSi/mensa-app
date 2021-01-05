@@ -89,9 +89,15 @@ export class AppComponent extends LitElement {
     } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
       await clearRootNav();
       this.tabsComponent.select(Routes.GROUPS);
-    } else if (this.currentRoute.startsWith(Routes.CREATEGROUP)) {
-      await clearRootNav();
-      this.tabsComponent.select(Routes.CREATEGROUP);
+      // document
+      //   .querySelector('app-tab-container[component=app-groups]')
+      //   .shadowRoot.querySelector('ion-nav')
+      //   .push('app-create-group');
+      if (this.currentRoute === Routes.GROUPS_CREATE) {
+        const tabContainer = this.querySelector('app-tab-container[component=app-groups]')!;
+        const nav = tabContainer.shadowRoot!.querySelector('ion-nav')!;
+        nav.push('app-create-group');
+      }
     }
     // RootRoutes start here
     // RootRoutes are not assignable to one tab,
