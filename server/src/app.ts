@@ -6,6 +6,7 @@ import * as http from 'http';
 import tasks from './routes/tasks';
 import users from './routes/users';
 import meals from './routes/meals';
+import proxy from 'express-http-proxy';
 import startDB from './db';
 
 const port = process.env.PORT || 3443;
@@ -31,6 +32,32 @@ function configureApp(app: Express) {
       next();
     }
   });
+  app.use(
+    '/api/media',
+    proxy('https://fhms.dub-services.de', {
+      https: true,
+      parseReqBody: false,
+      userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+        const data = proxyResData
+          .toString('utf8')
+          .replace(/https:\/\/[a-zA-Z0-9.-]*/g, (process.env.URL || 'http://localhost:3443') + '/api/media');
+        // Dirty workaround:
+        // At this point, I'm not able to get the content-type header in userResDecorator
+        // if function above is executed on binary content (e.g. images) the content will be destroyed
+        // so JSON.parse is used to determine if content is json or binary
+        try {
+          JSON.parse(data);
+          return data;
+        } catch (e) {
+          return proxyResData;
+        }
+      },
+      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers!['Authorization'] = 'Bearer ' + srcReq.cookies['jwt-token'];
+        return proxyReqOpts;
+      }
+    })
+  );
   app.use('/api/meals', meals);
   app.use('/api/users', users);
   app.use((req, res, next) => {
