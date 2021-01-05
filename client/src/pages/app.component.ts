@@ -89,6 +89,9 @@ export class AppComponent extends LitElement {
     } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
       await clearRootNav();
       this.tabsComponent.select(Routes.GROUPS);
+    } else if (this.currentRoute.startsWith(Routes.CREATEGROUP)) {
+      await clearRootNav();
+      this.tabsComponent.select(Routes.CREATEGROUP);
     }
     // RootRoutes start here
     // RootRoutes are not assignable to one tab,

@@ -5,5 +5,6 @@ export enum Routes {
   SETTINGS = 'settings',
   MEALS_TODAY = 'meals/today',
   MEALS_FUTURE = 'meals/future',
-  GROUPS = 'groups'
+  GROUPS = 'groups',
+  CREATEGROUP = 'create-group'
 }

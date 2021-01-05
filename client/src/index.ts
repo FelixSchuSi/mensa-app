@@ -10,6 +10,7 @@ import './pages/settings/settings.page';
 import './pages/meals-future/meals-future.page';
 import './pages/meals-today/meals-today.page';
 import './pages/groups/groups.page';
+import './pages/create-group/create-group.page';
 
 import './widgets/notification/notification.widget';
 import './widgets/task/task.widget';

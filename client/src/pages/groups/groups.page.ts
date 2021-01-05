@@ -5,6 +5,8 @@ import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
+import { routerService } from '../../services/router.service';
+import { Routes } from '../../routes';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./groups.page.scss');
 
@@ -71,7 +73,7 @@ class GroupsPage extends PageMixin(LitElement) {
           )}
         </ion-list>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button>
+          <ion-fab-button @click=${(): void => routerService.navigate(Routes.CREATEGROUP)}>
             <ion-icon name="enter-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab>
