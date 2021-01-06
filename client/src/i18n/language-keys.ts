@@ -85,4 +85,5 @@ export type LanguageKeys =
   | 'BACK'
   | 'MEALS_TODAY'
   | 'MEALS_FUTURE'
-  | 'GROUPS';
+  | 'GROUPS'
+  | 'CREATE_GROUP';

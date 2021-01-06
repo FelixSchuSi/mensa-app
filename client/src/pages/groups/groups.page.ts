@@ -7,6 +7,7 @@ import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { getTitleString } from '../../helpers/get-title-string';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./groups.page.scss');
 
@@ -47,8 +48,35 @@ class GroupsPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   protected render(): TemplateResult {
-    return html` ${this.renderNotification()}
-      <ion-content>
+    return html` <ion-header style="background-color: var(--ion-background-color);">
+        <ion-toolbar>
+          <ion-title>${getTitleString(this.i18n)}</ion-title>
+          <ion-buttons slot="primary">
+            <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
+              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+              <!-- <ion-icon name="person-circle"></ion-icon> -->
+              <!-- TODO: Make Google style avatar work -->
+              <!-- <ion-avatar style="border-radius: 0px" slot="end">
+                <img
+                  style="width: 60px; height:60px"
+                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
+                />
+              </ion-avatar> -->
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" fullscreen>
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${getTitleString(this.i18n)}</ion-title>
+          </ion-toolbar>
+          <ion-toolbar>
+            <ion-searchbar></ion-searchbar>
+          </ion-toolbar>
+        </ion-header>
+        ${this.renderNotification()}
+
         <ion-list>
           <ion-list-header> Gruppen </ion-list-header>
           ${guard(

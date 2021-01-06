@@ -24,6 +24,29 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   protected render(): TemplateResult {
-    return html`<h1>Test</h1>`;
+    return html`
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button
+              @click=${async () => {
+                // TODO Mehtode erstellen, die auf dem aktuellen nav .pop() ausführt
+                history.back();
+              }}
+              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
+            ></ion-back-button>
+          </ion-buttons>
+          <ion-title>${this.i18n.CREATE_GROUP}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${this.i18n.CREATE_GROUP}</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <h1>Test</h1>
+      </ion-content>
+    `;
   }
 }

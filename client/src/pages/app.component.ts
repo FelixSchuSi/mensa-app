@@ -89,13 +89,8 @@ export class AppComponent extends LitElement {
     } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
       await clearRootNav();
       this.tabsComponent.select(Routes.GROUPS);
-      // document
-      //   .querySelector('app-tab-container[component=app-groups]')
-      //   .shadowRoot.querySelector('ion-nav')
-      //   .push('app-create-group');
       if (this.currentRoute === Routes.GROUPS_CREATE) {
-        const tabContainer = this.querySelector('app-tab-container[component=app-groups]')!;
-        const nav = tabContainer.shadowRoot!.querySelector('ion-nav')!;
+        const nav = <HTMLIonNavElement>this.querySelector(`ion-nav.${Routes.GROUPS}`)!;
         nav.push('app-create-group');
       }
     }
@@ -112,38 +107,7 @@ export class AppComponent extends LitElement {
   }
 
   protected renderRouterOutlet(route: Routes, component: string): TemplateResult {
-    // TODO: move buttons to settings and return value in switch statement.
-    return html`
-      <ion-header style="background-color: var(--ion-background-color);">
-        <ion-toolbar>
-          <ion-title>${getTitleString(this.i18n)}</ion-title>
-          <ion-buttons slot="primary">
-            <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
-              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
-              <!-- <ion-icon name="person-circle"></ion-icon> -->
-              <!-- TODO: Make Google style avatar work -->
-              <!-- <ion-avatar style="border-radius: 0px" slot="end">
-                <img
-                  style="width: 60px; height:60px"
-                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
-                />
-              </ion-avatar> -->
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding" fullscreen>
-        <ion-header collapse="condense">
-          <ion-toolbar>
-            <ion-title size="large">${getTitleString(this.i18n)}</ion-title>
-          </ion-toolbar>
-          <ion-toolbar>
-            <ion-searchbar></ion-searchbar>
-          </ion-toolbar>
-        </ion-header>
-        <app-tab-container id="content" component="${component}"></app-tab-container>
-      </ion-content>
-    `;
+    return html` <ion-nav class="${route}" root="${component}"></ion-nav> `;
   }
 
   protected render(): TemplateResult {

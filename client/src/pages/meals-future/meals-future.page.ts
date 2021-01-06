@@ -8,6 +8,9 @@ import { AllergenesKeys } from '../../../../server/src/models/allergenes';
 import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
 import { LanguageKeys } from '../../i18n/language-keys';
 import { Price } from '../../../../server/src/models/price';
+import { getTitleString } from '../../helpers/get-title-string';
+import { routerService } from '../../services/router.service';
+import { Routes } from '../../routes';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -39,13 +42,44 @@ class MealsFuturePage extends PageMixin(LitElement) {
   }
 
   protected render(): TemplateResult {
-    return html` ${this.renderNotification()}
-    ${this.meals.map(meal => {
-      const { title, date, mensa, additives, allergens, otherInfo, price } = meal;
-      const entries = Object.entries({ date, mensa, additives, allergens, otherInfo, price });
-      return html` <h2>${title}</h2>
-        ${entries.map(([key, value]) => html`<span><b>${key}:</b> ${this.renderValue(value)}</span><br />`)} <br />`;
-    })}`;
+    return html`
+      <ion-header style="background-color: var(--ion-background-color);">
+        <ion-toolbar>
+          <ion-title>${getTitleString(this.i18n)}</ion-title>
+          <ion-buttons slot="primary">
+            <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
+              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+              <!-- <ion-icon name="person-circle"></ion-icon> -->
+              <!-- TODO: Make Google style avatar work -->
+              <!-- <ion-avatar style="border-radius: 0px" slot="end">
+                <img
+                  style="width: 60px; height:60px"
+                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
+                />
+              </ion-avatar> -->
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" fullscreen>
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${getTitleString(this.i18n)}</ion-title>
+          </ion-toolbar>
+          <ion-toolbar>
+            <ion-searchbar></ion-searchbar>
+          </ion-toolbar>
+        </ion-header>
+        ${this.renderNotification()}
+        ${this.meals.map(meal => {
+          const { title, date, mensa, additives, allergens, otherInfo, price } = meal;
+          const entries = Object.entries({ date, mensa, additives, allergens, otherInfo, price });
+          return html` <h2>${title}</h2>
+            ${entries.map(([key, value]) => html`<span><b>${key}:</b> ${this.renderValue(value)}</span><br />`)}
+            <br />`;
+        })}
+      </ion-content>
+    `;
   }
 
   protected renderValue(item: string | AdditivesKeys[] | AllergenesKeys[] | OtherMealInfoKeys[] | Price): string {

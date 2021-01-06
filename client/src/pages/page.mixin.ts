@@ -32,6 +32,10 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       userService.subscribe(userInfo => (this.userInfo = userInfo));
     }
 
+    protected createRenderRoot(): LitElement {
+      return this;
+    }
+
     disconnectedCallback(): void {
       super.disconnectedCallback();
       this.onDestroyCallbacks.forEach((callback: () => void) => callback());
