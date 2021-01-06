@@ -9,3 +9,9 @@ export enum Routes {
   GROUPS_CREATE = 'groups/create',
   GROUPS_DETAILS = 'groups/details'
 }
+
+export enum RootRoutes {
+  SIGN_IN = 'users/sign-in',
+  SIGN_UP = 'users/sign-up',
+  SETTINGS = 'settings'
+}

@@ -12,10 +12,10 @@ import {
 import { routerService } from '../services/router.service';
 import { Routes } from '../routes';
 import { LanguageStrings } from '../models/language-strings';
-import { storeService } from '../services/store.service';
-import { getTitleString } from '../helpers/get-title-string';
 import { i18nService } from '../services/i18n.service';
-import { clearRootNav, pushToRootNav } from '../helpers/root-nav-util';
+import { clearRootNav, pushToNav } from '../helpers/root-nav-util';
+import { Tab } from '../models/tab';
+import { getActiveNav, isRootRoute } from '../helpers/get-active-nav';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -77,17 +77,17 @@ export class AppComponent extends LitElement {
 
   protected async handleRouteChange(): Promise<void> {
     this.currentRoute = routerService.getPath();
-    if (this.currentRoute.startsWith(Routes.TASKS)) {
+    const activeNav: HTMLIonNavElement = getActiveNav(this.tabs, this);
+    if (!isRootRoute(this.currentRoute)) {
       await clearRootNav();
+    }
+    if (this.currentRoute.startsWith(Routes.TASKS)) {
       this.tabsComponent.select(Routes.TASKS);
     } else if (this.currentRoute.startsWith(Routes.MEALS_TODAY)) {
-      await clearRootNav();
       this.tabsComponent.select(Routes.MEALS_TODAY);
     } else if (this.currentRoute.startsWith(Routes.MEALS_FUTURE)) {
-      await clearRootNav();
       this.tabsComponent.select(Routes.MEALS_FUTURE);
     } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
-      await clearRootNav();
       this.tabsComponent.select(Routes.GROUPS);
       if (this.currentRoute === Routes.GROUPS_CREATE) {
         const nav = <HTMLIonNavElement>this.querySelector(`ion-nav.${Routes.GROUPS}`)!;
@@ -98,11 +98,11 @@ export class AppComponent extends LitElement {
     // RootRoutes are not assignable to one tab,
     // therefore RootRoutes are displayed fullscreen without tabs.
     else if (this.currentRoute.startsWith(Routes.SETTINGS)) {
-      pushToRootNav('app-settings');
+      pushToNav('app-settings', activeNav);
     } else if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
-      pushToRootNav('app-sign-in');
+      pushToNav('app-sign-in', activeNav);
     } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
-      pushToRootNav('app-sign-up');
+      pushToNav('app-sign-up', activeNav);
     }
   }
 
@@ -110,37 +110,52 @@ export class AppComponent extends LitElement {
     return html` <ion-nav class="${route}" root="${component}"></ion-nav> `;
   }
 
+  public get tabs(): Tab[] {
+    return [
+      { rootComponent: 'app-tasks', baseRoute: Routes.TASKS, titleString: this.i18n.TASKS, icon: 'list' },
+      {
+        rootComponent: 'app-meals-today',
+        baseRoute: Routes.MEALS_TODAY,
+        titleString: this.i18n.MEALS_TODAY,
+        icon: 'home'
+      },
+      {
+        rootComponent: 'app-meals-future',
+        baseRoute: Routes.MEALS_FUTURE,
+        titleString: this.i18n.MEALS_FUTURE,
+        icon: 'calendar'
+      },
+      { rootComponent: 'app-groups', baseRoute: Routes.GROUPS, titleString: this.i18n.GROUPS, icon: 'people' }
+    ];
+  }
+
   protected render(): TemplateResult {
     return html`
       <ion-app>
         <ion-tabs>
-          <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
+          <ion-tab tab=${Routes.TASKS}>
+            <ion-nav class="${Routes.TASKS}" root="app-tasks"></ion-nav>
+          </ion-tab>
           <ion-tab tab=${Routes.MEALS_TODAY}>
-            ${this.renderRouterOutlet(Routes.MEALS_TODAY, 'app-meals-today')}
+            <ion-nav class="${Routes.MEALS_TODAY}" root="app-meals-today"></ion-nav>
           </ion-tab>
           <ion-tab tab=${Routes.MEALS_FUTURE}>
-            ${this.renderRouterOutlet(Routes.MEALS_FUTURE, 'app-meals-future')}
+            <ion-nav class="${Routes.MEALS_FUTURE}" root="app-meals-future"></ion-nav>
           </ion-tab>
-          <ion-tab tab=${Routes.GROUPS}> ${this.renderRouterOutlet(Routes.GROUPS, 'app-groups')} </ion-tab>
+          <ion-tab tab=${Routes.GROUPS}>
+            <ion-nav class="${Routes.GROUPS}" root="app-groups"></ion-nav>
+          </ion-tab>
           <div id="bottom-content" slot="bottom">
             <app-connection-status-bar></app-connection-status-bar>
             <ion-tab-bar>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
-                <ion-label>${this.i18n.TASKS}</ion-label>
-                <ion-icon name="list"></ion-icon>
-              </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.MEALS_TODAY)} tab=${Routes.MEALS_TODAY}>
-                <ion-label>${this.i18n.MEALS_TODAY}</ion-label>
-                <ion-icon name="home"></ion-icon>
-              </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.MEALS_FUTURE)} tab=${Routes.MEALS_FUTURE}>
-                <ion-label>${this.i18n.MEALS_FUTURE}</ion-label>
-                <ion-icon name="calendar"></ion-icon>
-              </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.GROUPS)} tab=${Routes.GROUPS}>
-                <ion-label>${this.i18n.GROUPS}</ion-label>
-                <ion-icon name="people"></ion-icon>
-              </ion-tab-button>
+              ${this.tabs.map(
+                tab => html`
+                  <ion-tab-button @click=${() => routerService.navigate(tab.baseRoute)} tab=${tab.baseRoute}>
+                    <ion-label>${tab.titleString}</ion-label>
+                    <ion-icon name="${tab.icon}"></ion-icon>
+                  </ion-tab-button>
+                `
+              )}
             </ion-tab-bar>
           </div>
         </ion-tabs>

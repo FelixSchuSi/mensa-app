@@ -1,8 +1,7 @@
-export async function pushToRootNav(component: string): Promise<boolean> {
-  const rootNav: HTMLIonNavElement = <HTMLIonNavElement>document.querySelector('#root-nav');
-  const active = await rootNav.getActive();
+export async function pushToNav(component: string, nav: HTMLIonNavElement): Promise<boolean> {
+  const active = await nav.getActive();
   if (active?.component === component) return true;
-  return rootNav.push(component);
+  return nav.push(component);
 }
 
 export async function popFromRootNav(): Promise<boolean> {
