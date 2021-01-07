@@ -55,6 +55,7 @@ export const english: LanguageStrings = {
   // Strings in actual app
   SWITCH_LANGUAGE: 'Change language',
   SIGN_UP: 'Sign up',
+  GROUPS: 'Groups',
   SIGN_IN: 'Sign in',
   SIGN_OUT: 'Sign out',
   E_MAIL: 'E-Mail',
@@ -87,5 +88,5 @@ export const english: LanguageStrings = {
   BACK: 'Back',
   MEALS_TODAY: 'Todays Meals',
   MEALS_FUTURE: 'Meals',
-  GROUPS: 'Groups'
+  CREATE_GROUP: 'Create group'
 };

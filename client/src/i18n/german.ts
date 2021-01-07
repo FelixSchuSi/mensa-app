@@ -54,6 +54,7 @@ export const german: LanguageStrings = {
   10: 'Phenylalaninquelle',
   // Strings in actual app
   SWITCH_LANGUAGE: 'Sprache wechseln',
+  GROUPS: 'Gruppen',
   SIGN_UP: 'Konto erstellen',
   SIGN_IN: 'Anmelden',
   SIGN_OUT: 'Abmelden',
@@ -87,5 +88,5 @@ export const german: LanguageStrings = {
   BACK: 'Zurück',
   MEALS_TODAY: 'Heutige Gerichte',
   MEALS_FUTURE: 'Gerichte',
-  GROUPS: 'Gruppen'
+  CREATE_GROUP: 'Gruppe erstellen'
 };

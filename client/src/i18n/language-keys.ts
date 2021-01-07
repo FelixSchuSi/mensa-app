@@ -52,6 +52,7 @@ export type LanguageKeys =
   // Strings in actual app
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'
+  | 'GROUPS'
   | 'SIGN_IN'
   | 'SIGN_OUT'
   | 'E_MAIL'
@@ -84,4 +85,5 @@ export type LanguageKeys =
   | 'BACK'
   | 'MEALS_TODAY'
   | 'MEALS_FUTURE'
-  | 'GROUPS';
+  | 'GROUPS'
+  | 'CREATE_GROUP';
