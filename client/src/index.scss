@@ -53,3 +53,9 @@ body {
     }
   }
 }
+
+app-root,
+#undo-ion-page {
+  display: inline !important;
+  position: static !important;
+}

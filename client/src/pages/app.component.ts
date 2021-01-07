@@ -111,8 +111,8 @@ export class AppComponent extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <ion-app>
-        <ion-tabs>
+      <ion-app id="undo-ion-page">
+        <ion-tabs style="position:static;">
           <ion-tab tab=${Routes.TASKS}>
             <ion-nav class="${Routes.TASKS}" root="app-tasks"></ion-nav>
           </ion-tab>
