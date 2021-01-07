@@ -1,5 +1,6 @@
 import { LitElement, customElement, TemplateResult, html, internalProperty } from 'lit-element';
 import { LanguageStrings } from '../../models/language-strings';
+import { MealFilterConfig } from '../../models/meal-filter-config';
 import { i18nService } from '../../services/i18n.service';
 
 @customElement('app-filter-modal')
@@ -11,6 +12,9 @@ export class FilterModalWidget extends LitElement {
   @internalProperty()
   protected i18n!: LanguageStrings;
 
+  public applyFilterConfig!: (newFilterConfig: MealFilterConfig) => void;
+  public oldFilterConfig!: MealFilterConfig;
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -20,6 +24,10 @@ export class FilterModalWidget extends LitElement {
   protected dismissModal(): void {
     const modal = <HTMLIonModalElement>this.parentElement?.parentElement!;
     modal.dismiss();
+  }
+
+  protected applyFilter(): void {
+    const event = new CustomEvent('apply-meal-filter');
   }
 
   protected render(): TemplateResult {
@@ -41,7 +49,16 @@ export class FilterModalWidget extends LitElement {
             <div slot="end">Hier mensen aussuchen</div>
           </ion-item>
         </ion-list>
-        <ion-button>${this.i18n.APPLY_FILTER}</ion-button>
+        <ion-button
+          @click=${() => {
+            const newConfig: MealFilterConfig = {
+              mensen: ['davinci', 'denkpause', 'ring', 'steinfurt'],
+              nogos: []
+            };
+            this.applyFilterConfig(newConfig);
+          }}
+          >${this.i18n.APPLY_FILTER}</ion-button
+        >
       </ion-content>
     `;
   }

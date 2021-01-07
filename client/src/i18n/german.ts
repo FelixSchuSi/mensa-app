@@ -52,6 +52,12 @@ export const german: LanguageStrings = {
   8: 'Phosphat',
   9: 'Süßungsmitteln',
   10: 'Phenylalaninquelle',
+  // names of mensas
+  aasee: 'Mensa am Aasee',
+  davinci: 'Mensa Da Vinci',
+  denkpause: 'Bistro Denkpause',
+  ring: 'Mensa am Ring',
+  steinfurt: 'Mensa Steinfurt',
   // Strings in actual app
   SWITCH_LANGUAGE: 'Sprache wechseln',
   GROUPS: 'Gruppen',

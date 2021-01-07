@@ -49,6 +49,12 @@ export type LanguageKeys =
   | '8'
   | '9'
   | '10'
+  // names of mensas
+  | 'aasee'
+  | 'davinci'
+  | 'denkpause'
+  | 'ring'
+  | 'steinfurt'
   // Strings in actual app
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'

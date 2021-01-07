@@ -46,10 +46,9 @@ class TasksPage extends PageMixin(LitElement) {
       taskService.subscribe((tasks: Task[]) => {
         this.tasks = tasks;
       });
-      await taskService.getTasks();
+      if (userService.userInfo) await taskService.getTasks();
     } catch ({ message, statusCode }) {
       if (statusCode === 401) {
-        // routerService.navigate(Routes.SIGN_IN);
       } else {
         this.setNotification({ errorMessage: message });
       }

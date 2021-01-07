@@ -39,6 +39,7 @@ export class TaskService {
   private async onSyncFail(): Promise<void> {
     await storeService.remove(this.TASKKEY);
   }
+
   public subscribe(listener: TasksListener): void {
     this.listeners.push(listener);
   }

@@ -1,11 +1,8 @@
-export interface MealFilterConfig {
-  mensen: Set<'aasee' | 'davinci' | 'denkpause' | 'ring' | 'steinfurt'>;
-}
+import { AdditivesKeys } from '../../../server/src/models/additives';
+import { AllergenesKeys } from '../../../server/src/models/allergenes';
+import { OtherMealInfoKeys } from '../../../server/src/models/other-meal-info';
 
-// title: string;
-// date: string;
-// mensa: 'aasee' | 'davinci' | 'denkpause' | 'ring' | 'steinfurt';
-// additives: AdditivesKeys[]; // TODO: only use string -> keys
-// allergens: AllergenesKeys[];
-// otherInfo: OtherMealInfoKeys[];
-// price: Price;
+export interface MealFilterConfig {
+  mensen: Array<'aasee' | 'davinci' | 'denkpause' | 'ring' | 'steinfurt'>;
+  nogos: Array<AdditivesKeys | AllergenesKeys | OtherMealInfoKeys>;
+}
