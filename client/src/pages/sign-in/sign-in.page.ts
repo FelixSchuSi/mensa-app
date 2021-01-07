@@ -7,6 +7,7 @@ import { LanguageStrings } from '../../models/language-strings';
 import { InputChangeEventDetail } from '@ionic/core';
 import { Routes } from '../../routes';
 import { routerService } from '../../services/router.service';
+import { popFromRootNav } from '../../helpers/nav-util';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-in.page.scss');
@@ -45,7 +46,10 @@ export class SignInPage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
-              @click=${() => history.back()}
+              @click=${async () => {
+                await popFromRootNav();
+                history.back();
+              }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>
           </ion-buttons>

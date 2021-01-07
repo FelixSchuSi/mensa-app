@@ -86,4 +86,6 @@ export type LanguageKeys =
   | 'MEALS_TODAY'
   | 'MEALS_FUTURE'
   | 'GROUPS'
-  | 'CREATE_GROUP';
+  | 'CREATE_GROUP'
+  | 'FILTER_MEALS'
+  | 'APPLY_FILTER';

@@ -8,6 +8,7 @@ import {
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
+import { popFromRootNav } from '../../helpers/nav-util';
 import { toggleIosMd } from '../../helpers/toggle-ios-md';
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';
@@ -55,7 +56,10 @@ class SignUpPage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
-              @click=${() => history.back()}
+              @click=${async () => {
+                await popFromRootNav();
+                history.back();
+              }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>
           </ion-buttons>

@@ -13,7 +13,7 @@ import { routerService } from '../services/router.service';
 import { Routes } from '../routes';
 import { LanguageStrings } from '../models/language-strings';
 import { i18nService } from '../services/i18n.service';
-import { clearRootNav } from '../helpers/nav-util';
+import { clearRootNav, pushToNav } from '../helpers/nav-util';
 import { Tab } from '../models/tab';
 import { getActiveNav, isRootRoute } from '../helpers/get-active-nav';
 import { selectActiveTab } from '../helpers/select-active-tab';
@@ -80,13 +80,13 @@ export class AppComponent extends LitElement {
     selectActiveTab(this.tabsComponent);
     switch (this.currentRoute) {
       case Routes.GROUPS_CREATE:
-        return activeNav.push('app-create-group');
+        return await pushToNav('app-create-group', activeNav);
       case Routes.SETTINGS:
-        return activeNav.push('app-settings');
+        return await pushToNav('app-settings', activeNav);
       case Routes.SIGN_IN:
-        return activeNav.push('app-sign-in');
+        return await pushToNav('app-sign-in', activeNav);
       case Routes.SIGN_UP:
-        return activeNav.push('app-sign-up');
+        return await pushToNav('app-sign-up', activeNav);
     }
   }
 

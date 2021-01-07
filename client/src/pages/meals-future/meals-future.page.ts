@@ -10,6 +10,7 @@ import { LanguageKeys } from '../../i18n/language-keys';
 import { Price } from '../../../../server/src/models/price';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { modalController } from '@ionic/core';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -46,6 +47,9 @@ class MealsFuturePage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-title>${this.i18n.MEALS_FUTURE}</ion-title>
           <ion-buttons slot="primary">
+            <ion-button @click=${this.createModal}>
+              <ion-icon slot="icon-only" src="svg/custom_filter.svg"></ion-icon>
+            </ion-button>
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
               <!-- <ion-icon name="person-circle"></ion-icon> -->
@@ -105,5 +109,17 @@ class MealsFuturePage extends PageMixin(LitElement) {
   protected renderPrice(price: Price): string {
     const { student, employee, guest } = price;
     return `${student} € - ${employee} € - ${guest} €`;
+  }
+
+  protected async createModal() {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-filter-modal'
+    });
+
+    await modal.present();
+  }
+
+  protected dismissModal(e: any): void {
+    console.log(e);
   }
 }

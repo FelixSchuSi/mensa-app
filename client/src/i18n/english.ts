@@ -88,5 +88,7 @@ export const english: LanguageStrings = {
   BACK: 'Back',
   MEALS_TODAY: 'Todays Meals',
   MEALS_FUTURE: 'Meals',
-  CREATE_GROUP: 'Create group'
+  CREATE_GROUP: 'Create group',
+  FILTER_MEALS: 'Filter meals',
+  APPLY_FILTER: 'Apply filter'
 };
