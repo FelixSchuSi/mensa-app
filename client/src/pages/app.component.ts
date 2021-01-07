@@ -16,6 +16,7 @@ import { i18nService } from '../services/i18n.service';
 import { clearRootNav, pushToNav } from '../helpers/root-nav-util';
 import { Tab } from '../models/tab';
 import { getActiveNav, isRootRoute } from '../helpers/get-active-nav';
+import { selectActiveTab } from '../helpers/select-active-tab';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -23,9 +24,6 @@ const sharedCSS = require('../shared.scss');
 @customElement('app-root')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class AppComponent extends LitElement {
-  // createRenderRoot() {
-  //   return this;
-  // }
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
@@ -75,39 +73,21 @@ export class AppComponent extends LitElement {
     }
   }
 
-  protected async handleRouteChange(): Promise<void> {
+  protected async handleRouteChange(): Promise<any> {
     this.currentRoute = routerService.getPath();
     const activeNav: HTMLIonNavElement = getActiveNav(this.tabs, this);
-    if (!isRootRoute(this.currentRoute)) {
-      await clearRootNav();
+    if (!isRootRoute(this.currentRoute)) await clearRootNav();
+    selectActiveTab(this.tabsComponent);
+    switch (this.currentRoute) {
+      case Routes.GROUPS_CREATE:
+        return activeNav.push('app-create-group');
+      case Routes.SETTINGS:
+        return activeNav.push('app-settings');
+      case Routes.SIGN_IN:
+        return activeNav.push('app-sign-in');
+      case Routes.SIGN_UP:
+        return activeNav.push('app-sign-up');
     }
-    if (this.currentRoute.startsWith(Routes.TASKS)) {
-      this.tabsComponent.select(Routes.TASKS);
-    } else if (this.currentRoute.startsWith(Routes.MEALS_TODAY)) {
-      this.tabsComponent.select(Routes.MEALS_TODAY);
-    } else if (this.currentRoute.startsWith(Routes.MEALS_FUTURE)) {
-      this.tabsComponent.select(Routes.MEALS_FUTURE);
-    } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
-      this.tabsComponent.select(Routes.GROUPS);
-      if (this.currentRoute === Routes.GROUPS_CREATE) {
-        const nav = <HTMLIonNavElement>this.querySelector(`ion-nav.${Routes.GROUPS}`)!;
-        nav.push('app-create-group');
-      }
-    }
-    // RootRoutes start here
-    // RootRoutes are not assignable to one tab,
-    // therefore RootRoutes are displayed fullscreen without tabs.
-    else if (this.currentRoute.startsWith(Routes.SETTINGS)) {
-      pushToNav('app-settings', activeNav);
-    } else if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
-      pushToNav('app-sign-in', activeNav);
-    } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
-      pushToNav('app-sign-up', activeNav);
-    }
-  }
-
-  protected renderRouterOutlet(route: Routes, component: string): TemplateResult {
-    return html` <ion-nav class="${route}" root="${component}"></ion-nav> `;
   }
 
   public get tabs(): Tab[] {
