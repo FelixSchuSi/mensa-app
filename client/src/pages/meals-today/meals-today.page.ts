@@ -1,16 +1,6 @@
-import {
-  css,
-  customElement,
-  html,
-  LitElement,
-  property,
-  queryAssignedNodes,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
-import { getTitleString } from '../../helpers/get-title-string';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 

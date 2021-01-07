@@ -1,5 +1,3 @@
-import { forceUpdate } from '@ionic/core/dist/types/stencil-public-runtime';
-
 import { v4 as uuidv4 } from 'uuid';
 import { Entity } from '../../../server/src/models/entity';
 

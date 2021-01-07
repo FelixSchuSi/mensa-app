@@ -13,7 +13,7 @@ import { routerService } from '../services/router.service';
 import { Routes } from '../routes';
 import { LanguageStrings } from '../models/language-strings';
 import { i18nService } from '../services/i18n.service';
-import { clearRootNav, pushToNav } from '../helpers/root-nav-util';
+import { clearRootNav } from '../helpers/nav-util';
 import { Tab } from '../models/tab';
 import { getActiveNav, isRootRoute } from '../helpers/get-active-nav';
 import { selectActiveTab } from '../helpers/select-active-tab';

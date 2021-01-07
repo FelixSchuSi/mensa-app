@@ -8,7 +8,6 @@ import { AllergenesKeys } from '../../../../server/src/models/allergenes';
 import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
 import { LanguageKeys } from '../../i18n/language-keys';
 import { Price } from '../../../../server/src/models/price';
-import { getTitleString } from '../../helpers/get-title-string';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 

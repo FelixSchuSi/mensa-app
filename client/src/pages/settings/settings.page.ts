@@ -8,7 +8,6 @@ import {
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
-import { popFromRootNav } from '../../helpers/root-nav-util';
 import { toggleIosMd } from '../../helpers/toggle-ios-md';
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';

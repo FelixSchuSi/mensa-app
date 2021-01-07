@@ -7,7 +7,6 @@ import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
-import { getTitleString } from '../../helpers/get-title-string';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./groups.page.scss');
 

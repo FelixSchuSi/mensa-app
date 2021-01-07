@@ -4,11 +4,6 @@ export async function pushToNav(component: string, nav: HTMLIonNavElement): Prom
   return nav.push(component);
 }
 
-export async function popFromRootNav(): Promise<boolean> {
-  const rootNav: HTMLIonNavElement = <HTMLIonNavElement>document.querySelector('#root-nav');
-  return rootNav.pop();
-}
-
 export async function clearRootNav(): Promise<boolean> {
   const rootNav: HTMLIonNavElement = <HTMLIonNavElement>document.querySelector('#root-nav');
   return rootNav.popToRoot();

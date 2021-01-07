@@ -5,7 +5,6 @@ import { userService } from '../../services/user.service';
 import { formChanged } from '../../helpers/form-changed';
 import { LanguageStrings } from '../../models/language-strings';
 import { InputChangeEventDetail } from '@ionic/core';
-import { popFromRootNav } from '../../helpers/root-nav-util';
 import { Routes } from '../../routes';
 import { routerService } from '../../services/router.service';
 

@@ -6,7 +6,6 @@ import { LanguageStrings } from '../../models/language-strings';
 import { Task } from '../../models/task';
 import { taskService, TaskService } from '../../services/task.service';
 import { userService } from '../../services/user.service';
-import { getTitleString } from '../../helpers/get-title-string';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 
