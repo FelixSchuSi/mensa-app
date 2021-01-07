@@ -135,12 +135,7 @@ class MealsFuturePage extends PageMixin(LitElement) {
     await modal.present();
   }
 
-  protected dismissModal(e: any): void {
-    console.log(e);
-  }
-
   protected applyFilterConfig = (newFilterConfig: MealFilterConfig) => {
-    console.log('applyFilterConfig called!', newFilterConfig);
     this.mealFilterConfig = newFilterConfig;
     this.mealFilter = new MealFilterService(newFilterConfig);
     this.filteredMeals = this.mealFilter.filter(this.allMeals);

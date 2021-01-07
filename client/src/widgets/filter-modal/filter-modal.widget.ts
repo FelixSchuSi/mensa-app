@@ -2,6 +2,7 @@ import { LitElement, customElement, TemplateResult, html, internalProperty } fro
 import { LanguageStrings } from '../../models/language-strings';
 import { MealFilterConfig } from '../../models/meal-filter-config';
 import { i18nService } from '../../services/i18n.service';
+import { DEFAULT_MEAL_FILTER_CONFIG } from '../../services/meal-filter.service';
 
 @customElement('app-filter-modal')
 export class FilterModalWidget extends LitElement {
@@ -12,8 +13,10 @@ export class FilterModalWidget extends LitElement {
   @internalProperty()
   protected i18n!: LanguageStrings;
 
+  protected allMensen = DEFAULT_MEAL_FILTER_CONFIG.mensen;
   public applyFilterConfig!: (newFilterConfig: MealFilterConfig) => void;
   public oldFilterConfig!: MealFilterConfig;
+  public newFilterConfig!: MealFilterConfig;
 
   constructor() {
     super();
@@ -21,13 +24,13 @@ export class FilterModalWidget extends LitElement {
     i18nService.subscribe(i18n => (this.i18n = i18n));
   }
 
+  protected firstUpdated(): void {
+    this.newFilterConfig = this.oldFilterConfig;
+  }
+
   protected dismissModal(): void {
     const modal = <HTMLIonModalElement>this.parentElement?.parentElement!;
     modal.dismiss();
-  }
-
-  protected applyFilter(): void {
-    const event = new CustomEvent('apply-meal-filter');
   }
 
   protected render(): TemplateResult {
@@ -46,16 +49,28 @@ export class FilterModalWidget extends LitElement {
             <ion-label>
               <h2>Mensa</h2>
             </ion-label>
-            <div slot="end">Hier mensen aussuchen</div>
+            <div>
+              <chip-select
+                @chip-select-change=${(e: any) => {
+                  const mensen = e.detail.map((mensaChipElem: any) => mensaChipElem.id);
+                  this.newFilterConfig = { ...this.newFilterConfig, mensen };
+                }}
+              >
+                ${this.allMensen.map(mensa => {
+                  if (!this.newFilterConfig) this.newFilterConfig = this.oldFilterConfig;
+                  const isSelected = this.newFilterConfig.mensen.includes(mensa);
+                  return html`
+                    <ion-chip id=${mensa} class="${isSelected ? 'selected' : ''}">${this.i18n[mensa]}</ion-chip>
+                  `;
+                })}
+              </chip-select>
+            </div>
           </ion-item>
         </ion-list>
         <ion-button
           @click=${() => {
-            const newConfig: MealFilterConfig = {
-              mensen: ['davinci', 'denkpause', 'ring', 'steinfurt'],
-              nogos: []
-            };
-            this.applyFilterConfig(newConfig);
+            this.applyFilterConfig(this.newFilterConfig);
+            this.dismissModal();
           }}
           >${this.i18n.APPLY_FILTER}</ion-button
         >

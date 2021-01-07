@@ -15,6 +15,10 @@ class ChipSelectWidget extends LitElement {
     `
   ];
 
+  protected createRenderRoot(): LitElement {
+    return this;
+  }
+
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
