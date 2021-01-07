@@ -55,10 +55,7 @@ class SignUpPage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
-              @click=${async () => {
-                await popFromRootNav();
-                history.back();
-              }}
+              @click=${() => history.back()}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>
           </ion-buttons>

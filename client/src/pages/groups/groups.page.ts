@@ -50,7 +50,7 @@ class GroupsPage extends PageMixin(LitElement) {
   protected render(): TemplateResult {
     return html` <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
-          <ion-title>${getTitleString(this.i18n)}</ion-title>
+          <ion-title>${this.i18n.GROUPS}</ion-title>
           <ion-buttons slot="primary">
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
@@ -69,7 +69,7 @@ class GroupsPage extends PageMixin(LitElement) {
       <ion-content class="ion-padding" fullscreen>
         <ion-header collapse="condense">
           <ion-toolbar>
-            <ion-title size="large">${getTitleString(this.i18n)}</ion-title>
+            <ion-title size="large">${this.i18n.GROUPS}</ion-title>
           </ion-toolbar>
           <ion-toolbar>
             <ion-searchbar></ion-searchbar>
