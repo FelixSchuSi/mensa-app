@@ -30,7 +30,13 @@ export class FilterModalWidget extends LitElement {
 
   public applyFilterConfig!: (newFilterConfig: MealFilterConfig) => void;
   public oldFilterConfig!: MealFilterConfig;
-  public newFilterConfig!: MealFilterConfig;
+  private _newFilterConfig!: MealFilterConfig;
+  private get newFilterConfig(): MealFilterConfig {
+    return this._newFilterConfig ?? this.oldFilterConfig;
+  }
+  private set newFilterConfig(newConfig: MealFilterConfig) {
+    this._newFilterConfig = newConfig;
+  }
 
   constructor() {
     super();
@@ -61,6 +67,43 @@ export class FilterModalWidget extends LitElement {
       <ion-content fullscreen>
         <ion-list>
           <ion-item>
+            <div style="display:flex; align-items:center; width:100%; justify-content:space-between">
+              <div style="width:20%">
+                <ion-label>
+                  <h2>${this.i18n.DIET}</h2>
+                </ion-label>
+              </div>
+              <div style="width:60%">
+                <ion-segment
+                  @ionChange=${(e: any) => (this.newFilterConfig = { ...this.newFilterConfig, diet: e.detail.value })}
+                  value=${this.newFilterConfig.diet}
+                >
+                  ${this.allDiets.map(diet => {
+                    let imagePath: string;
+                    switch (diet) {
+                      case 'NO_PRESELECTION':
+                        imagePath = 'images/beef.png';
+                        break;
+                      case 'Vgn':
+                        imagePath = 'images/vegan.png';
+                        break;
+                      case 'Vgt':
+                        imagePath = 'images/veggie.png';
+                        break;
+                    }
+                    return html`
+                      <ion-segment-button value="${diet}">
+                        <ion-label>${this.i18n[diet]}</ion-label>
+                        <ion-img style="width:40px" src=${imagePath}></ion-img>
+                      </ion-segment-button>
+                    `;
+                  })}
+                </ion-segment>
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item>
             <div style="display:flex; align-items:center; width:100%">
               <div style="width:20%">
                 <ion-label>
@@ -75,39 +118,12 @@ export class FilterModalWidget extends LitElement {
                   }}
                 >
                   ${this.allMensen.map(mensa => {
-                    if (!this.newFilterConfig) this.newFilterConfig = this.oldFilterConfig;
                     const isSelected = this.newFilterConfig.mensen.includes(mensa);
                     return html`
                       <ion-chip id=${mensa} class="${isSelected ? 'selected' : ''}">${this.i18n[mensa]}</ion-chip>
                     `;
                   })}
                 </chip-select>
-              </div>
-            </div>
-          </ion-item>
-
-          <ion-item>
-            <div style="display:flex; align-items:center; width:100%">
-              <div style="width:20%">
-                <ion-label>
-                  <h2>${this.i18n.DIET}</h2>
-                </ion-label>
-              </div>
-              <div style="width:80%">
-                <ion-segment
-                  @ionChange=${(e: any) => (this.newFilterConfig = { ...this.newFilterConfig, diet: e.detail.value })}
-                  value=${this.newFilterConfig.diet}
-                >
-                  ${this.allDiets.map(diet => {
-                    if (!this.newFilterConfig) this.newFilterConfig = this.oldFilterConfig;
-                    return html`
-                      <ion-segment-button value="${diet}">
-                        <ion-label>${this.i18n[diet]}</ion-label>
-                        <ion-icon name="call"></ion-icon>
-                      </ion-segment-button>
-                    `;
-                  })}
-                </ion-segment>
               </div>
             </div>
           </ion-item>

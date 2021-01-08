@@ -41,7 +41,8 @@ module.exports = {
           from: path.resolve(__dirname, '404.html')
         },
         { from: path.resolve(__dirname, 'node_modules/@ionic/core/dist/ionic/svg'), to: './svg' },
-        { from: path.resolve(__dirname, 'svg/'), to: './svg' }
+        { from: path.resolve(__dirname, 'svg/'), to: './svg' },
+        { from: path.resolve(__dirname, 'images/'), to: './images' }
       ]
     }),
     new CleanWebpackPlugin(),
