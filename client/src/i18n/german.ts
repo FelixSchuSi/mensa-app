@@ -58,6 +58,11 @@ export const german: LanguageStrings = {
   denkpause: 'Bistro Denkpause',
   ring: 'Mensa am Ring',
   steinfurt: 'Mensa Steinfurt',
+  aasee_short: 'Am Aasee',
+  davinci_short: 'Da Vinci',
+  denkpause_short: 'Denkpause',
+  ring_short: 'Am Ring',
+  steinfurt_short: 'Steinfurt',
   // Strings in actual app
   SWITCH_LANGUAGE: 'Sprache wechseln',
   GROUPS: 'Gruppen',
@@ -101,5 +106,5 @@ export const german: LanguageStrings = {
   CONTENTS: 'Inhaltsstoffe',
   CLOSE: 'Schließen',
   DIET: 'Ernährungsstil',
-  NO_PRESELECTION: 'Keine Einschränkung'
+  NO_PRESELECTION: 'Standard'
 };

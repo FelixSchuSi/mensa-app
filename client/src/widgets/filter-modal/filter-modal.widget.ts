@@ -1,4 +1,4 @@
-import { LitElement, customElement, TemplateResult, html, internalProperty } from 'lit-element';
+import { LitElement, customElement, TemplateResult, html, internalProperty, property } from 'lit-element';
 import { AdditivesKeys } from '../../../../server/src/models/additives';
 import { AllergenesKeys } from '../../../../server/src/models/allergenes';
 import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
@@ -67,14 +67,17 @@ export class FilterModalWidget extends LitElement {
       <ion-content fullscreen>
         <ion-list>
           <ion-item>
-            <div style="display:flex; align-items:center; width:100%; justify-content:space-between">
+            <div
+              style="padding-top: 10px; padding-bottom: 10px; display:flex; align-items:center; width:100%; justify-content:flex-start"
+            >
               <div style="width:20%">
                 <ion-label>
                   <h2>${this.i18n.DIET}</h2>
                 </ion-label>
               </div>
-              <div style="width:60%">
+              <div style="width:40%">
                 <ion-segment
+                  mode="ios"
                   @ionChange=${(e: any) => (this.newFilterConfig = { ...this.newFilterConfig, diet: e.detail.value })}
                   value=${this.newFilterConfig.diet}
                 >
@@ -94,7 +97,7 @@ export class FilterModalWidget extends LitElement {
                     return html`
                       <ion-segment-button value="${diet}">
                         <ion-label>${this.i18n[diet]}</ion-label>
-                        <ion-img style="width:40px" src=${imagePath}></ion-img>
+                        <ion-img style="width:30px" src=${imagePath}></ion-img>
                       </ion-segment-button>
                     `;
                   })}
@@ -119,8 +122,14 @@ export class FilterModalWidget extends LitElement {
                 >
                   ${this.allMensen.map(mensa => {
                     const isSelected = this.newFilterConfig.mensen.includes(mensa);
+                    const shortMensa:
+                      | 'aasee_short'
+                      | 'davinci_short'
+                      | 'denkpause_short'
+                      | 'ring_short'
+                      | 'steinfurt_short' = <any>(mensa + '_short');
                     return html`
-                      <ion-chip id=${mensa} class="${isSelected ? 'selected' : ''}">${this.i18n[mensa]}</ion-chip>
+                      <ion-chip id=${mensa} class="${isSelected ? 'selected' : ''}">${this.i18n[shortMensa]}</ion-chip>
                     `;
                   })}
                 </chip-select>

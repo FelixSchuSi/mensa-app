@@ -101,5 +101,5 @@ export const english: LanguageStrings = {
   CONTENTS: 'Contents',
   CLOSE: 'Close',
   DIET: 'Diet',
-  NO_PRESELECTION: 'No preselection'
+  NO_PRESELECTION: 'Standard'
 };

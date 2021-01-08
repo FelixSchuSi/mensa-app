@@ -55,6 +55,11 @@ export type LanguageKeys =
   | 'denkpause'
   | 'ring'
   | 'steinfurt'
+  | 'aasee_short'
+  | 'davinci_short'
+  | 'denkpause_short'
+  | 'ring_short'
+  | 'steinfurt_short'
   // Strings in actual app
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'
