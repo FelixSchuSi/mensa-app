@@ -94,4 +94,9 @@ export type LanguageKeys =
   | 'GROUPS'
   | 'CREATE_GROUP'
   | 'FILTER_MEALS'
-  | 'APPLY_FILTER';
+  | 'APPLY_FILTER'
+  | 'LOCATION'
+  | 'CONTENTS'
+  | 'CLOSE'
+  | 'DIET'
+  | 'NO_PRESELECTION';

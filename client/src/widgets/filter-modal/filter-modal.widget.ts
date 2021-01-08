@@ -1,4 +1,7 @@
 import { LitElement, customElement, TemplateResult, html, internalProperty } from 'lit-element';
+import { AdditivesKeys } from '../../../../server/src/models/additives';
+import { AllergenesKeys } from '../../../../server/src/models/allergenes';
+import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
 import { DEFAULT_MEAL_FILTER_CONFIG } from '../../helpers/filter-meals';
 import { LanguageStrings } from '../../models/language-strings';
 import { MealFilterConfig } from '../../models/meal-filter-config';
@@ -14,6 +17,17 @@ export class FilterModalWidget extends LitElement {
   protected i18n!: LanguageStrings;
 
   protected allMensen = DEFAULT_MEAL_FILTER_CONFIG.mensen;
+  protected allDiets: Array<'Vgn' | 'Vgt' | 'NO_PRESELECTION'> = ['Vgn', 'Vgt', 'NO_PRESELECTION'];
+  protected get allContents(): Array<AdditivesKeys | AllergenesKeys | OtherMealInfoKeys> {
+    const values = [
+      // AdditiveKeys is the only numeric enum. 0 is a placeholder with no meaning
+      ...Object.values(AdditivesKeys).filter(additive => typeof additive === 'number' && additive !== 0),
+      ...Object.values(AllergenesKeys),
+      ...Object.values(OtherMealInfoKeys).filter(info => info !== 'Vgn' && info !== 'Vgt')
+    ];
+    return <Array<AdditivesKeys | AllergenesKeys | OtherMealInfoKeys>>values;
+  }
+
   public applyFilterConfig!: (newFilterConfig: MealFilterConfig) => void;
   public oldFilterConfig!: MealFilterConfig;
   public newFilterConfig!: MealFilterConfig;
@@ -26,6 +40,7 @@ export class FilterModalWidget extends LitElement {
 
   protected firstUpdated(): void {
     this.newFilterConfig = this.oldFilterConfig;
+    this.allContents;
   }
 
   protected dismissModal(): void {
@@ -39,32 +54,86 @@ export class FilterModalWidget extends LitElement {
         <ion-toolbar>
           <ion-title>${this.i18n.FILTER_MEALS}</ion-title>
           <ion-buttons slot="end">
-            <ion-button @click="${this.dismissModal}">Close</ion-button>
+            <ion-button @click="${this.dismissModal}">${this.i18n.CLOSE}</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content fullscreen>
         <ion-list>
           <ion-item>
-            <ion-label>
-              <h2>Mensa</h2>
-            </ion-label>
+            <div style="display:flex; align-items:center; width:100%">
+              <div style="width:20%">
+                <ion-label>
+                  <h2>${this.i18n.LOCATION}</h2>
+                </ion-label>
+              </div>
+              <div style="width:80%">
+                <chip-select
+                  @chip-select-change=${(e: any) => {
+                    const mensen = e.detail.map((mensaChipElem: any) => mensaChipElem.id);
+                    this.newFilterConfig = { ...this.newFilterConfig, mensen };
+                  }}
+                >
+                  ${this.allMensen.map(mensa => {
+                    if (!this.newFilterConfig) this.newFilterConfig = this.oldFilterConfig;
+                    const isSelected = this.newFilterConfig.mensen.includes(mensa);
+                    return html`
+                      <ion-chip id=${mensa} class="${isSelected ? 'selected' : ''}">${this.i18n[mensa]}</ion-chip>
+                    `;
+                  })}
+                </chip-select>
+              </div>
+            </div>
+          </ion-item>
 
-            <div>
-              <chip-select
-                @chip-select-change=${(e: any) => {
-                  const mensen = e.detail.map((mensaChipElem: any) => mensaChipElem.id);
-                  this.newFilterConfig = { ...this.newFilterConfig, mensen };
-                }}
-              >
-                ${this.allMensen.map(mensa => {
-                  if (!this.newFilterConfig) this.newFilterConfig = this.oldFilterConfig;
-                  const isSelected = this.newFilterConfig.mensen.includes(mensa);
-                  return html`
-                    <ion-chip id=${mensa} class="${isSelected ? 'selected' : ''}">${this.i18n[mensa]}</ion-chip>
-                  `;
-                })}
-              </chip-select>
+          <ion-item>
+            <div style="display:flex; align-items:center; width:100%">
+              <div style="width:20%">
+                <ion-label>
+                  <h2>${this.i18n.DIET}</h2>
+                </ion-label>
+              </div>
+              <div style="width:80%">
+                <ion-segment
+                  @ionChange=${(e: any) => (this.newFilterConfig = { ...this.newFilterConfig, diet: e.detail.value })}
+                  value=${this.newFilterConfig.diet}
+                >
+                  ${this.allDiets.map(diet => {
+                    if (!this.newFilterConfig) this.newFilterConfig = this.oldFilterConfig;
+                    return html`
+                      <ion-segment-button value="${diet}">
+                        <ion-label>${this.i18n[diet]}</ion-label>
+                        <ion-icon name="call"></ion-icon>
+                      </ion-segment-button>
+                    `;
+                  })}
+                </ion-segment>
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <div style="display:flex; align-items:center; width:100%">
+              <div style="width:20%">
+                <ion-label>
+                  <h2>${this.i18n.CONTENTS}</h2>
+                </ion-label>
+              </div>
+              <div style="width:80%">
+                <chip-select
+                  @chip-select-change=${(e: any) => {
+                    const contents = e.detail.map((contentChipElem: any) => contentChipElem.id);
+                    this.newFilterConfig = { ...this.newFilterConfig, nogos: contents };
+                  }}
+                >
+                  ${this.allContents.map(content => {
+                    const isSelected = this.newFilterConfig.nogos.includes(content);
+                    return html`
+                      <ion-chip id=${content} class="${isSelected ? 'selected' : ''}">${this.i18n[content]}</ion-chip>
+                    `;
+                  })}
+                </chip-select>
+              </div>
             </div>
           </ion-item>
         </ion-list>

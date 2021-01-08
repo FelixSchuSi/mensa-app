@@ -96,5 +96,10 @@ export const english: LanguageStrings = {
   MEALS_FUTURE: 'Meals',
   CREATE_GROUP: 'Create group',
   FILTER_MEALS: 'Filter meals',
-  APPLY_FILTER: 'Apply filter'
+  APPLY_FILTER: 'Apply filter',
+  LOCATION: 'Location',
+  CONTENTS: 'Contents',
+  CLOSE: 'Close',
+  DIET: 'Diet',
+  NO_PRESELECTION: 'No preselection'
 };

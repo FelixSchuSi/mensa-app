@@ -96,5 +96,10 @@ export const german: LanguageStrings = {
   MEALS_FUTURE: 'Gerichte',
   CREATE_GROUP: 'Gruppe erstellen',
   FILTER_MEALS: 'Gerichte filtern',
-  APPLY_FILTER: 'Filter anwenden'
+  APPLY_FILTER: 'Filter anwenden',
+  LOCATION: 'Mensa',
+  CONTENTS: 'Inhaltsstoffe',
+  CLOSE: 'Schließen',
+  DIET: 'Ernährungsstil',
+  NO_PRESELECTION: 'Keine Einschränkung'
 };
