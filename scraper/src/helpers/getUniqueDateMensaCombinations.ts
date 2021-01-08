@@ -1,6 +1,8 @@
 import { FlatMeal } from '../../../server/src/models/flatMeal';
 
-export function getUniqueDateMensaCombinations(flatMeals: FlatMeal[]): { date: string; mensa: string }[] {
+export function getUniqueDateMensaCombinations(
+  flatMeals: FlatMeal[]
+): { date: string; mensa: 'aasee' | 'davinci' | 'denkpause' | 'ring' | 'steinfurt' }[] {
   // Get all unique date - mensa combinations
   const mapped = flatMeals.map(flatMeal => {
     const { date, mensa } = flatMeal;
