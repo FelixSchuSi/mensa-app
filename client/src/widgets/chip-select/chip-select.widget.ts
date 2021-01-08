@@ -41,9 +41,9 @@ export class ChipSelectWidget extends LitElement {
     });
   }
 
-  public get value(): string[] {
+  public get value(): HTMLIonChipElement[] {
     const selectedChips = <any[]>this.chips.filter(chip => chip.classList.contains('selected'));
-    return selectedChips.map(chip => chip.id);
+    return selectedChips;
   }
 
   protected handleSlotchange(e: any) {

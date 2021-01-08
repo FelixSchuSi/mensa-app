@@ -4,8 +4,8 @@ import { Languages } from '../models/languages';
 export const german: LanguageStrings = {
   _LANGUAGE: Languages.GERMAN,
   // other meal info
-  Rin: 'Rindfleisch',
-  Sch: 'Schweinefleisch',
+  Rin: 'Rind',
+  Sch: 'Schwein',
   Vgt: 'Vegetarisch',
   Vgn: 'Vegan',
   Fis: 'Fisch',

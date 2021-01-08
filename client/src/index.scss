@@ -61,6 +61,5 @@ app-root,
 }
 
 ion-modal {
-  --width: 100% !important;
-  --height: 100% !important;
+  --min-width: 700px !important;
 }

@@ -58,6 +58,11 @@ export const english: LanguageStrings = {
   denkpause: 'Bistro Denkpause',
   ring: 'Mensa am Ring',
   steinfurt: 'Mensa Steinfurt',
+  aasee_short: 'Am Aasee',
+  davinci_short: 'Da Vinci',
+  denkpause_short: 'Denkpause',
+  ring_short: 'Am Ring',
+  steinfurt_short: 'Steinfurt',
   // Strings in actual app
   SWITCH_LANGUAGE: 'Change language',
   SIGN_UP: 'Sign up',

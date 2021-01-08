@@ -125,6 +125,7 @@ class MealsFuturePage extends PageMixin(LitElement) {
   protected async createModal() {
     const modal: HTMLIonModalElement = await modalController.create({
       component: 'app-filter-modal',
+      swipeToClose: true,
       componentProps: {
         applyFilterConfig: this.applyFilterConfig,
         oldFilterConfig: this.mealFilterConfig
