@@ -10,9 +10,9 @@ import { Price } from '../../../../server/src/models/price';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 import { modalController } from '@ionic/core';
-import { DEFAULT_MEAL_FILTER_CONFIG, MealFilterService } from '../../services/meal-filter.service';
 import { MealFilterConfig } from '../../models/meal-filter-config';
 import { mealService } from '../../services/meal.service';
+import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-meals';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -38,13 +38,12 @@ class MealsFuturePage extends PageMixin(LitElement) {
   protected filteredMeals: Meal[] = [];
 
   protected mealFilterConfig: MealFilterConfig = DEFAULT_MEAL_FILTER_CONFIG;
-  protected mealFilter: MealFilterService = new MealFilterService(this.mealFilterConfig);
 
   protected async firstUpdated(): Promise<void> {
     try {
       mealService.subscribe((meals: Meal[]) => {
         this.allMeals = meals;
-        this.filteredMeals = this.mealFilter.filter(meals);
+        this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
       });
       await mealService.getMeals();
     } catch ({ message, statusCode }) {
@@ -137,7 +136,6 @@ class MealsFuturePage extends PageMixin(LitElement) {
 
   protected applyFilterConfig = (newFilterConfig: MealFilterConfig) => {
     this.mealFilterConfig = newFilterConfig;
-    this.mealFilter = new MealFilterService(newFilterConfig);
-    this.filteredMeals = this.mealFilter.filter(this.allMeals);
+    this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
   };
 }

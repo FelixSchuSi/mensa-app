@@ -1,8 +1,8 @@
 import { LitElement, customElement, TemplateResult, html, internalProperty } from 'lit-element';
+import { DEFAULT_MEAL_FILTER_CONFIG } from '../../helpers/filter-meals';
 import { LanguageStrings } from '../../models/language-strings';
 import { MealFilterConfig } from '../../models/meal-filter-config';
 import { i18nService } from '../../services/i18n.service';
-import { DEFAULT_MEAL_FILTER_CONFIG } from '../../services/meal-filter.service';
 
 @customElement('app-filter-modal')
 export class FilterModalWidget extends LitElement {
@@ -49,6 +49,7 @@ export class FilterModalWidget extends LitElement {
             <ion-label>
               <h2>Mensa</h2>
             </ion-label>
+
             <div>
               <chip-select
                 @chip-select-change=${(e: any) => {
