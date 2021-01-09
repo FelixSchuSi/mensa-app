@@ -31,8 +31,11 @@ export class RouterService {
     };
   }
 
-  public navigate(relUrl: Routes, query?: Array<QueryParameter>): void {
-    const queryString = query?.map(e => e.Key + '=' + e.Value).join('&') ?? '';
+  public navigate(relUrl: Routes, query?: QueryParameter): void {
+    const queryString =
+      Object.keys(query || {})
+        .map(e => e + '=' + query![e])
+        .join('&') ?? '';
     history.pushState(null, '', this.withRootPath(relUrl) + (queryString ? '?' + queryString : ''));
     this.notifyListeners();
   }
