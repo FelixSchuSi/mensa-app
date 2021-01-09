@@ -79,26 +79,21 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-buttons>
           <ion-title>${this.i18n.SIGN_UP}</ion-title>
         </ion-toolbar>
-        <ion-toolbar>
-          <ion-segment value=${this.currentStep}>
-            <ion-segment-button @click=${() => (this.currentStep = 1)} value="1">
-              <ion-label>${this.i18n.STEP_1}</ion-label>
-            </ion-segment-button>
-            <ion-segment-button @click=${() => (this.currentStep = 2)} value="2">
-              <ion-label>${this.i18n.STEP_2}</ion-label>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-toolbar>
       </ion-header>
       <ion-content class="sign-up-content" fullscreen class="ion-padding">
+        <!-- <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${this.i18n.SIGN_UP}</ion-title>
+          </ion-toolbar>
+        </ion-header> -->
         ${this.renderNotification()} ${this.currentStep === 1 ? this.stepOne : this.stepTwo}
       </ion-content>
     `;
   }
 
-  protected get stepOne(): TemplateResult {
+  protected get stepTwo(): TemplateResult {
     return html`
-      <h1 style="padding-left: 20px;" class="ion-padding">${this.i18n.STEP_1}: ${this.i18n.PERSONAL_DATA}</h1>
+      <h1 style="padding-left: 20px;" class="ion-padding">${this.i18n.STEP_2}: ${this.i18n.PERSONAL_DATA}</h1>
       <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
         <ion-item-group>
           <ion-item>
@@ -155,15 +150,21 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-item>
           <div class="error pw-repeat-error"></div>
         </ion-item-group>
-        <ion-button style="float:right;" color="primary" type="button" @click="${this.submitFirstStep}"
-          >${this.i18n.NEXT_STEP}</ion-button
+        <ion-button style="float:right;" color="primary" type="button" @click="${this.submit}"
+          >${this.i18n.SIGN_UP}</ion-button
         >
       </form>
     `;
   }
-  protected get stepTwo(): TemplateResult {
+  protected get stepOne(): TemplateResult {
     return html`
-      <h1 style="padding-left: 20px;" class="ion-padding">${this.i18n.STEP_2}: ${this.i18n.PERSONAL_DATA}</h1>
+      <div class="ion-padding" style="padding-left: 20px;">
+        <h1>${this.i18n.STEP_1}: ${this.i18n.PERSONAL_DATA}</h1>
+        <p>
+          Bist du beim Essen wählerisch oder hast einen sensiblen Magen? Hinterlege Informationen zu deinen Vorlieben
+          damit dir Gerichte angezeigt werden, die für dich interessant sind.
+        </p>
+      </div>
       <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
         <ion-item-group>
           <ion-item>
@@ -190,14 +191,16 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-item>
           <div class="error"></div>
         </ion-item-group>
-        <ion-button style="float:right;" color="primary" type="button" @click="${this.submit}"
-          >${this.i18n.SIGN_UP}</ion-button
+        <ion-button style="float:right;" color="primary" type="button" @click="${() => (this.currentStep = 2)}"
+          >${this.i18n.NEXT_STEP}</ion-button
         >
       </form>
     `;
   }
 
-  protected async submitFirstStep(): Promise<void> {
+  protected async submitFirstStep(): Promise<void> {}
+
+  protected async submit(): Promise<void> {
     if (this.isFormValid()) {
       this.signUpData = {
         name: this.nameElement.value,
@@ -205,12 +208,6 @@ class SignUpPage extends PageMixin(LitElement) {
         password: this.passwordElement.value,
         passwordCheck: this.passwordCheckElement.value
       };
-      this.currentStep = 2;
-    }
-  }
-
-  protected async submit(): Promise<void> {
-    if (this.isFormValid()) {
       try {
         await userService.signUp(this.signUpData, this.i18n);
         routerService.navigate(Routes.TASKS);
