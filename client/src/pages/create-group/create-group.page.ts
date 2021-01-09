@@ -19,7 +19,8 @@ class CreateGroupPage extends PageMixin(LitElement) {
   ];
 
   protected groupService: GroupService = groupService;
-
+  @property({ type: String, attribute: false })
+  protected groupName: string;
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
@@ -45,7 +46,31 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.CREATE_GROUP}</ion-title>
           </ion-toolbar>
         </ion-header>
-        <h1>Test</h1>
+        <div class="horizontal-center" style="margin-top:1em;flex-direction:column">
+          <div style="height:200px;width:200px;background-color:lightgrey;display:flex;justify-content:center">
+            <ion-button slot="icon-only"
+              ><ion-icon style="color:black;height:100%;font-size:50px" name="cloud-upload-outline"></ion-icon
+            ></ion-button>
+          </div>
+          <ion-input
+            style="width:250px"
+            @change=${(e: Event): void => {
+              const target = e.target as HTMLTextAreaElement;
+              this.groupName = target.value;
+            }}
+            placeholder="test"
+            type="text"
+            required
+          >
+          </ion-input>
+          <ion-button
+            color="primary"
+            @click=${(): void => {
+              this.groupService;
+            }}
+            >Erstellen</ion-button
+          >
+        </div>
       </ion-content>
     `;
   }
