@@ -8,6 +8,7 @@ import { ALL_MENSEN } from '../../helpers/all-mensen';
 import { LanguageStrings } from '../../models/language-strings';
 import { MealFilterConfig } from '../../models/meal-filter-config';
 import { i18nService } from '../../services/i18n.service';
+import { userService } from '../../services/user.service';
 
 @customElement('app-filter-modal')
 export class FilterModalWidget extends LitElement {
@@ -162,6 +163,7 @@ export class FilterModalWidget extends LitElement {
             style="float:right"
             @click=${() => {
               this.applyFilterConfig(this.newFilterConfig);
+              userService.editUser({ filterConfig: this.newFilterConfig });
               this.dismissModal();
             }}
             >${this.i18n.APPLY_FILTER}</ion-button

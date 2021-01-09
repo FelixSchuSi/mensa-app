@@ -1,7 +1,8 @@
 import { LitElement, property, html, TemplateResult, internalProperty } from 'lit-element';
+import { User } from '../../../server/src/models/user';
 import { LanguageStrings } from '../models/language-strings';
 import { i18nService } from '../services/i18n.service';
-import { userService, UserInfo } from '../services/user.service';
+import { userService } from '../services/user.service';
 
 // eslint-disable-next-line
 export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T) => {
@@ -16,7 +17,7 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
     protected mode: 'ios' | 'md' = 'md';
 
     @property({ type: Object })
-    protected userInfo?: UserInfo;
+    protected userInfo?: User;
 
     @property()
     private infoMessage = '';

@@ -27,6 +27,7 @@ import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info
 import { getAllContents } from '../../helpers/all-contents';
 import { ALL_STATUS } from '../../helpers/all-status';
 import { Status } from '../../../../server/src/models/status';
+import { elementIsDisabled } from 'selenium-webdriver/lib/until';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -50,10 +51,10 @@ class SignUpPage extends PageMixin(LitElement) {
   @query('form')
   protected form!: HTMLFormElement;
 
-  @query('#name')
+  @query('#name > input')
   protected nameElement!: HTMLInputElement;
 
-  @query('#email')
+  @query('#email > input')
   protected emailElement!: HTMLInputElement;
 
   @query('#password > input')
@@ -111,7 +112,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-label class="wider-label" position="fixed" for="name">${this.i18n.NAME}</ion-label>
             <ion-input
               placeholder="${this.i18n.NAME}"
-              debounce="100"
+              debounce="0"
               type="text"
               autofocus
               required
@@ -305,6 +306,14 @@ class SignUpPage extends PageMixin(LitElement) {
       this.passwordRepeatError.innerHTML = this.passwordCheckElement.validationMessage;
     } else {
       this.passwordCheckElement.setCustomValidity('');
+    }
+    const formElements = [this.nameElement, this.emailElement, this.passwordElement, this.passwordCheckElement];
+    for (const element of formElements) {
+      if (element.value === '') {
+        const parent = <HTMLIonInputElement>element.parentElement;
+        parent.value = ' ';
+        parent.value = '';
+      }
     }
     return this.form.checkValidity();
   }
