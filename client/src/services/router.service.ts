@@ -1,5 +1,5 @@
 import { Routes } from '../routes';
-
+export type QueryParameter = Record<string, string>;
 export type RouteListener = (relUrl: string) => void;
 export type Unsubscribe = () => void;
 export class RouterService {
@@ -31,8 +31,9 @@ export class RouterService {
     };
   }
 
-  public navigate(relUrl: Routes): void {
-    history.pushState(null, '', this.withRootPath(relUrl));
+  public navigate(relUrl: Routes, query?: Array<QueryParameter>): void {
+    const queryString = query?.map(e => e.Key + '=' + e.Value).join('&') ?? '';
+    history.pushState(null, '', this.withRootPath(relUrl) + (queryString ? '?' + queryString : ''));
     this.notifyListeners();
   }
 
@@ -40,7 +41,19 @@ export class RouterService {
   public getPath(): Routes {
     return <Routes>this.withoutRootPath(location.pathname);
   }
+  public getQueryParameter(key: string): string {
+    const queryString = location.search.substr(1); // Remove ? from search
+    return this.parseQueryParameter(queryString)[key];
+  }
+  private parseQueryParameter(searchStr: string): QueryParameter {
+    const tmap: QueryParameter = {};
 
+    searchStr.split('&').forEach((e): void => {
+      const pair = e.split('=');
+      tmap[pair[0]] = pair[1];
+    });
+    return tmap;
+  }
   private notifyListeners(): void {
     const path = this.getPath();
     this.listeners.forEach(listener => listener(path));
