@@ -83,6 +83,11 @@ class GroupsPage extends PageMixin(LitElement) {
         <ion-header collapse="condense">
           <ion-toolbar>
             <ion-title size="large">${this.i18n.GROUPS}</ion-title>
+            <ion-buttons slot="primary">
+              <ion-button @click=${(): void => routerService.navigate(Routes.GROUPS_CREATE)}
+                ><ion-icon name="add"></ion-icon
+              ></ion-button>
+            </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-list>
