@@ -81,7 +81,6 @@ class TasksPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.TASKS}</ion-title>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
         <form novalidate @submit="${this.submit}">
           <div class="inputField">
             <ion-input

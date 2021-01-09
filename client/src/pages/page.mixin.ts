@@ -46,16 +46,30 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       this.onDestroyCallbacks.push(callback);
     }
 
-    protected renderNotification(): TemplateResult {
-      return html` <app-notification error="${this.errorMessage}" info="${this.infoMessage}"></app-notification> `;
-    }
-
     protected setNotification({ errorMessage = '', infoMessage = '' }): void {
       if (errorMessage === '_ignoreMe' || infoMessage === '_ignoreMe') return;
       this.errorMessage = errorMessage;
       this.infoMessage = infoMessage;
       if (errorMessage || infoMessage) {
         setTimeout(() => this.setNotification({}), 3000);
+        const toast = <HTMLIonToastElement>document.createElement('ion-toast');
+        toast.duration = 3000;
+        toast.buttons = [
+          {
+            role: 'cancel',
+            icon: 'close'
+          }
+        ];
+        if (errorMessage) {
+          toast.message = errorMessage;
+          toast.color = 'danger';
+        } else if (infoMessage) {
+          toast.message = infoMessage;
+          toast.color = 'success';
+        }
+
+        document.body.appendChild(toast);
+        toast.present();
       }
     }
   }

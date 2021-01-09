@@ -72,7 +72,6 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.SETTINGS}</ion-title>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
         <ion-list>
           <ion-item>
             <ion-label>${this.i18n.LANGUAGE}</ion-label>

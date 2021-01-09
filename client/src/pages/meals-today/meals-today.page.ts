@@ -51,7 +51,6 @@ class MealsTodayPage extends PageMixin(LitElement) {
             <ion-searchbar></ion-searchbar>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
         <p>Hier könnten Ihre heutigen Gerichte stehen!</p>
         <chip-select @chip-select-change=${(e: any) => console.log(e.detail, e)}>
           <ion-chip>asdf</ion-chip>

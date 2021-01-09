@@ -89,7 +89,6 @@ class MealsFuturePage extends PageMixin(LitElement) {
             <ion-searchbar></ion-searchbar>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
         ${this.filteredMeals.map(meal => {
           const { title, date, mensa, additives, allergens, otherInfo, price } = meal;
           const entries = Object.entries({ date, mensa, additives, allergens, otherInfo, price });

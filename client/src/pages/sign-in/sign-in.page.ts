@@ -62,7 +62,6 @@ export class SignInPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.SIGN_IN}</ion-title>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
         <form @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
           <ion-item-group>
             <ion-item>
