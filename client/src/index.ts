@@ -16,3 +16,5 @@ import './widgets/notification/notification.widget';
 import './widgets/task/task.widget';
 import './widgets/connection-status-bar/connection-status-bar.widget';
 import './widgets/chip-select/chip-select.widget';
+import './widgets/filter-modal/filter-modal.widget';
+import './widgets/chip-toggle-show-more/chip-toggle-show-more';

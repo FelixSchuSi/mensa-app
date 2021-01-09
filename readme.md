@@ -31,5 +31,5 @@ Wenn ohne Docker entwickelt wird muss das Frontend und das Backend separat gesta
 
 ## Deployment und Hosting
 
-Das Frontend wird mithilfe von Github Pages bereitgestellt. Soll ein neuer Stand des Frontends live geschaltet werden kann dies mit `cd client && npm run deploy` getätigt werden.
-Das Backend wird auf DigitalOcean's app platform gehostet. Mit jedem push in diesem Repository wird automatisch der neuste Stand des Backends bereitgestellt.
+Der neuste Stand der Anwendung wird bei jedem push in diesem Repository live geschaltet.
+Das Backend wird auf DigitalOcean's app platform gehostet, das Frontend wird mit Github pages bereitgestellt und ist unter https://felixschusi.github.io/mensa-app/ erreichbar.

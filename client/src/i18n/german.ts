@@ -4,8 +4,8 @@ import { Languages } from '../models/languages';
 export const german: LanguageStrings = {
   _LANGUAGE: Languages.GERMAN,
   // other meal info
-  Rin: 'Rindfleisch',
-  Sch: 'Schweinefleisch',
+  Rin: 'Rind',
+  Sch: 'Schwein',
   Vgt: 'Vegetarisch',
   Vgn: 'Vegan',
   Fis: 'Fisch',
@@ -52,6 +52,17 @@ export const german: LanguageStrings = {
   8: 'Phosphat',
   9: 'Süßungsmitteln',
   10: 'Phenylalaninquelle',
+  // names of mensas
+  aasee: 'Mensa am Aasee',
+  davinci: 'Mensa Da Vinci',
+  denkpause: 'Bistro Denkpause',
+  ring: 'Mensa am Ring',
+  steinfurt: 'Mensa Steinfurt',
+  aasee_short: 'Am Aasee',
+  davinci_short: 'Da Vinci',
+  denkpause_short: 'Denkpause',
+  ring_short: 'Am Ring',
+  steinfurt_short: 'Steinfurt',
   // Strings in actual app
   SWITCH_LANGUAGE: 'Sprache wechseln',
   GROUPS: 'Gruppen',
@@ -88,5 +99,12 @@ export const german: LanguageStrings = {
   BACK: 'Zurück',
   MEALS_TODAY: 'Heutige Gerichte',
   MEALS_FUTURE: 'Gerichte',
-  CREATE_GROUP: 'Gruppe erstellen'
+  CREATE_GROUP: 'Gruppe erstellen',
+  FILTER_MEALS: 'Gerichte filtern',
+  APPLY_FILTER: 'Filter anwenden',
+  LOCATION: 'Mensa',
+  CONTENTS: 'Inhaltsstoffe',
+  CLOSE: 'Schließen',
+  DIET: 'Ernährungsstil',
+  NO_PRESELECTION: 'Standard'
 };

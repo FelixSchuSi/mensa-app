@@ -1,7 +1,6 @@
 import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
-import { httpService } from '../../services/http.service';
 import { Meal } from '../../../../server/src/models/meal';
 import { AdditivesKeys } from '../../../../server/src/models/additives';
 import { AllergenesKeys } from '../../../../server/src/models/allergenes';
@@ -10,6 +9,10 @@ import { LanguageKeys } from '../../i18n/language-keys';
 import { Price } from '../../../../server/src/models/price';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { modalController } from '@ionic/core';
+import { MealFilterConfig } from '../../models/meal-filter-config';
+import { mealService } from '../../services/meal.service';
+import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-meals';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -29,15 +32,24 @@ class MealsFuturePage extends PageMixin(LitElement) {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
+  protected allMeals: Meal[] = [];
+
   @property({ attribute: false })
-  protected meals: Meal[] = [];
+  protected filteredMeals: Meal[] = [];
+
+  protected mealFilterConfig: MealFilterConfig = DEFAULT_MEAL_FILTER_CONFIG;
 
   protected async firstUpdated(): Promise<void> {
     try {
-      const res = await httpService.get('meals');
-      const json = await res.json();
-      this.meals = json.results;
-    } catch (e) {}
+      mealService.subscribe((meals: Meal[]) => {
+        this.allMeals = meals;
+        this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
+      });
+      await mealService.getMeals();
+    } catch ({ message, statusCode }) {
+      this.setNotification({ errorMessage: message });
+      console.log({ message, statusCode });
+    }
   }
 
   protected render(): TemplateResult {
@@ -46,6 +58,9 @@ class MealsFuturePage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-title>${this.i18n.MEALS_FUTURE}</ion-title>
           <ion-buttons slot="primary">
+            <ion-button @click=${this.createModal}>
+              <ion-icon slot="icon-only" src="svg/custom_filter.svg"></ion-icon>
+            </ion-button>
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
               <!-- <ion-icon name="person-circle"></ion-icon> -->
@@ -70,7 +85,7 @@ class MealsFuturePage extends PageMixin(LitElement) {
           </ion-toolbar>
         </ion-header>
         ${this.renderNotification()}
-        ${this.meals.map(meal => {
+        ${this.filteredMeals.map(meal => {
           const { title, date, mensa, additives, allergens, otherInfo, price } = meal;
           const entries = Object.entries({ date, mensa, additives, allergens, otherInfo, price });
           return html` <h2>${title}</h2>
@@ -106,4 +121,22 @@ class MealsFuturePage extends PageMixin(LitElement) {
     const { student, employee, guest } = price;
     return `${student} € - ${employee} € - ${guest} €`;
   }
+
+  protected async createModal() {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-filter-modal',
+      swipeToClose: true,
+      componentProps: {
+        applyFilterConfig: this.applyFilterConfig,
+        oldFilterConfig: this.mealFilterConfig
+      }
+    });
+
+    await modal.present();
+  }
+
+  protected applyFilterConfig = (newFilterConfig: MealFilterConfig) => {
+    this.mealFilterConfig = newFilterConfig;
+    this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
+  };
 }

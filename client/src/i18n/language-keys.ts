@@ -49,6 +49,17 @@ export type LanguageKeys =
   | '8'
   | '9'
   | '10'
+  // names of mensas
+  | 'aasee'
+  | 'davinci'
+  | 'denkpause'
+  | 'ring'
+  | 'steinfurt'
+  | 'aasee_short'
+  | 'davinci_short'
+  | 'denkpause_short'
+  | 'ring_short'
+  | 'steinfurt_short'
   // Strings in actual app
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'
@@ -86,4 +97,11 @@ export type LanguageKeys =
   | 'MEALS_TODAY'
   | 'MEALS_FUTURE'
   | 'GROUPS'
-  | 'CREATE_GROUP';
+  | 'CREATE_GROUP'
+  | 'FILTER_MEALS'
+  | 'APPLY_FILTER'
+  | 'LOCATION'
+  | 'CONTENTS'
+  | 'CLOSE'
+  | 'DIET'
+  | 'NO_PRESELECTION';

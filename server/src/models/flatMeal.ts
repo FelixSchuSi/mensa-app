@@ -5,7 +5,7 @@ import { Price } from '../../../server/src/models/price';
 export interface FlatMeal {
   title: string;
   date: string;
-  mensa: string;
+  mensa: 'aasee' | 'davinci' | 'denkpause' | 'ring' | 'steinfurt';
   additives: AdditivesKeys[]; // TODO: only use string -> keys
   allergens: AllergenesKeys[];
   otherInfo: OtherMealInfoKeys[];

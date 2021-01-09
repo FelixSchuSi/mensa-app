@@ -52,6 +52,17 @@ export const english: LanguageStrings = {
   8: 'Phosphate',
   9: 'Sweeteners',
   10: 'Phenylalanine',
+  // names of mensas
+  aasee: 'Mensa am Aasee',
+  davinci: 'Mensa Da Vinci',
+  denkpause: 'Bistro Denkpause',
+  ring: 'Mensa am Ring',
+  steinfurt: 'Mensa Steinfurt',
+  aasee_short: 'Am Aasee',
+  davinci_short: 'Da Vinci',
+  denkpause_short: 'Denkpause',
+  ring_short: 'Am Ring',
+  steinfurt_short: 'Steinfurt',
   // Strings in actual app
   SWITCH_LANGUAGE: 'Change language',
   SIGN_UP: 'Sign up',
@@ -88,5 +99,12 @@ export const english: LanguageStrings = {
   BACK: 'Back',
   MEALS_TODAY: 'Todays Meals',
   MEALS_FUTURE: 'Meals',
-  CREATE_GROUP: 'Create group'
+  CREATE_GROUP: 'Create group',
+  FILTER_MEALS: 'Filter meals',
+  APPLY_FILTER: 'Apply filter',
+  LOCATION: 'Location',
+  CONTENTS: 'Contents',
+  CLOSE: 'Close',
+  DIET: 'Diet',
+  NO_PRESELECTION: 'Standard'
 };
