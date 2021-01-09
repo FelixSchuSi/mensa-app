@@ -101,7 +101,7 @@ class GroupsPage extends PageMixin(LitElement) {
                 group => html`
                   <ion-item
                     @click=${(): void => {
-                      routerService.navigate(Routes.GROUPS_DETAILS);
+                      routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id });
                     }}
                   >
                     <ion-avatar slot="start">

@@ -4,6 +4,7 @@ import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
+import { routerService } from '../../services/router.service';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./group-details.page.scss');
 
@@ -20,8 +21,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
   ];
 
   protected groupService: GroupService = groupService;
-  @property({ type: Object, attribute: false })
-  protected group: Group | undefined;
+  protected groupID = routerService.getQueryParameter('id');
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
@@ -46,6 +46,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.CREATE_GROUP}</ion-title>
           </ion-toolbar>
         </ion-header>
+        <div>${this.groupID}</div>
       </ion-content>
     `;
   }
