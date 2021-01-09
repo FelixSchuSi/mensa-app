@@ -82,7 +82,7 @@ export const english: LanguageStrings = {
   EMPLOYEE: 'Employee',
   GUEST: 'Guest',
   CHOOSE_STATUS: 'Choose your status',
-  INDIGESTIBILITY: 'Indigestibility',
+  INDIGESTIBILITIES: 'Indigestibilities',
   PREFERENCE: 'Preference',
   NETWORK_SYNCING: 'Synchronizing...',
   NETWORK_OFFLINE: 'Offline',
@@ -106,5 +106,11 @@ export const english: LanguageStrings = {
   CONTENTS: 'Contents',
   CLOSE: 'Close',
   DIET: 'Diet',
-  NO_PRESELECTION: 'Standard'
+  STANDARD_DIET: 'Standard',
+  STEP_1: 'Step 1',
+  STEP_2: 'Step 2',
+  PERSONAL_DATA: 'Personal Data',
+  NEXT_STEP: 'Next step',
+  PREVIOUS_STEP: 'Previous step',
+  STATUS: 'Status'
 };

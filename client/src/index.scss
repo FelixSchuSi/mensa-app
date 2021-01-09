@@ -77,3 +77,22 @@ ion-modal {
   --width: 100% !important;
   --height: 100% !important;
 }
+
+div.error {
+  height: 24px;
+  color: var(--ion-color-danger);
+  padding-left: 20px;
+}
+
+div.error.md {
+  background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+
+.wider-label {
+  flex: initial !important;
+  width: 160px !important;
+}
+
+.sign-up-header > ion-toolbar {
+  --background: var(--ion-background-color);
+}

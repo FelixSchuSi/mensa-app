@@ -5,17 +5,14 @@ import { ConnectionStatus } from '../widgets/connection-status-bar/connection-st
 import { connectionStatusService } from './connection-status.service';
 import { httpService } from './http.service';
 import { taskService } from './task.service';
+import { User } from '../../../server/src/models/user';
+import { TouchSequence } from 'selenium-webdriver';
 
-export interface UserInfo {
-  name: string;
-  email: string;
-}
-
-type userInfoListener = (userInfo: UserInfo | undefined) => void;
+type userInfoListener = (userInfo: User | undefined) => void;
 
 class UserService {
   private listeners: userInfoListener[] = [];
-  private _userInfo?: UserInfo;
+  private _userInfo?: User;
 
   constructor() {
     this.getUserInfo();
@@ -29,7 +26,7 @@ class UserService {
   public async getUserInfo(): Promise<void> {
     try {
       const user = await httpService.get('users/');
-      const userInfo = <UserInfo>await user.json();
+      const userInfo = <User>await user.json();
       this.userInfo = userInfo;
     } catch ({ statusCode }) {
       if (statusCode === 401) this.userInfo = undefined;
@@ -39,8 +36,7 @@ class UserService {
   public async signIn(signInData: SignInData, i18n: LanguageStrings): Promise<void> {
     if (navigator.onLine) {
       const res: Response = await httpService.post('users/sign-in', signInData);
-      const { name, email } = await res.json();
-      this.userInfo = { name, email };
+      this.userInfo = await res.json();
     } else {
       return Promise.reject({ message: i18n.INTERNET_NEEDED_FOR_SIGN_IN, statusCode: 503 });
     }
@@ -49,10 +45,19 @@ class UserService {
   public async signUp(signUpData: SignUpData, i18n: LanguageStrings): Promise<void> {
     if (navigator.onLine) {
       const res: Response = await httpService.post('users', signUpData);
-      const { name, email } = await res.json();
-      this.userInfo = { name, email };
+      this.userInfo = await res.json();
     } else {
       return Promise.reject({ message: i18n.INTERNET_NEEDED_FOR_SIGN_UP, statusCode: 503 });
+    }
+  }
+
+  public async editUser(newUserData: Partial<User>): Promise<void> {
+    if (!this.userInfo?.email) return;
+    if (navigator.onLine) {
+      newUserData.email = newUserData.email ?? this.userInfo.email;
+      console.log(newUserData);
+      const res: Response = await httpService.patch('users', newUserData);
+      this.userInfo = await res.json();
     }
   }
 
@@ -61,11 +66,11 @@ class UserService {
     this.userInfo = undefined;
   }
 
-  public get userInfo(): UserInfo | undefined {
+  public get userInfo(): User | undefined {
     return this._userInfo;
   }
 
-  public set userInfo(userInfo: UserInfo | undefined) {
+  public set userInfo(userInfo: User | undefined) {
     this._userInfo = userInfo;
     if (this._userInfo === undefined) {
       taskService.clear();
@@ -77,7 +82,7 @@ class UserService {
     this.listeners.push(listener);
   }
 
-  private notifyListeners(userInfo: UserInfo | undefined): void {
+  private notifyListeners(userInfo: User | undefined): void {
     this.listeners.forEach(listener => listener(userInfo));
   }
 }

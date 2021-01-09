@@ -12,7 +12,6 @@ import './pages/meals-today/meals-today.page';
 import './pages/groups/groups.page';
 import './pages/create-group/create-group.page';
 
-import './widgets/notification/notification.widget';
 import './widgets/task/task.widget';
 import './widgets/connection-status-bar/connection-status-bar.widget';
 import './widgets/chip-select/chip-select.widget';

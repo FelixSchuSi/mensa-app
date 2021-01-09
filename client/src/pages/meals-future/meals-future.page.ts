@@ -13,6 +13,7 @@ import { modalController } from '@ionic/core';
 import { MealFilterConfig } from '../../models/meal-filter-config';
 import { mealService } from '../../services/meal.service';
 import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-meals';
+import { userService } from '../../services/user.service';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -37,10 +38,14 @@ class MealsFuturePage extends PageMixin(LitElement) {
   @property({ attribute: false })
   protected filteredMeals: Meal[] = [];
 
-  protected mealFilterConfig: MealFilterConfig = DEFAULT_MEAL_FILTER_CONFIG;
+  protected mealFilterConfig: MealFilterConfig = userService.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
 
   protected async firstUpdated(): Promise<void> {
     try {
+      userService.subscribe(user => {
+        this.mealFilterConfig = user?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
+        this.filteredMeals = filterMeals(this.allMeals);
+      });
       mealService.subscribe((meals: Meal[]) => {
         this.allMeals = meals;
         this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
@@ -84,7 +89,6 @@ class MealsFuturePage extends PageMixin(LitElement) {
             <ion-searchbar></ion-searchbar>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
         ${this.filteredMeals.map(meal => {
           const { title, date, mensa, additives, allergens, otherInfo, price } = meal;
           const entries = Object.entries({ date, mensa, additives, allergens, otherInfo, price });

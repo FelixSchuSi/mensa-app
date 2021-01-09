@@ -6,7 +6,7 @@ import { MealFilterConfig } from '../models/meal-filter-config';
 
 export const DEFAULT_MEAL_FILTER_CONFIG: MealFilterConfig = {
   mensen: ['aasee', 'davinci', 'denkpause', 'ring', 'steinfurt'],
-  diet: 'NO_PRESELECTION',
+  diet: 'STANDARD_DIET',
   nogos: []
 };
 
@@ -17,7 +17,7 @@ export function filterMeals(input: Meal[], inputConfig?: MealFilterConfig): Meal
     // If the meal is not from a mensa in the list of mensas, the meal is not valid
     if (config.mensen.indexOf(meal.mensa) === -1) validMeal = false;
 
-    if (config.diet !== 'NO_PRESELECTION') {
+    if (config.diet !== 'STANDARD_DIET') {
       //@ts-ignore
       if (config.diet === 'Vgn' && !meal.otherInfo.includes('Vgn')) validMeal = false;
 

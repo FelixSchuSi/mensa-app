@@ -82,7 +82,7 @@ export const german: LanguageStrings = {
   EMPLOYEE: 'Mitarbeiter',
   GUEST: 'Gast',
   CHOOSE_STATUS: 'Wähle deinen Status',
-  INDIGESTIBILITY: 'Unvertraeglichkeit',
+  INDIGESTIBILITIES: 'Unvertraeglichkeiten',
   PREFERENCE: 'Vorliebe',
   NETWORK_SYNCING: 'Synchronisiere...',
   NETWORK_OFFLINE: 'Offline',
@@ -106,5 +106,11 @@ export const german: LanguageStrings = {
   CONTENTS: 'Inhaltsstoffe',
   CLOSE: 'Schließen',
   DIET: 'Ernährungsstil',
-  NO_PRESELECTION: 'Standard'
+  STANDARD_DIET: 'Standard',
+  STEP_1: 'Schritt 1',
+  STEP_2: 'Schritt 2',
+  PERSONAL_DATA: 'Persönliche Daten',
+  NEXT_STEP: 'Nächster Schritt',
+  PREVIOUS_STEP: 'Vorheriger Schritt',
+  STATUS: 'Status'
 };

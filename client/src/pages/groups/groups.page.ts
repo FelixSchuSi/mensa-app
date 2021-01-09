@@ -71,7 +71,6 @@ class GroupsPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.GROUPS}</ion-title>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
 
         <ion-list>
           <ion-list-header> Gruppen </ion-list-header>
