@@ -106,5 +106,9 @@ export const german: LanguageStrings = {
   CONTENTS: 'Inhaltsstoffe',
   CLOSE: 'Schließen',
   DIET: 'Ernährungsstil',
-  NO_PRESELECTION: 'Standard'
+  NO_PRESELECTION: 'Standard',
+  STEP_1: 'Schritt 1',
+  STEP_2: 'Schritt 2',
+  PERSONAL_DATA: 'Persönliche Daten',
+  NEXT_STEP: 'Nächster Schritt'
 };

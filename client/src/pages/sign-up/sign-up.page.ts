@@ -1,4 +1,14 @@
-import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
+import {
+  css,
+  customElement,
+  html,
+  internalProperty,
+  LitElement,
+  property,
+  query,
+  TemplateResult,
+  unsafeCSS
+} from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { SignUpData } from '../../models/sign-up-data';
 import { userService } from '../../services/user.service';
@@ -49,9 +59,14 @@ class SignUpPage extends PageMixin(LitElement) {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
+  @internalProperty()
+  protected currentStep: number = 1;
+
+  protected signUpData!: SignUpData;
+
   protected render(): TemplateResult {
     return html`
-      <ion-header>
+      <ion-header class="sign-up-header">
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
@@ -64,98 +79,140 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-buttons>
           <ion-title>${this.i18n.SIGN_UP}</ion-title>
         </ion-toolbar>
+        <ion-toolbar>
+          <ion-segment value=${this.currentStep}>
+            <ion-segment-button @click=${() => (this.currentStep = 1)} value="1">
+              <ion-label>${this.i18n.STEP_1}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button @click=${() => (this.currentStep = 2)} value="2">
+              <ion-label>${this.i18n.STEP_2}</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
       </ion-header>
-      <ion-content fullscreen class="ion-padding">
-        <ion-header collapse="condense">
-          <ion-toolbar>
-            <ion-title size="large">${this.i18n.SIGN_UP}</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        ${this.renderNotification()}
-        <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
-          <ion-item-group>
-            <ion-item>
-              <ion-label position="floating" for="name">${this.i18n.NAME}</ion-label>
-              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-            </ion-item>
-            <div class="error"></div>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item>
-              <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
-              <ion-input type="email" required id="email" name="email"></ion-input>
-            </ion-item>
-            <div class="error"></div>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item>
-              <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
-              <ion-input
-                clear-on-edit="false"
-                type="password"
-                required
-                minlength="10"
-                id="password"
-                name="password"
-              ></ion-input>
-            </ion-item>
-            <div class="error"></div>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item>
-              <ion-label position="floating" for="password-check">${this.i18n.PASSWORD_CONFIRM}</ion-label>
-              <ion-input
-                clear-on-edit="false"
-                type="password"
-                required
-                minlength="10"
-                id="password-check"
-                name="passwordCheck"
-              ></ion-input>
-            </ion-item>
-            <div class="error pw-repeat-error"></div>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item>
-              <ion-label>Status</ion-label>
-              <ion-select placeholder="${this.i18n.CHOOSE_STATUS}">
-                <ion-select-option value="f">${this.i18n.STUDENT}</ion-select-option>
-                <ion-select-option value="m">${this.i18n.EMPLOYEE}</ion-select-option>
-                <ion-select-option value="h">${this.i18n.GUEST}</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <div class="error"></div>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item>
-              <ion-label position="floating" for="name">${this.i18n.INDIGESTIBILITY}</ion-label>
-              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-            </ion-item>
-            <div class="error"></div>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item>
-              <ion-label position="floating" for="name">${this.i18n.PREFERENCE}</ion-label>
-              <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-            </ion-item>
-            <div class="error"></div>
-          </ion-item-group>
-          <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
-        </form>
+      <ion-content class="sign-up-content" fullscreen class="ion-padding">
+        ${this.renderNotification()} ${this.currentStep === 1 ? this.stepOne : this.stepTwo}
       </ion-content>
     `;
   }
 
-  protected async submit(): Promise<void> {
+  protected get stepOne(): TemplateResult {
+    return html`
+      <h1 style="padding-left: 20px;" class="ion-padding">${this.i18n.STEP_1}: ${this.i18n.PERSONAL_DATA}</h1>
+      <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
+        <ion-item-group>
+          <ion-item>
+            <ion-label class="wider-label" position="fixed" for="name">${this.i18n.NAME}</ion-label>
+            <ion-input
+              placeholder="${this.i18n.NAME}"
+              debounce="100"
+              type="text"
+              autofocus
+              required
+              id="name"
+              name="name"
+            ></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label class="wider-label" position="fixed" for="email">${this.i18n.E_MAIL}</ion-label>
+            <ion-input placeholder="${this.i18n.E_MAIL}" type="email" required id="email" name="email"></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label class="wider-label" position="fixed" for="password">${this.i18n.PASSWORD}</ion-label>
+            <ion-input
+              placeholder="${this.i18n.PASSWORD}"
+              clear-on-edit="false"
+              type="password"
+              required
+              minlength="10"
+              id="password"
+              name="password"
+            ></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label class="wider-label" position="fixed" for="password-check">
+              ${this.i18n.PASSWORD_CONFIRM}</ion-label
+            >
+            <ion-input
+              placeholder="${this.i18n.PASSWORD_CONFIRM}"
+              debounce="1000"
+              clear-on-edit="false"
+              type="password"
+              required
+              minlength="10"
+              id="password-check"
+              name="passwordCheck"
+            ></ion-input>
+          </ion-item>
+          <div class="error pw-repeat-error"></div>
+        </ion-item-group>
+        <ion-button style="float:right;" color="primary" type="button" @click="${this.submitFirstStep}"
+          >${this.i18n.NEXT_STEP}</ion-button
+        >
+      </form>
+    `;
+  }
+  protected get stepTwo(): TemplateResult {
+    return html`
+      <h1 style="padding-left: 20px;" class="ion-padding">${this.i18n.STEP_2}: ${this.i18n.PERSONAL_DATA}</h1>
+      <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
+        <ion-item-group>
+          <ion-item>
+            <ion-label>Status</ion-label>
+            <ion-select placeholder="${this.i18n.CHOOSE_STATUS}">
+              <ion-select-option value="f">${this.i18n.STUDENT}</ion-select-option>
+              <ion-select-option value="m">${this.i18n.EMPLOYEE}</ion-select-option>
+              <ion-select-option value="h">${this.i18n.GUEST}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label class="wider-label" position="fixed" for="name">${this.i18n.INDIGESTIBILITY}</ion-label>
+            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label class="wider-label" position="fixed" for="name">${this.i18n.PREFERENCE}</ion-label>
+            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
+          </ion-item>
+          <div class="error"></div>
+        </ion-item-group>
+        <ion-button style="float:right;" color="primary" type="button" @click="${this.submit}"
+          >${this.i18n.SIGN_UP}</ion-button
+        >
+      </form>
+    `;
+  }
+
+  protected async submitFirstStep(): Promise<void> {
     if (this.isFormValid()) {
-      const signUpData: SignUpData = {
+      this.signUpData = {
         name: this.nameElement.value,
         email: this.emailElement.value,
         password: this.passwordElement.value,
         passwordCheck: this.passwordCheckElement.value
       };
+      this.currentStep = 2;
+    }
+  }
+
+  protected async submit(): Promise<void> {
+    if (this.isFormValid()) {
       try {
-        await userService.signUp(signUpData, this.i18n);
+        await userService.signUp(this.signUpData, this.i18n);
         routerService.navigate(Routes.TASKS);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });

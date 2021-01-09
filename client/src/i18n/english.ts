@@ -106,5 +106,9 @@ export const english: LanguageStrings = {
   CONTENTS: 'Contents',
   CLOSE: 'Close',
   DIET: 'Diet',
-  NO_PRESELECTION: 'Standard'
+  NO_PRESELECTION: 'Standard',
+  STEP_1: 'Schritt 1',
+  STEP_2: 'Schritt 2',
+  PERSONAL_DATA: 'Personal Data',
+  NEXT_STEP: 'Next step'
 };

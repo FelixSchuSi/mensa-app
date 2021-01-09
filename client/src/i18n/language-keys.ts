@@ -104,4 +104,8 @@ export type LanguageKeys =
   | 'CONTENTS'
   | 'CLOSE'
   | 'DIET'
-  | 'NO_PRESELECTION';
+  | 'NO_PRESELECTION'
+  | 'STEP_1'
+  | 'STEP_2'
+  | 'PERSONAL_DATA'
+  | 'NEXT_STEP';
