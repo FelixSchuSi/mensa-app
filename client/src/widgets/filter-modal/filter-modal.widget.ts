@@ -58,7 +58,7 @@ export class FilterModalWidget extends LitElement {
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <div style="padding-right: 16px;">
+        <div class="ion-padding">
           <ion-list>
             <ion-item>
               <div

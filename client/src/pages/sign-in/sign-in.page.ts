@@ -65,7 +65,7 @@ export class SignInPage extends PageMixin(LitElement) {
         <form @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
           <ion-item-group>
             <ion-item>
-              <ion-label position="floating" for="email">${this.i18n.E_MAIL}</ion-label>
+              <ion-label position="fixed" for="email">${this.i18n.E_MAIL}</ion-label>
               <ion-input
                 debounce="100"
                 inputmode="email"
@@ -74,13 +74,14 @@ export class SignInPage extends PageMixin(LitElement) {
                 required
                 id="email"
                 name="email"
+                placeholder="${this.i18n.E_MAIL}"
               ></ion-input>
             </ion-item>
-            <div class="error" color="danger"></div>
+            <div class="error ${this.mode}"></div>
           </ion-item-group>
           <ion-item-group>
             <ion-item>
-              <ion-label position="floating" for="password">${this.i18n.PASSWORD}</ion-label>
+              <ion-label position="fixed" for="password">${this.i18n.PASSWORD}</ion-label>
               <ion-input
                 clear-on-edit="false"
                 debounce="100"
@@ -88,9 +89,10 @@ export class SignInPage extends PageMixin(LitElement) {
                 required
                 id="password"
                 name="password"
+                placeholder="${this.i18n.PASSWORD}"
               ></ion-input>
             </ion-item>
-            <div class="error" color="danger"></div>
+            <div class="error ${this.mode}"></div>
           </ion-item-group>
 
           <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_IN}</ion-button>
