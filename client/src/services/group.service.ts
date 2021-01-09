@@ -25,6 +25,22 @@ export class GroupService {
       await this.setGroups(groups);
     }
   }
+  public async getGroup(id: string): Promise<Group> {
+    if (navigator.onLine) {
+      const response = await httpService.get('groups/' + id);
+      return response.json();
+    } else {
+      const groups = <Group[] | null>await storeService.get(this.TASKKEY);
+      return new Promise((res, rej) => {
+        if (groups === null) rej();
+        groups?.forEach((group): void => {
+          if (group.id === id) {
+            res(group);
+          }
+        });
+      });
+    }
+  }
   public async joinByCode(code: string): Promise<void> {
     if (navigator.onLine) {
       const body = await (await httpService.get('groups?joincode=' + code)).json();

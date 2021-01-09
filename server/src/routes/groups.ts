@@ -7,7 +7,15 @@ import { encrypt, decrypt } from '../services/crypto.service';
 const router = express.Router();
 const codeCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const codeLength = 8;
-
+router.get('/:id', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const group = await groupDAO.findOne({ id: req.params.id });
+  if (group) {
+    res.status(200).json({ ...group, name: decrypt(group!.name) });
+  } else {
+    res.status(404).json({});
+  }
+});
 router.get('/', async (req, res) => {
   const filter: Partial<Group> = {};
   let groups: Array<Group> = [];
