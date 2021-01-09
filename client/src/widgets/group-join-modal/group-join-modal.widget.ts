@@ -68,7 +68,7 @@ export class FilterModalWidget extends LitElement {
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <div class="ion-padding">
+        <div class="ion-padding" style="display:flex;flex-direction:column">
           <ion-input
             @change=${(e: Event): void => {
               const target = e.target as HTMLTextAreaElement;

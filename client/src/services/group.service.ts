@@ -37,10 +37,11 @@ export class GroupService {
       return Promise.reject({});
     }
   }
-  public async createGroup(name: string): Promise<void> {
+  public async createGroup(name: string): Promise<Group> {
     if (navigator.onLine) {
-      await httpService.post('groups', { group: { name: name } });
-      routerService.navigate(Routes.GROUPS);
+      const result = await httpService.post('groups', { group: { name: name } });
+      return result.json();
+      // routerService.navigate(Routes.GROUPS);
     } else {
       return Promise.reject({});
     }

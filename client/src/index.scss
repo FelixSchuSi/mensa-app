@@ -83,3 +83,9 @@ div.error.md {
 .sign-up-header > ion-toolbar {
   --background: var(--ion-background-color);
 }
+
+.horizontal-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

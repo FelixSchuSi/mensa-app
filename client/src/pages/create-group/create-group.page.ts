@@ -3,6 +3,7 @@ import { css, customElement, html, LitElement, property, TemplateResult, unsafeC
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
+import { Group } from '../../../../server/src/models/group';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./create-group.page.scss');
 
@@ -20,9 +21,10 @@ class CreateGroupPage extends PageMixin(LitElement) {
 
   protected groupService: GroupService = groupService;
   @property({ type: String, attribute: false })
-  protected groupName: string;
+  protected groupName: string | undefined;
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
+  protected joinCode = '';
 
   protected render(): TemplateResult {
     return html`
@@ -66,10 +68,21 @@ class CreateGroupPage extends PageMixin(LitElement) {
           <ion-button
             color="primary"
             @click=${(): void => {
-              this.groupService;
+              this.groupService
+                .createGroup(this.groupName!)
+                .then(json => {
+                  console.log(json);
+                  this.joinCode = json.joinCode;
+                  groupService.addMembership(json.id);
+                  this.requestUpdate();
+                })
+                .catch(err => {
+                  console.error(err);
+                });
             }}
             >Erstellen</ion-button
           >
+          <span>${this.joinCode}</span>
         </div>
       </ion-content>
     `;
