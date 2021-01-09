@@ -60,19 +60,6 @@ app-root,
   position: static !important;
 }
 
-#group-fab-list {
-  ion-label {
-    position: relative;
-    top: 40px;
-    right: 25px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    line-height: 24px;
-    padding: 4px 8px;
-    border-radius: 4px;
-  }
-}
-
 ion-modal {
   --width: 100% !important;
   --height: 100% !important;

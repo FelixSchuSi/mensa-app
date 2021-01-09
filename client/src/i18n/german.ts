@@ -112,5 +112,7 @@ export const german: LanguageStrings = {
   PERSONAL_DATA: 'Persönliche Daten',
   NEXT_STEP: 'Nächster Schritt',
   PREVIOUS_STEP: 'Vorheriger Schritt',
-  STATUS: 'Status'
+  STATUS: 'Status',
+  JOIN: 'Beitreten',
+  JOINCODE: 'Beitrittscode'
 };

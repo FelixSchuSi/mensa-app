@@ -110,4 +110,6 @@ export type LanguageKeys =
   | 'PERSONAL_DATA'
   | 'NEXT_STEP'
   | 'PREVIOUS_STEP'
-  | 'STATUS';
+  | 'STATUS'
+  | 'JOIN'
+  | 'JOINCODE';

@@ -5,6 +5,7 @@ import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
+import { modalController } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 const sharedCSS = require('../../shared.scss');
@@ -26,7 +27,20 @@ class GroupsPage extends PageMixin(LitElement) {
   protected groups: Group[] = [];
 
   protected groupService: GroupService = groupService;
+  protected joinCallback = (code: string): void => {
+    console.log(code);
+  };
+  protected async createModal(): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-group-join-modal',
+      swipeToClose: true,
+      componentProps: {
+        groups: this.groups
+      }
+    });
 
+    await modal.present();
+  }
   protected async firstUpdated(): Promise<void> {
     try {
       groupService.subscribe((groups: Group[]) => {
@@ -71,7 +85,6 @@ class GroupsPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.GROUPS}</ion-title>
           </ion-toolbar>
         </ion-header>
-
         <ion-list>
           <ion-list-header> Gruppen </ion-list-header>
           ${guard(
@@ -96,27 +109,13 @@ class GroupsPage extends PageMixin(LitElement) {
           )}
         </ion-list>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button>
-            <ion-icon name="add"></ion-icon>
+          <ion-fab-button
+            @click=${(): void => {
+              this.createModal();
+            }}
+          >
+            <ion-icon name="enter-outline"></ion-icon>
           </ion-fab-button>
-          <ion-fab-list side="top" id="group-fab-list">
-            <ion-fab-button
-              data-desc="Create"
-              @click=${(): void => {
-                routerService.navigate(Routes.GROUPS_CREATE);
-              }}
-              ><ion-icon name="create-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-label>Create</ion-label>
-            <ion-fab-button
-              data-desc="Join"
-              @click=${(): void => {
-                routerService.navigate(Routes.GROUPS_CREATE);
-              }}
-              ><ion-icon name="enter-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-label>Join</ion-label>
-          </ion-fab-list>
         </ion-fab>
       </ion-content>`;
   }

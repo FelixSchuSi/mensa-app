@@ -25,7 +25,6 @@ export class GroupService {
       await this.setGroups(groups);
     }
   }
-
   public async joinByCode(code: string): Promise<void> {
     if (navigator.onLine) {
       const body = await (await httpService.get('groups?joincode=' + code)).json();
