@@ -27,7 +27,6 @@ import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info
 import { getAllContents } from '../../helpers/all-contents';
 import { ALL_STATUS } from '../../helpers/all-status';
 import { Status } from '../../../../server/src/models/status';
-import { elementIsDisabled } from 'selenium-webdriver/lib/until';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -71,6 +70,13 @@ class SignUpPage extends PageMixin(LitElement) {
 
   @internalProperty()
   protected currentStep: number = 1;
+
+  protected signUpData: Partial<SignUpData> = {
+    name: '',
+    email: '',
+    password: '',
+    passwordCheck: ''
+  };
 
   private newFilterConfig: MealFilterConfig = DEFAULT_MEAL_FILTER_CONFIG;
   private status: Status = 'GUEST';
@@ -118,6 +124,7 @@ class SignUpPage extends PageMixin(LitElement) {
               required
               id="name"
               name="name"
+              value="${this.signUpData.name ?? ''}"
             ></ion-input>
           </ion-item>
           <div class="error"></div>
@@ -125,7 +132,14 @@ class SignUpPage extends PageMixin(LitElement) {
         <ion-item-group>
           <ion-item>
             <ion-label class="wider-label" position="fixed" for="email">${this.i18n.E_MAIL}</ion-label>
-            <ion-input placeholder="${this.i18n.E_MAIL}" type="email" required id="email" name="email"></ion-input>
+            <ion-input
+              placeholder="${this.i18n.E_MAIL}"
+              type="email"
+              required
+              id="email"
+              name="email"
+              value="${this.signUpData.email ?? ''}"
+            ></ion-input>
           </ion-item>
           <div class="error"></div>
         </ion-item-group>
@@ -140,6 +154,7 @@ class SignUpPage extends PageMixin(LitElement) {
               minlength="10"
               id="password"
               name="password"
+              value="${this.signUpData.password ?? ''}"
             ></ion-input>
           </ion-item>
           <div class="error"></div>
@@ -158,12 +173,25 @@ class SignUpPage extends PageMixin(LitElement) {
               minlength="10"
               id="password-check"
               name="passwordCheck"
+              value="${this.signUpData.passwordCheck ?? ''}"
             ></ion-input>
           </ion-item>
           <div class="error pw-repeat-error"></div>
         </ion-item-group>
         <div style="display:flex">
-          <ion-button style="" color="light" type="button" @click="${() => (this.currentStep = 1)}"
+          <ion-button
+            style=""
+            color="light"
+            type="button"
+            @click="${() => {
+              this.signUpData = {
+                name: this.nameElement.value,
+                email: this.emailElement.value,
+                password: this.passwordElement.value,
+                passwordCheck: this.passwordCheckElement.value
+              };
+              this.currentStep = 1;
+            }}"
             >${this.i18n.PREVIOUS_STEP}</ion-button
           >
           <div style="flex-grow:1"></div>
