@@ -32,7 +32,7 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       userService.subscribe(userInfo => (this.userInfo = userInfo));
     }
 
-    protected createRenderRoot(): LitElement {
+    protected createRenderRoot(): Element | ShadowRoot {
       return this;
     }
 
