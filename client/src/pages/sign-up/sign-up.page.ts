@@ -18,6 +18,15 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 import { popFromRootNav } from '../../helpers/nav-util';
+import { MealFilterConfig } from '../../models/meal-filter-config';
+import { DEFAULT_MEAL_FILTER_CONFIG } from '../../helpers/filter-meals';
+import { ALL_DIETS } from '../../helpers/all-diets';
+import { AdditivesKeys } from '../../../../server/src/models/additives';
+import { AllergenesKeys } from '../../../../server/src/models/allergenes';
+import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
+import { getAllContents } from '../../helpers/all-contents';
+import { ALL_STATUS } from '../../helpers/all-status';
+import { Status } from '../../../../server/src/models/status';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -62,7 +71,9 @@ class SignUpPage extends PageMixin(LitElement) {
   @internalProperty()
   protected currentStep: number = 1;
 
-  protected signUpData!: SignUpData;
+  private newFilterConfig: MealFilterConfig = DEFAULT_MEAL_FILTER_CONFIG;
+  private status: Status = 'GUEST';
+  protected allContents: Array<AdditivesKeys | AllergenesKeys | OtherMealInfoKeys> = getAllContents();
 
   protected render(): TemplateResult {
     return html`
@@ -150,9 +161,13 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-item>
           <div class="error pw-repeat-error"></div>
         </ion-item-group>
-        <ion-button style="float:right;" color="primary" type="button" @click="${this.submit}"
-          >${this.i18n.SIGN_UP}</ion-button
-        >
+        <div style="display:flex">
+          <ion-button style="" color="light" type="button" @click="${() => (this.currentStep = 1)}"
+            >${this.i18n.PREVIOUS_STEP}</ion-button
+          >
+          <div style="flex-grow:1"></div>
+          <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
+        </div>
       </form>
     `;
   }
@@ -165,36 +180,101 @@ class SignUpPage extends PageMixin(LitElement) {
           damit dir Gerichte angezeigt werden, die für dich interessant sind.
         </p>
       </div>
-      <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
-        <ion-item-group>
-          <ion-item>
-            <ion-label>Status</ion-label>
-            <ion-select placeholder="${this.i18n.CHOOSE_STATUS}">
-              <ion-select-option value="f">${this.i18n.STUDENT}</ion-select-option>
-              <ion-select-option value="m">${this.i18n.EMPLOYEE}</ion-select-option>
-              <ion-select-option value="h">${this.i18n.GUEST}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label class="wider-label" position="fixed" for="name">${this.i18n.INDIGESTIBILITY}</ion-label>
-            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-item-group>
-          <ion-item>
-            <ion-label class="wider-label" position="fixed" for="name">${this.i18n.PREFERENCE}</ion-label>
-            <ion-input debounce="100" type="text" autofocus required id="name" name="name"></ion-input>
-          </ion-item>
-          <div class="error"></div>
-        </ion-item-group>
-        <ion-button style="float:right;" color="primary" type="button" @click="${() => (this.currentStep = 2)}"
-          >${this.i18n.NEXT_STEP}</ion-button
-        >
-      </form>
+      <ion-list>
+        <ion-item>
+          <div
+            style="padding-top: 10px; padding-bottom: 10px; display:flex; align-items:center; width:100%; justify-content:flex-start"
+          >
+            <div style="width:160px">
+              <ion-label>
+                <h2>${this.i18n.STATUS}</h2>
+              </ion-label>
+            </div>
+            <div style="min-width:220px;width:40%">
+              <ion-segment mode="ios" @ionChange=${(e: any) => (this.status = e.detail.value)} value=${this.status}>
+                ${ALL_STATUS.map((status, i) => {
+                  let euros = '€'.repeat(i + 1);
+                  return html`
+                    <ion-segment-button value="${status}">
+                      <ion-label>${this.i18n[status]}</ion-label>
+                      <h4>${euros}</h4>
+                    </ion-segment-button>
+                  `;
+                })}
+              </ion-segment>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <div
+            style="padding-top: 10px; padding-bottom: 10px; display:flex; align-items:center; width:100%; justify-content:flex-start"
+          >
+            <div style="width:160px">
+              <ion-label>
+                <h2>${this.i18n.DIET}</h2>
+              </ion-label>
+            </div>
+            <div style="min-width:220px;width:40%">
+              <ion-segment
+                mode="ios"
+                @ionChange=${(e: any) => (this.newFilterConfig = { ...this.newFilterConfig, diet: e.detail.value })}
+                value=${this.newFilterConfig.diet}
+              >
+                ${ALL_DIETS.map(diet => {
+                  let imagePath: string;
+                  switch (diet) {
+                    case 'STANDARD_DIET':
+                      imagePath = 'images/beef.png';
+                      break;
+                    case 'Vgn':
+                      imagePath = 'images/vegan.png';
+                      break;
+                    case 'Vgt':
+                      imagePath = 'images/veggie.png';
+                      break;
+                  }
+                  return html`
+                    <ion-segment-button value="${diet}">
+                      <ion-label>${this.i18n[diet]}</ion-label>
+                      <ion-img style="width:30px" src=${imagePath}></ion-img>
+                    </ion-segment-button>
+                  `;
+                })}
+              </ion-segment>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <div style="display:flex; align-items:center; width:100%">
+            <div style="width:160px">
+              <ion-label>
+                <h2>${this.i18n.INDIGESTIBILITIES}</h2>
+              </ion-label>
+            </div>
+            <div>
+              <chip-select
+                @chip-select-change=${(e: any) => {
+                  const contents = e.detail.map((contentChipElem: any) => contentChipElem.id);
+                  this.newFilterConfig = { ...this.newFilterConfig, nogos: contents };
+                }}
+              >
+                ${this.allContents.map(content => {
+                  const isSelected = this.newFilterConfig.nogos.includes(content);
+                  return html`
+                    <ion-chip id=${content} class="${isSelected ? 'selected' : ''}">${this.i18n[content]}</ion-chip>
+                  `;
+                })}
+                <chip-toggle-show-more .cutOffIndex=${4}></chip-toggle-show-more>
+              </chip-select>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-button style="float:right;" color="primary" type="button" @click="${() => (this.currentStep = 2)}"
+        >${this.i18n.NEXT_STEP}</ion-button
+      >
     `;
   }
 
@@ -202,14 +282,16 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected async submit(): Promise<void> {
     if (this.isFormValid()) {
-      this.signUpData = {
+      const signUpData: SignUpData = {
         name: this.nameElement.value,
         email: this.emailElement.value,
         password: this.passwordElement.value,
-        passwordCheck: this.passwordCheckElement.value
+        passwordCheck: this.passwordCheckElement.value,
+        filterConfig: this.newFilterConfig,
+        status: this.status
       };
       try {
-        await userService.signUp(this.signUpData, this.i18n);
+        await userService.signUp(signUpData, this.i18n);
         routerService.navigate(Routes.TASKS);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });

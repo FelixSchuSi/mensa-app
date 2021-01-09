@@ -77,7 +77,7 @@ export class FilterModalWidget extends LitElement {
                     ${ALL_DIETS.map(diet => {
                       let imagePath: string;
                       switch (diet) {
-                        case 'NO_PRESELECTION':
+                        case 'STANDARD_DIET':
                           imagePath = 'images/beef.png';
                           break;
                         case 'Vgn':
