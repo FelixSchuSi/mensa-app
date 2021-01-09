@@ -112,4 +112,5 @@ export type LanguageKeys =
   | 'PREVIOUS_STEP'
   | 'STATUS'
   | 'JOIN'
-  | 'JOINCODE';
+  | 'JOINCODE'
+  | 'GROUP_DETAILS';

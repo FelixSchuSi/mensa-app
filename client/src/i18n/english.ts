@@ -114,5 +114,6 @@ export const english: LanguageStrings = {
   PREVIOUS_STEP: 'Previous step',
   STATUS: 'Status',
   JOIN: 'Join',
-  JOINCODE: 'Joincode'
+  JOINCODE: 'Joincode',
+  GROUP_DETAILS: 'Group details'
 };

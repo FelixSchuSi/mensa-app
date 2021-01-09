@@ -114,5 +114,6 @@ export const german: LanguageStrings = {
   PREVIOUS_STEP: 'Vorheriger Schritt',
   STATUS: 'Status',
   JOIN: 'Beitreten',
-  JOINCODE: 'Beitrittscode'
+  JOINCODE: 'Beitrittscode',
+  GROUP_DETAILS: 'Gruppendetails'
 };

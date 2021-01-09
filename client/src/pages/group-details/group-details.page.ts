@@ -37,16 +37,24 @@ class CreateGroupPage extends PageMixin(LitElement) {
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>
           </ion-buttons>
-          <ion-title>${this.i18n.CREATE_GROUP}</ion-title>
+          <ion-title>${this.i18n.GROUP_DETAILS}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
         <ion-header collapse="condense">
           <ion-toolbar>
-            <ion-title size="large">${this.i18n.CREATE_GROUP}</ion-title>
+            <ion-title size="large">${this.i18n.GROUP_DETAILS} - ${this.groupID}</ion-title>
           </ion-toolbar>
         </ion-header>
-        <div>${this.groupID}</div>
+        <ion-list-header>Termine</ion-list-header>
+        <ion-list>
+          <ion-list-header>Details</ion-list-header>
+          <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-label>SomeName</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-list-header>Mitglieder</ion-list-header>
       </ion-content>
     `;
   }
