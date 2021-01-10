@@ -97,6 +97,7 @@ export class MealWidget extends LitElement {
   protected transformDate(dateIsoString: string): string {
     const date: Date = new Date(dateIsoString);
     const language = this.i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
+    //@ts-ignore
     return new Intl.DateTimeFormat(language, { dateStyle: 'full' }).format(date);
   }
 
