@@ -42,11 +42,15 @@ export class MealWidget extends LitElement {
 
   protected get images(): TemplateResult {
     return html`
-      <macro-carousel @click="${() => this.carousel.update()}" .slidesPerView=${3}>
-        <img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic01.jpg`} />
-        <img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic02.jpg`} />
-        <img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic03.jpg`} />
-        <img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic04.jpg`} />
+      <macro-carousel
+        @touchstart="${() => this.carousel.update()}"
+        @mousedown="${() => this.carousel.update()}"
+        .slidesPerView=${1}
+      >
+        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}></ion-img>
+        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}></ion-img>
+        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}></ion-img>
+        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}></ion-img>
       </macro-carousel>
     `;
   }
