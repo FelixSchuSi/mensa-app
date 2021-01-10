@@ -4,6 +4,7 @@ import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
+import { User } from '../../../../server/src/models/user';
 import { routerService } from '../../services/router.service';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
@@ -25,12 +26,18 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected groupService: GroupService = groupService;
   protected groupID = routerService.getQueryParameter('id');
   protected group: Group | undefined;
+  protected members: User[] | undefined;
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
   protected async firstUpdated(): Promise<void> {
-    this.group = await groupService.getGroup(this.groupID);
-    this.requestUpdate();
-    console.log(this.group);
+    this.groupService.getGroup(this.groupID).then(res => {
+      this.group = res;
+      this.requestUpdate();
+    });
+    this.groupService.getGroupMembers(this.groupID).then(res => {
+      this.members = res;
+      this.requestUpdate();
+    });
   }
   protected formatDate = (unixMillis: number): string => {
     const date = new Date(unixMillis);
@@ -57,7 +64,11 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.GROUP_DETAILS} - ${this.group?.name}</ion-title>
           </ion-toolbar>
         </ion-header>
-        <ion-list-header>Termine</ion-list-header>
+        <ion-list>
+          <ion-list-header>Termine</ion-list-header>
+          <ion-item><ion-label>TODO</ion-label></ion-item>
+        </ion-list>
+
         <ion-list>
           <ion-list-header>Details</ion-list-header>
           <ion-item>
@@ -77,22 +88,34 @@ class CreateGroupPage extends PageMixin(LitElement) {
         </ion-list>
         <ion-list>
           <ion-list-header>Mitglieder</ion-list-header>
-          ${this.group &&
+          ${this.members &&
           guard(
-            [this.group?.members],
+            [this.members],
             () => html`
               ${repeat(
-                this.group!.members,
-                group => group,
-                group => html`
+                this.members!,
+                member => member.id,
+                member => html`
                   <ion-item>
-                    <ion-label>${group}</ion-label>
+                    <ion-label>${member.name}</ion-label>
+                    <ion-button
+                      @click=${(): void => {
+                        this.groupService.removeMembership(this.groupID, member.id);
+                      }}
+                      ><ion-icon name="trash-outline"></ion-icon
+                    ></ion-button>
                   </ion-item>
                 `
               )}
             `
           )}
         </ion-list>
+        <ion-button
+          @click=${(): void => {
+            this.groupService.removeMembership(this.groupID);
+          }}
+          >Gruppe verlassen</ion-button
+        >
       </ion-content>
     `;
   }

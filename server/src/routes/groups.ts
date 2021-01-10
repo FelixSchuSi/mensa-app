@@ -76,17 +76,21 @@ router.get('/:id/members', async (req, res) => {
   const group = await groupDAO.findOne({ id: req.params.id });
   if (!group) return res.status(404).end();
   // TODO: findMany() function on gerneric dao
-  let users = await Promise.all(
+  const users = await Promise.all(
     group!.members.map(
       (e): Promise<User | null> => {
         return userDAO.findOne({ id: e });
       }
     )
   );
-  users = users.filter(e => {
-    return e !== null;
+  const filteredUsers = users.map(e => {
+    if (e !== null) {
+      return { name: e.name, id: e.id };
+    } else {
+      return { name: 'Unkown User' };
+    }
   });
-  res.status(200).json(users);
+  res.status(200).json(filteredUsers);
 });
 router.post('/:id/membership', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;

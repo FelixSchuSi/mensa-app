@@ -1,5 +1,6 @@
 import { Routes } from '../routes';
 import { Group } from '../../../server/src/models/group';
+import { User } from '../../../server/src/models/user';
 import { httpService } from './http.service';
 import { routerService } from './router.service';
 import { storeService } from './store.service';
@@ -23,6 +24,16 @@ export class GroupService {
       let groups = <Group[] | null>await storeService.get(this.TASKKEY);
       if (groups === null) groups = [];
       await this.setGroups(groups);
+    }
+  }
+  public async getGroupMembers(gid: string): Promise<User[]> {
+    if (navigator.onLine) {
+      const response = await httpService.get('groups/' + gid + '/members');
+      return response.json();
+    } else {
+      return new Promise((res, rej) => {
+        rej();
+      });
     }
   }
   public async getGroup(id: string): Promise<Group> {
