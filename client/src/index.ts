@@ -17,3 +17,6 @@ import './widgets/connection-status-bar/connection-status-bar.widget';
 import './widgets/chip-select/chip-select.widget';
 import './widgets/filter-modal/filter-modal.widget';
 import './widgets/chip-toggle-show-more/chip-toggle-show-more';
+import './widgets/meal/meal.widget';
+
+import './../node_modules/macro-carousel/dist/macro-carousel.min.js';

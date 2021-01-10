@@ -96,3 +96,10 @@ div.error.md {
 .sign-up-header > ion-toolbar {
   --background: var(--ion-background-color);
 }
+
+.meal-img {
+  max-width: 250px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+}

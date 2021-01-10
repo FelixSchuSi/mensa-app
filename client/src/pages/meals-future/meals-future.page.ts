@@ -1,12 +1,16 @@
-import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import {
+  css,
+  customElement,
+  html,
+  internalProperty,
+  LitElement,
+  property,
+  query,
+  TemplateResult,
+  unsafeCSS
+} from 'lit-element';
 import { PageMixin } from '../page.mixin';
-import { LanguageStrings } from '../../models/language-strings';
 import { Meal } from '../../../../server/src/models/meal';
-import { AdditivesKeys } from '../../../../server/src/models/additives';
-import { AllergenesKeys } from '../../../../server/src/models/allergenes';
-import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
-import { LanguageKeys } from '../../i18n/language-keys';
-import { Price } from '../../../../server/src/models/price';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 import { modalController } from '@ionic/core';
@@ -14,6 +18,7 @@ import { MealFilterConfig } from '../../models/meal-filter-config';
 import { mealService } from '../../services/meal.service';
 import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-meals';
 import { userService } from '../../services/user.service';
+import { User } from '../../../../server/src/models/user';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -30,25 +35,33 @@ class MealsFuturePage extends PageMixin(LitElement) {
     `
   ];
 
-  @property({ type: Object, attribute: false })
-  protected i18n!: LanguageStrings;
-
-  protected allMeals: Meal[] = [];
+  @query('ion-infinite-scroll')
+  protected infiniteScrollElem!: HTMLIonInfiniteScrollElement;
+  @internalProperty()
+  protected scrollIndex: number = 0;
 
   @property({ attribute: false })
   protected filteredMeals: Meal[] = [];
 
-  protected mealFilterConfig: MealFilterConfig = userService.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
+  protected allMeals: Meal[] = [];
+  protected userInfo?: User = userService.userInfo;
+  protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
 
   protected async firstUpdated(): Promise<void> {
     try {
       userService.subscribe(user => {
         this.mealFilterConfig = user?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
+        this.userInfo = user;
         this.filteredMeals = filterMeals(this.allMeals);
       });
       mealService.subscribe((meals: Meal[]) => {
         this.allMeals = meals;
         this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
+        if (this.filteredMeals && this.filteredMeals.length >= 5) {
+          this.scrollIndex = 5;
+        } else {
+          this.scrollIndex = 1;
+        }
       });
       await mealService.getMeals();
     } catch ({ message, statusCode }) {
@@ -89,41 +102,21 @@ class MealsFuturePage extends PageMixin(LitElement) {
             <ion-searchbar></ion-searchbar>
           </ion-toolbar>
         </ion-header>
-        ${this.filteredMeals.map(meal => {
-          const { title, date, mensa, additives, allergens, otherInfo, price } = meal;
-          const entries = Object.entries({ date, mensa, additives, allergens, otherInfo, price });
-          return html` <h2>${title}</h2>
-            ${entries.map(([key, value]) => html`<span><b>${key}:</b> ${this.renderValue(value)}</span><br />`)}
-            <br />`;
-        })}
+        ${this.filteredMeals
+          .slice(0, this.scrollIndex)
+          .map(meal => html`<app-meal .meal=${meal} .i18n=${this.i18n} .status=${this.userInfo?.status}></app-meal>`)}
+        <ion-infinite-scroll threshold="0px" @ionInfinite=${this.displayMore}>
+          <ion-infinite-scroll-content loading-spinner="bubbles"> </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-content>
     `;
   }
 
-  protected renderValue(item: string | AdditivesKeys[] | AllergenesKeys[] | OtherMealInfoKeys[] | Price): string {
-    if (typeof item === 'string') {
-      return item;
-    } else if (Array.isArray(item)) {
-      return this.renderFoodStr(<string[]>item);
-    } else if (typeof item === 'object') {
-      return this.renderPrice(item);
-    }
-    return '';
-  }
-  protected renderFoodStr(strs: string[]): string {
-    if (strs.length === 0) return '';
-
-    const res = strs.map(i => {
-      const key = <LanguageKeys>String(i);
-      return this.i18n[key];
-    });
-
-    return res.reduce((acc, curr) => acc + ', ' + curr);
-  }
-
-  protected renderPrice(price: Price): string {
-    const { student, employee, guest } = price;
-    return `${student} € - ${employee} € - ${guest} €`;
+  protected async displayMore() {
+    const mealsLeft = this.filteredMeals.length - 1 - this.scrollIndex;
+    const indexChange = mealsLeft <= 5 ? mealsLeft : 5;
+    this.infiniteScrollElem.complete();
+    this.scrollIndex += indexChange;
   }
 
   protected async createModal() {
