@@ -70,7 +70,24 @@ router.delete('/:id', async (req, res) => {
   await groupDAO.deleteOne(req.params.id);
   res.status(200).end();
 });
-
+router.get('/:id/members', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+  const group = await groupDAO.findOne({ id: req.params.id });
+  if (!group) return res.status(404).end();
+  // TODO: findMany() function on gerneric dao
+  let users = await Promise.all(
+    group!.members.map(
+      (e): Promise<User | null> => {
+        return userDAO.findOne({ id: e });
+      }
+    )
+  );
+  users = users.filter(e => {
+    return e !== null;
+  });
+  res.status(200).json(users);
+});
 router.post('/:id/membership', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;

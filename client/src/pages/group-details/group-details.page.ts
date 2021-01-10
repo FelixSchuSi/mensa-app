@@ -66,7 +66,9 @@ class CreateGroupPage extends PageMixin(LitElement) {
           </ion-item>
           <ion-item>
             <ion-label>${this.i18n.JOINCODE}</ion-label>
-            <ion-label>${this.group?.joinCode}</ion-label>
+            <ion-label
+              >${this.group?.joinCode} <ion-button><ion-icon name="share-social-outline"></ion-icon></ion-button
+            ></ion-label>
           </ion-item>
           <ion-item>
             <ion-label>Erstellt am</ion-label>
