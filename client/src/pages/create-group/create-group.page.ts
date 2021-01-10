@@ -4,6 +4,7 @@ import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
+import { mediaService, MediaService } from '../../services/media.service';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./create-group.page.scss');
 
@@ -18,14 +19,14 @@ class CreateGroupPage extends PageMixin(LitElement) {
       ${unsafeCSS(componentCSS)}
     `
   ];
-
+  protected mediaService: MediaService = mediaService;
   protected groupService: GroupService = groupService;
   @property({ type: String, attribute: false })
   protected groupName: string | undefined;
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
   protected joinCode = '';
-
+  protected upload = (): void => {};
   protected render(): TemplateResult {
     return html`
       <ion-header>
@@ -49,8 +50,24 @@ class CreateGroupPage extends PageMixin(LitElement) {
           </ion-toolbar>
         </ion-header>
         <div class="horizontal-center" style="margin-top:1em;flex-direction:column">
-          <div style="height:200px;width:200px;background-color:lightgrey;display:flex;justify-content:center">
-            <ion-button slot="icon-only"
+          <div
+            style="height:200px;width:200px;background-color:lightgrey;display:flex;justify-content:center;flex-direction:column"
+          >
+            <img id="group-image" src="" style="display:none;" />
+            <input
+              type="file"
+              name="file"
+              @change=${(e: any): void => {
+                const file = e.target.files[0];
+                mediaService.upload(file).then((res): void => {
+                  console.log(res);
+                  const imageElement = <HTMLImageElement>this.querySelector('#group-image');
+                  imageElement!.src = res.embed_url;
+                  imageElement.style.display = 'block';
+                });
+              }}
+            />
+            <ion-button type="submit"
               ><ion-icon style="color:black;height:100%;font-size:50px" name="cloud-upload-outline"></ion-icon
             ></ion-button>
           </div>
