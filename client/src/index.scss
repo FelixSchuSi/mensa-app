@@ -100,6 +100,8 @@ div.error.md {
 .meal-img {
   max-width: 250px;
   max-height: 250px;
+  min-width: 1px;
+  min-height: 1px;
   width: auto;
   height: auto;
 }
