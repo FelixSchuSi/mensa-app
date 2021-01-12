@@ -14,7 +14,7 @@ import { Meal } from '../../../../server/src/models/meal';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 import { modalController } from '@ionic/core';
-import { MealFilterConfig } from '../../models/meal-filter-config';
+import { MealFilterConfig } from '../../../../server/src/models/meal-filter-config';
 import { mealService } from '../../services/meal.service';
 import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-meals';
 import { userService } from '../../services/user.service';

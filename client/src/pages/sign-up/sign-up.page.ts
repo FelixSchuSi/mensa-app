@@ -18,7 +18,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 import { popFromRootNav } from '../../helpers/nav-util';
-import { MealFilterConfig } from '../../models/meal-filter-config';
+import { MealFilterConfig } from '../../../../server/src/models/meal-filter-config';
 import { DEFAULT_MEAL_FILTER_CONFIG } from '../../helpers/filter-meals';
 import { ALL_DIETS } from '../../helpers/all-diets';
 import { AdditivesKeys } from '../../../../server/src/models/additives';

@@ -6,7 +6,7 @@ import { getAllContents } from '../../helpers/all-contents';
 import { ALL_DIETS } from '../../helpers/all-diets';
 import { ALL_MENSEN } from '../../helpers/all-mensen';
 import { LanguageStrings } from '../../models/language-strings';
-import { MealFilterConfig } from '../../models/meal-filter-config';
+import { MealFilterConfig } from '../../../../server/src/models/meal-filter-config';
 import { i18nService } from '../../services/i18n.service';
 import { userService } from '../../services/user.service';
 

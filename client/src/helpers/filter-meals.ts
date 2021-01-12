@@ -2,7 +2,7 @@ import { AdditivesKeys } from '../../../server/src/models/additives';
 import { AllergenesKeys } from '../../../server/src/models/allergenes';
 import { Meal } from '../../../server/src/models/meal';
 import { OtherMealInfoKeys } from '../../../server/src/models/other-meal-info';
-import { MealFilterConfig } from '../models/meal-filter-config';
+import { MealFilterConfig } from '../../../server/src/models/meal-filter-config';
 
 export const DEFAULT_MEAL_FILTER_CONFIG: MealFilterConfig = {
   mensen: ['aasee', 'davinci', 'denkpause', 'ring', 'steinfurt'],

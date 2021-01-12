@@ -1,5 +1,5 @@
 import { Status } from '../../../server/src/models/status';
-import { MealFilterConfig } from './meal-filter-config';
+import { MealFilterConfig } from '../../../server/src/models/meal-filter-config';
 
 export interface SignUpData {
   name: string;

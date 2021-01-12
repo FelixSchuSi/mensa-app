@@ -1,6 +1,6 @@
 import { Entity } from './entity';
 import { Status } from './status';
-import { MealFilterConfig } from '../../../client/src/models/meal-filter-config';
+import { MealFilterConfig } from './meal-filter-config';
 
 export interface User extends Entity {
   name: string;
