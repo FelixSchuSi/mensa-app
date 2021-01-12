@@ -61,7 +61,7 @@ export class FilterModalWidget extends LitElement {
     return html`
       <ion-header translucent>
         <ion-toolbar>
-          <ion-title>${this.i18n.FILTER_MEALS}</ion-title>
+          <ion-title>${this.i18n.JOINGROUP}</ion-title>
           <ion-buttons slot="end">
             <ion-button @click="${this.dismissModal}">${this.i18n.CLOSE}</ion-button>
           </ion-buttons>

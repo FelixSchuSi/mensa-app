@@ -115,5 +115,6 @@ export const english: LanguageStrings = {
   STATUS: 'Status',
   JOIN: 'Join',
   JOINCODE: 'Joincode',
-  GROUP_DETAILS: 'Group details'
+  GROUP_DETAILS: 'Group details',
+  JOINGROUP: 'Join group'
 };

@@ -115,5 +115,6 @@ export const german: LanguageStrings = {
   STATUS: 'Status',
   JOIN: 'Beitreten',
   JOINCODE: 'Beitrittscode',
-  GROUP_DETAILS: 'Gruppendetails'
+  GROUP_DETAILS: 'Gruppendetails',
+  JOINGROUP: 'Gruppe beitreten'
 };

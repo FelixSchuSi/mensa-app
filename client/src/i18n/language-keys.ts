@@ -113,4 +113,5 @@ export type LanguageKeys =
   | 'STATUS'
   | 'JOIN'
   | 'JOINCODE'
-  | 'GROUP_DETAILS';
+  | 'GROUP_DETAILS'
+  | 'JOINGROUP';
