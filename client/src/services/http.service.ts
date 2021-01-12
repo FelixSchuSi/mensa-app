@@ -49,6 +49,9 @@ class HttpService {
     }
     this.requestReplayLock = Promise.resolve();
   }
+  public getBaseURL(): string {
+    return this.config.baseURL;
+  }
   private async createFetch(
     method: string,
     url: string,
@@ -71,7 +74,6 @@ class HttpService {
       return Promise.reject({ message, statusCode: response.status });
     }
   }
-
   private buildRequest(method: string, url: string, body?: unknown): Request {
     const requestInit: RequestInit = {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
