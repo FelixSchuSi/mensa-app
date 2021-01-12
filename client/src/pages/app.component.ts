@@ -81,6 +81,8 @@ export class AppComponent extends LitElement {
     switch (this.currentRoute) {
       case Routes.GROUPS_CREATE:
         return await pushToNav('app-create-group', activeNav);
+      case Routes.GROUPS_DETAILS:
+        return await pushToNav('app-group-details', activeNav);
       case Routes.SETTINGS:
         return await pushToNav('app-settings', activeNav);
       case Routes.SIGN_IN:

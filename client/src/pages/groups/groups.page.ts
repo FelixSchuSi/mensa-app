@@ -5,6 +5,7 @@ import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
+import { modalController } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 const sharedCSS = require('../../shared.scss');
@@ -26,7 +27,20 @@ class GroupsPage extends PageMixin(LitElement) {
   protected groups: Group[] = [];
 
   protected groupService: GroupService = groupService;
+  protected joinCallback = (code: string): void => {
+    console.log(code);
+  };
+  protected async createModal(): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-group-join-modal',
+      swipeToClose: true,
+      componentProps: {
+        groups: this.groups
+      }
+    });
 
+    await modal.present();
+  }
   protected async firstUpdated(): Promise<void> {
     try {
       groupService.subscribe((groups: Group[]) => {
@@ -69,10 +83,14 @@ class GroupsPage extends PageMixin(LitElement) {
         <ion-header collapse="condense">
           <ion-toolbar>
             <ion-title size="large">${this.i18n.GROUPS}</ion-title>
+            <ion-buttons slot="primary">
+              <ion-button @click=${(): void => routerService.navigate(Routes.GROUPS_CREATE)}
+                ><ion-icon name="add"></ion-icon
+              ></ion-button>
+            </ion-buttons>
           </ion-toolbar>
         </ion-header>
-
-        <ion-list>
+        <ion-list lines="inset">
           <ion-list-header> Gruppen </ion-list-header>
           ${guard(
             [this.groups],
@@ -81,9 +99,14 @@ class GroupsPage extends PageMixin(LitElement) {
                 this.groups,
                 group => group.id,
                 group => html`
-                  <ion-item>
+                  <ion-item
+                    style="cursor: pointer"
+                    @click=${(): void => {
+                      routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id });
+                    }}
+                  >
                     <ion-avatar slot="start">
-                      <img src="" />
+                      <img src=${group.image?.url || ''} />
                     </ion-avatar>
                     <ion-label>
                       <h2>${group.name}</h2>
@@ -96,27 +119,13 @@ class GroupsPage extends PageMixin(LitElement) {
           )}
         </ion-list>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button>
-            <ion-icon name="add"></ion-icon>
+          <ion-fab-button
+            @click=${(): void => {
+              this.createModal();
+            }}
+          >
+            <ion-icon name="enter-outline"></ion-icon>
           </ion-fab-button>
-          <ion-fab-list side="top" id="group-fab-list">
-            <ion-fab-button
-              data-desc="Create"
-              @click=${(): void => {
-                routerService.navigate(Routes.GROUPS_CREATE);
-              }}
-              ><ion-icon name="create-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-label>Create</ion-label>
-            <ion-fab-button
-              data-desc="Join"
-              @click=${(): void => {
-                routerService.navigate(Routes.GROUPS_CREATE);
-              }}
-              ><ion-icon name="enter-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-label>Join</ion-label>
-          </ion-fab-list>
         </ion-fab>
       </ion-content>`;
   }

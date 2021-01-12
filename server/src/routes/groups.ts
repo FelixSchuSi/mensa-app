@@ -7,7 +7,15 @@ import { encrypt, decrypt } from '../services/crypto.service';
 const router = express.Router();
 const codeCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const codeLength = 8;
-
+router.get('/:id', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const group = await groupDAO.findOne({ id: req.params.id });
+  if (group) {
+    res.status(200).json({ ...group, name: decrypt(group!.name) });
+  } else {
+    res.status(404).json({});
+  }
+});
 router.get('/', async (req, res) => {
   const filter: Partial<Group> = {};
   let groups: Array<Group> = [];
@@ -46,6 +54,7 @@ router.post('/', async (req, res) => {
   const createdGroup = await groupDAO.create({
     name: encrypt(req.body.group.name),
     joinCode: createJoinCode(codeLength),
+    image: req.body.group.image,
     owner: res.locals.user.id
   });
   res.status(201).json({ ...createdGroup, name: decrypt(createdGroup.name) });
@@ -62,7 +71,28 @@ router.delete('/:id', async (req, res) => {
   await groupDAO.deleteOne(req.params.id);
   res.status(200).end();
 });
-
+router.get('/:id/members', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+  const group = await groupDAO.findOne({ id: req.params.id });
+  if (!group) return res.status(404).end();
+  // TODO: findMany() function on gerneric dao
+  const users = await Promise.all(
+    group!.members.map(
+      (e): Promise<User | null> => {
+        return userDAO.findOne({ id: e });
+      }
+    )
+  );
+  const filteredUsers = users.map(e => {
+    if (e !== null) {
+      return { name: e.name, id: e.id };
+    } else {
+      return { name: 'Unkown User' };
+    }
+  });
+  res.status(200).json(filteredUsers);
+});
 router.post('/:id/membership', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;

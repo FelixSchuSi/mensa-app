@@ -1,5 +1,7 @@
 import { Routes } from '../routes';
 import { Group } from '../../../server/src/models/group';
+import { User } from '../../../server/src/models/user';
+import { Image } from '../../../server/src/models/image';
 import { httpService } from './http.service';
 import { routerService } from './router.service';
 import { storeService } from './store.service';
@@ -25,7 +27,32 @@ export class GroupService {
       await this.setGroups(groups);
     }
   }
-
+  public async getGroupMembers(gid: string): Promise<User[]> {
+    if (navigator.onLine) {
+      const response = await httpService.get('groups/' + gid + '/members');
+      return response.json();
+    } else {
+      return new Promise((res, rej) => {
+        rej();
+      });
+    }
+  }
+  public async getGroup(id: string): Promise<Group> {
+    if (navigator.onLine) {
+      const response = await httpService.get('groups/' + id);
+      return response.json();
+    } else {
+      const groups = <Group[] | null>await storeService.get(this.TASKKEY);
+      return new Promise((res, rej) => {
+        if (groups === null) rej();
+        groups?.forEach((group): void => {
+          if (group.id === id) {
+            res(group);
+          }
+        });
+      });
+    }
+  }
   public async joinByCode(code: string): Promise<void> {
     if (navigator.onLine) {
       const body = await (await httpService.get('groups?joincode=' + code)).json();
@@ -38,10 +65,11 @@ export class GroupService {
       return Promise.reject({});
     }
   }
-  public async createGroup(name: string): Promise<void> {
+  public async createGroup(name: string, image?: Image): Promise<Group> {
     if (navigator.onLine) {
-      await httpService.post('groups', { group: { name: name } });
-      routerService.navigate(Routes.GROUPS);
+      const result = await httpService.post('groups', { group: { name: name, image: image || null } });
+      return result.json();
+      // routerService.navigate(Routes.GROUPS);
     } else {
       return Promise.reject({});
     }

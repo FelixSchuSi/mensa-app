@@ -11,6 +11,7 @@ import './pages/meals-future/meals-future.page';
 import './pages/meals-today/meals-today.page';
 import './pages/groups/groups.page';
 import './pages/create-group/create-group.page';
+import './pages/group-details/group-details.page';
 
 import './widgets/task/task.widget';
 import './widgets/connection-status-bar/connection-status-bar.widget';
@@ -20,3 +21,4 @@ import './widgets/chip-toggle-show-more/chip-toggle-show-more';
 import './widgets/meal/meal.widget';
 
 import './../node_modules/macro-carousel/dist/macro-carousel.min.js';
+import './widgets/group-join-modal/group-join-modal.widget';

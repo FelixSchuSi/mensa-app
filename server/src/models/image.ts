@@ -1,6 +1,6 @@
 import { Entity } from './entity';
 
-export interface Image extends Entity {
+export interface Image {
   url: string;
   id: string;
 }

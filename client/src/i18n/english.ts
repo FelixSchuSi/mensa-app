@@ -112,5 +112,8 @@ export const english: LanguageStrings = {
   PERSONAL_DATA: 'Personal Data',
   NEXT_STEP: 'Next step',
   PREVIOUS_STEP: 'Previous step',
-  STATUS: 'Status'
+  STATUS: 'Status',
+  JOIN: 'Join',
+  JOINCODE: 'Joincode',
+  GROUP_DETAILS: 'Group details'
 };
