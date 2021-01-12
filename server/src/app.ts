@@ -93,6 +93,7 @@ async function start() {
 function startHttpServer(app: Express) {
   const httpServer = http.createServer(app);
   httpServer.listen(port, () => {
+    console.log(`Proxy rewriting image embed URLs ${process.env.URL}`);
     console.log(`Server running at http://localhost:${port}`);
   });
 }
