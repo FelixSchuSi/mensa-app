@@ -3,7 +3,7 @@ import { css, customElement, html, LitElement, property, TemplateResult, unsafeC
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
-import { Group } from '../../../../server/src/models/group';
+import { Image } from '../../../../server/src/models/image';
 import { mediaService, MediaService } from '../../services/media.service';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./create-group.page.scss');
@@ -26,14 +26,15 @@ class CreateGroupPage extends PageMixin(LitElement) {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
   protected joinCode = '';
-  protected upload = (): void => {};
+  protected uploadedImage: Image | undefined;
+
   protected render(): TemplateResult {
     return html`
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
-              @click=${async () => {
+              @click=${async (): Promise<void> => {
                 // TODO Mehtode erstellen, die auf dem aktuellen nav .pop() ausführt
                 history.back();
               }}
@@ -55,19 +56,28 @@ class CreateGroupPage extends PageMixin(LitElement) {
           >
             <img id="group-image" src="" style="display:none;" />
             <input
+              style="display:none"
               type="file"
               name="file"
+              id="image-file-input"
               @change=${(e: any): void => {
                 const file = e.target.files[0];
                 mediaService.upload(file).then((res): void => {
-                  console.log(res);
                   const imageElement = <HTMLImageElement>this.querySelector('#group-image');
                   imageElement!.src = res.embed_url;
                   imageElement.style.display = 'block';
+                  const button = <HTMLElement>this.querySelector('#upload-button');
+                  button.style.display = 'none';
+                  this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
                 });
               }}
             />
-            <ion-button type="submit"
+            <ion-button
+              id="upload-button"
+              @click=${(): void => {
+                const input = <HTMLElement>this.querySelector('#image-file-input');
+                input.click();
+              }}
               ><ion-icon style="color:black;height:100%;font-size:50px" name="cloud-upload-outline"></ion-icon
             ></ion-button>
           </div>
@@ -86,7 +96,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
             color="primary"
             @click=${(): void => {
               this.groupService
-                .createGroup(this.groupName!)
+                .createGroup(this.groupName!, this.uploadedImage)
                 .then(json => {
                   console.log(json);
                   this.joinCode = json.joinCode;

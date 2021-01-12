@@ -105,7 +105,7 @@ class GroupsPage extends PageMixin(LitElement) {
                     }}
                   >
                     <ion-avatar slot="start">
-                      <img src="" />
+                      <img src=${group.image?.url || ''} />
                     </ion-avatar>
                     <ion-label>
                       <h2>${group.name}</h2>

@@ -1,6 +1,7 @@
 import { Routes } from '../routes';
 import { Group } from '../../../server/src/models/group';
 import { User } from '../../../server/src/models/user';
+import { Image } from '../../../server/src/models/image';
 import { httpService } from './http.service';
 import { routerService } from './router.service';
 import { storeService } from './store.service';
@@ -64,9 +65,9 @@ export class GroupService {
       return Promise.reject({});
     }
   }
-  public async createGroup(name: string): Promise<Group> {
+  public async createGroup(name: string, image?: Image): Promise<Group> {
     if (navigator.onLine) {
-      const result = await httpService.post('groups', { group: { name: name } });
+      const result = await httpService.post('groups', { group: { name: name, image: image || null } });
       return result.json();
       // routerService.navigate(Routes.GROUPS);
     } else {

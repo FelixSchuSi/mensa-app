@@ -54,6 +54,7 @@ router.post('/', async (req, res) => {
   const createdGroup = await groupDAO.create({
     name: encrypt(req.body.group.name),
     joinCode: createJoinCode(codeLength),
+    image: req.body.group.image,
     owner: res.locals.user.id
   });
   res.status(201).json({ ...createdGroup, name: decrypt(createdGroup.name) });
