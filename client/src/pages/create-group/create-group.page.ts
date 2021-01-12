@@ -52,7 +52,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
         </ion-header>
         <div class="horizontal-center" style="margin-top:1em;flex-direction:column">
           <div
-            style="height:200px;width:200px;background-color:lightgrey;display:flex;justify-content:center;flex-direction:column"
+            style="height:200px;width:200px;background-color:lightgrey;display:flex;justify-content:flex-end;flex-direction:column"
           >
             <img id="group-image" src="" style="display:none;" />
             <input
@@ -81,17 +81,20 @@ class CreateGroupPage extends PageMixin(LitElement) {
               ><ion-icon style="color:black;height:100%;font-size:50px" name="cloud-upload-outline"></ion-icon
             ></ion-button>
           </div>
-          <ion-input
-            style="width:250px"
-            @change=${(e: Event): void => {
-              const target = e.target as HTMLTextAreaElement;
-              this.groupName = target.value;
-            }}
-            placeholder="test"
-            type="text"
-            required
-          >
-          </ion-input>
+          <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-input
+              style="width:250px"
+              @change=${(e: Event): void => {
+                const target = e.target as HTMLTextAreaElement;
+                this.groupName = target.value;
+              }}
+              placeholder="Name der Gruppe"
+              type="text"
+              required
+            >
+            </ion-input>
+          </ion-item>
           <ion-button
             color="primary"
             @click=${(): void => {

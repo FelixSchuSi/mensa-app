@@ -90,7 +90,7 @@ class GroupsPage extends PageMixin(LitElement) {
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
-        <ion-list>
+        <ion-list lines="inset">
           <ion-list-header> Gruppen </ion-list-header>
           ${guard(
             [this.groups],
@@ -100,6 +100,7 @@ class GroupsPage extends PageMixin(LitElement) {
                 group => group.id,
                 group => html`
                   <ion-item
+                    style="cursor: pointer"
                     @click=${(): void => {
                       routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id });
                     }}

@@ -64,12 +64,12 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.GROUP_DETAILS} - ${this.group?.name}</ion-title>
           </ion-toolbar>
         </ion-header>
-        <ion-list>
+        <ion-list class="ion-padding">
           <ion-list-header>Termine</ion-list-header>
           <ion-item><ion-label>TODO</ion-label></ion-item>
         </ion-list>
 
-        <ion-list>
+        <ion-list class="ion-padding">
           <ion-list-header>Details</ion-list-header>
           <ion-item>
             <ion-label>Name</ion-label>
@@ -86,7 +86,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <ion-label>${this.group && this.formatDate(this.group!.createdAt)}</ion-label>
           </ion-item>
         </ion-list>
-        <ion-list>
+        <ion-list class="ion-padding">
           <ion-list-header>Mitglieder</ion-list-header>
           ${this.members &&
           guard(
@@ -110,12 +110,14 @@ class CreateGroupPage extends PageMixin(LitElement) {
             `
           )}
         </ion-list>
-        <ion-button
-          @click=${(): void => {
-            this.groupService.removeMembership(this.groupID);
-          }}
-          >Gruppe verlassen</ion-button
-        >
+        <div class="ion-padding" style="display: flex; justify-content:center">
+          <ion-button
+            @click=${(): void => {
+              this.groupService.removeMembership(this.groupID);
+            }}
+            >Gruppe verlassen</ion-button
+          >
+        </div>
       </ion-content>
     `;
   }

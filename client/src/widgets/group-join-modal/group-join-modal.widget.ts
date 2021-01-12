@@ -69,17 +69,20 @@ export class FilterModalWidget extends LitElement {
       </ion-header>
       <ion-content>
         <div class="ion-padding" style="display:flex;flex-direction:column">
-          <ion-input
-            @change=${(e: Event): void => {
-              const target = e.target as HTMLTextAreaElement;
-              this.inputJoinCode = target.value;
-            }}
-            placeholder=${this.i18n.JOINCODE}
-            type="text"
-            required
-            pattern=".{8}"
-          >
-          </ion-input>
+          <ion-item>
+            <ion-label>${this.i18n.JOINCODE}</ion-label>
+            <ion-input
+              @change=${(e: Event): void => {
+                const target = e.target as HTMLTextAreaElement;
+                this.inputJoinCode = target.value;
+              }}
+              placeholder=${this.i18n.JOINCODE}
+              type="text"
+              required
+              pattern=".{8}"
+            >
+            </ion-input>
+          </ion-item>
           <ion-button
             style="float:right"
             @click=${(): void => {
