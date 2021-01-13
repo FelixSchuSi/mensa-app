@@ -1,7 +1,7 @@
 @import '../../shared.scss';
 
 ::slotted(ion-chip.selected) {
-  --background: var(--ion-color-dark);
+  --background: var(--ion-color-step-850);
   --color: var(--ion-color-light);
 }
 

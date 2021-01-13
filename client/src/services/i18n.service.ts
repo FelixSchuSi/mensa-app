@@ -3,6 +3,7 @@ import { german } from '../i18n/german';
 import { getBrowserLanguage } from '../i18n/get-browser-language';
 import { LanguageStrings } from '../models/language-strings';
 import { Languages } from '../models/languages';
+import { storeService } from './store.service';
 
 type i18nListener = (i18n: LanguageStrings) => void;
 
@@ -10,15 +11,19 @@ class I18nService {
   private strings!: LanguageStrings;
   private _language!: Languages;
   private listeners: i18nListener[] = [];
+  private LANGUAGE_KEY: string = 'LANGUAGE';
 
   constructor() {
-    this.language = getBrowserLanguage();
+    storeService.get(this.LANGUAGE_KEY).then(language => {
+      this.language = <Languages>language ?? getBrowserLanguage();
+    });
   }
 
   public set language(language: Languages) {
     this._language = language;
     const newLangStrings: LanguageStrings = language === Languages.GERMAN ? german : english;
     this.strings = newLangStrings;
+    storeService.set(this.LANGUAGE_KEY, language);
     this.notifyListeners(this.strings);
   }
 

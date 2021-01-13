@@ -1,9 +1,11 @@
+import { Status } from '../../../server/src/models/status';
+import { MealFilterConfig } from '../../../server/src/models/meal-filter-config';
+
 export interface SignUpData {
   name: string;
   email: string;
   password: string;
   passwordCheck: string;
-  status: 'STUDENT' | 'GUEST' | 'EMPLOYEE';
-  diet: 'NO_MEAT' | 'VEGETARIAN' | 'VEGAN';
-  indigestibilities: string[];
+  filterConfig: MealFilterConfig;
+  status: Status;
 }

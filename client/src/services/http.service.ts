@@ -34,7 +34,24 @@ class HttpService {
   public delete(url: string, onSyncFail?: () => void): Promise<Response> {
     return this.createFetch('DELETE', url, { onSyncFail });
   }
-
+  public async replayRequests(): Promise<void> {
+    this.requestReplayLock = new Promise(() => {});
+    if (this.queue.length > 0) {
+      while (this.queue.length > 0) {
+        const { request, onSyncFail } = this.queue.shift()!;
+        try {
+          await fetch(request);
+        } catch (e) {
+          console.log('error during sync: ' + e);
+          await onSyncFail();
+        }
+      }
+    }
+    this.requestReplayLock = Promise.resolve();
+  }
+  public getBaseURL(): string {
+    return this.config.baseURL;
+  }
   private async createFetch(
     method: string,
     url: string,
@@ -57,7 +74,6 @@ class HttpService {
       return Promise.reject({ message, statusCode: response.status });
     }
   }
-
   private buildRequest(method: string, url: string, body?: unknown): Request {
     const requestInit: RequestInit = {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -80,22 +96,6 @@ class HttpService {
       this.queue.push({ request, onSyncFail: syncFail });
       return Promise.reject({ message: '_ignoreMe' });
     }
-  }
-
-  public async replayRequests(): Promise<void> {
-    this.requestReplayLock = new Promise(() => {});
-    if (this.queue.length > 0) {
-      while (this.queue.length > 0) {
-        const { request, onSyncFail } = this.queue.shift()!;
-        try {
-          await fetch(request);
-        } catch (e) {
-          console.log('error during sync: ' + e);
-          await onSyncFail();
-        }
-      }
-    }
-    this.requestReplayLock = Promise.resolve();
   }
 }
 

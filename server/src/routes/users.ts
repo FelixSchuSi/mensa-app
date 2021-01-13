@@ -5,7 +5,7 @@ import { GenericDAO } from '../models/generic.dao';
 import { User } from '../models/user';
 
 const router = express.Router();
-const isProd: boolean = !!process.env.ISPROD;
+const isProd = !!process.env.ISPROD;
 const cookieOptions: CookieOptions = isProd
   ? { sameSite: 'none', secure: true, httpOnly: false }
   : { sameSite: 'lax', httpOnly: false };
@@ -40,17 +40,17 @@ router.post('/', async (req, res) => {
 
   const filter: Partial<User> = { email: req.body.email };
   if (await userDAO.findOne(filter)) {
-    res.status(400).json({ message: ' Es existiert bereits ein Konto mit der angegebenen E-Mail-Adresse.' });
+    res.status(400).json({ message: 'Es existiert bereits ein Konto mit der angegebenen E-Mail-Adresse.' });
     return;
   }
 
+  const { name, email, password, status, filterConfig } = req.body;
   const createdUser = await userDAO.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: await bcrypt.hash(req.body.password, 10),
-    status: req.body.status,
-    diet: req.body.diet,
-    indigestibilities: req.body.indigestibilities
+    name,
+    email,
+    password: await bcrypt.hash(password, 10),
+    filterConfig,
+    status
   });
 
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);
@@ -77,6 +77,18 @@ router.post('/sign-in', async (req, res) => {
     res.clearCookie('jwt-token');
     res.status(400).json({ message: 'E-Mail oder Passwort ungültig!' });
   }
+});
+
+// Edit user
+router.patch('/', async (req, res) => {
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+  const partialUser: Partial<User> = req.body;
+  if (!partialUser.email) res.status(400).json({ message: 'Email muss gesetzt sein' });
+  const user = await userDAO.findOne({ email: partialUser.email });
+  if (!user) res.status(400).json({ message: 'Dieser Benutzer existiert nicht.' });
+  const newUser = { ...user, ...partialUser };
+  const success = await userDAO.update(newUser);
+  success ? res.json(newUser) : res.sendStatus(500);
 });
 
 router.delete('/sign-out', (req, res) => {

@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{ loader: 'file-loader', options: { outputPath: '/fonts/', publicPath: '/mensa-app/fonts' } }]
+        use: [{ loader: 'file-loader', options: { outputPath: '/fonts/' } }]
       }
     ]
   },
@@ -40,7 +40,9 @@ module.exports = {
         {
           from: path.resolve(__dirname, '404.html')
         },
-        { from: path.resolve(__dirname, 'node_modules/@ionic/core/dist/ionic/svg'), to: './svg' }
+        { from: path.resolve(__dirname, 'node_modules/@ionic/core/dist/ionic/svg'), to: './svg' },
+        { from: path.resolve(__dirname, 'svg/'), to: './svg' },
+        { from: path.resolve(__dirname, 'images/'), to: './images' }
       ]
     }),
     new CleanWebpackPlugin(),

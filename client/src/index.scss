@@ -53,3 +53,47 @@ body {
     }
   }
 }
+
+app-root,
+#undo-ion-page {
+  display: inline !important;
+  position: static !important;
+}
+
+ion-modal {
+  --width: 100% !important;
+  --height: 100% !important;
+}
+
+div.error {
+  height: 24px;
+  color: var(--ion-color-danger);
+  padding-left: 20px;
+}
+
+div.error.md {
+  background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+
+.wider-label {
+  flex: initial !important;
+  width: 160px !important;
+}
+
+.sign-up-header > ion-toolbar {
+  --background: var(--ion-background-color);
+}
+
+.meal-img {
+  max-width: 250px;
+  max-height: 250px;
+  min-width: 1px;
+  min-height: 1px;
+  width: auto;
+  height: auto;
+}
+.horizontal-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

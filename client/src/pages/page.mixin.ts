@@ -1,7 +1,8 @@
 import { LitElement, property, html, TemplateResult, internalProperty } from 'lit-element';
+import { User } from '../../../server/src/models/user';
 import { LanguageStrings } from '../models/language-strings';
 import { i18nService } from '../services/i18n.service';
-import { userService, UserInfo } from '../services/user.service';
+import { userService } from '../services/user.service';
 
 // eslint-disable-next-line
 export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T) => {
@@ -16,7 +17,7 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
     protected mode: 'ios' | 'md' = 'md';
 
     @property({ type: Object })
-    protected userInfo?: UserInfo;
+    protected userInfo?: User;
 
     @property()
     private infoMessage = '';
@@ -32,6 +33,10 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       userService.subscribe(userInfo => (this.userInfo = userInfo));
     }
 
+    protected createRenderRoot(): Element | ShadowRoot {
+      return this;
+    }
+
     disconnectedCallback(): void {
       super.disconnectedCallback();
       this.onDestroyCallbacks.forEach((callback: () => void) => callback());
@@ -41,16 +46,30 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       this.onDestroyCallbacks.push(callback);
     }
 
-    protected renderNotification(): TemplateResult {
-      return html` <app-notification error="${this.errorMessage}" info="${this.infoMessage}"></app-notification> `;
-    }
-
     protected setNotification({ errorMessage = '', infoMessage = '' }): void {
       if (errorMessage === '_ignoreMe' || infoMessage === '_ignoreMe') return;
       this.errorMessage = errorMessage;
       this.infoMessage = infoMessage;
       if (errorMessage || infoMessage) {
         setTimeout(() => this.setNotification({}), 3000);
+        const toast = <HTMLIonToastElement>document.createElement('ion-toast');
+        toast.duration = 3000;
+        toast.buttons = [
+          {
+            role: 'cancel',
+            icon: 'close'
+          }
+        ];
+        if (errorMessage) {
+          toast.message = errorMessage;
+          toast.color = 'danger';
+        } else if (infoMessage) {
+          toast.message = infoMessage;
+          toast.color = 'success';
+        }
+
+        document.body.appendChild(toast);
+        toast.present();
       }
     }
   }

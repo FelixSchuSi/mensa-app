@@ -12,10 +12,11 @@ import {
 import { routerService } from '../services/router.service';
 import { Routes } from '../routes';
 import { LanguageStrings } from '../models/language-strings';
-import { storeService } from '../services/store.service';
-import { getTitleString } from '../helpers/get-title-string';
 import { i18nService } from '../services/i18n.service';
-import { clearRootNav, pushToRootNav } from '../helpers/root-nav-util';
+import { clearRootNav, pushToNav } from '../helpers/nav-util';
+import { Tab } from '../models/tab';
+import { getActiveNav, isRootRoute } from '../helpers/get-active-nav';
+import { selectActiveTab } from '../helpers/select-active-tab';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -23,9 +24,6 @@ const sharedCSS = require('../shared.scss');
 @customElement('app-root')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class AppComponent extends LitElement {
-  // createRenderRoot() {
-  //   return this;
-  // }
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
@@ -75,99 +73,71 @@ export class AppComponent extends LitElement {
     }
   }
 
-  protected async handleRouteChange(): Promise<void> {
+  protected async handleRouteChange(): Promise<any> {
     this.currentRoute = routerService.getPath();
-    if (this.currentRoute.startsWith(Routes.TASKS)) {
-      await clearRootNav();
-      this.tabsComponent.select(Routes.TASKS);
-    } else if (this.currentRoute.startsWith(Routes.MEALS_TODAY)) {
-      await clearRootNav();
-      this.tabsComponent.select(Routes.MEALS_TODAY);
-    } else if (this.currentRoute.startsWith(Routes.MEALS_FUTURE)) {
-      await clearRootNav();
-      this.tabsComponent.select(Routes.MEALS_FUTURE);
-    } else if (this.currentRoute.startsWith(Routes.GROUPS)) {
-      await clearRootNav();
-      this.tabsComponent.select(Routes.GROUPS);
-    }
-    // RootRoutes start here
-    // RootRoutes are not assignable to one tab,
-    // therefore RootRoutes are displayed fullscreen without tabs.
-    else if (this.currentRoute.startsWith(Routes.SETTINGS)) {
-      pushToRootNav('app-settings');
-    } else if (this.currentRoute.startsWith(Routes.SIGN_IN)) {
-      pushToRootNav('app-sign-in');
-    } else if (this.currentRoute.startsWith(Routes.SIGN_UP)) {
-      pushToRootNav('app-sign-up');
+    const activeNav: HTMLIonNavElement = getActiveNav(this.tabs, this);
+    if (!isRootRoute(this.currentRoute)) await clearRootNav();
+    selectActiveTab(this.tabsComponent);
+    switch (this.currentRoute) {
+      case Routes.GROUPS_CREATE:
+        return await pushToNav('app-create-group', activeNav);
+      case Routes.GROUPS_DETAILS:
+        return await pushToNav('app-group-details', activeNav);
+      case Routes.SETTINGS:
+        return await pushToNav('app-settings', activeNav);
+      case Routes.SIGN_IN:
+        return await pushToNav('app-sign-in', activeNav);
+      case Routes.SIGN_UP:
+        return await pushToNav('app-sign-up', activeNav);
     }
   }
 
-  protected renderRouterOutlet(route: Routes, component: string): TemplateResult {
-    // TODO: move buttons to settings and return value in switch statement.
-    return html`
-      <ion-header style="background-color: var(--ion-background-color);">
-        <ion-toolbar>
-          <ion-title>${getTitleString(this.i18n)}</ion-title>
-          <ion-buttons slot="primary">
-            <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
-              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
-              <!-- <ion-icon name="person-circle"></ion-icon> -->
-              <!-- TODO: Make Google style avatar work -->
-              <!-- <ion-avatar style="border-radius: 0px" slot="end">
-                <img
-                  style="width: 60px; height:60px"
-                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
-                />
-              </ion-avatar> -->
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding" fullscreen>
-        <ion-header collapse="condense">
-          <ion-toolbar>
-            <ion-title size="large">${getTitleString(this.i18n)}</ion-title>
-          </ion-toolbar>
-          <ion-toolbar>
-            <ion-searchbar></ion-searchbar>
-          </ion-toolbar>
-        </ion-header>
-        <app-tab-container id="content" component="${component}"></app-tab-container>
-      </ion-content>
-    `;
+  public get tabs(): Tab[] {
+    return [
+      { rootComponent: 'app-tasks', baseRoute: Routes.TASKS, titleString: this.i18n.TASKS, icon: 'list' },
+      {
+        rootComponent: 'app-meals-today',
+        baseRoute: Routes.MEALS_TODAY,
+        titleString: this.i18n.MEALS_TODAY,
+        icon: 'home'
+      },
+      {
+        rootComponent: 'app-meals-future',
+        baseRoute: Routes.MEALS_FUTURE,
+        titleString: this.i18n.MEALS_FUTURE,
+        icon: 'calendar'
+      },
+      { rootComponent: 'app-groups', baseRoute: Routes.GROUPS, titleString: this.i18n.GROUPS, icon: 'people' }
+    ];
   }
 
   protected render(): TemplateResult {
     return html`
-      <ion-app>
-        <ion-tabs>
-          <ion-tab tab=${Routes.TASKS}> ${this.renderRouterOutlet(Routes.TASKS, 'app-tasks')} </ion-tab>
+      <ion-app id="undo-ion-page">
+        <ion-tabs style="position:static;">
+          <ion-tab tab=${Routes.TASKS}>
+            <ion-nav class="${Routes.TASKS}" root="app-tasks"></ion-nav>
+          </ion-tab>
           <ion-tab tab=${Routes.MEALS_TODAY}>
-            ${this.renderRouterOutlet(Routes.MEALS_TODAY, 'app-meals-today')}
+            <ion-nav class="${Routes.MEALS_TODAY}" root="app-meals-today"></ion-nav>
           </ion-tab>
           <ion-tab tab=${Routes.MEALS_FUTURE}>
-            ${this.renderRouterOutlet(Routes.MEALS_FUTURE, 'app-meals-future')}
+            <ion-nav class="${Routes.MEALS_FUTURE}" root="app-meals-future"></ion-nav>
           </ion-tab>
-          <ion-tab tab=${Routes.GROUPS}> ${this.renderRouterOutlet(Routes.GROUPS, 'app-groups')} </ion-tab>
+          <ion-tab tab=${Routes.GROUPS}>
+            <ion-nav class="${Routes.GROUPS}" root="app-groups"></ion-nav>
+          </ion-tab>
           <div id="bottom-content" slot="bottom">
             <app-connection-status-bar></app-connection-status-bar>
             <ion-tab-bar>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.TASKS)} tab=${Routes.TASKS}>
-                <ion-label>${this.i18n.TASKS}</ion-label>
-                <ion-icon name="list"></ion-icon>
-              </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.MEALS_TODAY)} tab=${Routes.MEALS_TODAY}>
-                <ion-label>${this.i18n.MEALS_TODAY}</ion-label>
-                <ion-icon name="home"></ion-icon>
-              </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.MEALS_FUTURE)} tab=${Routes.MEALS_FUTURE}>
-                <ion-label>${this.i18n.MEALS_FUTURE}</ion-label>
-                <ion-icon name="calendar"></ion-icon>
-              </ion-tab-button>
-              <ion-tab-button @click=${() => routerService.navigate(Routes.GROUPS)} tab=${Routes.GROUPS}>
-                <ion-label>${this.i18n.GROUPS}</ion-label>
-                <ion-icon name="people"></ion-icon>
-              </ion-tab-button>
+              ${this.tabs.map(
+                tab => html`
+                  <ion-tab-button @click=${() => routerService.navigate(tab.baseRoute)} tab=${tab.baseRoute}>
+                    <ion-label>${tab.titleString}</ion-label>
+                    <ion-icon name="${tab.icon}"></ion-icon>
+                  </ion-tab-button>
+                `
+              )}
             </ion-tab-bar>
           </div>
         </ion-tabs>

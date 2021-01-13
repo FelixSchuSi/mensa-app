@@ -31,7 +31,6 @@ export class ChipSelectWidget extends LitElement {
 
   public toggle(cutOffIndex: number, action: 'expand' | 'collapse'): void {
     this.chips.forEach((chip, i) => {
-      console.log(i, action, this.chips);
       if (i > cutOffIndex && !chip.classList.contains('readMoreToggle')) {
         if (action === 'collapse') {
           chip.classList.remove('ghost');
@@ -42,9 +41,9 @@ export class ChipSelectWidget extends LitElement {
     });
   }
 
-  public get value(): string[] {
+  public get value(): HTMLIonChipElement[] {
     const selectedChips = <any[]>this.chips.filter(chip => chip.classList.contains('selected'));
-    return selectedChips.map(chip => chip.id);
+    return selectedChips;
   }
 
   protected handleSlotchange(e: any) {

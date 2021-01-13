@@ -8,7 +8,7 @@ import {
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
-import { popFromRootNav } from '../../helpers/root-nav-util';
+import { popFromRootNav } from '../../helpers/nav-util';
 import { toggleIosMd } from '../../helpers/toggle-ios-md';
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';
@@ -72,7 +72,6 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.SETTINGS}</ion-title>
           </ion-toolbar>
         </ion-header>
-        ${this.renderNotification()}
         <ion-list>
           <ion-item>
             <ion-label>${this.i18n.LANGUAGE}</ion-label>

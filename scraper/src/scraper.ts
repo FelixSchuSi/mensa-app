@@ -14,7 +14,7 @@ import { writeFileSync } from 'fs';
 function parseMealsFromHTML(html: string): FlatMeal[] {
   const $: cheerio.Root = cheerio.load(html);
   const mensaString: string = $('.mensatitle').first().text();
-  const mensa: string = mensaString
+  const mensa: 'aasee' | 'davinci' | 'denkpause' | 'ring' | 'steinfurt' = <any>mensaString
     .split(' ')
     .filter(substr => ['Mensa', 'Am', 'Bistro'].indexOf(substr) < 0)
     .join('')

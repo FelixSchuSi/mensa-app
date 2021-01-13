@@ -1,10 +1,12 @@
 import { Entity } from './entity';
+import { Status } from './status';
+import { MealFilterConfig } from './meal-filter-config';
 
 export interface User extends Entity {
   name: string;
   email: string;
   password: string;
-  status: 'STUDENT' | 'GUEST' | 'EMPLOYEE';
-  diet: 'NO_MEAT' | 'VEGETARIAN' | 'VEGAN';
-  indigestibilities: string[];
+  groupMemberships: Array<string>;
+  filterConfig: MealFilterConfig;
+  status: Status;
 }

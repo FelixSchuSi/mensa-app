@@ -6,8 +6,8 @@ import { LifestyleKeys } from './lifestyle';
 export interface FlatMeal {
   title: string;
   date: string;
-  mensa: string;
-  additives: AdditivesKeys[];
+  mensa: 'aasee' | 'davinci' | 'denkpause' | 'ring' | 'steinfurt';
+  additives: AdditivesKeys[]; // TODO: only use string -> keys
   allergens: AllergenesKeys[];
   otherInfo: OtherMealInfoKeys[];
   lifestyle: LifestyleKeys[];
