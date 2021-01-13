@@ -207,6 +207,9 @@ class SignUpPage extends PageMixin(LitElement) {
             </ion-item>
             <div class="error"></div>
           </ion-item-group>
+          <ion-item-group>
+            <div class="error"></div>
+          </ion-item-group>
           <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
         </form>
       </ion-content>

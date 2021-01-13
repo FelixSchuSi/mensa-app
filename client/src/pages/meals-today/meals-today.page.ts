@@ -26,6 +26,10 @@ class MealsTodayPage extends PageMixin(LitElement) {
     `
   ];
 
+  createRenderRoot() {
+    return this;
+  }
+
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 

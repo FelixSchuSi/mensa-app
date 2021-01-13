@@ -93,5 +93,6 @@ export const english: LanguageStrings = {
   MEALS_FUTURE: 'Meals',
   GROUPS: 'Groups',
   READ_MORE: 'Read more',
-  SHOW_LESS: 'Show less'
+  SHOW_LESS: 'Show less',
+  CONTINUE: 'Continue'
 };

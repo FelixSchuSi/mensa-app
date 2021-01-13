@@ -90,4 +90,5 @@ export type LanguageKeys =
   | 'MEALS_FUTURE'
   | 'GROUPS'
   | 'READ_MORE'
-  | 'SHOW_LESS';
+  | 'SHOW_LESS'
+  | 'CONTINUE';

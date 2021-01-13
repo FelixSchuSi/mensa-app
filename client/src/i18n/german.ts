@@ -93,5 +93,6 @@ export const german: LanguageStrings = {
   MEALS_FUTURE: 'Gerichte',
   GROUPS: 'Gruppen',
   READ_MORE: 'Mehr anzeigen',
-  SHOW_LESS: 'Weniger anzeigen'
+  SHOW_LESS: 'Weniger anzeigen',
+  CONTINUE: 'Fortfahren'
 };
