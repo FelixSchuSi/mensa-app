@@ -48,6 +48,12 @@ export class AppComponent extends LitElement {
         navigator.serviceWorker.register('service-worker.js').then(console.log).catch(console.error);
       });
     }
+
+    const path = localStorage.getItem('path');
+    if (path) {
+      routerService.navigate(<Routes>path);
+      localStorage.removeItem('path');
+    }
   }
 
   @property()
