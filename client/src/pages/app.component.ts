@@ -67,7 +67,6 @@ export class AppComponent extends LitElement {
     await this.handleRouteChange();
     const path = localStorage.getItem('path');
     if (path) {
-      debugger;
       routerService.navigate(<Routes>path);
       localStorage.removeItem('path');
     }

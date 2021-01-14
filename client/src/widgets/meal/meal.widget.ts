@@ -44,16 +44,44 @@ export class MealWidget extends LitElement {
   }
 
   protected get images(): TemplateResult {
+    const onmousedown = (e: any) => {
+      e.preventDefault();
+      return false;
+    };
+
     return html`
       <macro-carousel
         @touchstart="${() => this.carousel.update()}"
         @mousedown="${() => this.carousel.update()}"
+        @dragstart=${e => {
+          console.log(e, e.target.nodeName);
+          if (e.target.nodeName.toUpperCase() == 'ION-IMG') {
+            console.log(true);
+            return false;
+          }
+        }}
         .slidesPerView=${this.slidesPerView ?? 2}
       >
-        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}></ion-img>
-        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}></ion-img>
-        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}></ion-img>
-        <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}></ion-img>
+        <ion-img
+          @mousedown="${onmousedown}"
+          class="meal-img"
+          src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}
+        ></ion-img>
+        <ion-img
+          @mousedown="${onmousedown}"
+          class="meal-img"
+          src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}
+        ></ion-img>
+        <ion-img
+          @mousedown="${onmousedown}"
+          class="meal-img"
+          src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}
+        ></ion-img>
+        <ion-img
+          @mousedown="${onmousedown}"
+          class="meal-img"
+          src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}
+        ></ion-img>
       </macro-carousel>
     `;
   }

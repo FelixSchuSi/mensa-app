@@ -114,4 +114,5 @@ export type LanguageKeys =
   | 'JOIN'
   | 'JOINCODE'
   | 'GROUP_DETAILS'
-  | 'JOINGROUP';
+  | 'JOINGROUP'
+  | 'SEARCH_MEALS';

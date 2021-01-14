@@ -116,5 +116,6 @@ export const english: LanguageStrings = {
   JOIN: 'Join',
   JOINCODE: 'Joincode',
   GROUP_DETAILS: 'Group details',
-  JOINGROUP: 'Join group'
+  JOINGROUP: 'Join group',
+  SEARCH_MEALS: 'Search for meals'
 };

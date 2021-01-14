@@ -93,9 +93,11 @@ class MealsFuturePage extends PageMixin(LitElement) {
           this.searchInput = e.target.value;
           this.displayMeals = this.applyTextSearch();
         }}
+        .placeholder=${this.i18n.SEARCH_MEALS}
       ></ion-searchbar>
     `;
   }
+
   protected render(): TemplateResult {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
