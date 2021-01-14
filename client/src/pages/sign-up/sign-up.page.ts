@@ -273,7 +273,7 @@ class SignUpPage extends PageMixin(LitElement) {
           </ion-item>
 
           <ion-item>
-            <div style="display:flex; align-items:center; width:100%">
+            <div class="filter-row">
               <div style="width:160px">
                 <ion-label>
                   <h2>${this.i18n.INDIGESTIBILITIES}</h2>

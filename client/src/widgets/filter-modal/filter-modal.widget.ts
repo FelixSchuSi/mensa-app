@@ -61,15 +61,13 @@ export class FilterModalWidget extends LitElement {
         <div class="ion-padding">
           <ion-list>
             <ion-item>
-              <div
-                style="padding-top: 10px; padding-bottom: 10px; display:flex; align-items:center; width:100%; justify-content:flex-start"
-              >
-                <div style="width:20%">
+              <div class="filter-row" style="padding-top: 10px; padding-bottom: 10px;">
+                <div class="filter-label">
                   <ion-label>
                     <h2>${this.i18n.DIET}</h2>
                   </ion-label>
                 </div>
-                <div style="width:40%; min-width: 200px">
+                <div>
                   <ion-segment
                     mode="ios"
                     @ionChange=${(e: any) => (this.newFilterConfig = { ...this.newFilterConfig, diet: e.detail.value })}
@@ -101,13 +99,13 @@ export class FilterModalWidget extends LitElement {
             </ion-item>
 
             <ion-item>
-              <div style="display:flex; align-items:center; width:100%">
-                <div style="width:20%">
+              <div class="filter-row">
+                <div class="filter-label">
                   <ion-label>
                     <h2>${this.i18n.LOCATION}</h2>
                   </ion-label>
                 </div>
-                <div style="width:80%">
+                <div class="align-self: flex-end">
                   <chip-select
                     @chip-select-change=${(e: any) => {
                       const mensen = e.detail.map((mensaChipElem: any) => mensaChipElem.id);
@@ -134,13 +132,13 @@ export class FilterModalWidget extends LitElement {
             </ion-item>
 
             <ion-item>
-              <div style="display:flex; align-items:center; width:100%">
-                <div style="width:20%">
+              <div class="filter-row">
+                <div class="filter-label">
                   <ion-label>
                     <h2>${this.i18n.CONTENTS}</h2>
                   </ion-label>
                 </div>
-                <div style="width:80%">
+                <div>
                   <chip-select
                     @chip-select-change=${(e: any) => {
                       const contents = e.detail.map((contentChipElem: any) => contentChipElem.id);

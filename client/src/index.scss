@@ -106,3 +106,26 @@ div.error.md {
   align-items: center;
   justify-content: center;
 }
+
+.filter-label {
+  width: 110px;
+}
+.filter-row {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+app-meal > ion-card {
+  @media (max-width: 767px) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

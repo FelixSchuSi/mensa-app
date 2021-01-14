@@ -105,7 +105,7 @@ export const german: LanguageStrings = {
   LOCATION: 'Mensa',
   CONTENTS: 'Inhaltsstoffe',
   CLOSE: 'Schließen',
-  DIET: 'Ernährungsstil',
+  DIET: 'Diät',
   STANDARD_DIET: 'Standard',
   STEP_1: 'Schritt 1',
   STEP_2: 'Schritt 2',
