@@ -44,6 +44,7 @@ class MealsFuturePage extends PageMixin(LitElement) {
   protected filteredMeals: Meal[] = [];
 
   protected allMeals: Meal[] = [];
+  @internalProperty()
   protected userInfo?: User = userService.userInfo;
   protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
 

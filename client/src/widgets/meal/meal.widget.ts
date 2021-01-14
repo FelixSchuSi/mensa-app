@@ -70,7 +70,8 @@ export class MealWidget extends LitElement {
         <ion-card-content style="display:flex">
           <div>${this.transformDate(date)}</div>
           <div style="flex-grow: 1"></div>
-          <div>${this.renderPrice(price)}</div>
+          <div class="big-layout">${this.renderPrice(price)}</div>
+          <div class="small-layout">${this.renderPrice(price, true)}</div>
         </ion-card-content>
       </ion-card>
     `;
@@ -105,7 +106,7 @@ export class MealWidget extends LitElement {
     return new Intl.DateTimeFormat(language, { dateStyle: 'full' }).format(date);
   }
 
-  protected renderPrice(price: Price): string {
+  protected renderPrice(price: Price, smallLayout: boolean = false): string {
     let { student, employee, guest } = this.transformPrice(price);
     switch (this.status) {
       case 'EMPLOYEE':
@@ -115,7 +116,11 @@ export class MealWidget extends LitElement {
       case 'STUDENT':
         return `${student} €`;
       default:
-        return `${student} € - ${employee} € - ${guest} €`;
+        if (smallLayout) {
+          return `${guest} €`;
+        } else {
+          return `${student} € - ${employee} € - ${guest} €`;
+        }
     }
   }
 

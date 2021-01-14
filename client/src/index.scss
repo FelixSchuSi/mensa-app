@@ -129,3 +129,16 @@ app-meal > ion-card {
     margin-right: 0 !important;
   }
 }
+
+.big-layout {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .small-layout {
+    display: none;
+  }
+  .big-layout {
+    display: initial;
+  }
+}
