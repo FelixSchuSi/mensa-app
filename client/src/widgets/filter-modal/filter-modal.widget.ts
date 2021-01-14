@@ -69,7 +69,7 @@ export class FilterModalWidget extends LitElement {
                     <h2>${this.i18n.DIET}</h2>
                   </ion-label>
                 </div>
-                <div style="width:40%">
+                <div style="width:40%; min-width: 200px">
                   <ion-segment
                     mode="ios"
                     @ionChange=${(e: any) => (this.newFilterConfig = { ...this.newFilterConfig, diet: e.detail.value })}
