@@ -12,6 +12,7 @@ import './pages/meals-today/meals-today.page';
 import './pages/groups/groups.page';
 import './pages/create-group/create-group.page';
 import './pages/group-details/group-details.page';
+import './pages/meal-detail/meal-detail.page';
 
 import './widgets/task/task.widget';
 import './widgets/connection-status-bar/connection-status-bar.widget';

@@ -53,8 +53,7 @@ export class MealWidget extends LitElement {
       <macro-carousel
         @touchstart="${() => this.carousel.update()}"
         @mousedown="${() => this.carousel.update()}"
-        @dragstart=${e => {
-          console.log(e, e.target.nodeName);
+        @dragstart=${(e: any) => {
           if (e.target.nodeName.toUpperCase() == 'ION-IMG') {
             console.log(true);
             return false;
