@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>mensa-app</title>
     <script>
+      const path = localStorage.getItem('path');
+      if (path) {
+        routerService.navigate(path);
+        localStorage.removeItem('path');
+      }
       const mode = localStorage.getItem('mode');
       const htmlElement = document.querySelector('html');
       if (mode) {

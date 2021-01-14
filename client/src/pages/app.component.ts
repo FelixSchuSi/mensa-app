@@ -39,11 +39,6 @@ export class AppComponent extends LitElement {
 
   constructor() {
     super();
-    const path = localStorage.getItem('path');
-    if (path) {
-      routerService.navigate(<Routes>path);
-      localStorage.removeItem('path');
-    }
     this.currentRoute = routerService.getPath();
     this.i18n = i18nService.getStrings();
     i18nService.subscribe(i18n => (this.i18n = i18n));
