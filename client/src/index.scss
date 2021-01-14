@@ -74,6 +74,15 @@ ion-modal {
   --height: 100% !important;
 }
 
+@media (min-width: 768px) {
+  ion-modal {
+    --width: 80% !important;
+    --min-height: 600px !important;
+    --height: 80% !important;
+    --min-height: 600px !important;
+  }
+}
+
 div.error {
   height: 24px;
   color: var(--ion-color-danger);
@@ -141,4 +150,10 @@ app-meal > ion-card {
   .big-layout {
     display: initial;
   }
+}
+
+ion-item.no-padding {
+  --padding-start: 0;
+  --padding-end: 0;
+  padding: 0;
 }

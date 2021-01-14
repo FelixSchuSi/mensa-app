@@ -110,7 +110,7 @@ class SignUpPage extends PageMixin(LitElement) {
         <h1>${this.i18n.STEP_2}: ${this.i18n.PERSONAL_DATA}</h1>
         <form novalidate @ionChange=${(event: CustomEvent<InputChangeEventDetail>) => formChanged(event, this.i18n)}>
           <ion-item-group>
-            <ion-item>
+            <ion-item class="no-padding">
               <ion-label class="wider-label" position="fixed" for="name">${this.i18n.NAME}</ion-label>
               <ion-input
                 placeholder="${this.i18n.NAME}"
@@ -126,7 +126,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <div class="error ${this.mode}"></div>
           </ion-item-group>
           <ion-item-group>
-            <ion-item>
+            <ion-item class="no-padding">
               <ion-label class="wider-label" position="fixed" for="email">${this.i18n.E_MAIL}</ion-label>
               <ion-input
                 placeholder="${this.i18n.E_MAIL}"
@@ -140,7 +140,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <div class="error ${this.mode}"></div>
           </ion-item-group>
           <ion-item-group>
-            <ion-item>
+            <ion-item class="no-padding">
               <ion-label class="wider-label" position="fixed" for="password">${this.i18n.PASSWORD}</ion-label>
               <ion-input
                 placeholder="${this.i18n.PASSWORD}"
@@ -156,7 +156,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <div class="error ${this.mode}"></div>
           </ion-item-group>
           <ion-item-group>
-            <ion-item>
+            <ion-item class="no-padding">
               <ion-label class="wider-label" position="fixed" for="password-check">
                 ${this.i18n.PASSWORD_CONFIRM}</ion-label
               >
@@ -207,7 +207,7 @@ class SignUpPage extends PageMixin(LitElement) {
         </p>
 
         <ion-list>
-          <ion-item>
+          <ion-item class="no-padding">
             <div
               style="padding-top: 10px; padding-bottom: 10px; display:flex; align-items:center; width:100%; justify-content:flex-start"
             >
@@ -232,7 +232,7 @@ class SignUpPage extends PageMixin(LitElement) {
             </div>
           </ion-item>
 
-          <ion-item>
+          <ion-item class="no-padding">
             <div
               style="padding-top: 10px; padding-bottom: 10px; display:flex; align-items:center; width:100%; justify-content:flex-start"
             >
@@ -272,7 +272,7 @@ class SignUpPage extends PageMixin(LitElement) {
             </div>
           </ion-item>
 
-          <ion-item>
+          <ion-item class="no-padding">
             <div class="filter-row">
               <div style="width:160px">
                 <ion-label>

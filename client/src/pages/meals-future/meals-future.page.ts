@@ -19,6 +19,7 @@ import { mealService } from '../../services/meal.service';
 import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-meals';
 import { userService } from '../../services/user.service';
 import { User } from '../../../../server/src/models/user';
+import { getSlidesPerView } from '../../helpers/get-slides-per-view';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -41,24 +42,34 @@ class MealsFuturePage extends PageMixin(LitElement) {
   protected scrollIndex: number = 0;
 
   @property({ attribute: false })
-  protected filteredMeals: Meal[] = [];
-
+  protected displayMeals: Meal[] = [];
+  protected mealBeforeTextSearch: Meal[] = [];
   protected allMeals: Meal[] = [];
   @internalProperty()
   protected userInfo?: User = userService.userInfo;
   protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
 
+  protected searchInput = '';
+
+  protected applyTextSearch() {
+    if (this.searchInput === '') return this.mealBeforeTextSearch;
+    return this.mealBeforeTextSearch.filter(meal => meal.title.toLowerCase().includes(this.searchInput.toLowerCase()));
+  }
+
   protected async firstUpdated(): Promise<void> {
+    window.addEventListener('resize', this.carouselResizeHandler);
     try {
       userService.subscribe(user => {
         this.mealFilterConfig = user?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
         this.userInfo = user;
-        this.filteredMeals = filterMeals(this.allMeals);
+        this.mealBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
+        this.displayMeals = this.applyTextSearch();
       });
       mealService.subscribe((meals: Meal[]) => {
         this.allMeals = meals;
-        this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
-        if (this.filteredMeals && this.filteredMeals.length >= 5) {
+        this.mealBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
+        this.displayMeals = this.applyTextSearch();
+        if (this.displayMeals && this.displayMeals.length >= 5) {
           this.scrollIndex = 5;
         } else {
           this.scrollIndex = 1;
@@ -71,6 +82,20 @@ class MealsFuturePage extends PageMixin(LitElement) {
     }
   }
 
+  protected get searchBar(): TemplateResult {
+    return html`
+      <ion-searchbar
+        @ionClear=${(e: any) => {
+          this.searchInput = '';
+          this.displayMeals = this.applyTextSearch();
+        }}
+        @input=${(e: any) => {
+          this.searchInput = e.target.value;
+          this.displayMeals = this.applyTextSearch();
+        }}
+      ></ion-searchbar>
+    `;
+  }
   protected render(): TemplateResult {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
@@ -99,11 +124,10 @@ class MealsFuturePage extends PageMixin(LitElement) {
           <ion-toolbar>
             <ion-title size="large">${this.i18n.MEALS_FUTURE}</ion-title>
           </ion-toolbar>
-          <ion-toolbar>
-            <ion-searchbar></ion-searchbar>
-          </ion-toolbar>
+          <ion-toolbar> ${this.searchBar} </ion-toolbar>
         </ion-header>
-        ${this.filteredMeals
+        ${this.mode === 'md' ? this.searchBar : html``}
+        ${this.displayMeals
           .slice(0, this.scrollIndex)
           .map(meal => html`<app-meal .meal=${meal} .i18n=${this.i18n} .status=${this.userInfo?.status}></app-meal>`)}
         <ion-infinite-scroll threshold="0px" @ionInfinite=${this.displayMore}>
@@ -114,7 +138,7 @@ class MealsFuturePage extends PageMixin(LitElement) {
   }
 
   protected async displayMore() {
-    const mealsLeft = this.filteredMeals.length - 1 - this.scrollIndex;
+    const mealsLeft = this.displayMeals.length - 1 - this.scrollIndex;
     const indexChange = mealsLeft <= 5 ? mealsLeft : 5;
     this.infiniteScrollElem.complete();
     this.scrollIndex += indexChange;
@@ -135,6 +159,15 @@ class MealsFuturePage extends PageMixin(LitElement) {
 
   protected applyFilterConfig = (newFilterConfig: MealFilterConfig) => {
     this.mealFilterConfig = newFilterConfig;
-    this.filteredMeals = filterMeals(this.allMeals, this.mealFilterConfig);
+    this.mealBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
+    this.displayMeals = this.applyTextSearch();
   };
+
+  protected carouselResizeHandler() {
+    const allCarousels = <NodeListOf<any>>document.querySelectorAll('macro-carousel');
+    const slidesPerView = getSlidesPerView();
+    for (const carousel of allCarousels) {
+      carousel.slidesPerView = slidesPerView;
+    }
+  }
 }

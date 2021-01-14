@@ -5,6 +5,7 @@ import { Meal } from '../../../../server/src/models/meal';
 import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
 import { Price } from '../../../../server/src/models/price';
 import { Status } from '../../../../server/src/models/status';
+import { getSlidesPerView } from '../../helpers/get-slides-per-view';
 import { LanguageKeys } from '../../i18n/language-keys';
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';
@@ -29,6 +30,8 @@ export class MealWidget extends LitElement {
   @query('macro-carousel')
   protected carousel!: any;
 
+  protected slidesPerView = getSlidesPerView();
+
   protected pictureNumber = String(Math.ceil(Math.random() * 5));
   protected get favoriteButton(): TemplateResult {
     return html`
@@ -45,7 +48,7 @@ export class MealWidget extends LitElement {
       <macro-carousel
         @touchstart="${() => this.carousel.update()}"
         @mousedown="${() => this.carousel.update()}"
-        .slidesPerView=${1}
+        .slidesPerView=${this.slidesPerView ?? 2}
       >
         <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}></ion-img>
         <ion-img class="meal-img" src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}></ion-img>
@@ -68,7 +71,8 @@ export class MealWidget extends LitElement {
           </ion-card-title>
         </ion-card-header>
         <ion-card-content style="display:flex">
-          <div>${this.transformDate(date)}</div>
+          <div class="big-layout">${this.transformDate(date)}</div>
+          <div class="small-layout">${this.transformDate(date, true)}</div>
           <div style="flex-grow: 1"></div>
           <div class="big-layout">${this.renderPrice(price)}</div>
           <div class="small-layout">${this.renderPrice(price, true)}</div>
@@ -99,11 +103,16 @@ export class MealWidget extends LitElement {
     return res.reduce((acc, curr) => acc + ', ' + curr);
   }
 
-  protected transformDate(dateIsoString: string): string {
+  protected transformDate(dateIsoString: string, smallLayout: boolean = false): string {
     const date: Date = new Date(dateIsoString);
     const language = this.i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
-    //@ts-ignore
-    return new Intl.DateTimeFormat(language, { dateStyle: 'full' }).format(date);
+    if (smallLayout) {
+      //@ts-ignore
+      return new Intl.DateTimeFormat(language, { dateStyle: 'long' }).format(date);
+    } else {
+      //@ts-ignore
+      return new Intl.DateTimeFormat(language, { dateStyle: 'full' }).format(date);
+    }
   }
 
   protected renderPrice(price: Price, smallLayout: boolean = false): string {

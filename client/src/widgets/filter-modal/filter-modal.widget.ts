@@ -60,7 +60,7 @@ export class FilterModalWidget extends LitElement {
       <ion-content>
         <div class="ion-padding">
           <ion-list>
-            <ion-item>
+            <ion-item class="no-padding">
               <div class="filter-row" style="padding-top: 10px; padding-bottom: 10px;">
                 <div class="filter-label">
                   <ion-label>
@@ -98,7 +98,7 @@ export class FilterModalWidget extends LitElement {
               </div>
             </ion-item>
 
-            <ion-item>
+            <ion-item class="no-padding">
               <div class="filter-row">
                 <div class="filter-label">
                   <ion-label>
@@ -131,7 +131,7 @@ export class FilterModalWidget extends LitElement {
               </div>
             </ion-item>
 
-            <ion-item>
+            <ion-item class="no-padding">
               <div class="filter-row">
                 <div class="filter-label">
                   <ion-label>
