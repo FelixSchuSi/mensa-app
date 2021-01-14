@@ -3,6 +3,7 @@ import { Meal } from '../../../../server/src/models/meal';
 import { Status } from '../../../../server/src/models/status';
 import { getSlidesPerView } from '../../helpers/get-slides-per-view';
 import { LanguageStrings } from '../../models/language-strings';
+import { MealsFuturePage } from '../../pages/meals-future/meals-future.page';
 import { transformDate } from './transform-date';
 import { transformPrice } from './transform-price';
 
@@ -21,7 +22,7 @@ export class MealWidget extends LitElement {
   protected i18n!: LanguageStrings;
 
   @property({ type: Boolean })
-  protected isFavorite!: boolean;
+  protected isBookmark!: boolean;
 
   @query('macro-carousel')
   protected carousel!: any;
@@ -32,8 +33,22 @@ export class MealWidget extends LitElement {
   protected get favoriteButton(): TemplateResult {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
-        <ion-button @click=${() => (this.isFavorite = !this.isFavorite)}>
-          <ion-icon slot="icon-only" color="primary" name=${this.isFavorite ? 'star' : 'star-outline'}></ion-icon>
+        <ion-button
+          @click=${(e: CustomEvent) => {
+            e.preventDefault();
+            this.isBookmark = !this.isBookmark;
+            const mealPage = <MealsFuturePage>this.parentNode?.parentElement;
+            mealPage.setNotification({
+              infoMessage: this.isBookmark ? this.i18n.BOOKMARKED_MEAL_MSG : this.i18n.UNBOOKMARKED_MEAL_MSG,
+              duration: 8000
+            });
+          }}
+        >
+          <ion-icon
+            slot="icon-only"
+            color="primary"
+            name=${this.isBookmark ? 'bookmark' : 'bookmark-outline'}
+          ></ion-icon>
         </ion-button>
       </ion-buttons>
     `;

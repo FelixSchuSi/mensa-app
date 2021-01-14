@@ -46,12 +46,12 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       this.onDestroyCallbacks.push(callback);
     }
 
-    protected setNotification({ errorMessage = '', infoMessage = '' }): void {
+    public setNotification({ errorMessage = '', infoMessage = '', duration = 3000 }): void {
       if (errorMessage === '_ignoreMe' || infoMessage === '_ignoreMe') return;
       this.errorMessage = errorMessage;
       this.infoMessage = infoMessage;
       if (errorMessage || infoMessage) {
-        setTimeout(() => this.setNotification({}), 3000);
+        setTimeout(() => this.setNotification({}), duration);
         const toast = <HTMLIonToastElement>document.createElement('ion-toast');
         toast.duration = 3000;
         toast.buttons = [

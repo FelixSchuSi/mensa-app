@@ -1,4 +1,14 @@
-import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
+import {
+  css,
+  customElement,
+  html,
+  internalProperty,
+  LitElement,
+  property,
+  query,
+  TemplateResult,
+  unsafeCSS
+} from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { Meal } from '../../../../server/src/models/meal';
 import { routerService } from '../../services/router.service';
@@ -23,10 +33,14 @@ class MealDetailPage extends PageMixin(LitElement) {
   @property({ type: Object })
   public meal?: Meal;
 
+  @internalProperty()
+  protected isBookmark: boolean = false;
+
   @query('macro-carousel')
   protected carousel!: any;
 
   protected rating: number = Math.ceil(Math.random() * 10) / 2;
+  protected pictureNumber = String(Math.ceil(Math.random() * 5));
 
   protected async firstUpdated(): Promise<void> {
     try {
@@ -43,6 +57,14 @@ class MealDetailPage extends PageMixin(LitElement) {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button
+              @click=${async () => {
+                history.back();
+              }}
+              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
+            ></ion-back-button>
+          </ion-buttons>
           <ion-buttons slot="primary">
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
@@ -53,13 +75,18 @@ class MealDetailPage extends PageMixin(LitElement) {
       <ion-content class="ion-padding" fullscreen>
         <ion-card class="meal-detail-card card-no-margin-when-small">
           ${this.images}
-          <ion-card-header>
-            <ion-card-subtitle style="display:flex; align-items: space-between">
-              <div><ion-icon name="location-outline"></ion-icon> ${this.i18n[mensa]}</div>
-              <div style="flex-grow:1"></div>
-              <div class="big-layout">${transformDate(date, this.i18n)}</div>
-              <div class="small-layout">${transformDate(date, this.i18n, true)}</div>
+          <ion-card-header style="padding-top: 0 !important">
+            ${this.bookmarkButton}
+            <ion-card-subtitle> <ion-icon name="location-outline"></ion-icon> ${this.i18n[mensa]} </ion-card-subtitle>
+            <ion-card-subtitle>
+              <div class="big-layout">
+                <ion-icon name="calendar-outline"></ion-icon> ${transformDate(date, this.i18n)}
+              </div>
+              <div class="small-layout">
+                <ion-icon name="calendar-outline"></ion-icon> ${transformDate(date, this.i18n, true)}
+              </div>
             </ion-card-subtitle>
+
             <ion-card-title style="display:flex;">
               <div style="flex-grow:1">${title}</div>
             </ion-card-title>
@@ -123,7 +150,6 @@ class MealDetailPage extends PageMixin(LitElement) {
     };
 
     const slidesPerView = 1;
-    const pictureNumber = String(Math.ceil(Math.random() * 5));
 
     return html`
       <macro-carousel
@@ -137,12 +163,35 @@ class MealDetailPage extends PageMixin(LitElement) {
           }
         }}
         .slidesPerView=${slidesPerView}
+        .navigation=${true}
+        .pagination=${true}
       >
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${pictureNumber}_pic01.jpg`}></ion-img>
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${pictureNumber}_pic02.jpg`}></ion-img>
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${pictureNumber}_pic03.jpg`}></ion-img>
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${pictureNumber}_pic04.jpg`}></ion-img>
+        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}></ion-img>
+        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}></ion-img>
+        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}></ion-img>
+        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}></ion-img>
       </macro-carousel>
+    `;
+  }
+  protected get bookmarkButton(): TemplateResult {
+    return html`
+      <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
+        <ion-button
+          @click=${() => {
+            this.isBookmark = !this.isBookmark;
+            this.setNotification({
+              infoMessage: this.isBookmark ? this.i18n.BOOKMARKED_MEAL_MSG : this.i18n.UNBOOKMARKED_MEAL_MSG,
+              duration: 8000
+            });
+          }}
+        >
+          <ion-icon
+            slot="icon-only"
+            color="primary"
+            name=${this.isBookmark ? 'bookmark' : 'bookmark-outline'}
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
     `;
   }
 }

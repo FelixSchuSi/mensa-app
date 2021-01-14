@@ -26,7 +26,7 @@ const componentCSS = require('./meals-future.page.scss');
 
 @customElement('app-meals-future')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class MealsFuturePage extends PageMixin(LitElement) {
+export class MealsFuturePage extends PageMixin(LitElement) {
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
@@ -129,18 +129,22 @@ class MealsFuturePage extends PageMixin(LitElement) {
           <ion-toolbar> ${this.searchBar} </ion-toolbar>
         </ion-header>
         ${this.mode === 'md' ? this.searchBar : html``}
-        ${this.displayMeals
-          .slice(0, this.scrollIndex)
-          .map(
-            meal =>
-              html`<app-meal
-                @click=${() =>
-                  routerService.navigate(Routes.MEAL_FUTURE_DETAILS, { mensa: meal.mensa, title: meal.title })}
-                .meal=${meal}
-                .i18n=${this.i18n}
-                .status=${this.userInfo?.status}
-              ></app-meal>`
-          )}
+        ${this.displayMeals.slice(0, this.scrollIndex).map(
+          meal =>
+            html`<app-meal
+              @click=${(e: any) => {
+                const name = <string>e?.target?.nodeName;
+                const dontNavigate = name === 'ION-BUTTON' || name === 'ION-IMG' || name === 'MACRO-CAROUSEL';
+                if (!dontNavigate) {
+                  routerService.navigate(Routes.MEAL_FUTURE_DETAILS, { mensa: meal.mensa, title: meal.title });
+                }
+              }}
+              .meal=${meal}
+              .i18n=${this.i18n}
+              .status=${this.userInfo?.status}
+              style="cursor: pointer"
+            ></app-meal>`
+        )}
         <ion-infinite-scroll threshold="0px" @ionInfinite=${this.displayMore}>
           <ion-infinite-scroll-content loading-spinner="bubbles"> </ion-infinite-scroll-content>
         </ion-infinite-scroll>

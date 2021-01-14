@@ -116,4 +116,6 @@ export type LanguageKeys =
   | 'GROUP_DETAILS'
   | 'JOINGROUP'
   | 'SEARCH_MEALS'
-  | 'MEAL';
+  | 'MEAL'
+  | 'BOOKMARKED_MEAL_MSG'
+  | 'UNBOOKMARKED_MEAL_MSG';

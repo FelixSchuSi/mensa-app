@@ -118,5 +118,7 @@ export const english: LanguageStrings = {
   GROUP_DETAILS: 'Group details',
   JOINGROUP: 'Join group',
   SEARCH_MEALS: 'Search for meals',
-  MEAL: 'Meal'
+  MEAL: 'Meal',
+  BOOKMARKED_MEAL_MSG: `Successfully bookmarked meal. You will receive notifications when this meal is on the menu again.`,
+  UNBOOKMARKED_MEAL_MSG: `Unbookmarked meal.`
 };
