@@ -19,7 +19,9 @@ body {
 
 .ion-app-container {
   background-color: #000000;
+  position: relative;
 }
+
 @media (min-width: 768px) {
   .full-size {
     width: 100vw;
