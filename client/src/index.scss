@@ -22,12 +22,19 @@ body {
   position: relative;
 }
 
+.full-size,
+.ion-app-container {
+  width: 100vw;
+  height: 100%;
+}
+
 @media (min-width: 768px) {
   .full-size {
     width: 100vw;
     height: 100vh;
     background-color: var(--ion-color-step-50);
     display: flex;
+    position: relative;
     justify-content: center;
   }
   .full-size > .ion-app-container {
