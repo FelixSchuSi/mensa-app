@@ -88,6 +88,9 @@ export class AppComponent extends LitElement {
         return await pushToNav('app-sign-in', activeNav);
       case Routes.SIGN_UP:
         return await pushToNav('app-sign-up', activeNav);
+      case Routes.MEAL_FUTURE_DETAILS:
+      case Routes.MEAL_TODAY_DETAILS:
+        return await pushToNav('app-meal-detail', activeNav);
     }
   }
 

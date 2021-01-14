@@ -5,7 +5,7 @@ export const english: LanguageStrings = {
   _LANGUAGE: Languages.ENGLISH,
   // other meal info
   Rin: 'Beef',
-  Sch: 'PorkMeat',
+  Sch: 'Porkmeat',
   Vgt: 'Vegetarian',
   Vgn: 'Vegan',
   Fis: 'Fish',
@@ -117,5 +117,6 @@ export const english: LanguageStrings = {
   JOINCODE: 'Joincode',
   GROUP_DETAILS: 'Group details',
   JOINGROUP: 'Join group',
-  SEARCH_MEALS: 'Search for meals'
+  SEARCH_MEALS: 'Search for meals',
+  MEAL: 'Meal'
 };

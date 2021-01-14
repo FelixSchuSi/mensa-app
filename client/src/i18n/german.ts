@@ -117,5 +117,6 @@ export const german: LanguageStrings = {
   JOINCODE: 'Beitrittscode',
   GROUP_DETAILS: 'Gruppendetails',
   JOINGROUP: 'Gruppe beitreten',
-  SEARCH_MEALS: 'Gerichte durchsuchen'
+  SEARCH_MEALS: 'Gerichte durchsuchen',
+  MEAL: 'Gericht'
 };

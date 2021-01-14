@@ -1,5 +1,6 @@
 import { Meal } from '../../../server/src/models/meal';
 import { httpService } from './http.service';
+import { QueryParameter } from './router.service';
 import { storeService } from './store.service';
 
 export type MealsListener = (meals: Meal[]) => void;
@@ -12,12 +13,23 @@ class MealService {
   public async getMeals(): Promise<void> {
     if (navigator.onLine) {
       const response = await httpService.get('meals');
-      let tasks = <Meal[]>(await response.json()).results;
-      await this.setMeals(tasks);
+      let meals = <Meal[]>(await response.json()).results;
+      await this.setMeals(meals);
     } else {
-      let tasks = <Meal[] | null>await storeService.get(this.MEALKEY);
-      if (tasks === null) tasks = [];
-      await this.setMeals(tasks);
+      let meals = <Meal[] | null>await storeService.get(this.MEALKEY);
+      if (meals === null) meals = [];
+      await this.setMeals(meals);
+    }
+  }
+
+  public async getMeal(search: string): Promise<Meal> {
+    if (navigator.onLine) {
+      const response = await httpService.get('meals/search' + search);
+      let meal = <Meal>(await response.json()).results;
+      return meal;
+    } else {
+      //TODO: search in all Meals
+      return <Meal>{};
     }
   }
 

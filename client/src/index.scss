@@ -132,10 +132,16 @@ div.error.md {
   }
 }
 
-app-meal > ion-card {
+app-meal > ion-card,
+.card-no-margin-when-small {
   @media (max-width: 767px) {
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+}
+.meal-detail-card {
+  @media (max-width: 767px) {
+    margin-top: 0 !important;
   }
 }
 
@@ -156,4 +162,8 @@ ion-item.no-padding {
   --padding-start: 0;
   --padding-end: 0;
   padding: 0;
+}
+
+.meal-detail-chip {
+  margin-left: 0;
 }

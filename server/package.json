@@ -7,8 +7,8 @@
   "scripts": {
     "prod": "tsc && node src/app mongodb prodDB",
     "dev": "tsc && node src/app mongodb devDB",
-    "watch:prod": "tsc && nodemon -e ts --exec \"npm run prod\"",
-    "watch:dev": "tsc && nodemon -e ts --exec \"npm run dev\"",
+    "watch:prod": "tsc && nodemon -e ts --exec \"npm run prod || exit 1\"",
+    "watch:dev": "tsc && nodemon -e ts --exec \"npm run dev || exit 1\"",
     "lint": "eslint . --ext .ts",
     "test": "tsc && nyc jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },

@@ -131,7 +131,16 @@ class MealsFuturePage extends PageMixin(LitElement) {
         ${this.mode === 'md' ? this.searchBar : html``}
         ${this.displayMeals
           .slice(0, this.scrollIndex)
-          .map(meal => html`<app-meal .meal=${meal} .i18n=${this.i18n} .status=${this.userInfo?.status}></app-meal>`)}
+          .map(
+            meal =>
+              html`<app-meal
+                @click=${() =>
+                  routerService.navigate(Routes.MEAL_FUTURE_DETAILS, { mensa: meal.mensa, title: meal.title })}
+                .meal=${meal}
+                .i18n=${this.i18n}
+                .status=${this.userInfo?.status}
+              ></app-meal>`
+          )}
         <ion-infinite-scroll threshold="0px" @ionInfinite=${this.displayMore}>
           <ion-infinite-scroll-content loading-spinner="bubbles"> </ion-infinite-scroll-content>
         </ion-infinite-scroll>
@@ -169,7 +178,9 @@ class MealsFuturePage extends PageMixin(LitElement) {
     const allCarousels = <NodeListOf<any>>document.querySelectorAll('macro-carousel');
     const slidesPerView = getSlidesPerView();
     for (const carousel of allCarousels) {
-      carousel.slidesPerView = slidesPerView;
+      if (!carousel.classList.contains('no-resize')) {
+        carousel.slidesPerView = slidesPerView;
+      }
     }
   }
 }

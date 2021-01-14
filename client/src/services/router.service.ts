@@ -44,10 +44,21 @@ export class RouterService {
   public getPath(): Routes {
     return <Routes>this.withoutRootPath(location.pathname);
   }
+
+  public getAllQueryParameters(): QueryParameter {
+    const params = new URLSearchParams(location.search);
+    let paramObj: QueryParameter = {};
+    for (var value of params.keys()) {
+      paramObj[value] = params.get(value)!;
+    }
+    return paramObj;
+  }
+
   public getQueryParameter(key: string): string {
     const queryString = location.search.substr(1); // Remove ? from search
     return this.parseQueryParameter(queryString)[key];
   }
+
   private parseQueryParameter(searchStr: string): QueryParameter {
     const tmap: QueryParameter = {};
 

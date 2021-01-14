@@ -1,14 +1,10 @@
 import { LitElement, customElement, property, TemplateResult, html, query } from 'lit-element';
-import { AdditivesKeys } from '../../../../server/src/models/additives';
-import { AllergenesKeys } from '../../../../server/src/models/allergenes';
 import { Meal } from '../../../../server/src/models/meal';
-import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
-import { Price } from '../../../../server/src/models/price';
 import { Status } from '../../../../server/src/models/status';
 import { getSlidesPerView } from '../../helpers/get-slides-per-view';
-import { LanguageKeys } from '../../i18n/language-keys';
 import { LanguageStrings } from '../../models/language-strings';
-import { Languages } from '../../models/languages';
+import { transformDate } from './transform-date';
+import { transformPrice } from './transform-price';
 
 @customElement('app-meal')
 export class MealWidget extends LitElement {
@@ -98,87 +94,13 @@ export class MealWidget extends LitElement {
           </ion-card-title>
         </ion-card-header>
         <ion-card-content style="display:flex">
-          <div class="big-layout">${this.transformDate(date)}</div>
-          <div class="small-layout">${this.transformDate(date, true)}</div>
+          <div class="big-layout">${transformDate(date, this.i18n)}</div>
+          <div class="small-layout">${transformDate(date, this.i18n, true)}</div>
           <div style="flex-grow: 1"></div>
-          <div class="big-layout">${this.renderPrice(price)}</div>
-          <div class="small-layout">${this.renderPrice(price, true)}</div>
+          <div class="big-layout">${transformPrice(price, this.status, this.i18n)}</div>
+          <div class="small-layout">${transformPrice(price, this.status, this.i18n, true)}</div>
         </ion-card-content>
       </ion-card>
     `;
-  }
-
-  protected renderValue(item: string | AdditivesKeys[] | AllergenesKeys[] | OtherMealInfoKeys[] | Price): string {
-    if (typeof item === 'string') {
-      return item;
-    } else if (Array.isArray(item)) {
-      return this.renderFoodStr(<string[]>item);
-    } else if (typeof item === 'object') {
-      return this.renderPrice(item);
-    }
-    return '';
-  }
-
-  protected renderFoodStr(strs: string[]): string {
-    if (strs.length === 0) return '';
-
-    const res = strs.map(i => {
-      const key = <LanguageKeys>String(i);
-      return this.i18n[key];
-    });
-
-    return res.reduce((acc, curr) => acc + ', ' + curr);
-  }
-
-  protected transformDate(dateIsoString: string, smallLayout: boolean = false): string {
-    const date: Date = new Date(dateIsoString);
-    const language = this.i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
-    if (smallLayout) {
-      //@ts-ignore
-      return new Intl.DateTimeFormat(language, { dateStyle: 'long' }).format(date);
-    } else {
-      //@ts-ignore
-      return new Intl.DateTimeFormat(language, { dateStyle: 'full' }).format(date);
-    }
-  }
-
-  protected renderPrice(price: Price, smallLayout: boolean = false): string {
-    let { student, employee, guest } = this.transformPrice(price);
-    switch (this.status) {
-      case 'EMPLOYEE':
-        return `${employee} €`;
-      case 'GUEST':
-        return `${guest} €`;
-      case 'STUDENT':
-        return `${student} €`;
-      default:
-        if (smallLayout) {
-          return `${guest} €`;
-        } else {
-          return `${student} € - ${employee} € - ${guest} €`;
-        }
-    }
-  }
-
-  protected transformPrice(price: Price): { student: string; employee: string; guest: string } {
-    let values = Object.values(price);
-
-    const transformedValues = values.map(value => {
-      // Enforce two decimal places
-      let [vks, nks] = String(value).split('.');
-      if (nks.length < 2) nks = nks + '0';
-
-      let output: string;
-      // swap comma and dot when lang is  german
-      if (this.i18n._LANGUAGE === Languages.GERMAN) {
-        output = vks + ',' + nks;
-      } else {
-        output = vks + '.' + nks;
-      }
-      return output;
-    });
-
-    const [student, employee, guest] = transformedValues;
-    return { student, employee, guest };
   }
 }

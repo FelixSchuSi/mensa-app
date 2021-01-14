@@ -10,4 +10,14 @@ router.get('/', async (req, res) => {
   res.json({ results: meals });
 });
 
+router.get('/search', async (req, res) => {
+  console.log(req.query);
+  const mealsDAO: GenericDAO<Meal> = req.app.locals.mealsDAO;
+  const { mensa, title } = req.query;
+  if (!mensa || !title) res.status(404).json({ message: 'Gericht nicht gefunden!' });
+  const results = await mealsDAO.findOne(<Meal>{ mensa, title });
+  if (results === null) res.status(404).json({ message: 'Gericht nicht gefunden!' });
+  res.json({ results });
+});
+
 export default router;
