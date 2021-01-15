@@ -92,6 +92,12 @@ export class AppComponent extends LitElement {
       case Routes.MEAL_FUTURE_DETAILS:
       case Routes.MEAL_TODAY_DETAILS:
         return await pushToNav('app-meal-detail', activeNav);
+      // all root Routes
+      case Routes.MEALS_FUTURE:
+      case Routes.MEALS_TODAY:
+      case Routes.TASKS:
+      case Routes.GROUPS:
+        await activeNav.popToRoot();
     }
   }
 

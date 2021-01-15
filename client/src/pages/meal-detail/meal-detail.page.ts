@@ -16,8 +16,6 @@ import { Routes } from '../../routes';
 import { mealService } from '../../services/meal.service';
 import { transformDate } from '../../widgets/meal/transform-date';
 import { transformPrice } from '../../widgets/meal/transform-price';
-import { Status } from '../../../../server/src/models/status';
-import { getSlidesPerView } from '../../helpers/get-slides-per-view';
 
 const sharedCSS = require('../../shared.scss');
 
