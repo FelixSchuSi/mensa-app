@@ -77,13 +77,13 @@ export class FilterModalWidget extends LitElement {
                       let imagePath: string;
                       switch (diet) {
                         case 'STANDARD_DIET':
-                          imagePath = 'images/beef.png';
+                          imagePath = 'images/Rin.png';
                           break;
                         case 'Vgn':
-                          imagePath = 'images/vegan.png';
+                          imagePath = 'images/Vgn.png';
                           break;
                         case 'Vgt':
-                          imagePath = 'images/veggie.png';
+                          imagePath = 'images/Vgt.png';
                           break;
                       }
                       return html`

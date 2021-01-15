@@ -1,6 +1,5 @@
 import { Price } from '../../../../server/src/models/price';
 import { Status } from '../../../../server/src/models/status';
-import { LanguageKeys } from '../../i18n/language-keys';
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';
 

@@ -118,4 +118,5 @@ export type LanguageKeys =
   | 'SEARCH_MEALS'
   | 'MEAL'
   | 'BOOKMARKED_MEAL_MSG'
-  | 'UNBOOKMARKED_MEAL_MSG';
+  | 'UNBOOKMARKED_MEAL_MSG'
+  | 'REVIEWS';

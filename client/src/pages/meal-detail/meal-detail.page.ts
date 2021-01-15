@@ -93,11 +93,12 @@ class MealDetailPage extends PageMixin(LitElement) {
             ${this.contents}
 
             <div style="display:flex; flex-direction:column; align-items: flex-end">
-              <div>${this.ratingTemplate}</div>
+              <app-rating-starts .rating=${this.rating}></app-rating-starts>
               <div>${transformPrice(price, this.userInfo?.status, this.i18n)}</div>
             </div>
           </ion-card-content>
         </ion-card>
+        <app-meal-reviews .i18n=${this.i18n} .meal=${this.meal} .rating=${this.rating}></app-meal-reviews>
       </ion-content>
     `;
   }
