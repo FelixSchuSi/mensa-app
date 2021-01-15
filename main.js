@@ -946,7 +946,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
                 </ion-toolbar>
               </ion-header>
               <img src="../../../svg/hungrig.svg" />
-              <ion-card-content size="large">Bereits Hunger? Dann lege hier los!</ion-card-content>
+              <ion-card-content size="large"><h1>Bereits Hunger? Dann lege hier los!</h1></ion-card-content>
               <ion-button
                 fill="clear"
                 @click=${()=>{gt.navigate(mt.MEALS_TODAY)}}
