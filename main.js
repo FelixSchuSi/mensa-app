@@ -906,7 +906,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
                   <ion-title size="large">Was gibt es heute in den Mensen? </ion-title>
                 </ion-toolbar>
               </ion-header>
-              <img src="../../../svg/plan.svg" />
+              <img src="/svg/plan.svg" />
               <ion-card-content>
                 Hier findest du es heraus! Informationen über die Gerichte aller münsteraner Mensen an einem Platz.
               </ion-card-content>
@@ -919,7 +919,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
                   <ion-title size="large">In Gesellschaft ist alles besser! </ion-title>
                 </ion-toolbar>
               </ion-header>
-              <img src="../../../svg/zsmessen.svg" />
+              <img src="/svg/zsmessen.svg" />
               <ion-card-content> Verabrede dich mit deinen Freunden in einer Mensa. </ion-card-content>
             </ion-card>
           </ion-slide>
@@ -931,7 +931,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
                   <ion-title size="large">Unverträglichkeiten oder Allergien? </ion-title>
                 </ion-toolbar>
               </ion-header>
-              <img src="../../../svg/auswahl.svg" />
+              <img src="/svg/auswahl.svg" />
               <ion-card-content>
                 Du bist beim Essen wählerisch oder hast einen sensiblen Magen? Dann nutze unsere Filterfunktion und
                 lasse dir nur Gerichte anzeigen, die für dich interessant und verträglich sind.
@@ -945,7 +945,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
                   <ion-title size="large"> </ion-title>
                 </ion-toolbar>
               </ion-header>
-              <img src="../../../svg/hungrig.svg" />
+              <img src="/svg/hungrig.svg" />
               <ion-card-content size="large"><h1>Bereits Hunger? Dann lege hier los!</h1></ion-card-content>
               <ion-button
                 fill="clear"
