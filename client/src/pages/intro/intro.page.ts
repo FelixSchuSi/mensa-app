@@ -7,6 +7,7 @@ import { intro } from '../../models/intro';
 import { userService } from '../../services/user.service';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { popFromRootNav } from '../../helpers/nav-util';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./intro.page.scss');
@@ -34,33 +35,56 @@ class IntroPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <ion-content>
-        <ion-slides scrollbar="true">
+      <ion-content fullscreen class="ion-padding">
+        <ion-slides scrollbar pager>
           <ion-slide>
-            <h1>
-              <img src="../plan.png" /> <br /><br />
-              Was gibt es heute in den Mensen? Hier findest du es heraus! Informationen über die Gerichte aller
-              münsteraner Mensen an einem Platz.
-            </h1>
+            <ion-card>
+              <ion-header collapse="condense">
+                <ion-toolbar>
+                  <ion-title size="large">Was gibt es heute in den Mensen? </ion-title>
+                </ion-toolbar>
+              </ion-header>
+              <img src="../../../svg/plan.svg" />
+              <ion-card-content>
+                Hier findest du es heraus! Informationen über die Gerichte aller münsteraner Mensen an einem Platz.
+              </ion-card-content>
+            </ion-card>
           </ion-slide>
           <ion-slide>
-            <h1>
-              <img src="zsmessen.png" /><br /><br />
-              In Gesellschaft ist alles besser! Verabrede dich mit deinen Freunden in einer Mensa.
-            </h1>
+            <ion-card>
+              <ion-header collapse="condense">
+                <ion-toolbar>
+                  <ion-title size="large">In Gesellschaft ist alles besser! </ion-title>
+                </ion-toolbar>
+              </ion-header>
+              <img src="../../../svg/zsmessen.svg" />
+              <ion-card-content> Verabrede dich mit deinen Freunden in einer Mensa. </ion-card-content>
+            </ion-card>
           </ion-slide>
 
           <ion-slide>
-            <h1>
-              <img src="auswahl.png" /><br /><br />
-              Bist du beim Essen wählerisch oder hast einen sensiblen Magen? Dann nutze unsere Filterfunktion und lasse
-              dir nur Gerichte anzeigen, die für dich interessant und verträglich sind. <br /><br /><br /><br />
-            </h1>
+            <ion-card>
+              <ion-header collapse="condense">
+                <ion-toolbar>
+                  <ion-title size="large">Unverträglichkeiten oder Allergien? </ion-title>
+                </ion-toolbar>
+              </ion-header>
+              <img src="../../../svg/auswahl.svg" />
+              <ion-card-content>
+                Du bist beim Essen wählerisch oder hast einen sensiblen Magen? Dann nutze unsere Filterfunktion und
+                lasse dir nur Gerichte anzeigen, die für dich interessant und verträglich sind.
+              </ion-card-content>
+            </ion-card>
           </ion-slide>
           <ion-slide>
-            <h1>
-              <img src="hungrig.png" /><br /><br />
-              Bereits Hunger? Dann lege hier los! <br />
+            <ion-card>
+              <ion-header collapse="condense">
+                <ion-toolbar>
+                  <ion-title size="large"> </ion-title>
+                </ion-toolbar>
+              </ion-header>
+              <img src="../../../svg/hungrig.svg" />
+              <ion-card-content size="large">Bereits Hunger? Dann lege hier los!</ion-card-content>
               <ion-button
                 fill="clear"
                 @click=${() => {
@@ -68,8 +92,7 @@ class IntroPage extends PageMixin(LitElement) {
                 }}
               >
                 ${this.i18n.CONTINUE}
-                <ion-icon slot="end" name="arrow-forward"></ion-icon
-              ></ion-button></h1
+                <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button></ion-card
           ></ion-slide>
         </ion-slides>
       </ion-content>

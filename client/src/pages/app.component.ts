@@ -17,6 +17,7 @@ import { clearRootNav, pushToNav } from '../helpers/nav-util';
 import { Tab } from '../models/tab';
 import { getActiveNav, isRootRoute } from '../helpers/get-active-nav';
 import { selectActiveTab } from '../helpers/select-active-tab';
+import { storeService } from '../services/store.service';
 
 const componentCSS = require('./app.component.scss');
 const sharedCSS = require('../shared.scss');
@@ -71,6 +72,13 @@ export class AppComponent extends LitElement {
   protected async firstUpdated(): Promise<void> {
     routerService.subscribe(() => this.handleRouteChange());
     await this.handleRouteChange();
+    await storeService.set('hasSeenIntro', false);
+    const hasSeenIntro = await storeService.get('hasSeenIntro');
+    if (!hasSeenIntro) {
+      const activeNav: HTMLIonNavElement = <HTMLIonNavElement>document.querySelector('#root-nav');
+      await pushToNav('app-intro', activeNav);
+      await storeService.set('hasSeenIntro', true);
+    }
   }
 
   protected async handleRouteChange(): Promise<any> {

@@ -1,9 +1,25 @@
-@import '../../shared.scss';
-
 form {
-  margin-top: 1rem;
+  margin-top: 5rem;
 }
 
 .tasks {
   margin-top: 1rem;
+}
+
+.ios {
+  --ion-background-color: #ffffff;
+  font-size: 0.7em;
+  color: #eb445a;
+}
+
+body {
+  background-color: #eb445a;
+}
+
+h1 {
+  background-color: #eb445a;
+}
+
+.ion {
+  background-color: #eb445a;
 }
