@@ -57,9 +57,67 @@ class TasksPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <ion-header style="background-color: var(--ion-background-color);"> </ion-header>
       <ion-content class="ion-padding" fullscreen>
-        <ion-header collapse="condense"> </ion-header>
+        <ion-header style="background-color: var(--ion-background-color);">
+          <ion-toolbar>
+            <ion-title>${this.i18n.TASKS}</ion-title>
+            <ion-buttons slot="primary">
+              <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
+                <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+                <!-- <ion-icon name="person-circle"></ion-icon> -->
+                <!-- TODO: Make Google style avatar work -->
+                <!-- <ion-avatar style="border-radius: 0px" slot="end">
+                <img
+                  style="width: 60px; height:60px"
+                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
+                />
+              </ion-avatar> -->
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <form novalidate @submit="${this.submit}">
+          <div class="inputField"></div>
+        </form>
+
+        <ion-header collapse="condense">
+          <ion-toolbar>
+            <ion-title size="large">${this.i18n.TASKS}</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <form novalidate @submit="${this.submit}">
+          <div class="inputField">
+            <ion-input
+              debounce="100"
+              type="text"
+              autofocus
+              id="title"
+              name="title"
+              placeholder="${this.i18n.NEW_TASK}"
+            ></ion-input>
+          </div>
+        </form>
+        ${this.userInfo === undefined ? html`Sign in to create Tasks.` : html``}
+        <div class="tasks">
+          ${guard(
+            [this.tasks],
+            () => html`
+              ${repeat(
+                this.tasks,
+                task => task.id,
+                task => html`
+                  <app-task
+                    status="${task.status}"
+                    @apptaskstatusclick=${(): Promise<void> => this.toggleTask(task)}
+                    @apptaskremoveclick=${(): Promise<void> => this.removeTask(task)}
+                  >
+                    <span slot="title">${task.title}</span>
+                  </app-task>
+                `
+              )}
+            `
+          )}
+        </div>
       </ion-content>
     `;
   }
