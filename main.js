@@ -883,10 +883,26 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
         .navigation=${!0}
         .pagination=${!0}
       >
-        <ion-img @mousedown="${t}" src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}></ion-img>
-        <ion-img @mousedown="${t}" src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}></ion-img>
-        <ion-img @mousedown="${t}" src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}></ion-img>
-        <ion-img @mousedown="${t}" src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${t}"
+          src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}
+        ></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${t}"
+          src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}
+        ></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${t}"
+          src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}
+        ></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${t}"
+          src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}
+        ></ion-img>
       </macro-carousel>
     `}get bookmarkButton(){return z`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
