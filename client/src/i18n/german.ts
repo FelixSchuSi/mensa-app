@@ -121,5 +121,13 @@ export const german: LanguageStrings = {
   MEAL: 'Gericht',
   BOOKMARKED_MEAL_MSG: `Gericht gemerkt! Du wirst benachrichtigt, wenn das Gericht wieder auf der Speisekarte steht.`,
   UNBOOKMARKED_MEAL_MSG: `Gericht ist nicht mehr gemerkt.`,
-  CONTINUE: 'Fortfahren'
+  CONTINUE: 'Fortfahren',
+  PLAN: 'Was gibt es heute in den Mensen?',
+  PLANINFO: 'Hier findest du es heraus! Informationen über die Gerichte aller münsteraner Mensen an einem Platz.',
+  EATINGTOGETHER: 'In Gesellschaft ist alles besser!',
+  EATINGTOGETHERINFO: 'Verabrede dich mit deinen Freunden in einer Mensa.',
+  CHOICE: 'Unverträglichkeiten oder Allergien?',
+  CHOICEINFO:
+    'Du bist beim Essen wählerisch oder hast einen sensiblen Magen? Dann nutze unsere Filterfunktion und lasse dir nur Gerichte anzeigen, die für dich interessant und verträglich sind.',
+  HUNGRY: 'Bereits Hunger? Dann lege hier los!'
 };

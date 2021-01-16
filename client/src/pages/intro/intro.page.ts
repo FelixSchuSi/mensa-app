@@ -46,39 +46,34 @@ class IntroPage extends PageMixin(LitElement) {
             <ion-card style="width:100%;">
               <ion-card-header>
                 <img style="max-height:355px" src="./svg/plan.svg" />
-                <ion-card-title>Was gibt es heute in den Mensen?</ion-card-title>
+                <ion-card-title>${this.i18n.PLAN}</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                Hier findest du es heraus! Informationen über die Gerichte aller münsteraner Mensen an einem Platz.
-              </ion-card-content>
+              <ion-card-content> ${this.i18n.PLANINFO} </ion-card-content>
             </ion-card>
           </ion-slide>
           <ion-slide>
             <ion-card style="width:100%">
               <ion-card-header>
                 <img style="max-height:355px" src="./svg/zsmessen.svg" />
-                <ion-card-title>In Gesellschaft ist alles besser!</ion-card-title>
+                <ion-card-title>${this.i18n.EATINGTOGETHER}</ion-card-title>
               </ion-card-header>
-              <ion-card-content> Verabrede dich mit deinen Freunden in einer Mensa. </ion-card-content>
+              <ion-card-content>${this.i18n.EATINGTOGETHERINFO}</ion-card-content>
             </ion-card>
           </ion-slide>
           <ion-slide>
             <ion-card style="width:100%">
               <ion-card-header>
                 <img style="max-height:355px" src="./svg/auswahl.svg" />
-                <ion-card-title>Unverträglichkeiten oder Allergien?</ion-card-title>
+                <ion-card-title>${this.i18n.CHOICE}</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                Du bist beim Essen wählerisch oder hast einen sensiblen Magen? Dann nutze unsere Filterfunktion und
-                lasse dir nur Gerichte anzeigen, die für dich interessant und verträglich sind.
-              </ion-card-content>
+              <ion-card-content> ${this.i18n.CHOICEINFO} </ion-card-content>
             </ion-card>
           </ion-slide>
           <ion-slide>
             <ion-card style="width:100%">
               <ion-card-header>
                 <img style="max-height:355px" src="./svg/hungrig.svg" />
-                <ion-card-title>Bereits Hunger? Dann lege hier los!</ion-card-title>
+                <ion-card-title>${this.i18n.HUNGRY}</ion-card-title>
               </ion-card-header>
               <ion-button
                 fill="clear"

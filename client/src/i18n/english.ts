@@ -121,5 +121,13 @@ export const english: LanguageStrings = {
   MEAL: 'Meal',
   BOOKMARKED_MEAL_MSG: `Successfully bookmarked meal. You will receive notifications when this meal is on the menu again.`,
   UNBOOKMARKED_MEAL_MSG: `Unbookmarked meal.`,
-  CONTINUE: 'Continue'
+  CONTINUE: 'Continue',
+  PLAN: 'What is offered in the refectories today?',
+  PLANINFO: 'Find out here! Information about the dishes of all münster refectories in one place.',
+  EATINGTOGETHER: 'Everything is better in company!',
+  EATINGTOGETHERINFO: 'Make a date with your firends at a dining hall.',
+  CHOICE: 'Intolerances or allergies?',
+  CHOICEINFO:
+    'Are you picky about food or do you have a sensitive stomach? Then use our filter function and only display dishes that are interesting and compatible for you.',
+  HUNGRY: 'Already hungry? Then start here!'
 };

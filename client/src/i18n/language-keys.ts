@@ -119,4 +119,11 @@ export type LanguageKeys =
   | 'MEAL'
   | 'BOOKMARKED_MEAL_MSG'
   | 'UNBOOKMARKED_MEAL_MSG'
-  | 'CONTINUE';
+  | 'CONTINUE'
+  | 'PLAN'
+  | 'PLANINFO'
+  | 'EATINGTOGETHER'
+  | 'EATINGTOGETHERINFO'
+  | 'CHOICE'
+  | 'CHOICEINFO'
+  | 'HUNGRY';
