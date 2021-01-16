@@ -122,5 +122,6 @@ export const english: LanguageStrings = {
   BOOKMARKED_MEAL_MSG: `Successfully bookmarked meal. You will receive notifications when this meal is on the menu again.`,
   UNBOOKMARKED_MEAL_MSG: `Unbookmarked meal.`,
   REVIEWS: 'Bewertungen',
-  CONTINUE: 'Continue'
+  CONTINUE: 'Continue',
+  WRITE_A_REVIEW: 'Write a review'
 };

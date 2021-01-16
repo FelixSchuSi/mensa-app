@@ -17,11 +17,11 @@ export class RatingStarsWidget extends LitElement {
     const template: TemplateResult[] = [];
     for (let i = 1; i <= 5; i++) {
       if (this.rating === i - 0.5) {
-        template.push(html`<ion-icon name="star-half-outline"></ion-icon> `);
+        template.push(html`<ion-icon style="color: #ffd203" name="star-half-outline"></ion-icon> `);
       } else if (i <= this.rating) {
-        template.push(html`<ion-icon name="star"></ion-icon> `);
+        template.push(html`<ion-icon style="color: #ffd203" name="star"></ion-icon> `);
       } else if (i > this.rating) {
-        template.push(html`<ion-icon name="star-outline"></ion-icon> `);
+        template.push(html`<ion-icon style="color: #ffd203" name="star-outline"></ion-icon> `);
       }
     }
     return template;

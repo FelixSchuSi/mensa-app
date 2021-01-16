@@ -120,4 +120,5 @@ export type LanguageKeys =
   | 'BOOKMARKED_MEAL_MSG'
   | 'UNBOOKMARKED_MEAL_MSG'
   | 'REVIEWS'
-  | 'CONTINUE';
+  | 'CONTINUE'
+  | 'WRITE_A_REVIEW';
