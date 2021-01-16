@@ -154,10 +154,26 @@ class MealDetailPage extends PageMixin(LitElement) {
         .navigation=${true}
         .pagination=${true}
       >
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}></ion-img>
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}></ion-img>
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}></ion-img>
-        <ion-img @mousedown="${onmousedown}" src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${onmousedown}"
+          src=${`./images/meal0${this.pictureNumber}_pic01.jpg`}
+        ></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${onmousedown}"
+          src=${`./images/meal0${this.pictureNumber}_pic02.jpg`}
+        ></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${onmousedown}"
+          src=${`./images/meal0${this.pictureNumber}_pic03.jpg`}
+        ></ion-img>
+        <ion-img
+          class="has-size"
+          @mousedown="${onmousedown}"
+          src=${`./images/meal0${this.pictureNumber}_pic04.jpg`}
+        ></ion-img>
       </macro-carousel>
     `;
   }
