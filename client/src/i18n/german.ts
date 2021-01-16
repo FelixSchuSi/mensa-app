@@ -121,5 +121,6 @@ export const german: LanguageStrings = {
   MEAL: 'Gericht',
   BOOKMARKED_MEAL_MSG: `Gericht gemerkt! Du wirst benachrichtigt, wenn das Gericht wieder auf der Speisekarte steht.`,
   UNBOOKMARKED_MEAL_MSG: `Gericht ist nicht mehr gemerkt.`,
-  REVIEWS: 'Reviews'
+  REVIEWS: 'Reviews',
+  CONTINUE: 'Fortfahren'
 };

@@ -9,7 +9,8 @@ export enum Routes {
   GROUPS_CREATE = 'groups/create',
   GROUPS_DETAILS = 'groups/details',
   MEAL_FUTURE_DETAILS = 'meals/future/meal',
-  MEAL_TODAY_DETAILS = 'meals/today/meal'
+  MEAL_TODAY_DETAILS = 'meals/today/meal',
+  INTRO = 'intro'
 }
 
 export enum RootRoutes {
