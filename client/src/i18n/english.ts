@@ -129,5 +129,7 @@ export const english: LanguageStrings = {
   CHOICE: 'Intolerances or allergies?',
   CHOICEINFO:
     'Are you picky about food or do you have a sensitive stomach? Then use our filter function and only display dishes that are interesting and compatible for you.',
-  HUNGRY: 'Already hungry? Then start here!'
+  HUNGRY: 'Already hungry? Then start here!',
+  REVIEWS: 'Bewertungen',
+  WRITE_A_REVIEW: 'Write a review'
 };

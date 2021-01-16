@@ -21,6 +21,10 @@ import './widgets/chip-select/chip-select.widget';
 import './widgets/filter-modal/filter-modal.widget';
 import './widgets/chip-toggle-show-more/chip-toggle-show-more';
 import './widgets/meal/meal.widget';
+import './widgets/meal-reviews/meal-reviews';
+import './widgets/group-join-modal/group-join-modal.widget';
+import './widgets/rating-stars/rating-stars';
+import './widgets/rating-stars-pick/rating-stars-pick';
+import './widgets/meal-review/meal-review';
 
 import './../node_modules/macro-carousel/dist/macro-carousel.min.js';
-import './widgets/group-join-modal/group-join-modal.widget';

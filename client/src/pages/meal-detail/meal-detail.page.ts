@@ -93,11 +93,17 @@ class MealDetailPage extends PageMixin(LitElement) {
             ${this.contents}
 
             <div style="display:flex; flex-direction:column; align-items: flex-end">
-              <div>${this.ratingTemplate}</div>
+              <app-rating-starts .rating=${this.rating}></app-rating-starts>
               <div>${transformPrice(price, this.userInfo?.status, this.i18n)}</div>
             </div>
           </ion-card-content>
         </ion-card>
+        <app-meal-reviews
+          .mode=${this.mode}
+          .i18n=${this.i18n}
+          .meal=${this.meal}
+          .rating=${this.rating}
+        ></app-meal-reviews>
       </ion-content>
     `;
   }
@@ -124,20 +130,6 @@ class MealDetailPage extends PageMixin(LitElement) {
       });
     }
 
-    return template;
-  }
-
-  protected get ratingTemplate(): TemplateResult[] {
-    const template: TemplateResult[] = [];
-    for (let i = 1; i <= 5; i++) {
-      if (this.rating === i - 0.5) {
-        template.push(html`<ion-icon name="star-half-outline"></ion-icon> `);
-      } else if (i <= this.rating) {
-        template.push(html`<ion-icon name="star"></ion-icon> `);
-      } else if (i > this.rating) {
-        template.push(html`<ion-icon name="star-outline"></ion-icon> `);
-      }
-    }
     return template;
   }
 

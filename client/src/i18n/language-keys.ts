@@ -126,4 +126,7 @@ export type LanguageKeys =
   | 'EATINGTOGETHERINFO'
   | 'CHOICE'
   | 'CHOICEINFO'
-  | 'HUNGRY';
+  | 'HUNGRY'
+  | 'REVIEWS'
+  | 'CONTINUE'
+  | 'WRITE_A_REVIEW';

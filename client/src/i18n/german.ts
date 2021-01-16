@@ -129,5 +129,7 @@ export const german: LanguageStrings = {
   CHOICE: 'Unverträglichkeiten oder Allergien?',
   CHOICEINFO:
     'Du bist beim Essen wählerisch oder hast einen sensiblen Magen? Dann nutze unsere Filterfunktion und lasse dir nur Gerichte anzeigen, die für dich interessant und verträglich sind.',
-  HUNGRY: 'Bereits Hunger? Dann lege hier los!'
+  HUNGRY: 'Bereits Hunger? Dann lege hier los!',
+  REVIEWS: 'Reviews',
+  WRITE_A_REVIEW: 'Schreibe eine Bewertung'
 };
