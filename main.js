@@ -633,7 +633,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
- */var ro=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},so=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{c(n.next(t))}catch(t){r(t)}}function a(t){try{c(n.throw(t))}catch(t){r(t)}}function c(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}c((n=n.apply(t,e||[])).next())}))};const ao=o(4),co=o(35);let lo=class extends(ee(pt)){constructor(){super(...arguments),this.groups=[],this.groupService=Ke,this.joinCallback=t=>{console.log(t)}}createModal(){return so(this,void 0,void 0,(function*(){const t=yield Pe.k.create({component:"app-group-join-modal",swipeToClose:!0,componentProps:{groups:this.groups}});yield t.present()}))}firstUpdated(){return so(this,void 0,void 0,(function*(){try{Ke.subscribe(t=>{console.log(t),this.groups=t}),yield Ke.loadGroups(!0)}catch({message:t,statusCode:e}){401===e||this.setNotification({errorMessage:t})}}))}render(){return z` <ion-header style="background-color: var(--ion-background-color);">
+ */var ro=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},so=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{c(n.next(t))}catch(t){r(t)}}function a(t){try{c(n.throw(t))}catch(t){r(t)}}function c(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}c((n=n.apply(t,e||[])).next())}))};const ao=o(4),co=o(35);let lo=class extends(ee(pt)){constructor(){super(...arguments),this.groups=[],this.groupService=Ke,this.joinCallback=t=>{console.log(t)}}createModal(){return so(this,void 0,void 0,(function*(){const t=yield Pe.k.create({component:"app-group-join-modal",swipeToClose:!0,componentProps:{groups:this.groups}});yield t.present()}))}firstUpdated(){return so(this,void 0,void 0,(function*(){try{Ke.subscribe(t=>{this.groups=t}),yield Ke.loadGroups(!0)}catch({message:t,statusCode:e}){401===e||this.setNotification({errorMessage:t})}}))}render(){return z` <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-title>${this.i18n.GROUPS}</ion-title>
           <ion-buttons slot="primary">
@@ -816,7 +816,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
       ${ut(wo)}
     `,ft`
       ${ut(So)}
-    `],yo([ot({type:Object,attribute:!1})],$o.prototype,"i18n",void 0),$o=yo([tt("app-group-details")],$o);var ko=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},_o=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{c(n.next(t))}catch(t){r(t)}}function a(t){try{c(n.throw(t))}catch(t){r(t)}}function c(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}c((n=n.apply(t,e||[])).next())}))};const Ao=o(4);let To=class extends(ee(pt)){constructor(){super(...arguments),this.isBookmark=!1,this.rating=Math.ceil(10*Math.random())/2,this.pictureNumber=String(Math.ceil(5*Math.random()))}firstUpdated(){return _o(this,void 0,void 0,(function*(){try{this.meal=yield Me.getMeal(location.search),console.log(this.meal)}catch({message:t,statusCode:e}){this.setNotification({errorMessage:t})}}))}render(){var t;if(!this.meal)return z``;const{title:e,date:o,mensa:n,additives:i,allergens:r,otherInfo:s,price:a}=this.meal;return z`
+    `],yo([ot({type:Object,attribute:!1})],$o.prototype,"i18n",void 0),$o=yo([tt("app-group-details")],$o);var ko=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},_o=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{c(n.next(t))}catch(t){r(t)}}function a(t){try{c(n.throw(t))}catch(t){r(t)}}function c(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}c((n=n.apply(t,e||[])).next())}))};const Ao=o(4);let To=class extends(ee(pt)){constructor(){super(...arguments),this.isBookmark=!1,this.rating=Math.ceil(10*Math.random())/2,this.pictureNumber=String(Math.ceil(5*Math.random()))}firstUpdated(){return _o(this,void 0,void 0,(function*(){try{this.meal=yield Me.getMeal(location.search)}catch({message:t,statusCode:e}){this.setNotification({errorMessage:t})}}))}render(){var t;if(!this.meal)return z``;const{title:e,date:o,mensa:n,additives:i,allergens:r,otherInfo:s,price:a}=this.meal;return z`
       <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-buttons slot="start">
@@ -878,7 +878,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
         class="no-resize"
         @touchstart="${()=>this.carousel.update()}"
         @mousedown="${()=>this.carousel.update()}"
-        @dragstart=${t=>{if("ION-IMG"==t.target.nodeName.toUpperCase())return console.log(!0),!1}}
+        @dragstart=${t=>{if("ION-IMG"==t.target.nodeName.toUpperCase())return!1}}
         .slidesPerView=${1}
         .navigation=${!0}
         .pagination=${!0}
@@ -1095,7 +1095,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
       <macro-carousel
         @touchstart="${()=>this.carousel.update()}"
         @mousedown="${()=>this.carousel.update()}"
-        @dragstart=${t=>{if("ION-IMG"==t.target.nodeName.toUpperCase())return console.log(!0),!1}}
+        @dragstart=${t=>{if("ION-IMG"==t.target.nodeName.toUpperCase())return!1}}
         .slidesPerView=${null!==(t=this.slidesPerView)&&void 0!==t?t:2}
       >
         <ion-img
@@ -1137,7 +1137,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
           <div class="small-layout">${Eo(s,this.status,this.i18n,!0)}</div>
         </ion-card-content>
       </ion-card>
-    `}};Qo([ot({type:Object})],Zo.prototype,"meal",void 0),Qo([ot({type:String})],Zo.prototype,"status",void 0),Qo([ot({type:Object,attribute:!1})],Zo.prototype,"i18n",void 0),Qo([ot({type:Boolean})],Zo.prototype,"isBookmark",void 0),Qo([it("macro-carousel")],Zo.prototype,"carousel",void 0),Zo=Qo([tt("app-meal")],Zo);var tn=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s};let en=class extends pt{createRenderRoot(){return this}render(){const{title:t,date:e,mensa:o,additives:n,allergens:i,otherInfo:r,price:s}=this.meal;return console.log(this.mode),z`
+    `}};Qo([ot({type:Object})],Zo.prototype,"meal",void 0),Qo([ot({type:String})],Zo.prototype,"status",void 0),Qo([ot({type:Object,attribute:!1})],Zo.prototype,"i18n",void 0),Qo([ot({type:Boolean})],Zo.prototype,"isBookmark",void 0),Qo([it("macro-carousel")],Zo.prototype,"carousel",void 0),Zo=Qo([tt("app-meal")],Zo);var tn=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s};let en=class extends pt{createRenderRoot(){return this}render(){return z`
       <ion-card class="card-no-margin-when-small">
         <ion-card-content>
           <ion-list>
@@ -1203,7 +1203,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
       >
         ${[1,2,3,4,5].map(t=>z`
             <ion-button
-              style="width: 35px; height: 35px; --padding-start:0px"
+              style="width: 30px; height: 30px; --padding-start:0px"
               id=${t}
               @mouseover=${this.onHover}
               @mouseleave=${this.onMouseLeave}
