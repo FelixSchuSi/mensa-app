@@ -905,7 +905,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
           <ion-slide>
             <ion-card style="width:100%;">
               <ion-card-header>
-                <img style="max-height:355px" src="./svg/plan.svg" />
+                <img style="max-height:300px" src="./svg/plan.svg" />
                 <ion-card-title>${this.i18n.PLAN}</ion-card-title>
               </ion-card-header>
               <ion-card-content> ${this.i18n.PLANINFO} </ion-card-content>
@@ -914,7 +914,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
           <ion-slide>
             <ion-card style="width:100%">
               <ion-card-header>
-                <img style="max-height:355px" src="./svg/zsmessen.svg" />
+                <img style="max-height:300px" src="./svg/zsmessen.svg" />
                 <ion-card-title>${this.i18n.EATINGTOGETHER}</ion-card-title>
               </ion-card-header>
               <ion-card-content>${this.i18n.EATINGTOGETHERINFO}</ion-card-content>
@@ -923,7 +923,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
           <ion-slide>
             <ion-card style="width:100%">
               <ion-card-header>
-                <img style="max-height:355px" src="./svg/auswahl.svg" />
+                <img style="max-height:300px" src="./svg/auswahl.svg" />
                 <ion-card-title>${this.i18n.CHOICE}</ion-card-title>
               </ion-card-header>
               <ion-card-content> ${this.i18n.CHOICEINFO} </ion-card-content>
@@ -932,7 +932,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
           <ion-slide>
             <ion-card style="width:100%">
               <ion-card-header>
-                <img style="max-height:355px" src="./svg/hungrig.svg" />
+                <img style="max-height:300px" src="./svg/hungrig.svg" />
                 <ion-card-title>${this.i18n.HUNGRY}</ion-card-title>
               </ion-card-header>
               <ion-button
