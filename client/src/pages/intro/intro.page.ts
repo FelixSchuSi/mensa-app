@@ -1,13 +1,9 @@
 import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
-import { repeat } from 'lit-html/directives/repeat';
-import { guard } from 'lit-html/directives/guard';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { intro } from '../../models/intro';
-import { userService } from '../../services/user.service';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
-import { popFromRootNav } from '../../helpers/nav-util';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./intro.page.scss');
@@ -36,11 +32,20 @@ class IntroPage extends PageMixin(LitElement) {
   protected render(): TemplateResult {
     return html`
       <ion-content fullscreen class="ion-padding">
-        <ion-slides scrollbar pager>
+        <ion-slides
+          scrollbar
+          .options=${{
+            scrollbar: {
+              el: '.swiper-scrollbar',
+              hide: false,
+              draggable: true
+            }
+          }}
+        >
           <ion-slide>
-            <ion-card>
+            <ion-card style="width:100%;">
               <ion-card-header>
-                <img style="max-height:355px" src="/svg/plan.svg" />
+                <img style="max-height:355px" src="./svg/plan.svg" />
                 <ion-card-title>Was gibt es heute in den Mensen?</ion-card-title>
               </ion-card-header>
               <ion-card-content>
@@ -49,18 +54,18 @@ class IntroPage extends PageMixin(LitElement) {
             </ion-card>
           </ion-slide>
           <ion-slide>
-            <ion-card>
+            <ion-card style="width:100%">
               <ion-card-header>
-                <img style="max-height:355px" src="/svg/zsmessen.svg" />
+                <img style="max-height:355px" src="./svg/zsmessen.svg" />
                 <ion-card-title>In Gesellschaft ist alles besser!</ion-card-title>
               </ion-card-header>
               <ion-card-content> Verabrede dich mit deinen Freunden in einer Mensa. </ion-card-content>
             </ion-card>
           </ion-slide>
           <ion-slide>
-            <ion-card>
+            <ion-card style="width:100%">
               <ion-card-header>
-                <img style="max-height:355px" src="/svg/auswahl.svg" />
+                <img style="max-height:355px" src="./svg/auswahl.svg" />
                 <ion-card-title>Unverträglichkeiten oder Allergien?</ion-card-title>
               </ion-card-header>
               <ion-card-content>
@@ -70,9 +75,9 @@ class IntroPage extends PageMixin(LitElement) {
             </ion-card>
           </ion-slide>
           <ion-slide>
-            <ion-card>
+            <ion-card style="width:100%">
               <ion-card-header>
-                <img style="max-height:355px" src="/svg/hungrig.svg" />
+                <img style="max-height:355px" src="./svg/hungrig.svg" />
                 <ion-card-title>Bereits Hunger? Dann lege hier los!</ion-card-title>
               </ion-card-header>
               <ion-button
