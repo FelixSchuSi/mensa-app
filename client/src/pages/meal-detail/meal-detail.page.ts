@@ -43,7 +43,6 @@ class MealDetailPage extends PageMixin(LitElement) {
   protected async firstUpdated(): Promise<void> {
     try {
       this.meal = await mealService.getMeal(location.search);
-      console.log(this.meal);
     } catch ({ message, statusCode }) {
       this.setNotification({ errorMessage: message });
     }
