@@ -44,7 +44,6 @@ class GroupsPage extends PageMixin(LitElement) {
   protected async firstUpdated(): Promise<void> {
     try {
       groupService.subscribe((groups: Group[]) => {
-        console.log(groups);
         this.groups = groups;
       });
       await groupService.loadGroups(true);

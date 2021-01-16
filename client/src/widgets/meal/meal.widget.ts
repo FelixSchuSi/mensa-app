@@ -66,7 +66,6 @@ export class MealWidget extends LitElement {
         @mousedown="${() => this.carousel.update()}"
         @dragstart=${(e: any) => {
           if (e.target.nodeName.toUpperCase() == 'ION-IMG') {
-            console.log(true);
             return false;
           }
         }}

@@ -25,7 +25,7 @@ export class RatingStarsPickWidget extends LitElement {
         ${[1, 2, 3, 4, 5].map(
           index => html`
             <ion-button
-              style="width: 35px; height: 35px; --padding-start:0px"
+              style="width: 30px; height: 30px; --padding-start:0px"
               id=${index}
               @mouseover=${this.onHover}
               @mouseleave=${this.onMouseLeave}

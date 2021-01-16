@@ -148,7 +148,6 @@ class MealDetailPage extends PageMixin(LitElement) {
         @mousedown="${() => this.carousel.update()}"
         @dragstart=${(e: any) => {
           if (e.target.nodeName.toUpperCase() == 'ION-IMG') {
-            console.log(true);
             return false;
           }
         }}

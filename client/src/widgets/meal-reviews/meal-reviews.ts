@@ -21,8 +21,6 @@ export class MealReviewsWidget extends LitElement {
   protected mode!: 'ios' | 'md';
 
   protected render(): TemplateResult {
-    const { title, date, mensa, additives, allergens, otherInfo, price } = this.meal;
-    console.log(this.mode);
     return html`
       <ion-card class="card-no-margin-when-small">
         <ion-card-content>
