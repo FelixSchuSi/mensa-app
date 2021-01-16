@@ -72,7 +72,6 @@ export class AppComponent extends LitElement {
   protected async firstUpdated(): Promise<void> {
     routerService.subscribe(() => this.handleRouteChange());
     await this.handleRouteChange();
-    await storeService.set('hasSeenIntro', false);
     const hasSeenIntro = await storeService.get('hasSeenIntro');
     if (!hasSeenIntro) {
       const activeNav: HTMLIonNavElement = <HTMLIonNavElement>document.querySelector('#root-nav');
