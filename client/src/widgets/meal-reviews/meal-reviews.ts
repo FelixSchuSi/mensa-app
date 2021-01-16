@@ -37,7 +37,7 @@ export class MealReviewsWidget extends LitElement {
                 <div style="display:flex; flex-direction:row; align-items:center">
                   <app-rating-starts-pick></app-rating-starts-pick>
                   <div style="flex-grow:1"></div>
-                  <ion-avatar slot="end">
+                  <ion-avatar slot="end" style="width: 50px; height: 50px;">
                     <img src="./svg/avatar.svg" />
                   </ion-avatar>
                 </div>
