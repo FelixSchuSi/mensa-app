@@ -6,7 +6,6 @@ import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
 
 const sharedCSS = require('../../shared.scss');
-const componentCSS = require('./intro.page.scss');
 
 @customElement('app-intro')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -14,9 +13,6 @@ class IntroPage extends PageMixin(LitElement) {
   static styles = [
     css`
       ${unsafeCSS(sharedCSS)}
-    `,
-    css`
-      ${unsafeCSS(componentCSS)}
     `
   ];
 
