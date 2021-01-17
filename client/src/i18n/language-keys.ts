@@ -108,6 +108,7 @@ export type LanguageKeys =
   | 'STEP_1'
   | 'STEP_2'
   | 'PERSONAL_DATA'
+  | 'FOOD_PREFERENCES'
   | 'NEXT_STEP'
   | 'PREVIOUS_STEP'
   | 'STATUS'
@@ -141,4 +142,6 @@ export type LanguageKeys =
   | 'UNTIL'
   | 'SELECT_DAY'
   | 'SELECT_START_DATE'
-  | 'SELECT_END_DATE';
+  | 'SELECT_END_DATE'
+  | 'SIGN_UP_EXPLANATION'
+  | 'NONE';

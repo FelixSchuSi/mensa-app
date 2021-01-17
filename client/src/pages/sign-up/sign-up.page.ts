@@ -200,11 +200,8 @@ class SignUpPage extends PageMixin(LitElement) {
   protected get stepOne(): TemplateResult {
     return html`
       <div class="ion-padding">
-        <h1>${this.i18n.STEP_1}: ${this.i18n.PERSONAL_DATA}</h1>
-        <p>
-          Bist du beim Essen wählerisch oder hast einen sensiblen Magen? Hinterlege Informationen zu deinen Vorlieben
-          damit dir Gerichte angezeigt werden, die für dich interessant sind.
-        </p>
+        <h1>${this.i18n.STEP_1}: ${this.i18n.FOOD_PREFERENCES}</h1>
+        <p>${this.i18n.SIGN_UP_EXPLANATION}</p>
 
         <ion-list>
           <ion-item class="no-padding">
@@ -282,10 +279,12 @@ class SignUpPage extends PageMixin(LitElement) {
               <div>
                 <chip-select
                   @chip-select-change=${(e: any) => {
-                    const contents = e.detail.map((contentChipElem: any) => contentChipElem.id);
+                    let contents = e.detail.map((contentChipElem: any) => contentChipElem.id);
+                    contents = contents.filter((str: string) => str !== 'none');
                     this.newFilterConfig = { ...this.newFilterConfig, nogos: contents };
                   }}
                 >
+                  <chip-select-none-chip></chip-select-none-chip>
                   ${this.allContents.map(content => {
                     const isSelected = this.newFilterConfig.nogos.includes(content);
                     return html`

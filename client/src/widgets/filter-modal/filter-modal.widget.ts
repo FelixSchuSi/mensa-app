@@ -23,7 +23,7 @@ export class FilterModalWidget extends LitElement {
 
   public applyFilterConfig!: (newFilterConfig: MealFilterConfig) => void;
   public oldFilterConfig!: MealFilterConfig;
-  private _newFilterConfig!: MealFilterConfig;
+  private _newFilterConfig: MealFilterConfig = this.oldFilterConfig;
   private get newFilterConfig(): MealFilterConfig {
     return this._newFilterConfig ?? this.oldFilterConfig;
   }
@@ -141,10 +141,12 @@ export class FilterModalWidget extends LitElement {
                 <div>
                   <chip-select
                     @chip-select-change=${(e: any) => {
-                      const contents = e.detail.map((contentChipElem: any) => contentChipElem.id);
+                      let contents = e.detail.map((contentChipElem: any) => contentChipElem.id);
+                      contents = contents.filter((str: string) => str !== 'none');
                       this.newFilterConfig = { ...this.newFilterConfig, nogos: contents };
                     }}
                   >
+                    <chip-select-none-chip></chip-select-none-chip>
                     ${this.allContents.map(content => {
                       const isSelected = this.newFilterConfig.nogos.includes(content);
                       return html`

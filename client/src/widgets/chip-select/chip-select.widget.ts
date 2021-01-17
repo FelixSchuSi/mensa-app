@@ -1,5 +1,6 @@
-import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
 import { LanguageStrings } from '../../models/language-strings';
+import { ChipSelectNoneChipWidget } from '../chip-select-none-chip/chip-select-none-chip';
 
 const componentCSS = require('./chip-select.widget.scss');
 const sharedCSS = require('../../shared.scss');
@@ -20,6 +21,9 @@ export class ChipSelectWidget extends LitElement {
 
   @property({ type: String })
   protected mode: 'checkbox' | 'radio' = 'checkbox';
+
+  @query('chip-select-none-chip')
+  protected noneChip?: ChipSelectNoneChipWidget;
 
   protected get chips(): HTMLIonChipElement[] {
     return <HTMLIonChipElement[]>Array.from(this.querySelectorAll('ion-chip')!);
@@ -58,6 +62,10 @@ export class ChipSelectWidget extends LitElement {
           detail: this.value
         });
         this.dispatchEvent(chipSelectEvent);
+        const noneChip = <ChipSelectNoneChipWidget | null>this.querySelector('chip-select-none-chip');
+        if (noneChip) {
+          noneChip.evaluate();
+        }
       });
     });
   }

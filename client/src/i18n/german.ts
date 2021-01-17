@@ -110,6 +110,7 @@ export const german: LanguageStrings = {
   STEP_1: 'Schritt 1',
   STEP_2: 'Schritt 2',
   PERSONAL_DATA: 'Persönliche Daten',
+  FOOD_PREFERENCES: 'Vorlieben',
   NEXT_STEP: 'Nächster Schritt',
   PREVIOUS_STEP: 'Vorheriger Schritt',
   STATUS: 'Status',
@@ -143,5 +144,8 @@ export const german: LanguageStrings = {
   DAY: 'Tag',
   SELECT_DAY: 'Tag auswählen',
   SELECT_START_DATE: 'Startdatum auswählen',
-  SELECT_END_DATE: 'Enddatum auswählen'
+  SELECT_END_DATE: 'Enddatum auswählen',
+  SIGN_UP_EXPLANATION:
+    'Bist du beim Essen wählerisch oder hast einen sensiblen Magen? Hinterlege Informationen zu deinen Vorlieben damit dir Gerichte angezeigt werden, die für dich interessant sind.',
+  NONE: 'Keine'
 };

@@ -110,6 +110,7 @@ export const english: LanguageStrings = {
   STEP_1: 'Step 1',
   STEP_2: 'Step 2',
   PERSONAL_DATA: 'Personal Data',
+  FOOD_PREFERENCES: 'Food Preferences',
   NEXT_STEP: 'Next step',
   PREVIOUS_STEP: 'Previous step',
   STATUS: 'Status',
@@ -143,5 +144,8 @@ export const english: LanguageStrings = {
   DAY: 'Day',
   SELECT_DAY: 'Select day',
   SELECT_START_DATE: 'Select start date',
-  SELECT_END_DATE: 'Select end date'
+  SELECT_END_DATE: 'Select end date',
+  SIGN_UP_EXPLANATION:
+    'Are you a picky eater or have a sensible stomach? Provide information about your food preferences so that you only see meals that are interesting to you.',
+  NONE: 'None'
 };
