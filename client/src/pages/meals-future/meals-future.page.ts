@@ -22,7 +22,6 @@ import { User } from '../../../../server/src/models/user';
 import { getSlidesPerView } from '../../helpers/get-slides-per-view';
 import { DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filtter-config';
 import { truncateToDay } from '../../helpers/truncate-to-day';
-import { getToday } from '../../helpers/get-today';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');

@@ -1,10 +1,12 @@
 import { getToday } from '../helpers/get-today';
+import { getTomorrow } from '../helpers/get-tomorrow';
 
 export interface MealDateFilterConfig {
   start: number | null;
   end: number | null;
 }
 
-export const DEFAULT_DATE_FILTER = { start: getToday().getTime(), end: null }; // 'all' type
+const tomorrow = getTomorrow();
+export const DEFAULT_DATE_FILTER = { start: tomorrow.getTime(), end: null }; // 'all' type
 
 export type DateFilterType = 'all' | 'tomorrow' | 'this-week' | 'next-week' | 'custom';

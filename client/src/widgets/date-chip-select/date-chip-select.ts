@@ -1,7 +1,7 @@
 import { customElement, html, internalProperty, LitElement, PropertyValues, TemplateResult } from 'lit-element';
 import { getToday } from '../../helpers/get-today';
-import { truncateToDay } from '../../helpers/truncate-to-day';
-import { DateFilterType, MealDateFilterConfig } from '../../models/meal-date-filtter-config';
+import { getTomorrow } from '../../helpers/get-tomorrow';
+import { DateFilterType, DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filtter-config';
 
 @customElement('date-chip-select')
 export class DateChipSelectWidget extends LitElement {
@@ -11,8 +11,6 @@ export class DateChipSelectWidget extends LitElement {
 
   @internalProperty()
   protected activeChip: DateFilterType = 'all';
-
-  protected today: Date = truncateToDay(getToday());
 
   protected get allChips(): HTMLIonChipElement[] {
     return <HTMLIonChipElement[]>Array.from(this.querySelectorAll('ion-chip')!);
@@ -50,10 +48,6 @@ export class DateChipSelectWidget extends LitElement {
       clickedChip = <HTMLIonChipElement>clickedChip.parentElement; // The calendar icon was clicked
     }
     this.activeChip = <DateFilterType>clickedChip.id;
-
-    // const { start, end } = this.buildDateFilterConfig();
-    // console.log(new Date(start));
-    // console.log(new Date(end));
     const filterChangeEvent = new CustomEvent('date-filter-change', {
       detail: this.buildDateFilterConfig()
     });
@@ -62,20 +56,18 @@ export class DateChipSelectWidget extends LitElement {
 
   protected buildDateFilterConfig(): MealDateFilterConfig {
     switch (this.activeChip) {
-      case 'all':
-        return { start: this.today.getTime(), end: null };
       case 'tomorrow':
-        let tomorrow = new Date(this.today.getTime());
-        tomorrow = new Date(tomorrow.setDate(tomorrow.getDate() + 1));
+        const tomorrow = getTomorrow();
+        console.log(tomorrow);
         return { start: tomorrow.getTime(), end: tomorrow.getTime() };
       case 'this-week':
-        let endOfThisWeek = new Date(this.today.getTime());
+        let endOfThisWeek = getToday();
         while (endOfThisWeek.getDay() !== 0) {
           endOfThisWeek.setDate(endOfThisWeek.getDate() + 1);
         }
-        return { start: this.today.getTime(), end: endOfThisWeek.getTime() };
+        return { start: getTomorrow().getTime(), end: endOfThisWeek.getTime() };
       case 'next-week':
-        let startOfNextWeek = new Date(this.today.getTime());
+        let startOfNextWeek = getToday();
         startOfNextWeek.setDate(startOfNextWeek.getDate() + 1);
         while (startOfNextWeek.getDay() !== 1) {
           startOfNextWeek.setDate(startOfNextWeek.getDate() + 1);
@@ -85,7 +77,9 @@ export class DateChipSelectWidget extends LitElement {
           endOfNextWeek.setDate(endOfNextWeek.getDate() + 1);
         }
         return { start: startOfNextWeek.getTime(), end: endOfNextWeek.getTime() };
+      case 'all':
+      default:
+        return DEFAULT_DATE_FILTER;
     }
-    return { start: this.today.getTime(), end: null };
   }
 }
