@@ -20,7 +20,7 @@ import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-me
 import { userService } from '../../services/user.service';
 import { User } from '../../../../server/src/models/user';
 import { getSlidesPerView } from '../../helpers/get-slides-per-view';
-import { DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filtter-config';
+import { DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filter-config';
 import { truncateToDay } from '../../helpers/truncate-to-day';
 
 const sharedCSS = require('../../shared.scss');
@@ -50,6 +50,7 @@ export class MealsFuturePage extends PageMixin(LitElement) {
   @internalProperty()
   protected userInfo?: User = userService.userInfo;
   protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
+  @internalProperty()
   protected dateFilterConfig: MealDateFilterConfig = DEFAULT_DATE_FILTER;
 
   protected searchInput = '';
@@ -70,7 +71,6 @@ export class MealsFuturePage extends PageMixin(LitElement) {
     return this.mealsBeforeTextSearch.filter(meal => {
       let valid = true;
       const truancedDate = truncateToDay(new Date(meal.date));
-      // if (meal.date === '2020-11-19') debugger;
       if (start !== null && truancedDate.getTime() < start) valid = false;
       if (end !== null && truancedDate.getTime() > end) valid = false;
       return valid;
@@ -141,6 +141,7 @@ export class MealsFuturePage extends PageMixin(LitElement) {
         </ion-header>
         ${this.mode === 'md' ? this.searchBar : html``}
         <date-chip-select
+          .dateFilterConfig=${this.dateFilterConfig}
           @date-filter-change=${(e: { detail: MealDateFilterConfig }) => {
             this.dateFilterConfig = e.detail;
             this.displayMeals = this.filter();

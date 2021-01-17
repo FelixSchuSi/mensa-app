@@ -7,6 +7,6 @@ export interface MealDateFilterConfig {
 }
 
 const tomorrow = getTomorrow();
-export const DEFAULT_DATE_FILTER = { start: tomorrow.getTime(), end: null }; // 'all' type
+export const DEFAULT_DATE_FILTER: MealDateFilterConfig = { start: tomorrow.getTime(), end: null }; // 'all' type
 
 export type DateFilterType = 'all' | 'tomorrow' | 'this-week' | 'next-week' | 'custom';

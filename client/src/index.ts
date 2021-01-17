@@ -27,5 +27,6 @@ import './widgets/rating-stars/rating-stars';
 import './widgets/rating-stars-pick/rating-stars-pick';
 import './widgets/meal-review/meal-review';
 import './widgets/date-chip-select/date-chip-select';
+import './widgets/date-filter-modal/date-filter-modal';
 
 import './../node_modules/macro-carousel/dist/macro-carousel.min.js';

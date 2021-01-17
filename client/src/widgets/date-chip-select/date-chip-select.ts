@@ -1,7 +1,9 @@
+import { modalController } from '@ionic/core';
 import { customElement, html, internalProperty, LitElement, PropertyValues, TemplateResult } from 'lit-element';
 import { getToday } from '../../helpers/get-today';
 import { getTomorrow } from '../../helpers/get-tomorrow';
-import { DateFilterType, DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filtter-config';
+import { DateFilterType, DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filter-config';
+import { DateFilterModalWidget } from '../date-filter-modal/date-filter-modal';
 
 @customElement('date-chip-select')
 export class DateChipSelectWidget extends LitElement {
@@ -11,6 +13,9 @@ export class DateChipSelectWidget extends LitElement {
 
   @internalProperty()
   protected activeChip: DateFilterType = 'all';
+
+  @internalProperty()
+  protected dateFilterConfig!: MealDateFilterConfig;
 
   protected get allChips(): HTMLIonChipElement[] {
     return <HTMLIonChipElement[]>Array.from(this.querySelectorAll('ion-chip')!);
@@ -42,23 +47,19 @@ export class DateChipSelectWidget extends LitElement {
     `;
   }
 
-  protected onClick(e: any): void {
+  protected async onClick(e: any): Promise<void> {
     let clickedChip = <HTMLIonChipElement>e.target;
     if (clickedChip.nodeName.toUpperCase() === 'ION-ICON') {
       clickedChip = <HTMLIonChipElement>clickedChip.parentElement; // The calendar icon was clicked
     }
     this.activeChip = <DateFilterType>clickedChip.id;
-    const filterChangeEvent = new CustomEvent('date-filter-change', {
-      detail: this.buildDateFilterConfig()
-    });
-    this.dispatchEvent(filterChangeEvent);
+    this.applyDateFilter();
   }
 
-  protected buildDateFilterConfig(): MealDateFilterConfig {
+  protected async buildDateFilterConfig(): Promise<MealDateFilterConfig> {
     switch (this.activeChip) {
       case 'tomorrow':
         const tomorrow = getTomorrow();
-        console.log(tomorrow);
         return { start: tomorrow.getTime(), end: tomorrow.getTime() };
       case 'this-week':
         let endOfThisWeek = getToday();
@@ -77,9 +78,28 @@ export class DateChipSelectWidget extends LitElement {
           endOfNextWeek.setDate(endOfNextWeek.getDate() + 1);
         }
         return { start: startOfNextWeek.getTime(), end: endOfNextWeek.getTime() };
+      case 'custom':
+        const modal: HTMLIonModalElement = await modalController.create({
+          component: 'app-date-filter-modal',
+          swipeToClose: true,
+          componentProps: {
+            dateFilterConfig: this.dateFilterConfig
+          }
+        });
+        await modal.present();
+        await modal.onWillDismiss();
+        const filterModal = <DateFilterModalWidget | null>modal.querySelector('app-date-filter-modal');
+        return filterModal?.dateFilterConfig ?? DEFAULT_DATE_FILTER;
       case 'all':
       default:
         return DEFAULT_DATE_FILTER;
     }
+  }
+
+  protected async applyDateFilter(): Promise<void> {
+    const filterChangeEvent = new CustomEvent('date-filter-change', {
+      detail: await this.buildDateFilterConfig()
+    });
+    this.dispatchEvent(filterChangeEvent);
   }
 }
