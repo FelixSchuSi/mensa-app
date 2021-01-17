@@ -176,3 +176,19 @@ ion-item.no-padding {
   min-width: 1px;
   min-height: 1px;
 }
+
+ion-chip.selected {
+  --background: var(--ion-color-step-850);
+  --color: var(--ion-color-light);
+}
+
+app-meals-future app-meal:first-of-type ion-card {
+  margin-top: 4px;
+}
+
+@media (min-width: 768px) {
+  .card-like-padding {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

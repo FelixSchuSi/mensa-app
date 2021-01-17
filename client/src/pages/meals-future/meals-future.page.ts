@@ -109,14 +109,6 @@ export class MealsFuturePage extends PageMixin(LitElement) {
             </ion-button>
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
-              <!-- <ion-icon name="person-circle"></ion-icon> -->
-              <!-- TODO: Make Google style avatar work -->
-              <!-- <ion-avatar style="border-radius: 0px" slot="end">
-                <img
-                  style="width: 60px; height:60px"
-                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
-                />
-              </ion-avatar> -->
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
@@ -129,6 +121,7 @@ export class MealsFuturePage extends PageMixin(LitElement) {
           <ion-toolbar> ${this.searchBar} </ion-toolbar>
         </ion-header>
         ${this.mode === 'md' ? this.searchBar : html``}
+        <date-chip-select @date-filter-change=${(e: any) => console.log(e.detail)}></date-chip-select>
         ${this.displayMeals.slice(0, this.scrollIndex).map(
           meal =>
             html`<app-meal
