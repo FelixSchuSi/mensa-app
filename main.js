@@ -398,7 +398,7 @@ const ct=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
                   @ionChange=${t=>this.newFilterConfig=Object.assign(Object.assign({},this.newFilterConfig),{diet:t.detail.value})}
                   value=${this.newFilterConfig.diet}
                 >
-                  ${de.map(t=>{let e;switch(t){case"STANDARD_DIET":e="images/beef.png";break;case"Vgn":e="images/Vgn.png";break;case"Vgt":e="images/Rin.png"}return z`
+                  ${de.map(t=>{let e;switch(t){case"STANDARD_DIET":e="images/Sch.png";break;case"Vgn":e="images/Vgn.png";break;case"Vgt":e="images/Vgt.png"}return z`
                       <ion-segment-button value="${t}">
                         <ion-label>${this.i18n[t]}</ion-label>
                         <ion-img style="width:30px" src=${e}></ion-img>
