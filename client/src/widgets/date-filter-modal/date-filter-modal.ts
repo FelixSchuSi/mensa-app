@@ -15,6 +15,9 @@ export class DateFilterModalWidget extends LitElement {
 
   public dateFilterConfig!: MealDateFilterConfig;
 
+  @internalProperty()
+  protected dateTab: 'day' | 'period' = 'day';
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -37,30 +40,20 @@ export class DateFilterModalWidget extends LitElement {
             <ion-button @click="${this.dismissModal}">${this.i18n.CLOSE}</ion-button>
           </ion-buttons>
         </ion-toolbar>
+        <ion-toolbar>
+          <ion-segment value=${this.dateTab}>
+            <ion-segment-button @click=${() => (this.dateTab = 'day')} value="day">
+              <ion-label>${this.i18n.ONE_DAY}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button @click=${() => (this.dateTab = 'period')} value="period">
+              <ion-label>${this.i18n.PERIOD}</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>Start Date</ion-label>
-            <ion-datetime
-              id="startdate"
-              @ionChange=${this.onChange}
-              value="${this.toISOStringOrNull(this.dateFilterConfig.start)}"
-              placeholder="Select Date"
-            ></ion-datetime>
-          </ion-item>
-          <ion-item>
-            <ion-label>Ends</ion-label>
-            <ion-datetime
-              id="enddate"
-              @ionChange=${this.onChange}
-              value="${this.toISOStringOrNull(this.dateFilterConfig.end)}"
-              placeholder="Select Date"
-            ></ion-datetime>
-          </ion-item>
-        </ion-list>
+        <ion-list> ${this.dateTab === 'day' ? this.dayTemplate : this.periodTemplate} </ion-list>
         <div class="ion-padding">
-          asdf
           <ion-button
             style="float:right"
             @click=${() => {
@@ -73,14 +66,52 @@ export class DateFilterModalWidget extends LitElement {
     `;
   }
 
+  protected get dayTemplate(): TemplateResult {
+    return html`
+      <ion-item>
+        <ion-label>${this.i18n.DAY}</ion-label>
+        <ion-datetime
+          id="day"
+          @ionChange=${this.onChange}
+          value="${this.toISOStringOrNull(this.dateFilterConfig.start)}"
+          placeholder=${this.i18n.SELECT_DAY}
+        ></ion-datetime>
+      </ion-item>
+    `;
+  }
+
+  protected get periodTemplate(): TemplateResult {
+    return html`
+      <ion-item>
+        <ion-label>${this.i18n.FROM}</ion-label>
+        <ion-datetime
+          id="startdate"
+          @ionChange=${this.onChange}
+          value="${this.toISOStringOrNull(this.dateFilterConfig.start)}"
+          placeholder=${this.i18n.SELECT_START_DATE}
+        ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>${this.i18n.UNTIL}</ion-label>
+        <ion-datetime
+          id="enddate"
+          @ionChange=${this.onChange}
+          value="${this.toISOStringOrNull(this.dateFilterConfig.end)}"
+          placeholder=${this.i18n.SELECT_END_DATE}
+        ></ion-datetime>
+      </ion-item>
+    `;
+  }
   protected onChange(e: any) {
     const element = <HTMLIonDatetimeElement>e.target;
     const value: string = element.value!;
     const newDate: Date = truncateToDay(new Date(value));
     if (element.id === 'startdate') {
       this.dateFilterConfig = { ...this.dateFilterConfig, start: newDate.getTime() };
-    } else {
+    } else if (element.id === 'enddate') {
       this.dateFilterConfig = { ...this.dateFilterConfig, end: newDate.getTime() };
+    } else if (element.id === 'id') {
+      this.dateFilterConfig = { start: newDate.getTime(), end: newDate.getTime() };
     }
   }
 

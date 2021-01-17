@@ -131,5 +131,17 @@ export const english: LanguageStrings = {
     'Are you picky about food or do you have a sensitive stomach? Then use our filter function and only display dishes that are interesting and compatible for you.',
   HUNGRY: 'Already hungry? Then start here!',
   REVIEWS: 'Bewertungen',
-  WRITE_A_REVIEW: 'Write a review'
+  WRITE_A_REVIEW: 'Write a review',
+  ALL: 'All',
+  TOMORROW: 'Tomorrow',
+  THIS_WEEK: 'This Week',
+  NEXT_WEEK: 'Next Week',
+  ONE_DAY: 'One day',
+  PERIOD: 'Period',
+  FROM: 'From',
+  UNTIL: 'Until',
+  DAY: 'Day',
+  SELECT_DAY: 'Select day',
+  SELECT_START_DATE: 'Select start date',
+  SELECT_END_DATE: 'Select end date'
 };

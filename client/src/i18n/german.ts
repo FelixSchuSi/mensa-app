@@ -131,5 +131,17 @@ export const german: LanguageStrings = {
     'Du bist beim Essen wählerisch oder hast einen sensiblen Magen? Dann nutze unsere Filterfunktion und lasse dir nur Gerichte anzeigen, die für dich interessant und verträglich sind.',
   HUNGRY: 'Bereits Hunger? Dann lege hier los!',
   REVIEWS: 'Reviews',
-  WRITE_A_REVIEW: 'Schreibe eine Bewertung'
+  WRITE_A_REVIEW: 'Schreibe eine Bewertung',
+  ALL: 'Alle',
+  TOMORROW: 'Morgen',
+  THIS_WEEK: 'Diese Woche',
+  NEXT_WEEK: 'Nächste Woche',
+  ONE_DAY: 'Ein Tag',
+  PERIOD: 'Zeitraum',
+  FROM: 'Von',
+  UNTIL: 'Bis',
+  DAY: 'Tag',
+  SELECT_DAY: 'Tag auswählen',
+  SELECT_START_DATE: 'Startdatum auswählen',
+  SELECT_END_DATE: 'Enddatum auswählen'
 };

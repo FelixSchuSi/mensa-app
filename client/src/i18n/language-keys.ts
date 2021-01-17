@@ -129,4 +129,16 @@ export type LanguageKeys =
   | 'HUNGRY'
   | 'REVIEWS'
   | 'CONTINUE'
-  | 'WRITE_A_REVIEW';
+  | 'WRITE_A_REVIEW'
+  | 'ALL'
+  | 'TOMORROW'
+  | 'THIS_WEEK'
+  | 'NEXT_WEEK'
+  | 'ONE_DAY'
+  | 'PERIOD'
+  | 'DAY'
+  | 'FROM'
+  | 'UNTIL'
+  | 'SELECT_DAY'
+  | 'SELECT_START_DATE'
+  | 'SELECT_END_DATE';
