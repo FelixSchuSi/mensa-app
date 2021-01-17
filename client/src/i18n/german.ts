@@ -82,7 +82,7 @@ export const german: LanguageStrings = {
   EMPLOYEE: 'Mitarbeiter',
   GUEST: 'Gast',
   CHOOSE_STATUS: 'Wähle deinen Status',
-  INDIGESTIBILITIES: 'Unvertraeglichkeiten',
+  INDIGESTIBILITIES: 'Unverträglichkeiten',
   PREFERENCE: 'Vorliebe',
   NETWORK_SYNCING: 'Synchronisiere...',
   NETWORK_OFFLINE: 'Offline',

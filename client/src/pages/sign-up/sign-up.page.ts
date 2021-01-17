@@ -254,10 +254,10 @@ class SignUpPage extends PageMixin(LitElement) {
                         imagePath = 'images/beef.png';
                         break;
                       case 'Vgn':
-                        imagePath = 'images/vegan.png';
+                        imagePath = 'images/Vgn.png';
                         break;
                       case 'Vgt':
-                        imagePath = 'images/veggie.png';
+                        imagePath = 'images/Rin.png';
                         break;
                     }
                     return html`
