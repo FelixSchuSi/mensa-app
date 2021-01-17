@@ -192,3 +192,9 @@ app-meals-future app-meal:first-of-type ion-card {
     padding-right: 16px;
   }
 }
+
+.item-no-side-padding {
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --inner-padding-end: 0px;
+}

@@ -20,7 +20,8 @@ export class MealReviewWidget extends LitElement {
   protected render(): TemplateResult {
     return html`
       <ion-item
-        style="--padding-start:0px; --inner-padding-top: 5px; --ion-item-background: var(--ion-card-background); --border-color: rgba(0, 0, 0, 0);"
+        class="item-no-side-padding"
+        style="--inner-padding-top: 5px; --ion-item-background: var(--ion-card-background); --border-color: rgba(0, 0, 0, 0);"
       >
         <ion-avatar slot="start">
           <img src="./svg/avatar.svg" />
@@ -31,7 +32,8 @@ export class MealReviewWidget extends LitElement {
         </ion-label>
       </ion-item>
       <ion-item
-        style=" --padding-start:0px; --inner-padding-bottom:16px; color:var(--ion-color-step-600, #666666); --border-color: rgba(0, 0, 0, 0); --min-height: 0px !important; --ion-item-background: var(--ion-card-background)"
+        class="item-no-side-padding"
+        style="--inner-padding-bottom:16px; color:var(--ion-color-step-600, #666666); --border-color: rgba(0, 0, 0, 0); --min-height: 0px !important; --ion-item-background: var(--ion-card-background)"
       >
         Hallo. Ich bin ein kleiner Blindtext. Und zwar schon so lange ich denken kann. Es war nicht leicht zu verstehen,
         was es bedeutet, ein blinder Text zu sein: Man ergibt keinen Sinn. Wirklich keinen Sinn. Man wird

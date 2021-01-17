@@ -28,6 +28,8 @@ export class DateFilterModalWidget extends LitElement {
 
   protected dismissModal(): void {
     const modal = <HTMLIonModalElement>this.parentElement?.parentElement!;
+    //@ts-ignore
+    this.dateFilterConfig = null;
     modal.dismiss();
   }
 

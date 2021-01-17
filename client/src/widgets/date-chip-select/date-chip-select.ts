@@ -1,5 +1,5 @@
 import { modalController } from '@ionic/core';
-import { customElement, html, internalProperty, LitElement, PropertyValues, TemplateResult } from 'lit-element';
+import { customElement, html, internalProperty, LitElement, PropertyValues, query, TemplateResult } from 'lit-element';
 import { getToday } from '../../helpers/get-today';
 import { getTomorrow } from '../../helpers/get-tomorrow';
 import { LanguageStrings } from '../../models/language-strings';
@@ -21,6 +21,9 @@ export class DateChipSelectWidget extends LitElement {
 
   @internalProperty()
   protected i18n!: LanguageStrings;
+
+  @query('.chip-wrapper')
+  protected chipWrapperElement!: HTMLDivElement;
 
   constructor() {
     super();
@@ -46,7 +49,7 @@ export class DateChipSelectWidget extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <div class="card-like-padding" style="overflow: auto;  white-space: nowrap; margin-top:4px">
+      <div class="chip-wrapper card-like-padding" style="overflow: auto;  white-space: nowrap; margin-top:4px">
         <ion-chip @click=${this.onClick} id="all">${this.i18n.ALL}</ion-chip>
         <ion-chip @click=${this.onClick} id="tomorrow">${this.i18n.TOMORROW}</ion-chip>
         <ion-chip @click=${this.onClick} id="this-week">${this.i18n.THIS_WEEK}</ion-chip>
@@ -100,7 +103,13 @@ export class DateChipSelectWidget extends LitElement {
         await modal.present();
         await modal.onWillDismiss();
         const filterModal = <DateFilterModalWidget | null>modal.querySelector('app-date-filter-modal');
-        return filterModal?.dateFilterConfig ?? DEFAULT_DATE_FILTER;
+        if (!filterModal || filterModal.dateFilterConfig === null) {
+          this.activeChip = 'all';
+          this.chipWrapperElement.scrollTo(0, 0);
+          return DEFAULT_DATE_FILTER;
+        } else {
+          return filterModal.dateFilterConfig;
+        }
       case 'all':
       default:
         return DEFAULT_DATE_FILTER;

@@ -26,7 +26,8 @@ export class MealReviewsWidget extends LitElement {
         <ion-card-content>
           <ion-list>
             <ion-item
-              style="--padding-start:0px; --highlight-color-focused: rgba(0, 0, 0, 0);
+              class="item-no-side-padding"
+              style="--highlight-color-focused: rgba(0, 0, 0, 0);
               ${this.mode === 'ios'
                 ? '--padding-bottom'
                 : 'padding-bottom'}:16px; --ion-item-background: var(--ion-card-background); --border-color: var(--ion-text-color);"
