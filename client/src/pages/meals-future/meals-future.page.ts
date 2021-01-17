@@ -20,6 +20,9 @@ import { DEFAULT_MEAL_FILTER_CONFIG, filterMeals } from '../../helpers/filter-me
 import { userService } from '../../services/user.service';
 import { User } from '../../../../server/src/models/user';
 import { getSlidesPerView } from '../../helpers/get-slides-per-view';
+import { DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filtter-config';
+import { truncateToDay } from '../../helpers/truncate-to-day';
+import { getToday } from '../../helpers/get-today';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./meals-future.page.scss');
@@ -43,17 +46,36 @@ export class MealsFuturePage extends PageMixin(LitElement) {
 
   @property({ attribute: false })
   protected displayMeals: Meal[] = [];
-  protected mealBeforeTextSearch: Meal[] = [];
+  protected mealsBeforeTextSearch: Meal[] = [];
   protected allMeals: Meal[] = [];
   @internalProperty()
   protected userInfo?: User = userService.userInfo;
   protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
+  protected dateFilterConfig: MealDateFilterConfig = DEFAULT_DATE_FILTER;
 
   protected searchInput = '';
 
+  protected filter() {
+    this.mealsBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
+    this.mealsBeforeTextSearch = this.applyDateFilter();
+    return this.applyTextSearch();
+  }
+
   protected applyTextSearch() {
-    if (this.searchInput === '') return this.mealBeforeTextSearch;
-    return this.mealBeforeTextSearch.filter(meal => meal.title.toLowerCase().includes(this.searchInput.toLowerCase()));
+    if (this.searchInput === '') return this.mealsBeforeTextSearch;
+    return this.mealsBeforeTextSearch.filter(meal => meal.title.toLowerCase().includes(this.searchInput.toLowerCase()));
+  }
+
+  protected applyDateFilter() {
+    const { start, end } = this.dateFilterConfig;
+    return this.mealsBeforeTextSearch.filter(meal => {
+      let valid = true;
+      const truancedDate = truncateToDay(new Date(meal.date));
+      // if (meal.date === '2020-11-19') debugger;
+      if (start !== null && truancedDate.getTime() < start) valid = false;
+      if (end !== null && truancedDate.getTime() > end) valid = false;
+      return valid;
+    });
   }
 
   protected async firstUpdated(): Promise<void> {
@@ -62,13 +84,11 @@ export class MealsFuturePage extends PageMixin(LitElement) {
       userService.subscribe(user => {
         this.mealFilterConfig = user?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
         this.userInfo = user;
-        this.mealBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
-        this.displayMeals = this.applyTextSearch();
+        this.displayMeals = this.filter();
       });
       mealService.subscribe((meals: Meal[]) => {
         this.allMeals = meals;
-        this.mealBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
-        this.displayMeals = this.applyTextSearch();
+        this.displayMeals = this.filter();
         if (this.displayMeals && this.displayMeals.length >= 5) {
           this.scrollIndex = 5;
         } else {
@@ -121,7 +141,12 @@ export class MealsFuturePage extends PageMixin(LitElement) {
           <ion-toolbar> ${this.searchBar} </ion-toolbar>
         </ion-header>
         ${this.mode === 'md' ? this.searchBar : html``}
-        <date-chip-select @date-filter-change=${(e: any) => console.log(e.detail)}></date-chip-select>
+        <date-chip-select
+          @date-filter-change=${(e: { detail: MealDateFilterConfig }) => {
+            this.dateFilterConfig = e.detail;
+            this.displayMeals = this.filter();
+          }}
+        ></date-chip-select>
         ${this.displayMeals.slice(0, this.scrollIndex).map(
           meal =>
             html`<app-meal
@@ -167,8 +192,7 @@ export class MealsFuturePage extends PageMixin(LitElement) {
 
   protected applyFilterConfig = (newFilterConfig: MealFilterConfig) => {
     this.mealFilterConfig = newFilterConfig;
-    this.mealBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
-    this.displayMeals = this.applyTextSearch();
+    this.displayMeals = this.filter();
   };
 
   protected carouselResizeHandler() {

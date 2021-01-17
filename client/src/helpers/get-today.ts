@@ -1,3 +1,5 @@
+import { truncateToDay } from './truncate-to-day';
+
 export function getToday(): Date {
-  return new Date(1605744000000);
+  return new Date(1605740400000);
 }
