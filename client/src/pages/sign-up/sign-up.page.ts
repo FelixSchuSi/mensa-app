@@ -251,13 +251,13 @@ class SignUpPage extends PageMixin(LitElement) {
                     let imagePath: string;
                     switch (diet) {
                       case 'STANDARD_DIET':
-                        imagePath = 'images/beef.png';
+                        imagePath = 'images/Sch.png';
                         break;
                       case 'Vgn':
                         imagePath = 'images/Vgn.png';
                         break;
                       case 'Vgt':
-                        imagePath = 'images/Rin.png';
+                        imagePath = 'images/Vgt.png';
                         break;
                     }
                     return html`
