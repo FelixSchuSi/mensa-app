@@ -12,10 +12,12 @@ const cookieOptions: CookieOptions = isProd
 
 // Used to check if a user has a valid token.
 router.get('/', async (req, res) => {
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
   const token = req.cookies['jwt-token'] || '';
   try {
-    const { email, name } = <User>jwt.verify(token, 'mysecret');
-    res.status(200).json({ email, name });
+    const { email } = <User>jwt.verify(token, 'mysecret');
+    const user = await userDAO.findOne({ email });
+    res.status(200).json({ ...user });
   } catch (error) {
     res.status(401).json({ message: 'Bitte melden Sie sich an!' });
   }
