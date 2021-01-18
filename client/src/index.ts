@@ -29,5 +29,7 @@ import './widgets/meal-review/meal-review';
 import './widgets/date-chip-select/date-chip-select';
 import './widgets/date-filter-modal/date-filter-modal';
 import './widgets/chip-select-none-chip/chip-select-none-chip';
+import './widgets/group/group.widget';
+import './widgets/group-date/group-date.widget';
 
 import './../node_modules/macro-carousel/dist/macro-carousel.min.js';

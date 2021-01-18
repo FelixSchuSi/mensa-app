@@ -157,5 +157,11 @@ export const german: LanguageStrings = {
   GROUPS_PAGE_HINT_02: 'Symbol um eine Gruppe zu erstellen oder klicke auf das',
   GROUPS_PAGE_HINT_03: 'Symbol um einer Gruppe beizutreten.',
   WHO_WHEN_WHERE: 'Wer, Wann, Wo?',
-  PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS: 'Plane Mensabesuche mit deinen Freunden!'
+  PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS: 'Plane Mensabesuche mit deinen Freunden!',
+  MEMBER: 'Mitglied',
+  MEMBERS: 'Mitglieder',
+  ATTENDING: 'Dabei',
+  ABSENT: 'Abwesend',
+  PARTICIPANT: 'Teilnehmer',
+  PARTICIPANTS: 'Teilnehmer'
 };

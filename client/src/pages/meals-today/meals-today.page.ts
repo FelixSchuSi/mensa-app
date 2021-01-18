@@ -128,7 +128,7 @@ class MealsTodayPage extends PageMixin(LitElement) {
       <ion-content class="ion-padding" fullscreen>
         <ion-header collapse="condense">
           <ion-toolbar>
-            <ion-title size="large">${this.i18n.MEALS_FUTURE}</ion-title>
+            <ion-title size="large">${this.i18n.MEALS_TODAY}</ion-title>
           </ion-toolbar>
           <ion-toolbar> ${this.searchBar} </ion-toolbar>
         </ion-header>

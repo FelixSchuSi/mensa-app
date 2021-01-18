@@ -157,5 +157,11 @@ export const english: LanguageStrings = {
   GROUPS_PAGE_HINT_02: 'symbol to create a group or click on the ',
   GROUPS_PAGE_HINT_03: 'symbol to join a group.',
   WHO_WHEN_WHERE: 'Who, When, Where?',
-  PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS: 'Plan mensa visits with your friends!'
+  PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS: 'Plan mensa visits with your friends!',
+  MEMBER: 'Member',
+  MEMBERS: 'Members',
+  ATTENDING: 'Attending',
+  ABSENT: 'Absent',
+  PARTICIPANT: 'Participant',
+  PARTICIPANTS: 'Participants'
 };
