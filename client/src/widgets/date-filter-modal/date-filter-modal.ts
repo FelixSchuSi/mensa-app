@@ -26,10 +26,12 @@ export class DateFilterModalWidget extends LitElement {
 
   protected firstUpdated(): void {}
 
-  protected dismissModal(): void {
+  protected dismissModal(applyDateFilter: boolean): void {
     const modal = <HTMLIonModalElement>this.parentElement?.parentElement!;
-    //@ts-ignore
-    this.dateFilterConfig = null;
+    if (!applyDateFilter) {
+      //@ts-ignore
+      this.dateFilterConfig = null;
+    }
     modal.dismiss();
   }
 
@@ -39,7 +41,7 @@ export class DateFilterModalWidget extends LitElement {
         <ion-toolbar>
           <ion-title>${this.i18n.FILTER_MEALS}</ion-title>
           <ion-buttons slot="end">
-            <ion-button @click="${this.dismissModal}">${this.i18n.CLOSE}</ion-button>
+            <ion-button @click="${() => this.dismissModal(false)}">${this.i18n.CLOSE}</ion-button>
           </ion-buttons>
         </ion-toolbar>
         <ion-toolbar>
@@ -59,7 +61,7 @@ export class DateFilterModalWidget extends LitElement {
           <ion-button
             style="float:right"
             @click=${() => {
-              this.dismissModal();
+              this.dismissModal(true);
             }}
             >${this.i18n.APPLY_FILTER}</ion-button
           >
