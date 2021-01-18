@@ -7,6 +7,7 @@ import { Image } from '../../../../server/src/models/image';
 import { mediaService, MediaService } from '../../services/media.service';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { Plugins, CameraResultType } from '@capacitor/core';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./create-group.page.scss');
 
@@ -70,6 +71,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
               id="image-file-input"
               @change=${(e: any): void => {
                 const file = e.target.files[0];
+                debugger;
                 mediaService.upload(file).then((res): void => {
                   const imageElement = <HTMLImageElement>this.querySelector('#group-image');
                   imageElement!.src = res.embed_url;
@@ -82,9 +84,25 @@ class CreateGroupPage extends PageMixin(LitElement) {
             />
             <ion-button
               id="upload-button"
-              @click=${(): void => {
+              @click=${async () => {
                 const input = <HTMLElement>this.querySelector('#image-file-input');
                 input.click();
+                //   const { Camera } = Plugins;
+                //   try {
+                //     const photo = await Camera.getPhoto({
+                //       quality: 90,
+                //       allowEditing: true,
+                //       resultType: CameraResultType.Uri
+                //     });
+                //     const image = <any>document.querySelector('#image');
+                //     debugger;
+                //     if (image) {
+                //       image.src = photo.webPath;
+                //     }
+                //     debugger;
+                //   } catch (e) {
+                //     console.warn('User cancelled', e);
+                //   }
               }}
               ><ion-icon style="color:black;height:100%;font-size:50px" name="cloud-upload-outline"></ion-icon
             ></ion-button>

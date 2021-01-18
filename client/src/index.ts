@@ -1,5 +1,9 @@
 import { defineCustomElements } from '@ionic/core/loader';
+import * as pwaElements from '@ionic/pwa-elements/loader';
+
 defineCustomElements(window);
+pwaElements.defineCustomElements(window);
+
 import './index.scss';
 
 import './pages/app.component';
