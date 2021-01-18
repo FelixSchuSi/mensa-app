@@ -1,3 +1,3 @@
 export function getToday(): Date {
-  return new Date(1605740400000);
+  return new Date(1606086000000);
 }

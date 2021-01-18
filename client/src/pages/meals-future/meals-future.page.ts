@@ -58,7 +58,21 @@ export class MealsFuturePage extends PageMixin(LitElement) {
   protected filter() {
     this.mealsBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
     this.mealsBeforeTextSearch = this.applyDateFilter();
+    this.mealsBeforeTextSearch = this.mealsBeforeTextSearch.sort(this.sort);
     return this.applyTextSearch();
+  }
+
+  protected sort(a: Meal, b: Meal) {
+    const aDate = new Date(a.date).getTime();
+    const bDate = new Date(b.date).getTime();
+
+    if (aDate === bDate) {
+      return 0;
+    } else if (aDate > bDate) {
+      return 1;
+    } else {
+      return -1;
+    }
   }
 
   protected applyTextSearch() {
