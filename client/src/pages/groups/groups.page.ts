@@ -28,23 +28,27 @@ class GroupsPage extends PageMixin(LitElement) {
   protected groups: Group[] = [];
 
   @internalProperty()
-  protected loaded = new Promise<void>(async (resolve, reject) => {
-    try {
-      groupService.subscribe((groups: Group[]) => {
-        this.groups = groups;
-      });
-      await sleep(500); // So the skeleton is seen
-      await groupService.loadGroups(true);
-      resolve();
-    } catch ({ message, statusCode }) {
-      if (statusCode === 401) {
-        // routerService.navigate(Routes.SIGN_IN);
-      } else {
-        this.setNotification({ errorMessage: message });
+  protected loaded!: Promise<void>;
+
+  protected loadGroups(): void {
+    this.loaded = new Promise<void>(async (resolve, reject) => {
+      try {
+        groupService.subscribe((groups: Group[]) => {
+          this.groups = groups;
+        });
+        await sleep(500); // So the skeleton is seen
+        await groupService.loadGroups(true);
+        resolve();
+      } catch ({ message, statusCode }) {
+        if (statusCode === 401) {
+          // routerService.navigate(Routes.SIGN_IN);
+        } else {
+          this.setNotification({ errorMessage: message });
+        }
+        resolve();
       }
-      resolve();
-    }
-  });
+    });
+  }
 
   protected groupService: GroupService = groupService;
 
@@ -65,7 +69,15 @@ class GroupsPage extends PageMixin(LitElement) {
 
     await modal.present();
   }
-  protected async firstUpdated(): Promise<void> {}
+
+  protected firstUpdated(): void {
+    this.loadGroups();
+    routerService.subscribe(route => {
+      if (route === Routes.GROUPS) {
+        this.loadGroups();
+      }
+    });
+  }
 
   protected render(): TemplateResult {
     return html` <ion-header style="background-color: var(--ion-background-color);">
