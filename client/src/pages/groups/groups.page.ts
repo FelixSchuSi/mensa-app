@@ -8,6 +8,7 @@ import { guard } from 'lit-html/directives/guard';
 import { modalController } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { LanguageKeys } from '../../i18n/language-keys';
 
 @customElement('app-groups')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -53,7 +54,12 @@ class GroupsPage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-title>${this.i18n.GROUPS}</ion-title>
           <ion-buttons slot="primary">
-            <ion-button @click=${(): void => routerService.navigate(Routes.GROUPS_CREATE)}>
+            <ion-button
+              @click=${(): void => {
+                if (!this.signInNeeded(this.i18n.SIGN_IN_NEEDED_TO_CREATE_GROUP)) return;
+                routerService.navigate(Routes.GROUPS_CREATE);
+              }}
+            >
               <ion-icon name="add"></ion-icon>
             </ion-button>
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
@@ -101,6 +107,7 @@ class GroupsPage extends PageMixin(LitElement) {
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button
             @click=${(): void => {
+              if (!this.signInNeeded(this.i18n.SIGN_IN_NEEDED_TO_JOIN_GROUP)) return;
               this.createModal();
             }}
           >
@@ -114,50 +121,59 @@ class GroupsPage extends PageMixin(LitElement) {
     return html`
       <ion-card class="card-no-margin-when-small">
         <ion-card-header>
-          ${this.userInfo
-            ? html`<img
-                style="margin-bottom:16px; max-height:300px; display: block;margin-left: auto;margin-right: auto;"
-                src="./svg/zsmessen.svg"
-              />`
-            : ''}
-          <ion-card-title>Plane Mensabesuche mit deinen Freunden!</ion-card-title>
+          <img
+            style="margin-bottom:16px; max-height:300px; display: block;margin-left: auto;margin-right: auto;"
+            src="./svg/zsmessen.svg"
+          />
+          <ion-card-subtitle style="text-transform: capitalize">${this.i18n.WHO_WHEN_WHERE}</ion-card-subtitle>
+          <ion-card-title>${this.i18n.PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS}</ion-card-title>
         </ion-card-header>
-        <ion-card-content style="font-size: 16px;">
-          Klicke auf das
-          <ion-icon color="primary" name="add"></ion-icon> Symbol um eine Gruppe zu erstellen oder klicke auf das
-          <ion-icon color="primary" name="enter-outline"></ion-icon> Symbol um einer Gruppe beizutreten.
-          <!-- ${!this.userInfo
-            ? html`
-                <br />
-                <ion-note style="font-size: 16px;" color="warning">
-                  Du muss dich anmelden um Gruppen erstellen und beitreten zu können!
-                </ion-note>
-              `
-            : ''} -->
-        </ion-card-content>
+        ${this.userInfo
+          ? html`
+              <ion-card-content style="font-size: 16px;">
+                ${this.i18n.GROUPS_PAGE_HINT_01}
+                <ion-icon color="primary" name="add"></ion-icon>
+                ${this.i18n.GROUPS_PAGE_HINT_02}
+                <ion-icon color="primary" name="enter-outline"></ion-icon>
+                ${this.i18n.GROUPS_PAGE_HINT_03}
+              </ion-card-content>
+            `
+          : ''}
         ${!this.userInfo
           ? html`
-              <!-- <ion-item-divider mode="ios">
-                <ion-label color="warning">
-                  Du muss dich anmelden um Gruppen erstellen und beitreten zu können!
-                </ion-label>
-              </ion-item-divider> -->
-              <ion-card style="--background: rgba(var(--ion-color-warning-rgb), .5); margin-top:0px; margin-bottom:0px">
-                <ion-card-content style="font-size: 16px;">
-                  Du muss dich anmelden um Gruppen erstellen und beitreten zu können!</ion-card-content
-                >
-              </ion-card>
-              <ion-item href=${Routes.SIGN_IN} .detail="${false}" style="--background: var(--ion-card-background)">
-                <ion-label>Jetzt anmelden</ion-label>
-                <ion-button fill="outline" slot="end">Anmelden</ion-button>
+              <ion-card-content style="font-size: 16px;">
+                ${this.i18n.SIGN_IN_NEEDED_TO_JOIN_AND_CREATE_GROUP}
+              </ion-card-content>
+              <ion-item
+                class="item-inside-card"
+                href=${Routes.SIGN_IN}
+                .detail="${false}"
+                style="--border-color: var();--background: var(--ion-card-background)"
+              >
+                <ion-label>${this.i18n.SIGN_IN_NOW}</ion-label>
+                <ion-button fill="outline" slot="end">${this.i18n.SIGN_IN}</ion-button>
               </ion-item>
-              <ion-item href=${Routes.SIGN_UP} .detail="${false}" style="--background: var(--ion-card-background)">
-                <ion-label>Jetzt registrieren</ion-label>
-                <ion-button fill="outline" slot="end">Registrieren</ion-button>
+              <ion-item
+                lines="none"
+                href=${Routes.SIGN_UP}
+                .detail="${false}"
+                style="--background: var(--ion-card-background)"
+              >
+                <ion-label>${this.i18n.SIGN_UP_NOW}</ion-label>
+                <ion-button fill="outline" slot="end">${this.i18n.SIGN_UP}</ion-button>
               </ion-item>
             `
           : ''}
       </ion-card>
     `;
+  }
+
+  protected signInNeeded(warningMessage: string): boolean {
+    if (!this.userInfo) {
+      this.setNotification({ warningMessage });
+      return false;
+    } else {
+      return true;
+    }
   }
 }

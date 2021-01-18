@@ -184,7 +184,7 @@ class MealDetailPage extends PageMixin(LitElement) {
           @click=${() => {
             this.isBookmark = !this.isBookmark;
             this.setNotification({
-              infoMessage: this.isBookmark ? this.i18n.BOOKMARKED_MEAL_MSG : this.i18n.UNBOOKMARKED_MEAL_MSG,
+              successMessage: this.isBookmark ? this.i18n.BOOKMARKED_MEAL_MSG : this.i18n.UNBOOKMARKED_MEAL_MSG,
               duration: 8000
             });
           }}

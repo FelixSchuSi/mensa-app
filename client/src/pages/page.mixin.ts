@@ -9,6 +9,10 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
   class Page extends base {
     @property()
     private errorMessage = '';
+    @property()
+    private infoMessage = '';
+    @property()
+    private successMessage = '';
 
     @internalProperty()
     protected i18n!: LanguageStrings;
@@ -18,9 +22,6 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
 
     @property({ type: Object })
     protected userInfo?: User;
-
-    @property()
-    private infoMessage = '';
 
     private onDestroyCallbacks: (() => void)[] = [];
 
@@ -46,11 +47,12 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       this.onDestroyCallbacks.push(callback);
     }
 
-    public setNotification({ errorMessage = '', infoMessage = '', duration = 3000 }): void {
-      if (errorMessage === '_ignoreMe' || infoMessage === '_ignoreMe') return;
+    public setNotification({ successMessage = '', errorMessage = '', warningMessage = '', duration = 3000 }): void {
+      if (errorMessage === '_ignoreMe' || warningMessage === '_ignoreMe' || successMessage === '_ignoreMe') return;
       this.errorMessage = errorMessage;
-      this.infoMessage = infoMessage;
-      if (errorMessage || infoMessage) {
+      this.infoMessage = warningMessage;
+      this.successMessage = successMessage;
+      if (errorMessage || warningMessage) {
         setTimeout(() => this.setNotification({}), duration);
         const toast = <HTMLIonToastElement>document.createElement('ion-toast');
         toast.duration = 3000;
@@ -63,8 +65,11 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
         if (errorMessage) {
           toast.message = errorMessage;
           toast.color = 'danger';
-        } else if (infoMessage) {
-          toast.message = infoMessage;
+        } else if (warningMessage) {
+          toast.message = warningMessage;
+          toast.color = 'warning';
+        } else if (successMessage) {
+          toast.message = successMessage;
           toast.color = 'success';
         }
 

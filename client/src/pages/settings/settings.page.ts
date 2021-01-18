@@ -144,7 +144,7 @@ class SignUpPage extends PageMixin(LitElement) {
   protected async logOut(): Promise<void> {
     try {
       await userService.logOut();
-      this.setNotification({ infoMessage: this.i18n.SIGN_OUT_MESSAGE + '!' });
+      this.setNotification({ successMessage: this.i18n.SIGN_OUT_MESSAGE + '!' });
     } catch ({ message }) {
       this.setNotification({ errorMessage: message });
     }

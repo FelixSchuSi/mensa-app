@@ -5,6 +5,8 @@ import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Image } from '../../../../server/src/models/image';
 import { mediaService, MediaService } from '../../services/media.service';
+import { routerService } from '../../services/router.service';
+import { Routes } from '../../routes';
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./create-group.page.scss');
 
@@ -28,6 +30,12 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected joinCode = '';
   protected uploadedImage: Image | undefined;
 
+  protected firstUpdated(): void {
+    if (!this.userInfo) {
+      routerService.navigate(Routes.GROUPS);
+      this.setNotification({ warningMessage: this.i18n.SIGN_IN_NEEDED_TO_CREATE_GROUP });
+    }
+  }
   protected render(): TemplateResult {
     return html`
       <ion-header>

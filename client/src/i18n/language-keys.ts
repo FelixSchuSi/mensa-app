@@ -63,8 +63,10 @@ export type LanguageKeys =
   // Strings in actual app
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'
+  | 'SIGN_UP_NOW'
   | 'GROUPS'
   | 'SIGN_IN'
+  | 'SIGN_IN_NOW'
   | 'SIGN_OUT'
   | 'E_MAIL'
   | 'PASSWORD'
@@ -144,4 +146,12 @@ export type LanguageKeys =
   | 'SELECT_START_DATE'
   | 'SELECT_END_DATE'
   | 'SIGN_UP_EXPLANATION'
-  | 'NONE';
+  | 'NONE'
+  | 'SIGN_IN_NEEDED_TO_CREATE_GROUP'
+  | 'SIGN_IN_NEEDED_TO_JOIN_GROUP'
+  | 'SIGN_IN_NEEDED_TO_JOIN_AND_CREATE_GROUP'
+  | 'GROUPS_PAGE_HINT_01'
+  | 'GROUPS_PAGE_HINT_02'
+  | 'GROUPS_PAGE_HINT_03'
+  | 'WHO_WHEN_WHERE'
+  | 'PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS';

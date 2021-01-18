@@ -198,3 +198,9 @@ app-meals-future app-meal:first-of-type ion-card {
   --padding-end: 0px;
   --inner-padding-end: 0px;
 }
+
+@media (prefers-color-scheme: dark) {
+  .item-inside-card {
+    --border-color: var(--ion-color-step-250);
+  }
+}

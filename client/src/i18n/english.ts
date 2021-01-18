@@ -66,8 +66,10 @@ export const english: LanguageStrings = {
   // Strings in actual app
   SWITCH_LANGUAGE: 'Change language',
   SIGN_UP: 'Sign up',
+  SIGN_UP_NOW: 'Sign up now',
   GROUPS: 'Groups',
   SIGN_IN: 'Sign in',
+  SIGN_IN_NOW: 'Sign in now',
   SIGN_OUT: 'Sign out',
   E_MAIL: 'E-Mail',
   PASSWORD: 'Password',
@@ -147,5 +149,13 @@ export const english: LanguageStrings = {
   SELECT_END_DATE: 'Select end date',
   SIGN_UP_EXPLANATION:
     'Are you a picky eater or have a sensible stomach? Provide information about your food preferences so that you only see meals that are interesting to you.',
-  NONE: 'None'
+  NONE: 'None',
+  SIGN_IN_NEEDED_TO_CREATE_GROUP: 'You need to be signed in to create a group!',
+  SIGN_IN_NEEDED_TO_JOIN_GROUP: 'You need to be signed in to join a group!',
+  SIGN_IN_NEEDED_TO_JOIN_AND_CREATE_GROUP: 'Sign in to create and join groups.',
+  GROUPS_PAGE_HINT_01: 'Click on the',
+  GROUPS_PAGE_HINT_02: 'symbol to create a group or click on the ',
+  GROUPS_PAGE_HINT_03: 'symbol to join a group.',
+  WHO_WHEN_WHERE: 'Who, When, Where?',
+  PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS: 'Plan mensa visits with your friends!'
 };

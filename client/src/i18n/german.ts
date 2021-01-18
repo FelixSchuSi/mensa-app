@@ -66,8 +66,10 @@ export const german: LanguageStrings = {
   // Strings in actual app
   SWITCH_LANGUAGE: 'Sprache wechseln',
   GROUPS: 'Gruppen',
-  SIGN_UP: 'Konto erstellen',
+  SIGN_UP: 'Registrieren',
+  SIGN_UP_NOW: 'Jetzt Registrieren',
   SIGN_IN: 'Anmelden',
+  SIGN_IN_NOW: 'Jetzt anmelden',
   SIGN_OUT: 'Abmelden',
   E_MAIL: 'E-Mail',
   PASSWORD: 'Passwort',
@@ -147,5 +149,13 @@ export const german: LanguageStrings = {
   SELECT_END_DATE: 'Enddatum auswählen',
   SIGN_UP_EXPLANATION:
     'Bist du beim Essen wählerisch oder hast einen sensiblen Magen? Hinterlege Informationen zu deinen Vorlieben damit dir Gerichte angezeigt werden, die für dich interessant sind.',
-  NONE: 'Keine'
+  NONE: 'Keine',
+  SIGN_IN_NEEDED_TO_CREATE_GROUP: 'Melde dich an um eine Gruppe zu erstellen!',
+  SIGN_IN_NEEDED_TO_JOIN_GROUP: 'Melde dich an um einer Gruppe beizutreten!',
+  SIGN_IN_NEEDED_TO_JOIN_AND_CREATE_GROUP: 'Melde dich an um Gruppen erstellen und beitreten zu können.',
+  GROUPS_PAGE_HINT_01: 'Klicke auf das',
+  GROUPS_PAGE_HINT_02: 'Symbol um eine Gruppe zu erstellen oder klicke auf das',
+  GROUPS_PAGE_HINT_03: 'Symbol um einer Gruppe beizutreten.',
+  WHO_WHEN_WHERE: 'Wer, Wann, Wo?',
+  PLAN_MENSA_VISITS_WITH_YOUR_FRIENDS: 'Plane Mensabesuche mit deinen Freunden!'
 };
