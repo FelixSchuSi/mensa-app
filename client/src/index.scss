@@ -29,7 +29,7 @@ body {
 }
 
 @media (min-width: 768px) {
-  @media not all and (orientation: landscape) {
+  @media not all and (pointer: coarse) {
     .full-size {
       width: 100vw;
       height: 100vh;
