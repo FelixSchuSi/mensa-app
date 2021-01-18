@@ -97,7 +97,7 @@ export const english: LanguageStrings = {
   LANGUAGE: 'Language',
   APPEARANCE: 'Appearance',
   BACK: 'Back',
-  MEALS_TODAY: 'Todays Meals',
+  MEALS_TODAY: "Today's Meals",
   MEALS_FUTURE: 'Meals',
   CREATE_GROUP: 'Create group',
   FILTER_MEALS: 'Filter meals',
