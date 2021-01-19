@@ -162,7 +162,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
       <ion-card class="card-no-margin-when-small">
         <div class="bg-image-wrapper" style="background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); height: 100px">
         </div>
-        <div id="add-group-pic" class="group-list-avatar circle-add-btn" 
+        <ion-avatar id="add-group-pic" class="group-list-avatar circle-add-btn" 
         @click=${(): void => {
           const input = <HTMLElement>this.querySelector('#image-file-input');
           input.click();
@@ -174,7 +174,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
                 <ion-icon style="width:50%; height:50%" slot="icon-only" color="primary" name="camera"></ion-icon>
               </ion-button>
             </ion-buttons>
-          </div>
+          </ion-avatar>
         <ion-card-header style="padding-top:0px">
           <ion-card-subtitle >
             New group
