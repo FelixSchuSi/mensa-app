@@ -2,8 +2,9 @@
   <script>
     const path = window.location.pathname;
     const search = window.location.search;
+    console.log(path + search);
     localStorage.setItem('path', path + search);
-    window.location.href = window.location.origin;
+    // window.location.href = window.location.origin;
     // + '/mensa-app/';
   </script>
 </html>
