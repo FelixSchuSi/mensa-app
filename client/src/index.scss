@@ -238,7 +238,9 @@ app-meals-future app-meal:first-of-type ion-card {
   display: inline-flex;
   flex-direction: column;
   margin: 8px;
+  margin-top: 0px;
   margin-left: 0px;
+  height: 100%;
   box-shadow: none;
   line-height: 20px;
   --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); // standard ion-chip value
@@ -267,4 +269,20 @@ app-meals-future app-meal:first-of-type ion-card {
   display: flex;
   align-items: stretch;
   // overflow-x: auto;
+}
+
+.add-date-btn {
+  height: 56px;
+  width: 56px;
+  background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12);
+  border-radius: 50%;
+  display: flex;
+  justify-content: space-around;
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(255 255 255 / 12%);
+  }
+}
+
+.termin-add-card {
+  background-color: rgb(255 255 255 / 0%);
 }

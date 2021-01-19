@@ -163,5 +163,7 @@ export const german: LanguageStrings = {
   ATTENDING: 'Dabei',
   ABSENT: 'Abwesend',
   PARTICIPANT: 'Teilnehmer',
-  PARTICIPANTS: 'Teilnehmer'
+  PARTICIPANTS: 'Teilnehmer',
+  MENSA_VISIT: 'Termin',
+  CREATE_MENSA_VISIT: 'Termin hinzufügen'
 };

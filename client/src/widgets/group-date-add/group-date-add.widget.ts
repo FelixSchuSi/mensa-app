@@ -12,12 +12,26 @@ export class GroupDateAddWidget extends LitElement {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
+  constructor() {
+    super();
+    this.i18n = i18nService.getStrings();
+    i18nService.subscribe(i18n => (this.i18n = i18n));
+  }
+
   protected render(): TemplateResult {
     return html`
-      <ion-card class="termin-card">
-        <ion-card-content style="display: flex; flex-direction:column; ">
-          <!-- <h1 style="color: var(--ion-text-color)">ADD</h1> -->
-          <div>Termin hinzufügen</div>
+      <ion-card style="align-self:stretch" class="termin-card termin-add-card">
+        <ion-card-content style="height:100%; display: flex; flex-direction:column; align-items: center; ">
+          <div style="flex-grow:1; "></div>
+          <div class="add-date-btn" @click=${() => console.log('TODO: create functionality to create mensa visits')}>
+            <ion-buttons>
+              <ion-button>
+                <ion-icon slot="icon-only" color="primary" name="add-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>
+          <div style="margin-top: 8px">${this.i18n.CREATE_MENSA_VISIT}</div>
+          <div style="flex-grow:1; "></div>
         </ion-card-content>
       </ion-card>
     `;

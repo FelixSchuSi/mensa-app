@@ -160,4 +160,6 @@ export type LanguageKeys =
   | 'ATTENDING'
   | 'ABSENT'
   | 'PARTICIPANT'
-  | 'PARTICIPANTS';
+  | 'PARTICIPANTS'
+  | 'MENSA_VISIT'
+  | 'CREATE_MENSA_VISIT';

@@ -163,5 +163,7 @@ export const english: LanguageStrings = {
   ATTENDING: 'Attending',
   ABSENT: 'Absent',
   PARTICIPANT: 'Participant',
-  PARTICIPANTS: 'Participants'
+  PARTICIPANTS: 'Participants',
+  MENSA_VISIT: 'Mensa visit',
+  CREATE_MENSA_VISIT: 'Add mensa visit'
 };
