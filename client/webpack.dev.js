@@ -10,12 +10,12 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: {
-      rewrites: [{ from: /^\/[a-z]*/, to: '/mensa-app/index.html' }]
+      rewrites: [{ from: /^\/[a-z]*/, to: '/index.html' }]
     },
     host: '0.0.0.0',
     port: 8080,
-    public: '0.0.0.0:8080',
-    publicPath: '/mensa-app/'
+    public: '0.0.0.0:8080'
+    // publicPath: '/mensa-app/'
   },
   resolve: { extensions: ['.ts', '.js'] },
   module: {
@@ -43,7 +43,7 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{ loader: 'file-loader', options: { outputPath: 'fonts/', publicPath: '/mensa-app/fonts' } }]
+        use: [{ loader: 'file-loader', options: { outputPath: 'fonts/', publicPath: '/fonts' } }]
       }
     ]
   },
