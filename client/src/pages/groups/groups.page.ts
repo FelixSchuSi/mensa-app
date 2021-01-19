@@ -20,6 +20,7 @@ import { Routes } from '../../routes';
 import { LanguageKeys } from '../../i18n/language-keys';
 import { until } from 'lit-html/directives/until';
 import { sleep } from '../../helpers/sleep';
+import { userService } from '../../services/user.service';
 
 @customElement('app-groups')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,6 +30,15 @@ class GroupsPage extends PageMixin(LitElement) {
 
   @internalProperty()
   protected loaded!: Promise<void>;
+
+  protected groupService: GroupService = groupService;
+
+  @property({ type: Object, attribute: false })
+  protected i18n!: LanguageStrings;
+
+  protected joinCallback = (code: string): void => {
+    console.log(code);
+  };
 
   protected loadGroups(): void {
     this.loaded = new Promise<void>(async (resolve, reject) => {
@@ -50,14 +60,6 @@ class GroupsPage extends PageMixin(LitElement) {
     });
   }
 
-  protected groupService: GroupService = groupService;
-
-  @property({ type: Object, attribute: false })
-  protected i18n!: LanguageStrings;
-
-  protected joinCallback = (code: string): void => {
-    console.log(code);
-  };
   protected async createModal(): Promise<void> {
     const modal: HTMLIonModalElement = await modalController.create({
       component: 'app-group-join-modal',
@@ -75,6 +77,11 @@ class GroupsPage extends PageMixin(LitElement) {
     routerService.subscribe(route => {
       if (route === Routes.GROUPS) {
         this.loadGroups();
+      }
+    });
+    userService.subscribe(userInfo => {
+      if (!userInfo) {
+        this.groups = [];
       }
     });
   }
@@ -105,17 +112,7 @@ class GroupsPage extends PageMixin(LitElement) {
           </ion-toolbar>
         </ion-header>
 
-        ${until(this.getHintTemplate(), this.skeleton)}
-        ${this.groups.map(group => {
-          return html`
-            <app-group
-              @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
-              .group=${group}
-              style="cursor: pointer"
-            >
-            </app-group>
-          `;
-        })}
+        ${until(this.getContentTemplate(), this.skeleton)}
 
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button
@@ -130,9 +127,27 @@ class GroupsPage extends PageMixin(LitElement) {
       </ion-content>`;
   }
 
-  protected async getHintTemplate(): Promise<TemplateResult> {
+  protected async getContentTemplate(): Promise<TemplateResult> {
     await this.loaded;
-    if (this.groups.length !== 0 && this.userInfo) return html``;
+    return html` ${this.groups.length === 0 || !this.userInfo ? this.hintTemplate : ''} ${this.groupListTemplate} `;
+  }
+
+  protected get groupListTemplate(): TemplateResult {
+    return html`
+      ${this.groups.map(group => {
+        return html`
+          <app-group
+            @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
+            .group=${group}
+            style="cursor: pointer"
+          >
+          </app-group>
+        `;
+      })}
+    `;
+  }
+
+  protected get hintTemplate(): TemplateResult {
     return html`
       <ion-card class="card-no-margin-when-small">
         <ion-card-header>
