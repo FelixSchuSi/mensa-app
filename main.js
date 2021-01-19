@@ -687,7 +687,8 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
- */var uo=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},ho=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{l(n.next(t))}catch(t){r(t)}}function a(t){try{l(n.throw(t))}catch(t){r(t)}}function l(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}l((n=n.apply(t,e||[])).next())}))};let po=class extends(ee(ft)){constructor(){super(...arguments),this.groups=[],this.groupService=ao,this.joinCallback=t=>{console.log(t)}}loadGroups(){this.loaded=new Promise((t,e)=>ho(this,void 0,void 0,(function*(){try{ao.subscribe(t=>{this.groups=t}),yield jt(500),yield ao.loadGroups(!0),t()}catch({message:e,statusCode:o}){401===o||this.setNotification({errorMessage:e}),t()}})))}createModal(){return ho(this,void 0,void 0,(function*(){const t=yield We.k.create({component:"app-group-join-modal",swipeToClose:!0,componentProps:{groups:this.groups}});yield t.present()}))}firstUpdated(){this.loadGroups(),mt.subscribe(t=>{t===gt.GROUPS&&this.loadGroups()}),Zt.subscribe(t=>{t||(this.groups=[])})}render(){return z` <ion-header style="background-color: var(--ion-background-color);">
+ */var uo=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},ho=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{l(n.next(t))}catch(t){r(t)}}function a(t){try{l(n.throw(t))}catch(t){r(t)}}function l(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}l((n=n.apply(t,e||[])).next())}))};let po=class extends(ee(ft)){constructor(){super(...arguments),this.groups=[],this.groupService=ao,this.joinCallback=t=>{console.log(t)}}loadGroups(){this.loaded=new Promise((t,e)=>ho(this,void 0,void 0,(function*(){try{ao.subscribe(t=>{this.groups=t}),yield jt(500),yield ao.loadGroups(!0),t()}catch({message:e,statusCode:o}){401===o||this.setNotification({errorMessage:e}),t()}})))}createModal(){return ho(this,void 0,void 0,(function*(){const t=yield We.k.create({component:"app-group-join-modal",swipeToClose:!0,componentProps:{groups:this.groups}});yield t.present()}))}firstUpdated(){this.loadGroups(),mt.subscribe(t=>{t===gt.GROUPS&&this.loadGroups()}),Zt.subscribe(t=>{t||(this.groups=[])})}render(){return z`
+      <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-title>${this.i18n.GROUPS}</ion-title>
           <ion-buttons slot="primary">
@@ -718,7 +719,8 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
             <ion-icon name="enter-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab>
-      </ion-content>`}getContentTemplate(){return ho(this,void 0,void 0,(function*(){return yield this.loaded,z` ${0!==this.groups.length&&this.userInfo?"":this.hintTemplate} ${this.groupListTemplate} `}))}get groupListTemplate(){return z`
+      </ion-content>
+    `}getContentTemplate(){return ho(this,void 0,void 0,(function*(){return yield this.loaded,z` ${0!==this.groups.length&&this.userInfo?"":this.hintTemplate} ${this.groupListTemplate} `}))}get groupListTemplate(){return z`
       ${this.groups.map(t=>z`
           <app-group
             @click=${()=>mt.navigate(gt.GROUPS_DETAILS,{id:t.id})}
@@ -796,7 +798,7 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
         </ion-card-content>
       </ion-card>
     `}};uo([ot({type:Array})],po.prototype,"groups",void 0),uo([nt()],po.prototype,"loaded",void 0),uo([ot({type:Object,attribute:!1})],po.prototype,"i18n",void 0),po=uo([tt("app-groups")],po);var fo=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{l(n.next(t))}catch(t){r(t)}}function a(t){try{l(n.throw(t))}catch(t){r(t)}}function l(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}l((n=n.apply(t,e||[])).next())}))};const mo=new class{upload(t){return fo(this,void 0,void 0,(function*(){const e=new FormData;e.append("file",t);return(yield fetch(Dt.getBaseURL()+"media/media",{credentials:"include",method:"POST",body:e})).json()}))}};var go=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},bo=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{l(n.next(t))}catch(t){r(t)}}function a(t){try{l(n.throw(t))}catch(t){r(t)}}function l(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}l((n=n.apply(t,e||[])).next())}))};const vo=o(5),yo=o(33);let wo=class extends(ee(ft)){constructor(){super(...arguments),this.mediaService=mo,this.groupService=ao,this.joinCode="",this.imagesrc=null}firstUpdated(){this.userInfo||(mt.navigate(gt.GROUPS),this.setNotification({warningMessage:this.i18n.SIGN_IN_NEEDED_TO_CREATE_GROUP}))}render(){return z`
-      <ion-header>
+      <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
@@ -854,18 +856,19 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
           type="file"
           name="file"
           id="image-file-input"
-          @change=${t=>{const e=t.target.files[0];mo.upload(e).then(t=>{const e=this.querySelector("#group-image");e.src=t.embed_url,e.style.display="block";this.querySelector("#upload-button").style.display="none",this.uploadedImage={url:t.embed_url,id:t.metadata.id}})}}
+          @change=${t=>{const e=t.target.files[0];mo.upload(e).then(t=>{this.imagesrc=t.embed_url;this.querySelector("#upload-button").style.display="none",this.uploadedImage={url:t.embed_url,id:t.metadata.id}})}}
         />
         ${this.cardTemplate}
       </ion-content>
     `}get cardTemplate(){return z`
       <ion-card class="card-no-margin-when-small">
         <div class="bg-image-wrapper" style="background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); height: 100px">
+        ${this.imagesrc?z`<img class="bg-image" src=${this.imagesrc||""} />`:""}
         </div>
         <ion-avatar id="add-group-pic" class="group-list-avatar circle-add-btn" 
         @click=${()=>{this.querySelector("#image-file-input").click()}}
         >
-        <img id="group-image" src="" style="display:none;" />
+        <img id="group-image" src="${this.imagesrc||""}" style="${this.imagesrc?"":"display:none"}" />
             <ion-buttons id="upload-button" style="width:100%; height:100%">
               <ion-button style="width:100%; height:100%">
                 <ion-icon style="width:50%; height:50%" slot="icon-only" color="primary" name="camera"></ion-icon>
