@@ -297,3 +297,21 @@ app-meals-future app-meal:first-of-type ion-card {
 .termin-add-card {
   background-color: rgb(255 255 255 / 0%);
 }
+
+.create-group-modal {
+  // --width: 80% !important;
+  --width: 100% !important;
+  --min-width: 200px !important;
+  --border-radius: 10px !important;
+
+  --height: auto !important;
+  // overflow: overlay;
+  --min-height: auto !important;
+  // position: static !important;
+  padding: 16px !important;
+}
+
+app-group-create-modal {
+  position: static !important;
+  display: inline !important;
+}

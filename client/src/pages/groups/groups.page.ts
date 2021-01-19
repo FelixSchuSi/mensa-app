@@ -60,13 +60,23 @@ class GroupsPage extends PageMixin(LitElement) {
     });
   }
 
-  protected async createModal(): Promise<void> {
+  protected async createJoinModal(): Promise<void> {
     const modal: HTMLIonModalElement = await modalController.create({
       component: 'app-group-join-modal',
       swipeToClose: true,
       componentProps: {
         groups: this.groups
       }
+    });
+
+    await modal.present();
+  }
+
+  protected async createCreateModal(): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-group-create-modal',
+      swipeToClose: true,
+      cssClass: 'create-group-modal'
     });
 
     await modal.present();
@@ -95,7 +105,8 @@ class GroupsPage extends PageMixin(LitElement) {
             <ion-button
               @click=${(): void => {
                 if (!this.signInNeeded(this.i18n.SIGN_IN_NEEDED_TO_CREATE_GROUP)) return;
-                routerService.navigate(Routes.GROUPS_CREATE);
+                // routerService.navigate(Routes.GROUPS_CREATE);
+                this.createCreateModal();
               }}
             >
               <ion-icon name="add"></ion-icon>
@@ -106,7 +117,7 @@ class GroupsPage extends PageMixin(LitElement) {
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding" fullscreen>
+      <ion-content class="ion-padding">
         <ion-header collapse="condense">
           <ion-toolbar>
             <ion-title size="large">${this.i18n.GROUPS}</ion-title>
@@ -119,7 +130,7 @@ class GroupsPage extends PageMixin(LitElement) {
           <ion-fab-button
             @click=${(): void => {
               if (!this.signInNeeded(this.i18n.SIGN_IN_NEEDED_TO_JOIN_GROUP)) return;
-              this.createModal();
+              this.createJoinModal();
             }}
           >
             <ion-icon name="enter-outline"></ion-icon>
