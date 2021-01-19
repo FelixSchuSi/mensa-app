@@ -7,7 +7,7 @@ import { LanguageStrings } from '../models/language-strings';
 // If other forms use the same HTML-Structure this function can be reused.
 export async function formChanged(event: CustomEvent<InputChangeEventDetail>, i18n: LanguageStrings): Promise<void> {
   // @ts-ignore
-  const ionicInputElement: HTMLIonInputElement = event.originalTarget ?? event.path[0];
+  const ionicInputElement: HTMLIonInputElement = event.target ?? (event.path || event.composedPath())[0];
   const htmlInputElement: HTMLInputElement = await ionicInputElement.getInputElement();
   const errorElement: any = ionicInputElement.parentNode!.parentNode!.querySelector('.error');
   const ionicLabelElement: any = ionicInputElement.parentNode!.querySelector('ion-label');
