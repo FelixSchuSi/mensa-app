@@ -41,7 +41,7 @@ export class GroupDateWidget extends LitElement {
   }
   protected render(): TemplateResult {
     return html`
-      <ion-card style="display:inline-flex; flex-direction:column" class="termin-card">
+      <ion-card class="termin-card">
         <div style="display:flex; align-items:flex-end; padding-top: 8px; padding-right: 8px; padding-left:20px">
           <ion-card-subtitle style="margin-bottom:0px">
             ${this.numberOfParticipants}

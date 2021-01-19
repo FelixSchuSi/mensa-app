@@ -31,5 +31,6 @@ import './widgets/date-filter-modal/date-filter-modal';
 import './widgets/chip-select-none-chip/chip-select-none-chip';
 import './widgets/group/group.widget';
 import './widgets/group-date/group-date.widget';
+import './widgets/group-date-add/group-date-add.widget';
 
 import './../node_modules/macro-carousel/dist/macro-carousel.min.js';

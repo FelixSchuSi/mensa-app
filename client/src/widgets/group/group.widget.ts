@@ -48,7 +48,8 @@ export class GroupWidget extends LitElement {
         <ion-card-content style="display:flex">
           <div @click=${(e: any) => e.stopPropagation()} class="horizontal-scroll-outer-container">
             <div @mousedown=${this.onMouseDown} class="horizontal-scroll-inner-container">
-              ${[0, 1, 2, 3, 4, 5].map(e => html`<app-group-date></app-group-date>`)}
+              ${[0, 1, 2].map(e => html`<app-group-date></app-group-date>`)}
+              <app-group-date-add style="align-self: strech"></app-group-date-add>
             </div>
           </div>
         </ion-card-content>
