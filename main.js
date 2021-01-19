@@ -862,7 +862,7 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
       <ion-card class="card-no-margin-when-small">
         <div class="bg-image-wrapper" style="background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); height: 100px">
         </div>
-        <div id="add-group-pic" class="group-list-avatar circle-add-btn" 
+        <ion-avatar id="add-group-pic" class="group-list-avatar circle-add-btn" 
         @click=${()=>{this.querySelector("#image-file-input").click()}}
         >
         <img id="group-image" src="" style="display:none;" />
@@ -871,7 +871,7 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
                 <ion-icon style="width:50%; height:50%" slot="icon-only" color="primary" name="camera"></ion-icon>
               </ion-button>
             </ion-buttons>
-          </div>
+          </ion-avatar>
         <ion-card-header style="padding-top:0px">
           <ion-card-subtitle >
             New group
