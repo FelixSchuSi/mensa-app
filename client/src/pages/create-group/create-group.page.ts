@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import {
+  css,
+  customElement,
+  html,
+  internalProperty,
+  LitElement,
+  property,
+  TemplateResult,
+  unsafeCSS
+} from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
@@ -30,12 +39,16 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected joinCode = '';
   protected uploadedImage: Image | undefined;
 
+  @internalProperty()
+  protected imagesrc: string | null = null;
+
   protected firstUpdated(): void {
     if (!this.userInfo) {
       routerService.navigate(Routes.GROUPS);
       this.setNotification({ warningMessage: this.i18n.SIGN_IN_NEEDED_TO_CREATE_GROUP });
     }
   }
+
   protected render(): TemplateResult {
     return html`
       <ion-header>
@@ -58,7 +71,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.CREATE_GROUP}</ion-title>
           </ion-toolbar>
         </ion-header>
-        <div class="horizontal-center" style="margin-top:1em;flex-direction:column">
+        <!-- <div class="horizontal-center" style="margin-top:1em;flex-direction:column">
           <div
             style="height:200px;width:200px;background-color:lightgrey;display:flex;justify-content:flex-end;flex-direction:column"
           >
@@ -69,23 +82,23 @@ class CreateGroupPage extends PageMixin(LitElement) {
               name="file"
               id="image-file-input"
               @change=${(e: any): void => {
-                const file = e.target.files[0];
-                mediaService.upload(file).then((res): void => {
-                  const imageElement = <HTMLImageElement>this.querySelector('#group-image');
-                  imageElement!.src = res.embed_url;
-                  imageElement.style.display = 'block';
-                  const button = <HTMLElement>this.querySelector('#upload-button');
-                  button.style.display = 'none';
-                  this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
-                });
-              }}
+          const file = e.target.files[0];
+          mediaService.upload(file).then((res): void => {
+            const imageElement = <HTMLImageElement>this.querySelector('#group-image');
+            imageElement!.src = res.embed_url;
+            imageElement.style.display = 'block';
+            const button = <HTMLElement>this.querySelector('#upload-button');
+            button.style.display = 'none';
+            this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
+          });
+        }}
             />
             <ion-button
               id="upload-button"
               @click=${(): void => {
-                const input = <HTMLElement>this.querySelector('#image-file-input');
-                input.click();
-              }}
+          const input = <HTMLElement>this.querySelector('#image-file-input');
+          input.click();
+        }}
               ><ion-icon style="color:black;height:100%;font-size:50px" name="cloud-upload-outline"></ion-icon
             ></ion-button>
           </div>
@@ -93,6 +106,82 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <ion-label>Name</ion-label>
             <ion-input
               style="width:250px"
+              @change=${(e: Event): void => {
+          const target = e.target as HTMLTextAreaElement;
+          this.groupName = target.value;
+        }}
+              placeholder="Name der Gruppe"
+              type="text"
+              required
+            >
+            </ion-input>
+          </ion-item>
+          <ion-button
+            color="primary"
+            @click=${(): void => {
+          this.groupService
+            .createGroup(this.groupName!, this.uploadedImage)
+            .then(json => {
+              console.log(json);
+              this.joinCode = json.joinCode;
+              groupService.addMembership(json.id);
+              this.requestUpdate();
+            })
+            .catch(err => {
+              console.error(err);
+            });
+        }}
+            >Erstellen</ion-button
+          >
+          <span>${this.joinCode}</span>
+        </div> -->
+        <input
+          style="display:none"
+          type="file"
+          name="file"
+          id="image-file-input"
+          @change=${(e: any): void => {
+            const file = e.target.files[0];
+            mediaService.upload(file).then((res): void => {
+              const imageElement = <HTMLImageElement>this.querySelector('#group-image');
+              imageElement!.src = res.embed_url;
+              imageElement.style.display = 'block';
+              const button = <HTMLElement>this.querySelector('#upload-button');
+              button.style.display = 'none';
+              this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
+            });
+          }}
+        />
+        ${this.cardTemplate}
+      </ion-content>
+    `;
+  }
+
+  protected get cardTemplate(): TemplateResult {
+    return html`
+      <ion-card class="card-no-margin-when-small">
+        <div class="bg-image-wrapper" style="background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); height: 100px">
+        </div>
+        <div id="add-group-pic" class="group-list-avatar circle-add-btn" 
+        @click=${(): void => {
+          const input = <HTMLElement>this.querySelector('#image-file-input');
+          input.click();
+        }}
+        >
+        <img id="group-image" src="" style="display:none;" />
+            <ion-buttons id="upload-button" style="width:100%; height:100%">
+              <ion-button style="width:100%; height:100%">
+                <ion-icon style="width:50%; height:50%" slot="icon-only" color="primary" name="camera"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>
+        <ion-card-header style="padding-top:0px">
+          <ion-card-subtitle >
+            New group
+          </ion-card-subtitle>
+          <ion-card-title style="display:flex"> 
+            <ion-input autofocus
+            style="border-bottom: 1px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);"
               @change=${(e: Event): void => {
                 const target = e.target as HTMLTextAreaElement;
                 this.groupName = target.value;
@@ -102,9 +191,8 @@ class CreateGroupPage extends PageMixin(LitElement) {
               required
             >
             </ion-input>
-          </ion-item>
-          <ion-button
-            color="primary"
+            <!-- <ion-button>Erstellen</ion-button> -->
+            <div style="background-color: var(--ion-color-primary)" class="circle-add-btn"
             @click=${(): void => {
               this.groupService
                 .createGroup(this.groupName!, this.uploadedImage)
@@ -118,11 +206,17 @@ class CreateGroupPage extends PageMixin(LitElement) {
                   console.error(err);
                 });
             }}
-            >Erstellen</ion-button
-          >
-          <span>${this.joinCode}</span>
-        </div>
-      </ion-content>
+              >
+            <ion-buttons>
+              <ion-button>
+                <ion-icon slot="icon-only" style="color:white" name="send"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>
+          </ion-item>
+        </ion-card-title>
+        </ion-card-header>
+            </ion-card>
     `;
   }
 }

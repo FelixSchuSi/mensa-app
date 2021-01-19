@@ -271,7 +271,7 @@ app-meals-future app-meal:first-of-type ion-card {
   // overflow-x: auto;
 }
 
-.add-date-btn {
+.circle-add-btn {
   height: 56px;
   width: 56px;
   background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12);
@@ -281,6 +281,14 @@ app-meals-future app-meal:first-of-type ion-card {
   @media (prefers-color-scheme: dark) {
     background-color: rgb(255 255 255 / 12%);
   }
+}
+
+#add-group-pic {
+  height: 100px;
+  width: 100px;
+  background-color: var(--ion-color-step-250);
+  filter: drop-shadow(0px 0px 8px black);
+  border: solid 3px rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.8);
 }
 
 .termin-add-card {
