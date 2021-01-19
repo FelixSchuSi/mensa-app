@@ -35,7 +35,7 @@ module.exports = {
   },
   plugins: [
     // new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }),
-    new HtmlWebpackPlugin({ template: './src/index.html', base: '/' }),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
     new CopyPlugin({
       patterns: [
         {
