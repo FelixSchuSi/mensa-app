@@ -216,7 +216,7 @@ app-meals-future app-meal:first-of-type ion-card {
 .bg-image {
   filter: blur(4px);
   transform: scale(1.5);
-  max-height: 100px;
+  height: 100px;
   width: 100%;
   /* Center and scale the image nicely */
   background-position: center;

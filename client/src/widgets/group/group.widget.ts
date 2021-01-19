@@ -33,10 +33,16 @@ export class GroupWidget extends LitElement {
     return html`
       <ion-card class="card-no-margin-when-small">
         <div class="bg-image-wrapper">
-          <img class="bg-image" src=${this.group.image?.url || ''} />
+          <img class="bg-image" src=${this.group.image?.url || '/images/default_group_background.png'} />
         </div>
-        <ion-avatar class="group-list-avatar">
-          <img src=${this.group.image?.url || ''} />
+        <ion-avatar class="group-list-avatar" style="background-color:white">
+          ${this.group.image?.url
+            ? html`<img src=${this.group.image?.url || ''} />`
+            : html`<ion-icon
+                style="width:100%;height:100%;transform: scale(1.23);"
+                color="primary"
+                name="people-circle-outline"
+              ></ion-icon>`}
         </ion-avatar>
         <ion-card-header style="padding-top:0px">
           ${this.buttonsTemplate}
