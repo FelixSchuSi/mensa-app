@@ -87,7 +87,8 @@ class GroupsPage extends PageMixin(LitElement) {
   }
 
   protected render(): TemplateResult {
-    return html` <ion-header style="background-color: var(--ion-background-color);">
+    return html`
+      <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-title>${this.i18n.GROUPS}</ion-title>
           <ion-buttons slot="primary">
@@ -124,7 +125,8 @@ class GroupsPage extends PageMixin(LitElement) {
             <ion-icon name="enter-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab>
-      </ion-content>`;
+      </ion-content>
+    `;
   }
 
   protected async getContentTemplate(): Promise<TemplateResult> {

@@ -51,7 +51,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <ion-header>
+      <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
@@ -143,9 +143,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
           @change=${(e: any): void => {
             const file = e.target.files[0];
             mediaService.upload(file).then((res): void => {
-              const imageElement = <HTMLImageElement>this.querySelector('#group-image');
-              imageElement!.src = res.embed_url;
-              imageElement.style.display = 'block';
+              this.imagesrc = res.embed_url;
               const button = <HTMLElement>this.querySelector('#upload-button');
               button.style.display = 'none';
               this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
@@ -161,6 +159,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
     return html`
       <ion-card class="card-no-margin-when-small">
         <div class="bg-image-wrapper" style="background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); height: 100px">
+        ${this.imagesrc ? html`<img class="bg-image" src=${this.imagesrc || ''} />`:''}
         </div>
         <ion-avatar id="add-group-pic" class="group-list-avatar circle-add-btn" 
         @click=${(): void => {
@@ -168,7 +167,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
           input.click();
         }}
         >
-        <img id="group-image" src="" style="display:none;" />
+        <img id="group-image" src="${this.imagesrc || ''}" style="${this.imagesrc ? '' : 'display:none'}" />
             <ion-buttons id="upload-button" style="width:100%; height:100%">
               <ion-button style="width:100%; height:100%">
                 <ion-icon style="width:50%; height:50%" slot="icon-only" color="primary" name="camera"></ion-icon>
