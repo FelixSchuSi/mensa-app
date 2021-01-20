@@ -78,8 +78,13 @@ class CreateGroupPage extends PageMixin(LitElement) {
           </ion-card-header>
           <ion-card-content style="display:flex">
             <app-horizontal-scroller>
-              ${[0, 1, 2, 3, 4].map(e => html`<app-group-date></app-group-date>`)}
-              <app-group-date-add></app-group-date-add>
+              ${this.members?.map(
+                member =>
+                  html`<ion-chip
+                    ><ion-avatar><img src="./svg/avatar.svg" /></ion-avatar
+                    ><ion-label>${member.name}</ion-label></ion-chip
+                  >`
+              )}
             </app-horizontal-scroller>
           </ion-card-content>
         </ion-card>
