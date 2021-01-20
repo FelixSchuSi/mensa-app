@@ -18,12 +18,6 @@ class CreateGroupPage extends PageMixin(LitElement) {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
-  protected scrollPos: any;
-  protected isDragging: boolean = false;
-
-  @query('.horizontal-scroll-inner-container')
-  protected innerScrollContainer!: HTMLDivElement;
-
   protected async firstUpdated(): Promise<void> {
     this.groupService.getGroup(this.groupID).then(res => {
       this.group = res;
@@ -82,37 +76,16 @@ class CreateGroupPage extends PageMixin(LitElement) {
             </ion-card-subtitle>
             <ion-card-title style="display:flex"> ${this.group?.name} </ion-card-title>
           </ion-card-header>
+          <ion-card-content style="display:flex">
+            <app-horizontal-scroller>
+              ${[0, 1, 2, 3, 4].map(e => html`<app-group-date></app-group-date>`)}
+              <app-group-date-add></app-group-date-add>
+            </app-horizontal-scroller>
+          </ion-card-content>
         </ion-card>
       </ion-content>
     `;
   }
-
-  protected onMouseDown = (e: any) => {
-    this.isDragging = true;
-    this.scrollPos = {
-      // The current scroll
-      left: this.innerScrollContainer.scrollLeft,
-      // Get the current mouse position
-      x: e.clientX
-    };
-    this.innerScrollContainer.style.userSelect = 'none';
-    document.addEventListener('mousemove', this.onMouseMove);
-    document.addEventListener('mouseup', this.onMouseUp);
-  };
-
-  protected onMouseMove = (e: any) => {
-    // How far the mouse has been moved
-    const dx = e.clientX - this.scrollPos.x;
-    // Scroll the element
-    this.innerScrollContainer.scrollLeft = this.scrollPos.left - dx;
-  };
-
-  protected onMouseUp = (e: any) => {
-    this.innerScrollContainer.style.removeProperty('user-select');
-    this.isDragging = false;
-    document.removeEventListener('mousemove', this.onMouseMove);
-    document.removeEventListener('mouseup', this.onMouseUp);
-  };
 
   protected get buttonsTemplate(): TemplateResult {
     return html`
