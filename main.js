@@ -797,7 +797,7 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
           </div>
         </ion-card-content>
       </ion-card>
-    `}};uo([ot({type:Array})],po.prototype,"groups",void 0),uo([nt()],po.prototype,"loaded",void 0),uo([ot({type:Object,attribute:!1})],po.prototype,"i18n",void 0),po=uo([tt("app-groups")],po);var fo=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},mo=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{l(n.next(t))}catch(t){r(t)}}function a(t){try{l(n.throw(t))}catch(t){r(t)}}function l(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}l((n=n.apply(t,e||[])).next())}))};let go=class extends(ee(ft)){constructor(){super(...arguments),this.groupService=ao,this.groupID=mt.getQueryParameter("id"),this.formatDate=t=>new Date(t).toLocaleString("de-DE")}firstUpdated(){return mo(this,void 0,void 0,(function*(){this.groupService.getGroup(this.groupID).then(t=>{this.group=t}),this.groupService.getGroupMembers(this.groupID).then(t=>{this.members=t})}))}render(){var t,e,o,n,i,r,s,a,l;return z`
+    `}};uo([ot({type:Array})],po.prototype,"groups",void 0),uo([nt()],po.prototype,"loaded",void 0),uo([ot({type:Object,attribute:!1})],po.prototype,"i18n",void 0),po=uo([tt("app-groups")],po);var fo=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},mo=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{l(n.next(t))}catch(t){r(t)}}function a(t){try{l(n.throw(t))}catch(t){r(t)}}function l(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}l((n=n.apply(t,e||[])).next())}))};let go=class extends(ee(ft)){constructor(){super(...arguments),this.groupService=ao,this.groupID=mt.getQueryParameter("id"),this.formatDate=t=>new Date(t).toLocaleString("de-DE")}firstUpdated(){return mo(this,void 0,void 0,(function*(){this.groupService.getGroup(this.groupID).then(t=>{this.group=t}),this.groupService.getGroupMembers(this.groupID).then(t=>{this.members=t})}))}render(){var t,e,o,n,i,r,s,a,l,c;return z`
       <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-buttons slot="start">
@@ -831,8 +831,10 @@ const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNo
           </ion-card-header>
           <ion-card-content style="display:flex">
             <app-horizontal-scroller>
-              ${[0,1,2,3,4].map(t=>z`<app-group-date></app-group-date>`)}
-              <app-group-date-add></app-group-date-add>
+              ${null===(c=this.members)||void 0===c?void 0:c.map(t=>z`<ion-chip
+                    ><ion-avatar><img src="./svg/avatar.svg" /></ion-avatar
+                    ><ion-label>${t.name}</ion-label></ion-chip
+                  >`)}
             </app-horizontal-scroller>
           </ion-card-content>
         </ion-card>
