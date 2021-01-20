@@ -25,6 +25,8 @@ export class DateChipSelectWidget extends LitElement {
   @query('.chip-wrapper')
   protected chipWrapperElement!: HTMLDivElement;
 
+  protected mouseDownPos: number = 0;
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -49,15 +51,15 @@ export class DateChipSelectWidget extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <div class="chip-wrapper card-like-padding" style="overflow: auto;  white-space: nowrap; margin-top:4px">
-        <ion-chip @click=${this.onClick} id="all">${this.i18n.ALL}</ion-chip>
-        <ion-chip @click=${this.onClick} id="tomorrow">${this.i18n.TOMORROW}</ion-chip>
-        <ion-chip @click=${this.onClick} id="this-week">${this.i18n.THIS_WEEK}</ion-chip>
-        <ion-chip @click=${this.onClick} id="next-week">${this.i18n.NEXT_WEEK}</ion-chip>
-        <ion-chip @click=${this.onClick} id="custom">
+      <app-horizontal-scroller class="card-like-padding" @mousedown=${(e: any) => (this.mouseDownPos = e.clientX)}>
+        <ion-chip style="flex-shrink:0" @click=${this.onClick} id="all">${this.i18n.ALL}</ion-chip>
+        <ion-chip style="flex-shrink:0" @click=${this.onClick} id="tomorrow">${this.i18n.TOMORROW}</ion-chip>
+        <ion-chip style="flex-shrink:0" @click=${this.onClick} id="this-week">${this.i18n.THIS_WEEK}</ion-chip>
+        <ion-chip style="flex-shrink:0" @click=${this.onClick} id="next-week">${this.i18n.NEXT_WEEK}</ion-chip>
+        <ion-chip style="flex-shrink:0" @click=${this.onClick} id="custom">
           <ion-icon style="margin:0px" color="primary" name="calendar"></ion-icon>
         </ion-chip>
-      </div>
+      </app-horizontal-scroller>
     `;
   }
 
@@ -66,8 +68,11 @@ export class DateChipSelectWidget extends LitElement {
     if (clickedChip.nodeName.toUpperCase() === 'ION-ICON') {
       clickedChip = <HTMLIonChipElement>clickedChip.parentElement; // The calendar icon was clicked
     }
-    this.activeChip = <DateFilterType>clickedChip.id;
-    this.applyDateFilter();
+    if ((this.mouseDownPos - e.clientX) ** 2 <= 7) {
+      this.activeChip = <DateFilterType>clickedChip.id;
+      this.applyDateFilter();
+    }
+    this.mouseDownPos = 0;
   }
 
   protected async buildDateFilterConfig(): Promise<MealDateFilterConfig> {

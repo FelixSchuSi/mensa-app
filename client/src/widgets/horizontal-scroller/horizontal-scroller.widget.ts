@@ -22,7 +22,6 @@ export class GroupWidget extends LitElement {
   protected innerScrollContainer!: HTMLDivElement;
 
   protected onMouseDown = (e: any) => {
-    console.log('mousedown');
     this.scrollPos = {
       // The current scroll
       left: this.innerScrollContainer.scrollLeft,
@@ -36,16 +35,13 @@ export class GroupWidget extends LitElement {
   };
 
   protected onMouseMove = (e: any) => {
-    console.log('move');
     // How far the mouse has been moved
     const dx = e.clientX - this.scrollPos.x;
-    console.log(this.scrollPos.x, e.clientX);
     // Scroll the element
     this.innerScrollContainer.scrollLeft = this.scrollPos.left - dx;
   };
 
   protected onMouseUp = (e: any) => {
-    console.log('mouseup');
     this.innerScrollContainer.style.removeProperty('user-select');
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
