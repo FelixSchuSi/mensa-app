@@ -95,9 +95,11 @@ export class GroupDateWidget extends LitElement {
               `
             )}
           </app-horizontal-scroller>
-          <div><ion-icon style="color: var(--ion-text-color)" name="location-outline"></ion-icon> Mensa am Ring</div>
-          <div><ion-icon style="color: var(--ion-text-color)" name="calendar-outline"></ion-icon> 01.02.21</div>
-          <div><ion-icon style="color: var(--ion-text-color)" name="time-outline"></ion-icon> 13:30</div>
+          <div style="color: var(--ion-text-color)">
+            <div><ion-icon name="location-outline"></ion-icon> Mensa am Ring</div>
+            <div><ion-icon name="calendar-outline"></ion-icon> 01.02.21</div>
+            <div><ion-icon name="time-outline"></ion-icon> 13:30</div>
+          </div>
         </ion-card-content>
       </ion-card>
     `;
