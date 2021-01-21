@@ -1,23 +1,11 @@
-import {
-  css,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { customElement, html, internalProperty, LitElement, property, TemplateResult } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
-import { repeat } from 'lit-html/directives/repeat';
-import { guard } from 'lit-html/directives/guard';
 import { modalController } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
-import { LanguageKeys } from '../../i18n/language-keys';
 import { until } from 'lit-html/directives/until';
 import { sleep } from '../../helpers/sleep';
 import { userService } from '../../services/user.service';
@@ -241,7 +229,7 @@ class GroupsPage extends PageMixin(LitElement) {
                   html`
                     <ion-skeleton-text
                       animated
-                      style="display:inline-flex;border-radius: 8px;width: 260px; height:164px"
+                      style="flex-shrink:0;display:inline-flex;border-radius: 8px;margin-right:8px;width: 260px; height:164px"
                     ></ion-skeleton-text>
                   `
               )}
