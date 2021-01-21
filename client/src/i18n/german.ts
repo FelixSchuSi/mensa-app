@@ -117,7 +117,6 @@ export const german: LanguageStrings = {
   PREVIOUS_STEP: 'Vorheriger Schritt',
   STATUS: 'Status',
   JOIN: 'Beitreten',
-  JOINCODE: 'Beitrittscode',
   GROUP_DETAILS: 'Gruppendetails',
   JOINGROUP: 'Gruppe beitreten',
   SEARCH_MEALS: 'Gerichte durchsuchen',
@@ -172,5 +171,7 @@ export const german: LanguageStrings = {
   LEAVE: 'Verlassen',
   LEAVE_GROUP_CONFIRM_QUESTION: 'Gruppe wirklich verlassen?',
   CANCEL: 'Abbrechen',
-  COPIED_TO_CLIPBOARD: 'In die Zwischenablage kopiert!'
+  COPIED_TO_CLIPBOARD: 'In die Zwischenablage kopiert!',
+  NEW_GROUP: 'Neue Gruppe',
+  GROUP_NAME: 'Name der Gruppe'
 };

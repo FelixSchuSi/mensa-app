@@ -3,6 +3,7 @@ import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Image } from '../../../../server/src/models/image';
 import { mediaService, MediaService } from '../../services/media.service';
+import { i18nService } from '../../services/i18n.service';
 
 @customElement('app-group-create-modal')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,6 +22,12 @@ class GroupCreateModalWidget extends LitElement {
 
   @internalProperty()
   protected imagesrc: string | null = null;
+
+  constructor() {
+    super();
+    this.i18n = i18nService.getStrings();
+    i18nService.subscribe(i18n => (this.i18n = i18n));
+  }
 
   protected render(): TemplateResult {
     return html`
@@ -64,7 +71,7 @@ class GroupCreateModalWidget extends LitElement {
             </ion-avatar>
           <ion-card-header style="padding-top:0px">
             <ion-card-subtitle >
-              New group
+              ${this.i18n.NEW_GROUP}
             </ion-card-subtitle>
             <ion-card-title style="display:flex"> 
               <ion-input autofocus
@@ -73,7 +80,7 @@ class GroupCreateModalWidget extends LitElement {
                   const target = e.target as HTMLTextAreaElement;
                   this.groupName = target.value;
                 }}
-                placeholder="Name der Gruppe"
+                placeholder=${this.i18n.GROUP_NAME}
                 type="text"
                 required
               >

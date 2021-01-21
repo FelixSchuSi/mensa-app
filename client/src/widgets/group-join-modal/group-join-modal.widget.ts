@@ -70,13 +70,13 @@ export class FilterModalWidget extends LitElement {
       <ion-content>
         <div class="ion-padding" style="display:flex;flex-direction:column">
           <ion-item>
-            <ion-label>${this.i18n.JOINCODE}</ion-label>
+            <ion-label>${this.i18n.JOIN_CODE}</ion-label>
             <ion-input
               @change=${(e: Event): void => {
                 const target = e.target as HTMLTextAreaElement;
                 this.inputJoinCode = target.value;
               }}
-              placeholder=${this.i18n.JOINCODE}
+              placeholder=${this.i18n.JOIN_CODE}
               type="text"
               required
               pattern=".{8}"

@@ -115,7 +115,6 @@ export type LanguageKeys =
   | 'PREVIOUS_STEP'
   | 'STATUS'
   | 'JOIN'
-  | 'JOINCODE'
   | 'GROUP_DETAILS'
   | 'JOINGROUP'
   | 'SEARCH_MEALS'
@@ -169,4 +168,6 @@ export type LanguageKeys =
   | 'LEAVE_GROUP_CONFIRM_QUESTION'
   | 'CANCEL'
   | 'MENSA_VISITS'
-  | 'COPIED_TO_CLIPBOARD';
+  | 'COPIED_TO_CLIPBOARD'
+  | 'NEW_GROUP'
+  | 'GROUP_NAME';

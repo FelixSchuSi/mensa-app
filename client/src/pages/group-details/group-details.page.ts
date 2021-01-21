@@ -148,7 +148,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
         button
         style="--background: var(--ion-card-background)"
       >
-        <ion-label>${this.i18n.JOINCODE}</ion-label>
+        <ion-label>${this.i18n.JOIN_CODE}</ion-label>
         <ion-button color="primary" fill="outline" slot="end">
           <div class="join-code">${this.group?.joinCode}</div>
           <ion-icon style="margin-left:4px" name="copy-outline"></ion-icon>
