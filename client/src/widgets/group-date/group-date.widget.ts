@@ -133,6 +133,7 @@ export class GroupDateWidget extends LitElement {
             <div><ion-icon name="time-outline"></ion-icon> ${this.getTimeOfDateTime(this.mensaVisit.datetime)}</div>
           </div>
         </ion-card-content>
+        ${this.deleteMensaVisitTemplate}
       </ion-card>
     `;
   }
@@ -152,10 +153,7 @@ export class GroupDateWidget extends LitElement {
           ${this.large ? 'margin-bottom:-8px' : ''}
         "
       >
-        <ion-icon
-          name="${this.attending ? 'checkmark-circle' : ''}"
-          src="${this.attending ? '' : 'svg/ban.svg'}"
-        ></ion-icon>
+        <ion-icon src="${this.attending ? 'svg/checkmark-circle.svg' : 'svg/ban.svg'}"></ion-icon>
         <ion-label>${this.attending ? this.i18n.ATTENDING : this.i18n.ABSENT}</ion-label>
       </ion-chip>
     `;
@@ -188,5 +186,29 @@ export class GroupDateWidget extends LitElement {
     const language = this.i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
     // @ts-ignore
     return new Intl.DateTimeFormat(language, { timeStyle: 'short' }).format(date);
+  }
+
+  protected get deleteMensaVisitTemplate(): TemplateResult {
+    return html`
+      <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
+      <ion-item
+        @click=${() => this.deleteMensaVisit()}
+        lines="none"
+        .detail=${false}
+        button
+        style="--background: var(--ion-card-background)"
+      >
+        <ion-label>Delete</ion-label>
+        <ion-button color="danger" fill="outline" slot="end">Delete</ion-button>
+      </ion-item>
+    `;
+  }
+
+  protected async deleteMensaVisit(): Promise<void> {
+    try {
+      console.log('before ', this.group);
+      this.group = await groupService.deleteMensaVisit(this.group.id, this.mensaVisit.id);
+      console.log('after ', this.group);
+    } catch (e) {}
   }
 }

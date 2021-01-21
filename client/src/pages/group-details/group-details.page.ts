@@ -135,7 +135,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
               ></app-group-date>
             `
         )}
-        <app-group-date-add @click=${this.createVisit} large></app-group-date-add>
+        <app-group-date-add large></app-group-date-add>
       </div>
     `;
   }
@@ -146,14 +146,14 @@ class CreateGroupPage extends PageMixin(LitElement) {
     // TODO: create a Modal to create MensaVisit
 
     // helpful stuff
-    // const groupWithNewVisit = await groupService.createMensaVisit(this.group.id, mensaVisit);
+    this.group = await groupService.createMensaVisit(this.group.id, mensaVisit);
     // const groupAfterDelete = await groupService.deleteMensaVisit(this.group.id, 'bfdd27f9-7bb3-437e-bca5-e3fd566fcbd1');
     // const groupAfterLeave = await groupService.leaveMensaVisit(this.group.id, 'f9c2e13d-7898-45e3-ae05-cb9dee533e59');
     // const groupAfterJoin = await groupService.participateInMensaVisit(
     //   this.group.id,
     //   'f9c2e13d-7898-45e3-ae05-cb9dee533e59'
     // );
-    // console.log(groupAfterJoin);
+    // console.log(groupWithNewVisit);
   }
 
   protected get inviteCodeTemplate(): TemplateResult {
