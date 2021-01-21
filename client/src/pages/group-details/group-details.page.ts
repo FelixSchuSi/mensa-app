@@ -57,16 +57,21 @@ class CreateGroupPage extends PageMixin(LitElement) {
         ''}
         <ion-card class="card-no-margin-when-small">
           <div class="bg-image-wrapper">
-            <img class="bg-image" src=${this.group?.image?.url || '/images/default_group_background.png'} />
+            ${this.group?.image?.url ? html`<img class="bg-image" src=${this.group.image?.url || ''} />` : ''}
           </div>
-          <ion-avatar class="group-list-avatar" style="background-color:white">
+          <ion-avatar
+            class="group-list-avatar"
+            style="
+          background-color: var(--ion-color-step-250); 
+          border-radius: var(--border-radius);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;"
+          >
             ${this.group?.image?.url
-              ? html`<img src=${this.group.image?.url || ''} />`
-              : html`<ion-icon
-                  style="width:100%;height:100%;transform: scale(1.23);"
-                  color="primary"
-                  name="people-circle-outline"
-                ></ion-icon>`}
+              ? html`<img src=${this.group?.image?.url || ''} />`
+              : html`<ion-icon style="width:85%;height:85%;" name="help-outline"></ion-icon>`}
           </ion-avatar>
           <ion-card-header style="padding-top:0px">
             ${this.buttonsTemplate}
@@ -80,14 +85,19 @@ class CreateGroupPage extends PageMixin(LitElement) {
             <app-horizontal-scroller>
               ${this.members?.map(
                 member =>
-                  html`<ion-chip
-                    ><ion-avatar><img src="./svg/avatar.svg" /></ion-avatar
-                    ><ion-label>${member.name}</ion-label></ion-chip
-                  >`
+                  html`
+                    <ion-chip style="flex-shrink:0; margin-left:0px">
+                      <ion-avatar>
+                        <img src="./svg/avatar.svg" />
+                      </ion-avatar>
+                      <ion-label>${member.name}</ion-label>
+                    </ion-chip>
+                  `
               )}
             </app-horizontal-scroller>
           </ion-card-content>
         </ion-card>
+        ${this.mensaVisitsTemplate}
       </ion-content>
     `;
   }
@@ -104,6 +114,16 @@ class CreateGroupPage extends PageMixin(LitElement) {
           <ion-icon slot="icon-only" color="primary" name="share-social"></ion-icon>
         </ion-button>
       </ion-buttons>
+    `;
+  }
+
+  protected get mensaVisitsTemplate(): TemplateResult {
+    return html`
+      <ion-card class="card-no-margin-when-small">
+        <ion-card-content>
+          ${[0, 1, 2, 3, 4, 5].map(() => html` <app-group-date large></app-group-date> `)}
+        </ion-card-content>
+      </ion-card>
     `;
   }
 }

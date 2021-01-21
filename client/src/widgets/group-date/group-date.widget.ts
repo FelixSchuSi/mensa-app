@@ -27,6 +27,9 @@ export class GroupDateWidget extends LitElement {
   @internalProperty()
   protected chipText!: LanguageStrings;
 
+  @property({ type: Boolean })
+  protected large: boolean = false;
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -40,6 +43,10 @@ export class GroupDateWidget extends LitElement {
     }
   }
   protected render(): TemplateResult {
+    return html` ${this.large ? this.largeTemplate : this.smallTemplate} `;
+  }
+
+  protected get smallTemplate(): TemplateResult {
     return html`
       <ion-card class="termin-card">
         <div style="display:flex; align-items:flex-end; padding-top: 8px; padding-right: 8px; padding-left:20px">
@@ -52,6 +59,42 @@ export class GroupDateWidget extends LitElement {
         </div>
         <ion-card-content style="display: flex; flex-direction:column; padding-top: 0px;">
           <h1 style="color: var(--ion-text-color)">Zusammen Mensen</h1>
+          <div><ion-icon style="color: var(--ion-text-color)" name="location-outline"></ion-icon> Mensa am Ring</div>
+          <div><ion-icon style="color: var(--ion-text-color)" name="calendar-outline"></ion-icon> 01.02.21</div>
+          <div><ion-icon style="color: var(--ion-text-color)" name="time-outline"></ion-icon> 13:30</div>
+        </ion-card-content>
+      </ion-card>
+    `;
+  }
+
+  protected get largeTemplate(): TemplateResult {
+    return html`
+      <ion-card id="largeTermin" class="termin-card">
+        <ion-card-header>
+          <div style="display:flex; align-items:flex-end; ">
+            <ion-card-subtitle style="margin-bottom:0px; ">
+              ${this.numberOfParticipants}
+              ${this.numberOfParticipants > 1 ? this.i18n.PARTICIPANTS : this.i18n.PARTICIPANT}
+            </ion-card-subtitle>
+
+            <div style="flex-grow:1; min-width:16px"></div>
+            ${this.participateButton}
+          </div>
+          <ion-card-title>Zusammen Mensen</ion-card-title>
+        </ion-card-header>
+        <ion-card-content style="display: flex; flex-direction:column; padding-top: 0px; ">
+          <app-horizontal-scroller>
+            ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+              i => html`
+                <ion-chip style="flex-shrink:0; margin-left:0px">
+                  <ion-avatar>
+                    <img src="./svg/avatar.svg" />
+                  </ion-avatar>
+                  <ion-label>Teilnehmer ${i}</ion-label>
+                </ion-chip>
+              `
+            )}
+          </app-horizontal-scroller>
           <div><ion-icon style="color: var(--ion-text-color)" name="location-outline"></ion-icon> Mensa am Ring</div>
           <div><ion-icon style="color: var(--ion-text-color)" name="calendar-outline"></ion-icon> 01.02.21</div>
           <div><ion-icon style="color: var(--ion-text-color)" name="time-outline"></ion-icon> 13:30</div>
@@ -76,28 +119,4 @@ export class GroupDateWidget extends LitElement {
       </ion-chip>
     `;
   }
-
-  //   @mouseover=${this.onMouseOver}
-  //   @mouseleave=${this.onMouseLeave}
-  //   protected onMouseOver(e: any): void {
-  //     this.isHovering = true;
-  //     if (this.attending) {
-  //       this.chipColor = 'danger';
-  //       this.chipText = this.i18n.ABSENT;
-  //     } else {
-  //       this.chipColor = 'success';
-  //       this.chipText = this.i18n.ATTENDING;
-  //     }
-  //   }
-
-  //   protected onMouseLeave(e: any): void {
-  //     this.isHovering = false;
-  //     if (!this.attending) {
-  //       this.chipColor = 'danger';
-  //       this.chipText = this.i18n.ABSENT;
-  //     } else {
-  //       this.chipColor = 'success';
-  //       this.chipText = this.i18n.ATTENDING;
-  //     }
-  //   }
 }
