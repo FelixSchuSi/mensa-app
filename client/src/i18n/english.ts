@@ -165,5 +165,12 @@ export const english: LanguageStrings = {
   PARTICIPANT: 'Participant',
   PARTICIPANTS: 'Participants',
   MENSA_VISIT: 'Mensa visit',
-  CREATE_MENSA_VISIT: 'Add mensa visit'
+  MENSA_VISITS: 'Mensa visits',
+  CREATE_MENSA_VISIT: 'Add mensa visit',
+  JOIN_CODE: 'Join code',
+  LEAVE_GROUP: 'Leave group',
+  LEAVE: 'Leave',
+  LEAVE_GROUP_CONFIRM_QUESTION: 'Do you really want to leave this group?',
+  CANCEL: 'Cancel',
+  COPIED_TO_CLIPBOARD: 'Copied to clipboard!'
 };

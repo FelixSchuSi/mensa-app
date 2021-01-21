@@ -165,5 +165,12 @@ export const german: LanguageStrings = {
   PARTICIPANT: 'Teilnehmer',
   PARTICIPANTS: 'Teilnehmer',
   MENSA_VISIT: 'Termin',
-  CREATE_MENSA_VISIT: 'Termin hinzufügen'
+  MENSA_VISITS: 'Termine',
+  CREATE_MENSA_VISIT: 'Termin hinzufügen',
+  JOIN_CODE: 'Beitrittscode',
+  LEAVE_GROUP: 'Gruppe verlassen',
+  LEAVE: 'Verlassen',
+  LEAVE_GROUP_CONFIRM_QUESTION: 'Gruppe wirklich verlassen?',
+  CANCEL: 'Abbrechen',
+  COPIED_TO_CLIPBOARD: 'In die Zwischenablage kopiert!'
 };

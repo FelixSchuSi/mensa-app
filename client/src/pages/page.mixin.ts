@@ -52,7 +52,7 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
       this.errorMessage = errorMessage;
       this.infoMessage = warningMessage;
       this.successMessage = successMessage;
-      if (errorMessage || warningMessage) {
+      if (errorMessage || warningMessage || successMessage) {
         setTimeout(() => this.setNotification({}), duration);
         const toast = <HTMLIonToastElement>document.createElement('ion-toast');
         toast.duration = 3000;

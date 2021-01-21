@@ -1,10 +1,11 @@
-import { customElement, html, internalProperty, LitElement, property, TemplateResult } from 'lit-element';
+import { customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
 import { User } from '../../../../server/src/models/user';
 import { routerService } from '../../services/router.service';
+import { Routes } from '../../routes';
 
 @customElement('app-group-details')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -17,6 +18,9 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected members: User[] | undefined;
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
+
+  @query('.join-code')
+  protected joinCodeElem!: HTMLDivElement;
 
   protected async firstUpdated(): Promise<void> {
     this.groupService.getGroup(this.groupID).then(res => {
@@ -38,23 +42,20 @@ class CreateGroupPage extends PageMixin(LitElement) {
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button
-              @click=${(): void => {
+              @click=${() => {
                 history.back();
               }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>
           </ion-buttons>
+          <ion-buttons slot="primary">
+            <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
+              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        ${// ### helpful stuff ###
-        // this.i18n.JOINCODE
-        // this.group && this.formatDate(this.group!.createdAt)
-        // this.members
-        // @click=${(): void => {
-        //   this.groupService.removeMembership(this.groupID);
-        // }}
-        ''}
         <ion-card class="card-no-margin-when-small">
           <div class="bg-image-wrapper">
             ${this.group?.image?.url ? html`<img class="bg-image" src=${this.group.image?.url || ''} />` : ''}
@@ -96,7 +97,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
               )}
             </app-horizontal-scroller>
           </ion-card-content>
-          ${this.leaveGroupButtonTemplate}
+          ${this.inviteCodeTemplate} ${this.leaveGroupButtonTemplate}
         </ion-card>
         ${this.mensaVisitsTemplate}
       </ion-content>
@@ -121,10 +122,42 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected get mensaVisitsTemplate(): TemplateResult {
     return html`
       <div class="card-like-padding" style="display:block">
-        <h1>Termine</h1>
+        <h1>${this.i18n.MENSA_VISITS}</h1>
         ${[0, 1].map(() => html` <app-group-date large></app-group-date> `)}
         <app-group-date-add large></app-group-date-add>
       </div>
+    `;
+  }
+
+  protected get inviteCodeTemplate(): TemplateResult {
+    return html`
+      <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
+      <ion-item
+        @click=${() => {
+          const textArea = document.createElement('textarea');
+          textArea.value = this.group?.joinCode || '';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          this.setNotification({ successMessage: this.i18n.COPIED_TO_CLIPBOARD });
+        }}
+        lines="none"
+        .detail=${false}
+        button
+        style="--background: var(--ion-card-background)"
+      >
+        <ion-label>${this.i18n.JOINCODE}</ion-label>
+        <ion-button color="primary" fill="outline" slot="end">
+          <div class="join-code">${this.group?.joinCode}</div>
+          <ion-icon style="margin-left:4px" name="copy-outline"></ion-icon>
+        </ion-button>
+        <!-- <div slot="end">
+          <ion-icon name="copy-outline"></ion-icon>
+          ${this.group?.joinCode}
+        </div> -->
+      </ion-item>
     `;
   }
 
@@ -132,18 +165,14 @@ class CreateGroupPage extends PageMixin(LitElement) {
     return html`
       <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
       <ion-item
-        @click=${() => {
-          // this.groupService.removeMembership(this.groupID);
-          console.log('showing!');
-          this.showLeaveAlert();
-        }}
+        @click=${() => this.showLeaveAlert()}
         lines="none"
         .detail=${false}
         button
         style="--background: var(--ion-card-background)"
       >
-        <ion-label>Gruppe verlassen</ion-label>
-        <ion-button color="danger" fill="outline" slot="end">Verlassen</ion-button>
+        <ion-label>${this.i18n.LEAVE_GROUP}</ion-label>
+        <ion-button color="danger" fill="outline" slot="end">${this.i18n.LEAVE}</ion-button>
       </ion-item>
       <!-- <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
       <ion-item
@@ -162,12 +191,12 @@ class CreateGroupPage extends PageMixin(LitElement) {
 
   protected showLeaveAlert(): void {
     const alert = document.createElement('ion-alert');
-    alert.header = 'Leave group?';
-    alert.message = 'Do you relly want to leave this group?';
+    alert.header = this.i18n.LEAVE_GROUP + '?';
+    alert.message = this.i18n.LEAVE_GROUP_CONFIRM_QUESTION;
     alert.buttons = [
-      'Cancel',
+      this.i18n.CANCEL,
       {
-        text: 'Leave',
+        text: this.i18n.LEAVE,
         handler: () => {
           this.groupService.removeMembership(this.groupID);
         }
