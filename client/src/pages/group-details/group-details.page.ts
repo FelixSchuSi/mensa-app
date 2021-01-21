@@ -96,6 +96,7 @@ class CreateGroupPage extends PageMixin(LitElement) {
               )}
             </app-horizontal-scroller>
           </ion-card-content>
+          ${this.leaveGroupButtonTemplate}
         </ion-card>
         ${this.mensaVisitsTemplate}
       </ion-content>
@@ -119,11 +120,39 @@ class CreateGroupPage extends PageMixin(LitElement) {
 
   protected get mensaVisitsTemplate(): TemplateResult {
     return html`
-      <ion-card class="card-no-margin-when-small">
-        <ion-card-content>
-          ${[0, 1, 2, 3, 4, 5].map(() => html` <app-group-date large></app-group-date> `)}
-        </ion-card-content>
-      </ion-card>
+      <div class="card-like-padding" style="display:block">
+        <h1>Termine</h1>
+        ${[0, 1].map(() => html` <app-group-date large></app-group-date> `)}
+        <app-group-date-add large></app-group-date-add>
+      </div>
+    `;
+  }
+
+  protected get leaveGroupButtonTemplate(): TemplateResult {
+    return html`
+      <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
+      <ion-item
+        @click=${() => this.groupService.removeMembership(this.groupID)}
+        lines="none"
+        .detail=${false}
+        button
+        style="--background: var(--ion-card-background)"
+      >
+        <ion-label>Gruppe verlassen</ion-label>
+        <ion-button color="danger" fill="outline" slot="end">Gruppe verlassen</ion-button>
+      </ion-item>
+      <!-- <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
+      <ion-item
+        @click=${() => this.groupService.removeMembership(this.groupID)}
+        lines="none"
+        detail
+        .detail=${false}
+        button
+        style="--background: var(--ion-card-background);"
+      >
+        <ion-label>Gruppe verlassen</ion-label>
+        <ion-icon color="danger" name="exit-outline"></ion-icon>
+      </ion-item> -->
     `;
   }
 }

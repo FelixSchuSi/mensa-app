@@ -71,16 +71,16 @@ export class GroupDateWidget extends LitElement {
     return html`
       <ion-card id="largeTermin" class="termin-card">
         <ion-card-header>
-          <div style="display:flex; align-items:flex-end; ">
-            <ion-card-subtitle style="margin-bottom:0px; ">
-              ${this.numberOfParticipants}
-              ${this.numberOfParticipants > 1 ? this.i18n.PARTICIPANTS : this.i18n.PARTICIPANT}
-            </ion-card-subtitle>
+          <ion-card-subtitle>
+            ${this.numberOfParticipants}
+            ${this.numberOfParticipants > 1 ? this.i18n.PARTICIPANTS : this.i18n.PARTICIPANT}
+          </ion-card-subtitle>
 
+          <ion-card-title style="display:flex; align-items:flex-start; ">
+            <div>Zusammen Mensen</div>
             <div style="flex-grow:1; min-width:16px"></div>
             ${this.participateButton}
-          </div>
-          <ion-card-title>Zusammen Mensen</ion-card-title>
+          </ion-card-title>
         </ion-card-header>
         <ion-card-content style="display: flex; flex-direction:column; padding-top: 0px; ">
           <app-horizontal-scroller>

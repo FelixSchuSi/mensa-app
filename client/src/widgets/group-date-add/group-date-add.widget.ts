@@ -1,5 +1,4 @@
-import { LitElement, customElement, internalProperty, property, TemplateResult, html, query } from 'lit-element';
-import { Group } from '../../../../server/src/models/group';
+import { LitElement, customElement, property, TemplateResult, html } from 'lit-element';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 
@@ -12,6 +11,9 @@ export class GroupDateAddWidget extends LitElement {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
+  @property({ type: Boolean })
+  protected large: boolean = false;
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -20,7 +22,7 @@ export class GroupDateAddWidget extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <ion-card style="align-self:stretch" class="termin-card termin-add-card">
+      <ion-card style="align-self:stretch; ${this.large ? 'display:flex' : ''}" class="termin-card termin-add-card">
         <ion-card-content style="height:100%; display: flex; flex-direction:column; align-items: center; ">
           <div style="flex-grow:1; "></div>
           <div class="circle-add-btn" @click=${() => console.log('TODO: create functionality to create mensa visits')}>
