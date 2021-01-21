@@ -7,6 +7,8 @@ import { encrypt, decrypt } from '../services/crypto.service';
 const router = express.Router();
 const codeCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const codeLength = 8;
+
+// Get a group by groupID
 router.get('/:id', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const group = await groupDAO.findOne({ id: req.params.id });
@@ -16,6 +18,8 @@ router.get('/:id', async (req, res) => {
     res.status(404).json({});
   }
 });
+
+// Get a group by joincode or groups of user
 router.get('/', async (req, res) => {
   const filter: Partial<Group> = {};
   let groups: Array<Group> = [];
@@ -72,6 +76,7 @@ router.delete('/:id', async (req, res) => {
   await groupDAO.deleteOne(req.params.id);
   res.status(200).end();
 });
+
 router.get('/:id/members', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
@@ -94,6 +99,7 @@ router.get('/:id/members', async (req, res) => {
   });
   res.status(200).json(filteredUsers);
 });
+
 router.post('/:id/membership', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
@@ -107,12 +113,14 @@ router.delete('/:gid/membership/:uid', async (req, res) => {
   const result = await removeMembership(groupDAO, req.params.gid, userDAO, req.params.uid);
   res.status(result.status).json({ message: result.message || 'Success' });
 });
+
 router.delete('/:gid/membership', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
   const result = await removeMembership(groupDAO, req.params.gid, userDAO, res.locals.user.id);
   res.status(result.status).json({ message: result.message || 'Success' });
 });
+
 function createJoinCode(length: number): string {
   const charArrrayLength = codeCharacters.length;
   let code = '';
@@ -121,20 +129,13 @@ function createJoinCode(length: number): string {
   }
   return code;
 }
-interface GroupMemberOperation {
-  operation: string;
-  user: string;
-}
-interface Response {
-  status: number;
-  message?: string;
-}
+
 async function addMembership(
   groupDAO: GenericDAO<Group>,
   groupID: string,
   userDAO: GenericDAO<User>,
   userID: string
-): Promise<Response> {
+): Promise<{ status: number; message: string }> {
   const filter: Partial<Group> = { id: userID };
   const user = await userDAO.findOne(filter);
   if (!user) return { status: 404, message: 'Unkown user' };
@@ -156,14 +157,15 @@ async function addMembership(
   } catch (err) {
     return { status: 500, message: 'Unexpected error occured' };
   }
-  return { status: 200 };
+  return { status: 200, message: '' };
 }
+
 async function removeMembership(
   groupDAO: GenericDAO<Group>,
   groupID: string,
   userDAO: GenericDAO<User>,
   userID: string
-): Promise<Response> {
+): Promise<{ status: number; message: string }> {
   const filter: Partial<Group> = { id: userID };
   const user = await userDAO.findOne(filter);
   if (!user) return { status: 404, message: 'Unkown user' };
