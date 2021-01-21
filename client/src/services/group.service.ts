@@ -5,6 +5,7 @@ import { Image } from '../../../server/src/models/image';
 import { httpService } from './http.service';
 import { routerService } from './router.service';
 import { storeService } from './store.service';
+import { MensaVisit } from '../../../server/src/models/mensa-visit';
 
 export type GroupsListener = (groups: Group[]) => void;
 export class GroupService {
@@ -71,6 +72,71 @@ export class GroupService {
       return result.json();
       // routerService.navigate(Routes.GROUPS);
     } else {
+      return Promise.reject({});
+    }
+  }
+
+  public async createMensaVisit(groupID: string, mensaVisit: Partial<MensaVisit>): Promise<Group> {
+    if (navigator.onLine) {
+      const { title, mensa, datetime } = mensaVisit;
+      const result = await httpService.post('mensa-visits/' + groupID, { title, mensa, datetime });
+      const groupWithNewMensaVisit: Group = await result.json();
+      const updatedGroups: Group[] = this.groups.map(group => {
+        if (group.id !== groupWithNewMensaVisit.id) return group;
+        return groupWithNewMensaVisit;
+      });
+      await this.setGroups(updatedGroups);
+      return groupWithNewMensaVisit;
+    } else {
+      // TODO make this service offline capable
+      return Promise.reject({});
+    }
+  }
+
+  public async deleteMensaVisit(groupID: string, mensaVisitID: string): Promise<Group> {
+    if (navigator.onLine) {
+      const result = await httpService.delete('mensa-visits/' + groupID + '/' + mensaVisitID);
+      const groupWithoutMensaVisit: Group = await result.json();
+      const updatedGroups: Group[] = this.groups.map(group => {
+        if (group.id !== groupWithoutMensaVisit.id) return group;
+        return groupWithoutMensaVisit;
+      });
+      await this.setGroups(updatedGroups);
+      return groupWithoutMensaVisit;
+    } else {
+      // TODO make this service offline capable
+      return Promise.reject({});
+    }
+  }
+
+  public async participateInMensaVisit(groupID: string, mensaVisitID: string): Promise<Group> {
+    if (navigator.onLine) {
+      const result = await httpService.patch('mensa-visits/' + groupID + '/participate/' + mensaVisitID, {});
+      const groupWithNewMensaVisit: Group = await result.json();
+      const updatedGroups: Group[] = this.groups.map(group => {
+        if (group.id !== groupWithNewMensaVisit.id) return group;
+        return groupWithNewMensaVisit;
+      });
+      await this.setGroups(updatedGroups);
+      return groupWithNewMensaVisit;
+    } else {
+      // TODO make this service offline capable
+      return Promise.reject({});
+    }
+  }
+
+  public async leaveMensaVisit(groupID: string, mensaVisitID: string): Promise<Group> {
+    if (navigator.onLine) {
+      const result = await httpService.patch('mensa-visits/' + groupID + '/leave/' + mensaVisitID, {});
+      const groupWithNewMensaVisit: Group = await result.json();
+      const updatedGroups: Group[] = this.groups.map(group => {
+        if (group.id !== groupWithNewMensaVisit.id) return group;
+        return groupWithNewMensaVisit;
+      });
+      await this.setGroups(updatedGroups);
+      return groupWithNewMensaVisit;
+    } else {
+      // TODO make this service offline capable
       return Promise.reject({});
     }
   }

@@ -6,6 +6,7 @@ import { Group } from '../../../../server/src/models/group';
 import { User } from '../../../../server/src/models/user';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
+import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 
 @customElement('app-group-details')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -123,10 +124,36 @@ class CreateGroupPage extends PageMixin(LitElement) {
     return html`
       <div class="card-like-padding" style="display:block">
         <h1>${this.i18n.MENSA_VISITS}</h1>
-        ${[0, 1].map(() => html` <app-group-date large></app-group-date> `)}
-        <app-group-date-add large></app-group-date-add>
+        ${this.group?.mensaVisits.map(
+          mensaVisit =>
+            html`
+              <app-group-date
+                .group=${this.group}
+                .members=${this.members}
+                .mensaVisit=${mensaVisit}
+                large
+              ></app-group-date>
+            `
+        )}
+        <app-group-date-add @click=${this.createVisit} large></app-group-date-add>
       </div>
     `;
+  }
+
+  protected async createVisit(): Promise<void> {
+    const mensaVisit: Partial<MensaVisit> = { title: 'moin', mensa: 'aasee', datetime: 1611253613166 };
+    if (!this.group?.id) return;
+    // TODO: create a Modal to create MensaVisit
+
+    // helpful stuff
+    // const groupWithNewVisit = await groupService.createMensaVisit(this.group.id, mensaVisit);
+    // const groupAfterDelete = await groupService.deleteMensaVisit(this.group.id, 'bfdd27f9-7bb3-437e-bca5-e3fd566fcbd1');
+    // const groupAfterLeave = await groupService.leaveMensaVisit(this.group.id, 'f9c2e13d-7898-45e3-ae05-cb9dee533e59');
+    // const groupAfterJoin = await groupService.participateInMensaVisit(
+    //   this.group.id,
+    //   'f9c2e13d-7898-45e3-ae05-cb9dee533e59'
+    // );
+    // console.log(groupAfterJoin);
   }
 
   protected get inviteCodeTemplate(): TemplateResult {
@@ -153,10 +180,6 @@ class CreateGroupPage extends PageMixin(LitElement) {
           <div class="join-code">${this.group?.joinCode}</div>
           <ion-icon style="margin-left:4px" name="copy-outline"></ion-icon>
         </ion-button>
-        <!-- <div slot="end">
-          <ion-icon name="copy-outline"></ion-icon>
-          ${this.group?.joinCode}
-        </div> -->
       </ion-item>
     `;
   }
@@ -174,18 +197,6 @@ class CreateGroupPage extends PageMixin(LitElement) {
         <ion-label>${this.i18n.LEAVE_GROUP}</ion-label>
         <ion-button color="danger" fill="outline" slot="end">${this.i18n.LEAVE}</ion-button>
       </ion-item>
-      <!-- <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
-      <ion-item
-        @click=${() => this.groupService.removeMembership(this.groupID)}
-        lines="none"
-        detail
-        .detail=${false}
-        button
-        style="--background: var(--ion-card-background);"
-      >
-        <ion-label>Gruppe verlassen</ion-label>
-        <ion-icon color="danger" name="exit-outline"></ion-icon>
-      </ion-item> -->
     `;
   }
 

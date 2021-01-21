@@ -7,6 +7,7 @@ import tasks from './routes/tasks';
 import users from './routes/users';
 import groups from './routes/groups';
 import meals from './routes/meals';
+import mensaVisits from './routes/mensa-visits';
 import proxy from 'express-http-proxy';
 import startDB from './db';
 
@@ -70,8 +71,8 @@ function configureApp(app: Express) {
     }
   });
   app.use('/api/tasks', tasks);
-  app.use('/api/tasks', tasks);
   app.use('/api/groups', groups);
+  app.use('/api/mensa-visits', mensaVisits);
 }
 
 function isPreflight(req: Request) {

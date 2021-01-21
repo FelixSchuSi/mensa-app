@@ -1,7 +1,13 @@
+import { group } from 'console';
 import { LitElement, customElement, internalProperty, property, TemplateResult, html, query } from 'lit-element';
 import { Group } from '../../../../server/src/models/group';
+import { MensaVisit } from '../../../../server/src/models/mensa-visit';
+import { User } from '../../../../server/src/models/user';
 import { LanguageStrings } from '../../models/language-strings';
+import { Languages } from '../../models/languages';
+import { groupService } from '../../services/group.service';
 import { i18nService } from '../../services/i18n.service';
+import { userService } from '../../services/user.service';
 
 @customElement('app-group-date')
 export class GroupDateWidget extends LitElement {
@@ -9,37 +15,50 @@ export class GroupDateWidget extends LitElement {
     return this;
   }
 
-  @property({ type: Object, attribute: false })
+  @internalProperty()
   protected i18n!: LanguageStrings;
+
+  @property({ type: Object, attribute: false })
+  protected mensaVisit!: MensaVisit;
 
   @property({ type: Object, attribute: false })
   protected group!: Group;
 
-  @property({ type: Boolean })
-  protected attending: boolean = false;
-
-  @property({ type: Number })
+  @property({ type: Object, attribute: false })
+  protected members!: User[];
+  @internalProperty()
+  protected attending!: boolean;
   protected numberOfParticipants: number = 3;
 
   @internalProperty()
   protected chipColor!: 'success' | 'danger';
 
-  @internalProperty()
-  protected chipText!: LanguageStrings;
-
   @property({ type: Boolean })
   protected large: boolean = false;
+
+  @internalProperty()
+  protected userInfo!: User;
 
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
     i18nService.subscribe(i18n => (this.i18n = i18n));
+    this.userInfo = userService.userInfo!;
+  }
+
+  protected firstUpdated(): void {
     this.chipColor = this.attending ? 'success' : 'danger';
+    this.numberOfParticipants = this.mensaVisit.participants.length;
+    this.attending = this.mensaVisit.participants.includes(this.userInfo.id);
   }
 
   protected updated(_changedProperties: any): void {
     if (_changedProperties.has('attending')) {
       this.chipColor = this.attending ? 'success' : 'danger';
+    }
+    if (_changedProperties.has('mensaVisit')) {
+      this.numberOfParticipants = this.mensaVisit.participants.length;
+      this.attending = this.mensaVisit.participants.includes(this.userInfo.id);
     }
   }
   protected render(): TemplateResult {
@@ -47,6 +66,7 @@ export class GroupDateWidget extends LitElement {
   }
 
   protected get smallTemplate(): TemplateResult {
+    if (!this.mensaVisit) return html``;
     return html`
       <ion-card class="termin-card">
         <div style="display:flex; align-items:flex-end; padding-top: 8px; padding-right: 8px; padding-left:20px">
@@ -58,16 +78,28 @@ export class GroupDateWidget extends LitElement {
           ${this.participateButton}
         </div>
         <ion-card-content style="display: flex; flex-direction:column; padding-top: 0px;">
-          <h1 style="color: var(--ion-text-color)">Zusammen Mensen</h1>
-          <div><ion-icon style="color: var(--ion-text-color)" name="location-outline"></ion-icon> Mensa am Ring</div>
-          <div><ion-icon style="color: var(--ion-text-color)" name="calendar-outline"></ion-icon> 01.02.21</div>
-          <div><ion-icon style="color: var(--ion-text-color)" name="time-outline"></ion-icon> 13:30</div>
+          <h1 style="color: var(--ion-text-color)">${this.mensaVisit.title}</h1>
+          <div>
+            <ion-icon style="color: var(--ion-text-color)" name="location-outline"></ion-icon>
+            ${this.i18n[this.mensaVisit.mensa]}
+          </div>
+          <div>
+            <ion-icon style="color: var(--ion-text-color)" name="calendar-outline"></ion-icon> ${this.getDateOfDateTime(
+              this.mensaVisit.datetime
+            )}
+          </div>
+          <div>
+            <ion-icon style="color: var(--ion-text-color)" name="time-outline"></ion-icon> ${this.getTimeOfDateTime(
+              this.mensaVisit.datetime
+            )}
+          </div>
         </ion-card-content>
       </ion-card>
     `;
   }
 
   protected get largeTemplate(): TemplateResult {
+    if (!this.mensaVisit) return html``;
     return html`
       <ion-card class="large-termin-card">
         <ion-card-header style="padding-bottom:0px">
@@ -79,36 +111,40 @@ export class GroupDateWidget extends LitElement {
           </ion-card-subtitle>
 
           <ion-card-title>
-            <div>Zusammen Mensen</div>
+            <div>${this.mensaVisit.title}</div>
           </ion-card-title>
         </ion-card-header>
         <ion-card-content style="display: flex; flex-direction:column; padding-top: 0px; ">
           <app-horizontal-scroller>
-            ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-              i => html`
+            ${this.mensaVisit.participants.map(
+              participant => html`
                 <ion-chip style="flex-shrink:0; margin-left:0px">
                   <ion-avatar>
                     <img src="./svg/avatar.svg" />
                   </ion-avatar>
-                  <ion-label>Teilnehmer ${i}</ion-label>
+                  <ion-label>${this.getParticipantName(participant)}</ion-label>
                 </ion-chip>
               `
             )}
           </app-horizontal-scroller>
           <div style="color: var(--ion-text-color)">
-            <div><ion-icon name="location-outline"></ion-icon> Mensa am Ring</div>
-            <div><ion-icon name="calendar-outline"></ion-icon> 01.02.21</div>
-            <div><ion-icon name="time-outline"></ion-icon> 13:30</div>
+            <div><ion-icon name="location-outline"></ion-icon> ${this.i18n[this.mensaVisit.mensa]}</div>
+            <div><ion-icon name="calendar-outline"></ion-icon> ${this.getDateOfDateTime(this.mensaVisit.datetime)}</div>
+            <div><ion-icon name="time-outline"></ion-icon> ${this.getTimeOfDateTime(this.mensaVisit.datetime)}</div>
           </div>
         </ion-card-content>
       </ion-card>
     `;
   }
 
+  protected getParticipantName(userID: string): string | undefined {
+    return this.members.find(member => member.id === userID)?.name;
+  }
+
   protected get participateButton(): TemplateResult {
     return html`
       <ion-chip
-        @click=${() => (this.attending = !this.attending)}
+        @click=${this.participateOrLeave}
         outline
         color="${this.chipColor}"
         style="
@@ -123,5 +159,34 @@ export class GroupDateWidget extends LitElement {
         <ion-label>${this.attending ? this.i18n.ATTENDING : this.i18n.ABSENT}</ion-label>
       </ion-chip>
     `;
+  }
+
+  protected async participateOrLeave(): Promise<void> {
+    try {
+      if (this.attending) {
+        this.attending = !this.attending;
+        this.group = await groupService.leaveMensaVisit(this.group.id, this.mensaVisit.id);
+      } else {
+        this.attending = !this.attending;
+        this.group = await groupService.participateInMensaVisit(this.group.id, this.mensaVisit.id);
+      }
+      // this.mensaVisit = this.group.mensaVisits.find(visit => visit.id === this.mensaVisit.id)!;
+    } catch (e) {
+      this.attending = !this.attending;
+    }
+  }
+
+  protected getDateOfDateTime(dateTime: number): string {
+    const date = new Date(dateTime);
+    const language = this.i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
+    // @ts-ignore
+    return new Intl.DateTimeFormat(language, { dateStyle: 'short' }).format(date);
+  }
+
+  protected getTimeOfDateTime(dateTime: number): string {
+    const date = new Date(dateTime);
+    const language = this.i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
+    // @ts-ignore
+    return new Intl.DateTimeFormat(language, { timeStyle: 'short' }).format(date);
   }
 }

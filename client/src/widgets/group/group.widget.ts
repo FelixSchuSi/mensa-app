@@ -50,7 +50,6 @@ export class GroupWidget extends LitElement {
         </ion-card-header>
         <ion-card-content style="display:flex">
           <app-horizontal-scroller>
-            ${[0, 1, 2].map(e => html`<app-group-date></app-group-date>`)}
             <app-group-date-add></app-group-date-add>
           </app-horizontal-scroller>
         </ion-card-content>
