@@ -25,16 +25,21 @@ export class GroupWidget extends LitElement {
     return html`
       <ion-card class="card-no-margin-when-small">
         <div class="bg-image-wrapper">
-          <img class="bg-image" src=${this.group.image?.url || '/images/default_group_background.png'} />
+          ${this.group?.image?.url ? html`<img class="bg-image" src=${this.group.image?.url || ''} />` : ''}
         </div>
-        <ion-avatar class="group-list-avatar" style="background-color:white">
+        <ion-avatar
+          class="group-list-avatar"
+          style="
+          background-color: var(--ion-color-step-250); 
+          border-radius: var(--border-radius);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;"
+        >
           ${this.group.image?.url
             ? html`<img src=${this.group.image?.url || ''} />`
-            : html`<ion-icon
-                style="width:100%;height:100%;transform: scale(1.23);"
-                color="primary"
-                name="people-circle-outline"
-              ></ion-icon>`}
+            : html`<ion-icon style="width:85%;height:85%;" name="help-outline"></ion-icon>`}
         </ion-avatar>
         <ion-card-header style="padding-top:0px">
           ${this.buttonsTemplate}

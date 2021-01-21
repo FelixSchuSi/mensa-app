@@ -209,6 +209,8 @@ app-meals-future app-meal:first-of-type ion-card {
 
 .bg-image-wrapper {
   max-height: 100px;
+  background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12);
+  height: 100px;
   width: 100%;
   overflow: hidden;
 }
