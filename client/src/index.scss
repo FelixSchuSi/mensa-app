@@ -255,9 +255,20 @@ app-meals-future app-meal:first-of-type ion-card {
   }
 }
 
-#largeTermin {
+.large-termin-card {
   display: flex;
+  flex-direction: column;
   margin-right: 0px;
+  margin-left: 0px;
+  box-shadow: none;
+  @media (prefers-color-scheme: light) {
+    border: solid 1px;
+    border-color: var(--ion-color-step-250);
+  }
+}
+
+.large-termin-card:first-of-type {
+  margin-top: 0px;
 }
 
 .horizontal-scroll-outer-container {

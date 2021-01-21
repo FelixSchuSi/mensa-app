@@ -69,8 +69,8 @@ export class GroupDateWidget extends LitElement {
 
   protected get largeTemplate(): TemplateResult {
     return html`
-      <ion-card id="largeTermin" class="termin-card">
-        <ion-card-header>
+      <ion-card class="large-termin-card">
+        <ion-card-header style="padding-bottom:0px">
           <ion-card-subtitle>
             ${this.numberOfParticipants}
             ${this.numberOfParticipants > 1 ? this.i18n.PARTICIPANTS : this.i18n.PARTICIPANT}
