@@ -1,4 +1,4 @@
-import { customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
+import { customElement, html, internalProperty, LitElement, property, TemplateResult } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
@@ -132,14 +132,18 @@ class CreateGroupPage extends PageMixin(LitElement) {
     return html`
       <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
       <ion-item
-        @click=${() => this.groupService.removeMembership(this.groupID)}
+        @click=${() => {
+          // this.groupService.removeMembership(this.groupID);
+          console.log('showing!');
+          this.showLeaveAlert();
+        }}
         lines="none"
         .detail=${false}
         button
         style="--background: var(--ion-card-background)"
       >
         <ion-label>Gruppe verlassen</ion-label>
-        <ion-button color="danger" fill="outline" slot="end">Gruppe verlassen</ion-button>
+        <ion-button color="danger" fill="outline" slot="end">Verlassen</ion-button>
       </ion-item>
       <!-- <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
       <ion-item
@@ -154,5 +158,22 @@ class CreateGroupPage extends PageMixin(LitElement) {
         <ion-icon color="danger" name="exit-outline"></ion-icon>
       </ion-item> -->
     `;
+  }
+
+  protected showLeaveAlert(): void {
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Leave group?';
+    alert.message = 'Do you relly want to leave this group?';
+    alert.buttons = [
+      'Cancel',
+      {
+        text: 'Leave',
+        handler: () => {
+          this.groupService.removeMembership(this.groupID);
+        }
+      }
+    ];
+    document.body.appendChild(alert);
+    alert.present();
   }
 }
