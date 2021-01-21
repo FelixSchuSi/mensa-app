@@ -71,15 +71,15 @@ export class GroupDateWidget extends LitElement {
     return html`
       <ion-card class="large-termin-card">
         <ion-card-header style="padding-bottom:0px">
-          <ion-card-subtitle>
+          <ion-card-subtitle style="display:flex; align-items:flex-end; ">
             ${this.numberOfParticipants}
             ${this.numberOfParticipants > 1 ? this.i18n.PARTICIPANTS : this.i18n.PARTICIPANT}
-          </ion-card-subtitle>
-
-          <ion-card-title style="display:flex; align-items:flex-start; ">
-            <div>Zusammen Mensen</div>
             <div style="flex-grow:1; min-width:16px"></div>
             ${this.participateButton}
+          </ion-card-subtitle>
+
+          <ion-card-title>
+            <div>Zusammen Mensen</div>
           </ion-card-title>
         </ion-card-header>
         <ion-card-content style="display: flex; flex-direction:column; padding-top: 0px; ">
@@ -109,7 +109,10 @@ export class GroupDateWidget extends LitElement {
         @click=${() => (this.attending = !this.attending)}
         outline
         color="${this.chipColor}"
-        style="border-color: var(--ion-color-${this.chipColor});"
+        style="
+          border-color: var(--ion-color-${this.chipColor});
+          ${this.large ? 'margin-bottom:-8px' : ''}
+        "
       >
         <ion-icon
           name="${this.attending ? 'checkmark-circle' : ''}"
