@@ -7,7 +7,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.dev.js",
+    "start:tls": "webpack-dev-server --https --cert ./cert.pem --key ./key.pem --config ./webpack.dev.js",
     "build": "webpack --config ./webpack.prod.js --progress",
+    "build:dev": "webpack --config ./webpack.dev.js --progress",
     "build:capacitor": "webpack --config ./webpack.capacitor.js --progress",
     "build:watch": "webpack --config ./webpack.capacitor.js --watch --progress",
     "lint": "eslint . --ext .ts",
