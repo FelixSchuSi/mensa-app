@@ -3,6 +3,7 @@ import { GenericDAO } from '../models/generic.dao';
 import { Group } from '../models/group';
 import { User } from '../models/user';
 import { encrypt, decrypt } from '../services/crypto.service';
+import { filterAndSortMensaVisits } from './mensa-visits';
 
 const router = express.Router();
 const codeCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -11,47 +12,59 @@ const codeLength = 8;
 // Get a group by groupID
 router.get('/:id', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
-  const group = await groupDAO.findOne({ id: req.params.id });
-  if (group) {
-    res.status(200).json({ ...group, name: decrypt(group!.name) });
-  } else {
+  let group = await groupDAO.findOne({ id: req.params.id });
+
+  if (!group) {
     res.status(404).json({});
+    return;
   }
+
+  group = await filterAndSortMensaVisits(group);
+  await groupDAO.update(group);
+
+  res.status(200).json({ ...group, name: decrypt(group!.name) });
 });
 
 // Get a group by joincode or groups of user
 router.get('/', async (req, res) => {
   const filter: Partial<Group> = {};
-  let groups: Array<Group> = [];
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   //Filter by joinCode
   if (req.query.joincode) {
     filter.joinCode = <string>req.query.joincode;
     filter.joinCode = filter.joinCode.toUpperCase();
   }
+
+  let groups: Group[];
+
   if (req.query.scope) {
     if (req.query.scope === 'me') {
       const userDAO: GenericDAO<User> = req.app.locals.userDAO;
       const userFilter: Partial<User> = { id: res.locals.user.id };
       const user = await userDAO.findOne(userFilter);
 
-      const groups = await Promise.all(
-        (user!.groupMemberships || []).map(async groupid => {
-          const group = await groupDAO.findOne({ id: groupid });
-          return { ...group, name: decrypt(group!.name) };
-        })
-      );
-      return res.status(200).json(groups);
+      const memberships = user!.groupMemberships || [];
+      const groupsOrNull = await Promise.all(memberships.map(async groupid => await groupDAO.findOne({ id: groupid })));
+      groups = <Group[]>groupsOrNull.filter(groupOrNull => !!groupOrNull);
     } else {
       return res.status(405).json({ message: 'Unkown scope' });
     }
   } else {
-    groups = (await groupDAO.findAll(filter)).map(group => {
-      return { ...group, name: decrypt(group.name) };
-    });
+    groups = await groupDAO.findAll(filter);
   }
 
-  res.json({ results: groups });
+  try {
+    groups = await Promise.all(groups.map(g => filterAndSortMensaVisits(g)));
+    groups = groups.map(group => {
+      return { ...group, name: decrypt(group.name) };
+    });
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+    return;
+  }
+
+  res.json(groups);
 });
 
 router.post('/', async (req, res) => {

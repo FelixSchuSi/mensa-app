@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { GenericDAO } from '../models/generic.dao';
 import { Group } from '../models/group';
 import { MensaVisit } from '../models/mensa-visit';
+import { decrypt } from '../services/crypto.service';
 
 const router = express.Router();
 
@@ -14,8 +15,9 @@ router.post('/:groupID', async (req, res) => {
   // Check if user is member of group
   const group = await groupDAO.findOne({ id: groupID });
   const userIsMember: boolean = group?.members.includes(userID) || false;
-  if (!userIsMember) {
+  if (!group || !userIsMember) {
     res.status(404).json({ message: 'Gruppe existiert nicht' });
+    return;
   }
 
   const newMensaVisit: MensaVisit = {
@@ -27,11 +29,12 @@ router.post('/:groupID', async (req, res) => {
     participants: [userID]
   };
 
-  const listOfMensaVisits = group?.mensaVisits ? group.mensaVisits : [];
+  const listOfMensaVisits = group.mensaVisits ? group.mensaVisits : [];
   const newListOfMensaVisits = [...listOfMensaVisits, newMensaVisit];
-  await groupDAO.update({ ...group, mensaVisits: newListOfMensaVisits });
+  const newGroup = await filterAndSortMensaVisits({ ...group, mensaVisits: newListOfMensaVisits });
+  await groupDAO.update(newGroup);
 
-  res.status(200).json({ ...group, mensaVisits: newListOfMensaVisits });
+  res.status(200).json({ ...newGroup, name: decrypt(group?.name!) });
 });
 
 router.delete('/:groupID/:mensaVisitID', async (req, res) => {
@@ -44,7 +47,7 @@ router.delete('/:groupID/:mensaVisitID', async (req, res) => {
   // Check if user is member of group
   const group = await groupDAO.findOne({ id: groupID });
   const userIsMember: boolean = group?.members.includes(userID) || false;
-  if (!userIsMember) {
+  if (!group || !userIsMember) {
     res.status(404).json({ message: 'Gruppe existiert nicht' });
     return;
   }
@@ -58,10 +61,11 @@ router.delete('/:groupID/:mensaVisitID', async (req, res) => {
   }
 
   const newListOfMensaVisits = listOfMensaVisits.filter(visit => visit.id !== mensaVisitID);
+  const newGroup = await filterAndSortMensaVisits({ ...group, mensaVisits: newListOfMensaVisits });
 
-  await groupDAO.update({ ...group, mensaVisits: newListOfMensaVisits });
+  await groupDAO.update(newGroup);
 
-  res.status(200).json({ ...group, mensaVisits: newListOfMensaVisits });
+  res.status(200).json({ ...newGroup, name: decrypt(group?.name!) });
 });
 
 router.patch('/:groupID/participate/:mensaVisitID', async (req, res) => {
@@ -73,7 +77,7 @@ router.patch('/:groupID/participate/:mensaVisitID', async (req, res) => {
   // Check if user is member of group
   const group = await groupDAO.findOne({ id: groupID });
   const userIsMember: boolean = group?.members.includes(userID) || false;
-  if (!userIsMember) {
+  if (!group || !userIsMember) {
     res.status(404).json({ message: 'Gruppe existiert nicht' });
     return;
   }
@@ -100,9 +104,10 @@ router.patch('/:groupID/participate/:mensaVisitID', async (req, res) => {
     return { ...visit, participants: newParticipants };
   });
 
-  await groupDAO.update({ ...group, mensaVisits: newListOfMensaVisits });
+  const newGroup = await filterAndSortMensaVisits({ ...group, mensaVisits: newListOfMensaVisits });
+  await groupDAO.update(newGroup);
 
-  res.status(200).json({ ...group, mensaVisits: newListOfMensaVisits });
+  res.status(200).json({ ...newGroup, name: decrypt(group?.name!) });
 });
 
 router.patch('/:groupID/leave/:mensaVisitID', async (req, res) => {
@@ -114,7 +119,7 @@ router.patch('/:groupID/leave/:mensaVisitID', async (req, res) => {
   // Check if user is member of group
   const group = await groupDAO.findOne({ id: groupID });
   const userIsMember: boolean = group?.members.includes(userID) || false;
-  if (!userIsMember) {
+  if (!group || !userIsMember) {
     res.status(404).json({ message: 'Gruppe existiert nicht' });
     return;
   }
@@ -134,9 +139,30 @@ router.patch('/:groupID/leave/:mensaVisitID', async (req, res) => {
     return { ...visit, participants: newParticipants };
   });
 
-  await groupDAO.update({ ...group, mensaVisits: newListOfMensaVisits });
+  const newGroup = await filterAndSortMensaVisits({ ...group, mensaVisits: newListOfMensaVisits });
+  await groupDAO.update(newGroup);
 
-  res.status(200).json({ ...group, mensaVisits: newListOfMensaVisits });
+  res.status(200).json({ ...newGroup, name: decrypt(group?.name!) });
 });
+
+export async function filterAndSortMensaVisits(group: Group): Promise<Group> {
+  const mensaVisits = group.mensaVisits;
+
+  // Filter mensaVisits of the past
+  const filteredMensaVisits = mensaVisits.filter(visit => visit.datetime >= Date.now());
+
+  // Sort mensaVisits by timestamp
+  const sordedMensaVisits = filteredMensaVisits.sort((visitA, visitB) => {
+    if (visitA.datetime === visitB.datetime) {
+      return 0;
+    } else if (visitA.datetime > visitB.datetime) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
+  return { ...group, mensaVisits: sordedMensaVisits };
+}
 
 export default router;

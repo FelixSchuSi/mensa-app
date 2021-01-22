@@ -19,7 +19,7 @@ export class GroupDateAddWidget extends LitElement {
   protected groupID!: string;
 
   @property({ type: Object, attribute: false })
-  protected setNotification!: () => void;
+  protected setNotification!: (e: any) => void;
 
   constructor() {
     super();

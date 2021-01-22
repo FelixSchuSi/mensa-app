@@ -24,12 +24,15 @@ class CreateGroupPage extends PageMixin(LitElement) {
   protected joinCodeElem!: HTMLDivElement;
 
   protected async firstUpdated(): Promise<void> {
-    this.groupService.getGroup(this.groupID).then(res => {
-      this.group = res;
+    this.groupService.subscribe(async groups => {
+      const thisGroupUpdated: Group | undefined = groups.find(group => group.id === this.groupID);
+      if (thisGroupUpdated) {
+        this.group = thisGroupUpdated;
+        this.members = await this.groupService.getGroupMembers(this.groupID);
+      }
     });
-    this.groupService.getGroupMembers(this.groupID).then(res => {
-      this.members = res;
-    });
+    this.group = await this.groupService.getGroup(this.groupID);
+    this.members = await this.groupService.getGroupMembers(this.groupID);
   }
 
   protected formatDate = (unixMillis: number): string => {
@@ -121,19 +124,19 @@ class CreateGroupPage extends PageMixin(LitElement) {
   }
 
   protected get mensaVisitsTemplate(): TemplateResult {
+    const visits = this.group?.mensaVisits || [];
     return html`
       <div class="card-like-padding" style="display:block">
         <h1>${this.i18n.MENSA_VISITS}</h1>
-        ${this.group?.mensaVisits.map(
-          mensaVisit =>
-            html`
-              <app-group-date
-                .group=${this.group}
-                .members=${this.members}
-                .mensaVisit=${mensaVisit}
-                large
-              ></app-group-date>
-            `
+        ${visits.map(
+          mensaVisit => html`
+            <app-group-date
+              .group=${this.group}
+              .members=${this.members}
+              .mensaVisit=${mensaVisit}
+              large
+            ></app-group-date>
+          `
         )}
         <app-group-date-add
           .groupID=${this.group?.id}

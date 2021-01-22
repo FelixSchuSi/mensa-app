@@ -9,6 +9,7 @@ import { Routes } from '../../routes';
 import { until } from 'lit-html/directives/until';
 import { sleep } from '../../helpers/sleep';
 import { userService } from '../../services/user.service';
+import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 
 @customElement('app-groups')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -140,6 +141,7 @@ class GroupsPage extends PageMixin(LitElement) {
           <app-group
             @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
             .group=${group}
+            .setNotification=${this.setNotification}
             style="cursor: pointer"
           >
           </app-group>

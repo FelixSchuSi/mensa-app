@@ -77,6 +77,8 @@ class GroupDateAddModalWidget extends LitElement {
               @ionChange=${(e: any) => (this.dateValue = e.detail.value)}
               class="date-picker"
               display-format="DD MMM YYYY"
+              min="${new Date().toISOString()}"
+              max="${new Date(new Date().setFullYear(new Date().getFullYear() + 5)).toISOString()}"
               placeholder=${this.i18n.CLICK_TO_CHOOSE_DATE}
             ></ion-datetime>
           </ion-item>
