@@ -7,7 +7,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.dev.js",
+    "start:tls": "webpack-dev-server --https --cert ./cert.pem --key ./key.pem --config ./webpack.dev.js",
     "build": "webpack --config ./webpack.prod.js --progress",
+    "build:dev": "webpack --config ./webpack.dev.js --progress",
     "build:capacitor": "webpack --config ./webpack.capacitor.js --progress",
     "build:watch": "webpack --config ./webpack.capacitor.js --watch --progress",
     "lint": "eslint . --ext .ts",
@@ -76,9 +78,10 @@
   "dependencies": {
     "@capacitor/android": "^2.4.2",
     "@capacitor/cli": "^2.4.2",
-    "@capacitor/core": "^2.4.2",
+    "@capacitor/core": "^2.4.6",
     "@capacitor/ios": "^2.4.2",
     "@ionic/core": "^5.4.3",
+    "@ionic/pwa-elements": "^3.0.2",
     "@open-wc/lit-helpers": "^0.3.11",
     "bootstrap": "^4.5.3",
     "lit-element": "^2.4.0",

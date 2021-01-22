@@ -9,6 +9,7 @@ import { Routes } from '../../routes';
 import { until } from 'lit-html/directives/until';
 import { sleep } from '../../helpers/sleep';
 import { userService } from '../../services/user.service';
+import { ShareParameter } from '../../helpers/share-api';
 
 @customElement('app-groups')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -48,12 +49,13 @@ class GroupsPage extends PageMixin(LitElement) {
     });
   }
 
-  protected async createJoinModal(): Promise<void> {
+  protected async createJoinModal(joinCode?: string): Promise<void> {
     const modal: HTMLIonModalElement = await modalController.create({
       component: 'app-group-join-modal',
       swipeToClose: true,
       componentProps: {
-        groups: this.groups
+        groups: this.groups,
+        inputJoinCode: joinCode
       }
     });
 
@@ -82,8 +84,12 @@ class GroupsPage extends PageMixin(LitElement) {
         this.groups = [];
       }
     });
+    const urlParams = new URLSearchParams(window.location.search);
+    const joinCode = urlParams.get('joinCode');
+    if (joinCode) {
+      this.createJoinModal(joinCode);
+    }
   }
-
   protected render(): TemplateResult {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
@@ -138,6 +144,7 @@ class GroupsPage extends PageMixin(LitElement) {
       ${this.groups.map(group => {
         return html`
           <app-group
+            .setNotification=${this.setNotification}
             @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
             .group=${group}
             style="cursor: pointer"

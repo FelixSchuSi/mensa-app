@@ -171,6 +171,7 @@ export class MealsFuturePage extends PageMixin(LitElement) {
                   routerService.navigate(Routes.MEAL_FUTURE_DETAILS, { mensa: meal.mensa, title: meal.title });
                 }
               }}
+              .setNotification=${this.setNotification}
               .meal=${meal}
               .i18n=${this.i18n}
               .status=${this.userInfo?.status}

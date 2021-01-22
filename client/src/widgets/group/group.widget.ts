@@ -2,7 +2,9 @@ import { LitElement, customElement, property, TemplateResult, html } from 'lit-e
 import { Group } from '../../../../server/src/models/group';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
-
+import { share, ShareParameter } from '../../helpers/share-api';
+import { Routes } from '../../routes';
+import { createShareModal } from '../../helpers/create-share-modal';
 @customElement('app-group')
 export class GroupWidget extends LitElement {
   protected createRenderRoot(): LitElement {
@@ -15,12 +17,26 @@ export class GroupWidget extends LitElement {
   @property({ type: Object, attribute: false })
   protected group!: Group;
 
+  @property({ type: Object, attribute: false })
+  protected setNotification!: (e: any) => void;
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
     i18nService.subscribe(i18n => (this.i18n = i18n));
   }
 
+  protected createShareParameter = (): ShareParameter => {
+    return {
+      title: i18nService.complexi18n(this.i18n.GROUP_INVITE_TITLE, { Group: this.group.name || '' }),
+      text: i18nService.complexi18n(this.i18n.GROUP_INVITE_MESSAGE, {
+        Group: this.group.name,
+        JoinCode: this.group.joinCode
+      }),
+      path: `${Routes.GROUPS}?joinCode=${this.group.joinCode}`,
+      subject: i18nService.complexi18n(this.i18n.GROUP_SHARE_SUBJECT, { Group: this.group?.name || '' })
+    };
+  };
   protected render(): TemplateResult {
     return html`
       <ion-card class="card-no-margin-when-small">
@@ -62,9 +78,11 @@ export class GroupWidget extends LitElement {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button
-          @click=${(e: any) => {
+          @click=${async (e: any): Promise<void> => {
             e.stopPropagation();
-            console.log('TODO: Implement Share API to Invite someone to a group');
+            if (!(await share(this.createShareParameter()))) {
+              createShareModal(this.createShareParameter(), this.setNotification);
+            }
           }}
         >
           <ion-icon slot="icon-only" color="primary" name="share-social"></ion-icon>

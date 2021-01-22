@@ -34,6 +34,9 @@ class I18nService {
   public getStrings(): LanguageStrings {
     return this.strings;
   }
+  public complexi18n(languageString: string, params: { [key: string]: string }): string {
+    return this.renderSentenceWithParams(languageString, params);
+  }
 
   public subscribe(listener: i18nListener): void {
     this.listeners.push(listener);
@@ -41,6 +44,16 @@ class I18nService {
 
   private notifyListeners(i18n: LanguageStrings): void {
     this.listeners.forEach(listener => listener(i18n));
+  }
+  private renderSentenceWithParams(sentence: string, params: { [key: string]: string }): string {
+    const paramKeys = Object.keys(params);
+    let targetStr = sentence;
+    if (paramKeys.length) {
+      for (const [key, value] of Object.entries(params)) {
+        targetStr = targetStr.replace(new RegExp('\\{' + key + '\\}', 'gi'), value);
+      }
+    }
+    return targetStr;
   }
 }
 

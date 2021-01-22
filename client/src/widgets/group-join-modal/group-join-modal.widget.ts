@@ -12,6 +12,7 @@ export class FilterModalWidget extends LitElement {
   @property({ type: Array })
   protected groups: Group[] = [];
   protected groupService: GroupService = groupService;
+  @property({ type: String })
   protected inputJoinCode = '';
   constructor() {
     super();
@@ -76,6 +77,7 @@ export class FilterModalWidget extends LitElement {
                 const target = e.target as HTMLTextAreaElement;
                 this.inputJoinCode = target.value;
               }}
+              value=${this.inputJoinCode}
               placeholder=${this.i18n.JOIN_CODE}
               type="text"
               required

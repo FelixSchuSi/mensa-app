@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { css, customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { routerService } from '../../services/router.service';
@@ -13,10 +14,11 @@ import { MealDateFilterConfig, DEFAULT_DATE_FILTER } from '../../models/meal-dat
 import { mealService } from '../../services/meal.service';
 import { userService } from '../../services/user.service';
 import { getToday } from '../../helpers/get-today';
+import { ShareParameter } from '../../helpers/share-api';
 
 @customElement('app-meals-today')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class MealsTodayPage extends PageMixin(LitElement) {
+export class MealsTodayPage extends PageMixin(LitElement) {
   @query('ion-infinite-scroll')
   protected infiniteScrollElem!: HTMLIonInfiniteScrollElement;
   @internalProperty()
@@ -69,7 +71,17 @@ class MealsTodayPage extends PageMixin(LitElement) {
       return valid;
     });
   }
-
+  public async createShareModal(params: ShareParameter): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-share-modal',
+      swipeToClose: true,
+      componentProps: {
+        shareParams: params,
+        setNotification: this.setNotification
+      }
+    });
+    await modal.present();
+  }
   protected async firstUpdated(): Promise<void> {
     window.addEventListener('resize', this.carouselResizeHandler);
     try {
@@ -143,6 +155,7 @@ class MealsTodayPage extends PageMixin(LitElement) {
                   routerService.navigate(Routes.MEAL_TODAY_DETAILS, { mensa: meal.mensa, title: meal.title });
                 }
               }}
+              .setNotification=${this.setNotification}
               .meal=${meal}
               .i18n=${this.i18n}
               .status=${this.userInfo?.status}
