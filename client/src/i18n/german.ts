@@ -175,8 +175,11 @@ export const german: LanguageStrings = {
   NEW_GROUP: 'Neue Gruppe',
   GROUP_NAME: 'Name der Gruppe',
   GROUP_INVITE_MESSAGE:
-    'Hey!\n Ich lade dich zu meiner Mensa-Gruppe {Group} ein! Nutze einfach den Code {Joincode} um beizutreten.',
+    'Hey!\nIch lade dich zu meiner Mensa-Gruppe {Group} ein! Nutze einfach den Code {Joincode} um beizutreten.',
   GROUP_INVITE_TITLE: 'Lade deine Freunde ein {Group} beizutreten',
-  MEAL_SHARE_MESSAGE: 'Hey!\n Schau mal, heute gibt es {Meal} in der Mensa',
-  MEAL_SHARE_TITLE: 'Teile {Meal} mit deinen Freunde'
+  MEAL_SHARE_MESSAGE: 'Hey!\nSchau mal, heute gibt es {Meal} in der Mensa',
+  MEAL_SHARE_TITLE: 'Teile {Meal} mit deinen Freunde',
+  SHARE_GROUP: 'Gruppe teilen',
+  SHARE_MEAL: 'Gericht teilen',
+  COPY_TO_CLIPBOARD: 'In Zwischenablage kopieren'
 };
