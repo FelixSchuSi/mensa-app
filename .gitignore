@@ -3,3 +3,7 @@ node_modules/
 
 # Mac only
 .DS_Store
+
+# Testing Certs
+cert.pem
+key.pem
