@@ -1,6 +1,8 @@
 import { defineCustomElements } from '@ionic/core/loader';
 import * as pwaElements from '@ionic/pwa-elements/loader';
+import { Plugins } from '@capacitor/core';
 
+// Plugins.Share
 defineCustomElements(window);
 pwaElements.defineCustomElements(window);
 
