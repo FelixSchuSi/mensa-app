@@ -68,6 +68,7 @@ export const german: LanguageStrings = {
   GROUPS: 'Gruppen',
   SIGN_UP: 'Registrieren',
   SIGN_UP_NOW: 'Jetzt Registrieren',
+  CREATE_ACCOUNT: 'Konto erstellen',
   SIGN_IN: 'Anmelden',
   SIGN_IN_NOW: 'Jetzt anmelden',
   SIGN_OUT: 'Abmelden',

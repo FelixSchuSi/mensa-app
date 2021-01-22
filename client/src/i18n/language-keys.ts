@@ -64,6 +64,7 @@ export type LanguageKeys =
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'
   | 'SIGN_UP_NOW'
+  | "CREATE_ACCOUNT"
   | 'GROUPS'
   | 'SIGN_IN'
   | 'SIGN_IN_NOW'

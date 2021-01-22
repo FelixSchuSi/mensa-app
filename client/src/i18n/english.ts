@@ -67,6 +67,7 @@ export const english: LanguageStrings = {
   SWITCH_LANGUAGE: 'Change language',
   SIGN_UP: 'Sign up',
   SIGN_UP_NOW: 'Sign up now',
+  CREATE_ACCOUNT: 'Create account',
   GROUPS: 'Groups',
   SIGN_IN: 'Sign in',
   SIGN_IN_NOW: 'Sign in now',

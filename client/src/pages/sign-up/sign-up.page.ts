@@ -191,7 +191,7 @@ class SignUpPage extends PageMixin(LitElement) {
               >${this.i18n.PREVIOUS_STEP}</ion-button
             >
             <div style="flex-grow:1"></div>
-            <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.SIGN_UP}</ion-button>
+            <ion-button color="primary" type="button" @click="${this.submit}">${this.i18n.CREATE_ACCOUNT}</ion-button>
           </div>
         </form>
       </div>
