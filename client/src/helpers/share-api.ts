@@ -1,17 +1,25 @@
+import { Plugins } from '@capacitor/core';
+const { Share } = Plugins;
+
 export interface ShareParameter {
   title: string;
   text: string;
   path?: string;
+  subject: string;
 }
-export function share(parameter: ShareParameter): boolean {
-  if (navigator.share) {
-    navigator.share({
+export function buildShareURL(path?: string): string {
+  return 'https://mensa-app.dub-services.de/' + (path ? `/${path}` : '');
+}
+export async function share(parameter: ShareParameter): Promise<boolean> {
+  try {
+    await Share.share({
       title: parameter.title,
-      text: parameter.text + (parameter.path ? '\n' : ''),
-      url: window.location.hostname + (parameter.path ? `/${parameter.path}` : '')
+      text: parameter.text,
+      url: buildShareURL(parameter.path),
+      dialogTitle: parameter.title
     });
     return true;
-  } else {
+  } catch (e) {
     return false;
   }
 }

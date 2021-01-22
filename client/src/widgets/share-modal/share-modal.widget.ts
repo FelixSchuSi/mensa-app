@@ -6,12 +6,13 @@ import { i18nService } from '../../services/i18n.service';
 import { ShareParameter } from '../../helpers/share-api';
 import GroupDetailsPage from '../../pages/group-details/group-details.page';
 import { createMailto } from '../../helpers/create-mailto';
+import { buildShareURL } from '../../helpers/share-api';
 @customElement('app-share-modal')
 export class ShareModalWidget extends LitElement {
   @internalProperty()
   protected i18n!: LanguageStrings;
   @property({ type: Object })
-  protected shareParams: ShareParameter = { text: '', title: '' };
+  protected shareParams: ShareParameter = { text: '', title: '', subject: '' };
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -22,10 +23,11 @@ export class ShareModalWidget extends LitElement {
     return this;
   }
   protected createShareText(): string {
-    return `${this.shareParams.text}\n${window.location.hostname}/${this.shareParams.path}`;
+    return `${this.shareParams.text}\n${buildShareURL(window.location.search)}`;
   }
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   @property({ type: Function })
-  protected notificationCallback: (arg0: string) => void = null;
+  protected notificationCallback: ((arg0: string) => void) | undefined;
   protected update(changedProperties: Map<string | number | symbol, unknown>): void {
     this.shareText = this.createShareText();
     super.update(changedProperties);
@@ -56,9 +58,8 @@ export class ShareModalWidget extends LitElement {
           ></ion-textarea>
           <ion-button
             @click=${(): void => {
-              copyToClipboard(this.shareText).then(() => {
-                if (this.notificationCallback) this.notificationCallback(this.i18n.COPIED_TO_CLIPBOARD);
-              });
+              copyToClipboard(this.shareText);
+              if (this.notificationCallback) this.notificationCallback(this.i18n.COPIED_TO_CLIPBOARD);
             }}
             >${this.i18n.COPY_TO_CLIPBOARD}</ion-button
           >
@@ -73,7 +74,7 @@ export class ShareModalWidget extends LitElement {
             @click=${(): void => {
               const mailTo = createMailto(
                 this.toEmail,
-                encodeURIComponent(this.shareParams.title),
+                encodeURIComponent(this.shareParams.subject),
                 encodeURIComponent(this.shareText)
               );
               const win = window.open(mailTo, '_blank');

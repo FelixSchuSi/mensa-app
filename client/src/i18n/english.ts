@@ -180,5 +180,7 @@ export const english: LanguageStrings = {
   MEAL_SHARE_TITLE: 'Show {Meal} to your friends',
   SHARE_GROUP: 'Share group',
   SHARE_MEAL: 'Share meal',
-  COPY_TO_CLIPBOARD: 'Copy to clipboard'
+  COPY_TO_CLIPBOARD: 'Copy to clipboard',
+  MEAL_SHARE_SUBJECT: 'Today in the mensa: {Meal}',
+  GROUP_SHARE_SUBJECT: 'Join my mensa group {Group}'
 };

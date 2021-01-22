@@ -17,10 +17,8 @@ import { mealService } from '../../services/meal.service';
 import { transformDate } from '../../widgets/meal/transform-date';
 import { transformPrice } from '../../widgets/meal/transform-price';
 import { i18nService } from '../../services/i18n.service';
-import { copyToClipboard } from '../../helpers/copy-to-clipboard';
-import { modalController } from '@ionic/core';
-import { Routes } from '../../routes';
 import { share, ShareParameter } from '../../helpers/share-api';
+import { modalController } from '@ionic/core';
 
 const sharedCSS = require('../../shared.scss');
 
@@ -56,7 +54,8 @@ class MealDetailPage extends PageMixin(LitElement) {
     return {
       title: i18nService.complexi18n(this.i18n.MEAL_SHARE_TITLE, { Meal: this.meal?.title || '' }),
       text: i18nService.complexi18n(this.i18n.MEAL_SHARE_MESSAGE, { Meal: this.meal?.title || '' }),
-      path: `${Routes.MEALS_TODAY}/meal${window.location.search}`
+      path: `${Routes.MEALS_TODAY}/meal${window.location.search}`,
+      subject: i18nService.complexi18n(this.i18n.MEAL_SHARE_SUBJECT, { Meal: this.meal?.title || '' })
     };
   };
   protected async createShareModal(): Promise<void> {
@@ -205,8 +204,10 @@ class MealDetailPage extends PageMixin(LitElement) {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button
-          @click=${(): void => {
-            if (!share(this.createShareParameter())) this.createShareModal();
+          @click=${async (): Promise<void> => {
+            if (!(await share(this.createShareParameter()))) {
+              this.createShareModal();
+            }
           }}
         >
           <ion-icon color="primary" slot="icon-only" name="share-social-outline"></ion-icon>

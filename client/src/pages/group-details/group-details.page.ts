@@ -46,6 +46,7 @@ class GroupDetailsPage extends PageMixin(LitElement) {
         Group: this.group?.name || '',
         JoinCode: this.group?.joinCode || ''
       }),
+      subject: i18nService.complexi18n(this.i18n.GROUP_SHARE_SUBJECT, { Group: this.group?.name || '' }),
       path: `${Routes.GROUPS}?joinCode=${this.group?.joinCode}`
     };
   };
@@ -133,9 +134,8 @@ class GroupDetailsPage extends PageMixin(LitElement) {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button
-          @click=${(e: any) => {
-            const params = this.createShareParameter();
-            if (!share(params)) {
+          @click=${async (e: any) => {
+            if (!(await share(this.createShareParameter()))) {
               this.createShareModal();
             }
             e.stopPropagation();
@@ -162,9 +162,8 @@ class GroupDetailsPage extends PageMixin(LitElement) {
       <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
       <ion-item
         @click=${(): void => {
-          copyToClipboard(this.group?.joinCode || '').then(() => {
-            this.setNotification({ successMessage: this.i18n.COPIED_TO_CLIPBOARD });
-          });
+          copyToClipboard(this.group?.joinCode || '');
+          this.setNotification({ successMessage: this.i18n.COPIED_TO_CLIPBOARD });
         }}
         lines="none"
         .detail=${false}

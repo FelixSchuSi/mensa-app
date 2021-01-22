@@ -6,7 +6,9 @@ import { LanguageStrings } from '../../models/language-strings';
 import { MealsFuturePage } from '../../pages/meals-future/meals-future.page';
 import { transformDate } from './transform-date';
 import { transformPrice } from './transform-price';
-
+import { i18nService } from '../../services/i18n.service';
+import { share, ShareParameter } from '../../helpers/share-api';
+import { MealsTodayPage } from '../../pages/meals-today/meals-today.page';
 @customElement('app-meal')
 export class MealWidget extends LitElement {
   protected createRenderRoot(): LitElement {
@@ -29,10 +31,29 @@ export class MealWidget extends LitElement {
 
   protected slidesPerView = getSlidesPerView();
 
+  protected createShareParameter = (): ShareParameter => {
+    return {
+      title: i18nService.complexi18n(this.i18n.MEAL_SHARE_TITLE, { Meal: this.meal?.title || '' }),
+      text: i18nService.complexi18n(this.i18n.MEAL_SHARE_MESSAGE, { Meal: this.meal?.title || '' }),
+      path: `/TODO`,
+      subject: i18nService.complexi18n(this.i18n.MEAL_SHARE_SUBJECT, { Meal: this.meal?.title || '' })
+    };
+  };
+
   protected pictureNumber = String(Math.ceil(Math.random() * 5));
   protected get favoriteButton(): TemplateResult {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
+        <ion-button
+          @click=${async (): Promise<void> => {
+            if (!(await share(this.createShareParameter()))) {
+              const page = <MealsTodayPage>this.parentNode?.parentElement;
+              page.createShareModal(this.createShareParameter());
+            }
+          }}
+        >
+          <ion-icon color="primary" slot="icon-only" name="share-social-outline"></ion-icon>
+        </ion-button>
         <ion-button
           @click=${(e: CustomEvent) => {
             e.preventDefault();

@@ -30,7 +30,8 @@ export class GroupWidget extends LitElement {
         Group: this.group.name,
         JoinCode: this.group.joinCode
       }),
-      path: `${Routes.GROUPS}?joinCode=${this.group.joinCode}`
+      path: `${Routes.GROUPS}?joinCode=${this.group.joinCode}`,
+      subject: i18nService.complexi18n(this.i18n.GROUP_SHARE_SUBJECT, { Group: this.group?.name || '' })
     };
   };
   protected render(): TemplateResult {
@@ -74,9 +75,9 @@ export class GroupWidget extends LitElement {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button
-          @click=${(e: any) => {
+          @click=${async (e: any): Promise<void> => {
             e.stopPropagation();
-            if (!share(this.createShareParameter())) {
+            if (!(await share(this.createShareParameter()))) {
               const page = <GroupsPage>this.parentNode?.parentElement;
               page.createShareModal(this.createShareParameter());
             }

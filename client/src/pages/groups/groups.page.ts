@@ -29,6 +29,20 @@ class GroupsPage extends PageMixin(LitElement) {
     console.log(code);
   };
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public async createShareModal(params: ShareParameter): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-share-modal',
+      swipeToClose: true,
+      componentProps: {
+        shareParams: params,
+        notificationCallback: (msg: string): void => {
+          this.setNotification({ successMessage: msg });
+        }
+      }
+    });
+    await modal.present();
+  }
   protected loadGroups(): void {
     this.loaded = new Promise<void>(async (resolve, reject) => {
       try {
@@ -49,12 +63,13 @@ class GroupsPage extends PageMixin(LitElement) {
     });
   }
 
-  protected async createJoinModal(): Promise<void> {
+  protected async createJoinModal(joinCode?: string): Promise<void> {
     const modal: HTMLIonModalElement = await modalController.create({
       component: 'app-group-join-modal',
       swipeToClose: true,
       componentProps: {
-        groups: this.groups
+        groups: this.groups,
+        inputJoinCode: joinCode
       }
     });
 
@@ -83,20 +98,11 @@ class GroupsPage extends PageMixin(LitElement) {
         this.groups = [];
       }
     });
-  }
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  public async createShareModal(params: ShareParameter): Promise<void> {
-    const modal: HTMLIonModalElement = await modalController.create({
-      component: 'app-share-modal',
-      swipeToClose: true,
-      componentProps: {
-        shareParams: params,
-        notificationCallback: (msg: string): void => {
-          this.setNotification({ successMessage: msg });
-        }
-      }
-    });
-    await modal.present();
+    const urlParams = new URLSearchParams(window.location.search);
+    const joinCode = urlParams.get('joinCode');
+    if (joinCode) {
+      this.createJoinModal(joinCode);
+    }
   }
   protected render(): TemplateResult {
     return html`

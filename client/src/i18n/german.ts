@@ -181,5 +181,7 @@ export const german: LanguageStrings = {
   MEAL_SHARE_TITLE: 'Teile {Meal} mit deinen Freunde',
   SHARE_GROUP: 'Gruppe teilen',
   SHARE_MEAL: 'Gericht teilen',
-  COPY_TO_CLIPBOARD: 'In Zwischenablage kopieren'
+  COPY_TO_CLIPBOARD: 'In Zwischenablage kopieren',
+  MEAL_SHARE_SUBJECT: 'Heute in der Mensa: {Meal}',
+  GROUP_SHARE_SUBJECT: 'Tritt meiner Mensagruppe {Group} bei'
 };

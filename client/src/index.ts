@@ -1,5 +1,10 @@
 import { defineCustomElements } from '@ionic/core/loader';
+import * as pwaElements from '@ionic/pwa-elements/loader';
+import { Plugins } from '@capacitor/core';
+
 defineCustomElements(window);
+pwaElements.defineCustomElements(window);
+
 import './index.scss';
 
 import './pages/app.component';
@@ -34,5 +39,4 @@ import './widgets/group-date-add/group-date-add.widget';
 import './widgets/group-create-modal/group-create-modal.widget';
 import './widgets/horizontal-scroller/horizontal-scroller.widget';
 import './widgets/share-modal/share-modal.widget';
-
 import './../node_modules/macro-carousel/dist/macro-carousel.min.js';
