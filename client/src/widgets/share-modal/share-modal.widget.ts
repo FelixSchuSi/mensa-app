@@ -4,7 +4,6 @@ import { copyToClipboard } from '../../helpers/copy-to-clipboard';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 import { ShareParameter } from '../../helpers/share-api';
-import GroupDetailsPage from '../../pages/group-details/group-details.page';
 import { createMailto } from '../../helpers/create-mailto';
 import { buildShareURL } from '../../helpers/share-api';
 @customElement('app-share-modal')

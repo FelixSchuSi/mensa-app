@@ -4,7 +4,6 @@ import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 import { share, ShareParameter } from '../../helpers/share-api';
 import { Routes } from '../../routes';
-import GroupsPage from '../../pages/groups/groups.page';
 import { createShareModal } from '../../helpers/create-share-modal';
 @customElement('app-group')
 export class GroupWidget extends LitElement {
