@@ -1,28 +1,17 @@
-import { httpService } from '../services/http.service';
-
-export enum WhatToShare {
-  GROUP,
-  MEAL
-}
-export interface ShareObject {
+export interface ShareParameter {
   title: string;
   text: string;
-  url: string;
+  path?: string;
 }
-const ShareContentMap = new Map<WhatToShare, ShareObject>();
-
-export async function share(title: string, text: string, path?: string): Promise<boolean> {
+export function share(parameter: ShareParameter): boolean {
   if (navigator.share) {
     navigator.share({
-      title: title,
-      text: text,
-      url: window.location.hostname + (path ? `/${path}` : '')
+      title: parameter.title,
+      text: parameter.text + (parameter.path ? '\n' : ''),
+      url: window.location.hostname + (parameter.path ? `/${parameter.path}` : '')
     });
     return true;
   } else {
     return false;
   }
-}
-export function shareGroup(joinCode: string) {
-  share('');
 }
