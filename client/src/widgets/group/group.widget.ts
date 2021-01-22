@@ -2,7 +2,9 @@ import { LitElement, customElement, property, TemplateResult, html } from 'lit-e
 import { Group } from '../../../../server/src/models/group';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
-
+import { share, ShareParameter } from '../../helpers/share-api';
+import { Routes } from '../../routes';
+import GroupsPage from '../../pages/groups/groups.page';
 @customElement('app-group')
 export class GroupWidget extends LitElement {
   protected createRenderRoot(): LitElement {
@@ -21,6 +23,16 @@ export class GroupWidget extends LitElement {
     i18nService.subscribe(i18n => (this.i18n = i18n));
   }
 
+  protected createShareParameter = (): ShareParameter => {
+    return {
+      title: i18nService.complexi18n(this.i18n.GROUP_INVITE_TITLE, { Group: this.group.name || '' }),
+      text: i18nService.complexi18n(this.i18n.GROUP_INVITE_MESSAGE, {
+        Group: this.group.name,
+        JoinCode: this.group.joinCode
+      }),
+      path: `${Routes.GROUPS}?joinCode=${this.group.joinCode}`
+    };
+  };
   protected render(): TemplateResult {
     return html`
       <ion-card class="card-no-margin-when-small">
@@ -64,7 +76,10 @@ export class GroupWidget extends LitElement {
         <ion-button
           @click=${(e: any) => {
             e.stopPropagation();
-            console.log('TODO: Implement Share API to Invite someone to a group');
+            if (!share(this.createShareParameter())) {
+              const page = <GroupsPage>this.parentNode?.parentElement;
+              page.createShareModal(this.createShareParameter());
+            }
           }}
         >
           <ion-icon slot="icon-only" color="primary" name="share-social"></ion-icon>

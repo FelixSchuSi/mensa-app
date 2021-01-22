@@ -4,6 +4,7 @@ import { groupService, GroupService } from '../../services/group.service';
 import { Image } from '../../../../server/src/models/image';
 import { mediaService, MediaService } from '../../services/media.service';
 import { i18nService } from '../../services/i18n.service';
+import { share } from '../../helpers/share-api';
 
 @customElement('app-group-create-modal')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -9,6 +9,7 @@ import { Routes } from '../../routes';
 import { until } from 'lit-html/directives/until';
 import { sleep } from '../../helpers/sleep';
 import { userService } from '../../services/user.service';
+import { ShareParameter } from '../../helpers/share-api';
 
 @customElement('app-groups')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -83,7 +84,20 @@ class GroupsPage extends PageMixin(LitElement) {
       }
     });
   }
-
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public async createShareModal(params: ShareParameter): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-share-modal',
+      swipeToClose: true,
+      componentProps: {
+        shareParams: params,
+        notificationCallback: (msg: string): void => {
+          this.setNotification({ successMessage: msg });
+        }
+      }
+    });
+    await modal.present();
+  }
   protected render(): TemplateResult {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
@@ -240,3 +254,4 @@ class GroupsPage extends PageMixin(LitElement) {
     `;
   }
 }
+export default GroupsPage;

@@ -5,11 +5,15 @@ import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
 import { User } from '../../../../server/src/models/user';
 import { routerService } from '../../services/router.service';
+import { modalController } from '@ionic/core';
 import { Routes } from '../../routes';
+import { share, ShareParameter } from '../../helpers/share-api';
+import { i18nService } from '../../services/i18n.service';
+import { copyToClipboard } from '../../helpers/copy-to-clipboard';
 
 @customElement('app-group-details')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class CreateGroupPage extends PageMixin(LitElement) {
+class GroupDetailsPage extends PageMixin(LitElement) {
   protected groupService: GroupService = groupService;
   protected groupID = routerService.getQueryParameter('id');
   @internalProperty()
@@ -35,7 +39,30 @@ class CreateGroupPage extends PageMixin(LitElement) {
     const date = new Date(unixMillis);
     return date.toLocaleString('de-DE');
   };
+  protected createShareParameter = (): ShareParameter => {
+    return {
+      title: i18nService.complexi18n(this.i18n.GROUP_INVITE_TITLE, { Group: this.group?.name || '' }),
+      text: i18nService.complexi18n(this.i18n.GROUP_INVITE_MESSAGE, {
+        Group: this.group?.name || '',
+        JoinCode: this.group?.joinCode || ''
+      }),
+      path: `${Routes.GROUPS}?joinCode=${this.group?.joinCode}`
+    };
+  };
+  protected async createShareModal(): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-share-modal',
+      swipeToClose: true,
+      componentProps: {
+        shareParams: this.createShareParameter(),
+        notificationCallback: (msg: string): void => {
+          this.setNotification({ successMessage: msg });
+        }
+      }
+    });
 
+    await modal.present();
+  }
   protected render(): TemplateResult {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
@@ -103,14 +130,16 @@ class CreateGroupPage extends PageMixin(LitElement) {
       </ion-content>
     `;
   }
-
   protected get buttonsTemplate(): TemplateResult {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button
           @click=${(e: any) => {
+            const params = this.createShareParameter();
+            if (!share(params)) {
+              this.createShareModal();
+            }
             e.stopPropagation();
-            console.log('TODO: Implement Share API to Invite someone to a group');
           }}
         >
           <ion-icon slot="icon-only" color="primary" name="share-social"></ion-icon>
@@ -133,15 +162,10 @@ class CreateGroupPage extends PageMixin(LitElement) {
     return html`
       <div style="width:100%; border-bottom: solid 1px; border-color: var(--ion-color-step-250)"></div>
       <ion-item
-        @click=${() => {
-          const textArea = document.createElement('textarea');
-          textArea.value = this.group?.joinCode || '';
-          document.body.appendChild(textArea);
-          textArea.focus();
-          textArea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textArea);
-          this.setNotification({ successMessage: this.i18n.COPIED_TO_CLIPBOARD });
+        @click=${(): void => {
+          copyToClipboard(this.group?.joinCode || '').then(() => {
+            this.setNotification({ successMessage: this.i18n.COPIED_TO_CLIPBOARD });
+          });
         }}
         lines="none"
         .detail=${false}
@@ -206,3 +230,4 @@ class CreateGroupPage extends PageMixin(LitElement) {
     alert.present();
   }
 }
+export default GroupDetailsPage;
