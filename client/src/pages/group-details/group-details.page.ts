@@ -51,19 +51,7 @@ class GroupDetailsPage extends PageMixin(LitElement) {
       path: `${Routes.GROUPS}?joinCode=${this.group?.joinCode}`
     };
   };
-  // protected async createShareModal(): Promise<void> {
-  //   const modal: HTMLIonModalElement = await modalController.create({
-  //     component: 'app-share-modal',
-  //     swipeToClose: true,
-  //     componentProps: {
-  //       shareParams: this.createShareParameter(),
-  //       notificationCallback: (msg: string): void => {
-  //         this.setNotification({ successMessage: msg });
-  //       }
-  //     }
-  //   });
-  //   await modal.present();
-  // }
+
   protected render(): TemplateResult {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
