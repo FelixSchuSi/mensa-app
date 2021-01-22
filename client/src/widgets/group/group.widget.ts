@@ -5,6 +5,7 @@ import { i18nService } from '../../services/i18n.service';
 import { share, ShareParameter } from '../../helpers/share-api';
 import { Routes } from '../../routes';
 import GroupsPage from '../../pages/groups/groups.page';
+import { createShareModal } from '../../helpers/create-share-modal';
 @customElement('app-group')
 export class GroupWidget extends LitElement {
   protected createRenderRoot(): LitElement {
@@ -16,6 +17,9 @@ export class GroupWidget extends LitElement {
 
   @property({ type: Object, attribute: false })
   protected group!: Group;
+
+  @property({ type: Object, attribute: false })
+  protected setNotification!: (e: any) => void;
 
   constructor() {
     super();
@@ -78,8 +82,7 @@ export class GroupWidget extends LitElement {
           @click=${async (e: any): Promise<void> => {
             e.stopPropagation();
             if (!(await share(this.createShareParameter()))) {
-              const page = <GroupsPage>this.parentNode?.parentElement;
-              page.createShareModal(this.createShareParameter());
+              createShareModal(this.createShareParameter(), this.setNotification);
             }
           }}
         >

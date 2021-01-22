@@ -8,7 +8,8 @@ import { transformDate } from './transform-date';
 import { transformPrice } from './transform-price';
 import { i18nService } from '../../services/i18n.service';
 import { share, ShareParameter } from '../../helpers/share-api';
-import { MealsTodayPage } from '../../pages/meals-today/meals-today.page';
+import { createShareModal } from '../../helpers/create-share-modal';
+import { Routes } from '../../routes';
 @customElement('app-meal')
 export class MealWidget extends LitElement {
   protected createRenderRoot(): LitElement {
@@ -29,13 +30,16 @@ export class MealWidget extends LitElement {
   @query('macro-carousel')
   protected carousel!: any;
 
+  @property({ type: Object, attribute: false })
+  protected setNotification!: (e: any) => void;
+
   protected slidesPerView = getSlidesPerView();
 
   protected createShareParameter = (): ShareParameter => {
     return {
       title: i18nService.complexi18n(this.i18n.MEAL_SHARE_TITLE, { Meal: this.meal?.title || '' }),
       text: i18nService.complexi18n(this.i18n.MEAL_SHARE_MESSAGE, { Meal: this.meal?.title || '' }),
-      path: `/TODO`,
+      path: `${Routes.MEAL_TODAY_DETAILS}?mensa=${this.meal.mensa}&title=${this.meal.title}`,
       subject: i18nService.complexi18n(this.i18n.MEAL_SHARE_SUBJECT, { Meal: this.meal?.title || '' })
     };
   };
@@ -47,8 +51,7 @@ export class MealWidget extends LitElement {
         <ion-button
           @click=${async (): Promise<void> => {
             if (!(await share(this.createShareParameter()))) {
-              const page = <MealsTodayPage>this.parentNode?.parentElement;
-              page.createShareModal(this.createShareParameter());
+              createShareModal(this.createShareParameter(), this.setNotification);
             }
           }}
         >

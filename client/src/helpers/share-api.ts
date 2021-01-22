@@ -8,7 +8,7 @@ export interface ShareParameter {
   subject: string;
 }
 export function buildShareURL(path?: string): string {
-  return 'https://mensa-app.dub-services.de/' + (path ? `/${path}` : '');
+  return 'https://mensa-app.dub-services.de' + (path ? encodeURI(`/${path}`) : '');
 }
 export async function share(parameter: ShareParameter): Promise<boolean> {
   try {
@@ -20,6 +20,11 @@ export async function share(parameter: ShareParameter): Promise<boolean> {
     });
     return true;
   } catch (e) {
+    // Canceled will result in error w/ message
+    // If Browser Share API not present, error will not have a message
+    if (e.message) {
+      return true;
+    }
     return false;
   }
 }

@@ -64,9 +64,7 @@ class MealDetailPage extends PageMixin(LitElement) {
       swipeToClose: true,
       componentProps: {
         shareParams: this.createShareParameter(),
-        notificationCallback: (msg: string): void => {
-          this.setNotification({ successMessage: msg });
-        }
+        setNotification: this.setNotification
       }
     });
     await modal.present();

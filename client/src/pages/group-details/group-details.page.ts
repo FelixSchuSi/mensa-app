@@ -10,6 +10,7 @@ import { Routes } from '../../routes';
 import { share, ShareParameter } from '../../helpers/share-api';
 import { i18nService } from '../../services/i18n.service';
 import { copyToClipboard } from '../../helpers/copy-to-clipboard';
+import { createShareModal } from '../../helpers/create-share-modal';
 
 @customElement('app-group-details')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,19 +51,19 @@ class GroupDetailsPage extends PageMixin(LitElement) {
       path: `${Routes.GROUPS}?joinCode=${this.group?.joinCode}`
     };
   };
-  protected async createShareModal(): Promise<void> {
-    const modal: HTMLIonModalElement = await modalController.create({
-      component: 'app-share-modal',
-      swipeToClose: true,
-      componentProps: {
-        shareParams: this.createShareParameter(),
-        notificationCallback: (msg: string): void => {
-          this.setNotification({ successMessage: msg });
-        }
-      }
-    });
-    await modal.present();
-  }
+  // protected async createShareModal(): Promise<void> {
+  //   const modal: HTMLIonModalElement = await modalController.create({
+  //     component: 'app-share-modal',
+  //     swipeToClose: true,
+  //     componentProps: {
+  //       shareParams: this.createShareParameter(),
+  //       notificationCallback: (msg: string): void => {
+  //         this.setNotification({ successMessage: msg });
+  //       }
+  //     }
+  //   });
+  //   await modal.present();
+  // }
   protected render(): TemplateResult {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
@@ -134,9 +135,10 @@ class GroupDetailsPage extends PageMixin(LitElement) {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button
-          @click=${async (e: any) => {
-            if (!(await share(this.createShareParameter()))) {
-              this.createShareModal();
+          @click=${async (e: any): Promise<void> => {
+            const params = this.createShareParameter();
+            if (!(await share(params))) {
+              createShareModal(params, this.setNotification);
             }
             e.stopPropagation();
           }}

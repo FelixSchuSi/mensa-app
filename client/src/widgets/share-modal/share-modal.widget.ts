@@ -23,11 +23,15 @@ export class ShareModalWidget extends LitElement {
     return this;
   }
   protected createShareText(): string {
-    return `${this.shareParams.text}\n${buildShareURL(window.location.search)}`;
+    return `${this.shareParams.text}\n${buildShareURL(this.shareParams.path)}`;
   }
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  @property({ type: Function })
-  protected notificationCallback: ((arg0: string) => void) | undefined;
+  // @property({ type: Function })
+  // protected notificationCallback: ((arg0: string) => void) | undefined;
+
+  @property({ type: Object, attribute: false })
+  protected setNotification!: (e: any) => void;
+
   protected update(changedProperties: Map<string | number | symbol, unknown>): void {
     this.shareText = this.createShareText();
     super.update(changedProperties);
@@ -59,7 +63,7 @@ export class ShareModalWidget extends LitElement {
           <ion-button
             @click=${(): void => {
               copyToClipboard(this.shareText);
-              if (this.notificationCallback) this.notificationCallback(this.i18n.COPIED_TO_CLIPBOARD);
+              if (this.setNotification) this.setNotification({ successMessage: this.i18n.COPIED_TO_CLIPBOARD });
             }}
             >${this.i18n.COPY_TO_CLIPBOARD}</ion-button
           >

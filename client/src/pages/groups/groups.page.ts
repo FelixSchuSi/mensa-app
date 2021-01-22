@@ -29,20 +29,6 @@ class GroupsPage extends PageMixin(LitElement) {
     console.log(code);
   };
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  public async createShareModal(params: ShareParameter): Promise<void> {
-    const modal: HTMLIonModalElement = await modalController.create({
-      component: 'app-share-modal',
-      swipeToClose: true,
-      componentProps: {
-        shareParams: params,
-        notificationCallback: (msg: string): void => {
-          this.setNotification({ successMessage: msg });
-        }
-      }
-    });
-    await modal.present();
-  }
   protected loadGroups(): void {
     this.loaded = new Promise<void>(async (resolve, reject) => {
       try {
@@ -158,6 +144,7 @@ class GroupsPage extends PageMixin(LitElement) {
       ${this.groups.map(group => {
         return html`
           <app-group
+            .setNotification=${this.setNotification}
             @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
             .group=${group}
             style="cursor: pointer"

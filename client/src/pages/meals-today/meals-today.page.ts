@@ -77,9 +77,7 @@ export class MealsTodayPage extends PageMixin(LitElement) {
       swipeToClose: true,
       componentProps: {
         shareParams: params,
-        notificationCallback: (msg: string): void => {
-          this.setNotification({ successMessage: msg });
-        }
+        setNotification: this.setNotification
       }
     });
     await modal.present();
@@ -157,6 +155,7 @@ export class MealsTodayPage extends PageMixin(LitElement) {
                   routerService.navigate(Routes.MEAL_TODAY_DETAILS, { mensa: meal.mensa, title: meal.title });
                 }
               }}
+              .setNotification=${this.setNotification}
               .meal=${meal}
               .i18n=${this.i18n}
               .status=${this.userInfo?.status}
