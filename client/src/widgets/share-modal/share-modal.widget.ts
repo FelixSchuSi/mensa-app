@@ -5,7 +5,7 @@ import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 import { ShareParameter } from '../../helpers/share-api';
 import GroupDetailsPage from '../../pages/group-details/group-details.page';
-
+import { createMailto } from '../../helpers/create-mailto';
 @customElement('app-share-modal')
 export class ShareModalWidget extends LitElement {
   @internalProperty()
@@ -28,7 +28,6 @@ export class ShareModalWidget extends LitElement {
   protected notificationCallback: (arg0: string) => void = null;
   protected update(changedProperties: Map<string | number | symbol, unknown>): void {
     this.shareText = this.createShareText();
-    console.log(this.shareText);
     super.update(changedProperties);
   }
   protected dismissModal(): void {
@@ -36,9 +35,8 @@ export class ShareModalWidget extends LitElement {
     modal.dismiss();
   }
   protected shareText = '';
-
+  protected toEmail = '';
   protected render(): TemplateResult {
-    console.log('Render');
     return html`
       <ion-header translucent>
         <ion-toolbar>
@@ -64,7 +62,25 @@ export class ShareModalWidget extends LitElement {
             }}
             >${this.i18n.COPY_TO_CLIPBOARD}</ion-button
           >
-          <ion-button @click=${(): void => {}}><ion-icon name="mail-outline"></ion-icon></ion-button>
+          <ion-input
+            @change=${(e: any): void => {
+              this.toEmail = e.target.value;
+            }}
+            value=${this.toEmail}
+            placeholder="E-Mail"
+          ></ion-input>
+          <ion-button
+            @click=${(): void => {
+              const mailTo = createMailto(
+                this.toEmail,
+                encodeURIComponent(this.shareParams.title),
+                encodeURIComponent(this.shareText)
+              );
+              const win = window.open(mailTo, '_blank');
+              win?.focus();
+            }}
+            ><ion-icon name="mail-outline"></ion-icon
+          ></ion-button>
         </div>
       </ion-content>
     `;

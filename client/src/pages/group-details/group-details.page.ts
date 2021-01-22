@@ -60,7 +60,6 @@ class GroupDetailsPage extends PageMixin(LitElement) {
         }
       }
     });
-
     await modal.present();
   }
   protected render(): TemplateResult {
