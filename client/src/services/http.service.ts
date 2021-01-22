@@ -102,7 +102,5 @@ class HttpService {
 // const ISPROD = true;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const baseURL: string = ISPROD
-  ? 'https://mensa-app-5jrmv.ondigitalocean.app/api/'
-  : `http://${location.hostname}:3443/api/`;
+const baseURL: string = ISPROD ? 'https://api.mensa-app.dub-services.de/api/' : `http://${location.hostname}:3443/api/`;
 export const httpService: HttpService = new HttpService({ baseURL });

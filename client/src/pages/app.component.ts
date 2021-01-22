@@ -86,8 +86,6 @@ export class AppComponent extends LitElement {
     if (!isRootRoute(this.currentRoute)) await clearRootNav();
     selectActiveTab(this.tabsComponent);
     switch (this.currentRoute) {
-      case Routes.GROUPS_CREATE:
-        return await pushToNav('app-create-group', activeNav);
       case Routes.GROUPS_DETAILS:
         return await pushToNav('app-group-details', activeNav);
       case Routes.SETTINGS:

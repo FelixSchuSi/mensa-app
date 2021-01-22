@@ -117,7 +117,6 @@ export const english: LanguageStrings = {
   PREVIOUS_STEP: 'Previous step',
   STATUS: 'Status',
   JOIN: 'Join',
-  JOINCODE: 'Joincode',
   GROUP_DETAILS: 'Group details',
   JOINGROUP: 'Join group',
   SEARCH_MEALS: 'Search for meals',
@@ -163,5 +162,16 @@ export const english: LanguageStrings = {
   ATTENDING: 'Attending',
   ABSENT: 'Absent',
   PARTICIPANT: 'Participant',
-  PARTICIPANTS: 'Participants'
+  PARTICIPANTS: 'Participants',
+  MENSA_VISIT: 'Mensa visit',
+  MENSA_VISITS: 'Mensa visits',
+  CREATE_MENSA_VISIT: 'Add mensa visit',
+  JOIN_CODE: 'Join code',
+  LEAVE_GROUP: 'Leave group',
+  LEAVE: 'Leave',
+  LEAVE_GROUP_CONFIRM_QUESTION: 'Do you really want to leave this group?',
+  CANCEL: 'Cancel',
+  COPIED_TO_CLIPBOARD: 'Copied to clipboard!',
+  NEW_GROUP: 'New group',
+  GROUP_NAME: 'Group name'
 };

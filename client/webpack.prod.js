@@ -34,7 +34,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }),
+    // new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }),
+    new HtmlWebpackPlugin({ template: './src/index.html', base: '/' }),
     new CopyPlugin({
       patterns: [
         {
@@ -42,7 +43,8 @@ module.exports = {
         },
         { from: path.resolve(__dirname, 'node_modules/@ionic/core/dist/ionic/svg'), to: './svg' },
         { from: path.resolve(__dirname, 'svg/'), to: './svg' },
-        { from: path.resolve(__dirname, 'images/'), to: './images' }
+        { from: path.resolve(__dirname, 'images/'), to: './images' },
+        { from: 'CNAME' }
       ]
     }),
     new CleanWebpackPlugin(),

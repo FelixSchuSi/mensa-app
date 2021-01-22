@@ -40,7 +40,7 @@ function configureApp(app: Express) {
       parseReqBody: false,
       userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
         const url = process.env.URL || 'http://localhost:3443';
-        const data = proxyResData.toString('utf8').replace(/https:\/\/[a-zA-Z0-9.-]*/g, url + '/api/media');
+        const data = proxyResData.toString('utf8').replace(/https:\/\/[a-zA-Z0-9.-]*/g, `https://${url}/api/media`);
         // Dirty workaround:
         // At this point, I'm not able to get the content-type header in userResDecorator
         // if function above is executed on binary content (e.g. images) the content will be destroyed

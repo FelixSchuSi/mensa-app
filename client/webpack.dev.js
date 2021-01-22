@@ -10,12 +10,12 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: {
-      rewrites: [{ from: /^\/[a-z]*/, to: '/mensa-app/index.html' }]
+      rewrites: [{ from: /^\/[a-z]*/, to: '/index.html' }]
     },
     host: '0.0.0.0',
     port: 8080,
-    public: '0.0.0.0:8080',
-    publicPath: '/mensa-app/'
+    public: '0.0.0.0:8080'
+    // publicPath: '/mensa-app/'
   },
   resolve: { extensions: ['.ts', '.js'] },
   module: {
@@ -43,17 +43,19 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{ loader: 'file-loader', options: { outputPath: 'fonts/', publicPath: '/mensa-app/fonts' } }]
+        use: [{ loader: 'file-loader', options: { outputPath: 'fonts/', publicPath: '/fonts' } }]
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }),
+    new HtmlWebpackPlugin({ template: './src/index.html', base: '/' }),
+    // new HtmlWebpackPlugin({ template: './src/index.html', base: '/mensa-app/' }),
     new CopyPlugin({
       patterns: [
         { from: path.resolve(__dirname, 'node_modules/@ionic/core/dist/ionic/svg'), to: './svg' },
         { from: path.resolve(__dirname, 'svg/'), to: './svg' },
-        { from: path.resolve(__dirname, 'images/'), to: './images' }
+        { from: path.resolve(__dirname, 'images/'), to: './images' },
+        { from: 'CNAME' }
       ]
     }),
     new DefinePlugin({

@@ -1,0 +1,21 @@
+.horizontal-scroll-outer-container {
+  overflow: hidden;
+}
+
+.horizontal-scroll-inner-container::-webkit-scrollbar {
+  display: none;
+}
+
+.horizontal-scroll-inner-container {
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  display: flex;
+  align-items: stretch;
+  cursor: pointer;
+}
+
+:host {
+  width: 100%;
+}

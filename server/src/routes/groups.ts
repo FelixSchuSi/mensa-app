@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
   //Filter by joinCode
   if (req.query.joincode) {
     filter.joinCode = <string>req.query.joincode;
+    filter.joinCode = filter.joinCode.toUpperCase();
   }
   if (req.query.scope) {
     if (req.query.scope === 'me') {

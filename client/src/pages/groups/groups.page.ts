@@ -1,25 +1,14 @@
-import {
-  css,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { customElement, html, internalProperty, LitElement, property, TemplateResult } from 'lit-element';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Group } from '../../../../server/src/models/group';
-import { repeat } from 'lit-html/directives/repeat';
-import { guard } from 'lit-html/directives/guard';
 import { modalController } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
-import { LanguageKeys } from '../../i18n/language-keys';
 import { until } from 'lit-html/directives/until';
 import { sleep } from '../../helpers/sleep';
+import { userService } from '../../services/user.service';
 
 @customElement('app-groups')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,6 +18,15 @@ class GroupsPage extends PageMixin(LitElement) {
 
   @internalProperty()
   protected loaded!: Promise<void>;
+
+  protected groupService: GroupService = groupService;
+
+  @property({ type: Object, attribute: false })
+  protected i18n!: LanguageStrings;
+
+  protected joinCallback = (code: string): void => {
+    console.log(code);
+  };
 
   protected loadGroups(): void {
     this.loaded = new Promise<void>(async (resolve, reject) => {
@@ -50,21 +48,23 @@ class GroupsPage extends PageMixin(LitElement) {
     });
   }
 
-  protected groupService: GroupService = groupService;
-
-  @property({ type: Object, attribute: false })
-  protected i18n!: LanguageStrings;
-
-  protected joinCallback = (code: string): void => {
-    console.log(code);
-  };
-  protected async createModal(): Promise<void> {
+  protected async createJoinModal(): Promise<void> {
     const modal: HTMLIonModalElement = await modalController.create({
       component: 'app-group-join-modal',
       swipeToClose: true,
       componentProps: {
         groups: this.groups
       }
+    });
+
+    await modal.present();
+  }
+
+  protected async createCreateModal(): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-group-create-modal',
+      swipeToClose: true,
+      cssClass: 'create-group-modal'
     });
 
     await modal.present();
@@ -77,17 +77,24 @@ class GroupsPage extends PageMixin(LitElement) {
         this.loadGroups();
       }
     });
+    userService.subscribe(userInfo => {
+      if (!userInfo) {
+        this.groups = [];
+      }
+    });
   }
 
   protected render(): TemplateResult {
-    return html` <ion-header style="background-color: var(--ion-background-color);">
+    return html`
+      <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-title>${this.i18n.GROUPS}</ion-title>
           <ion-buttons slot="primary">
             <ion-button
               @click=${(): void => {
                 if (!this.signInNeeded(this.i18n.SIGN_IN_NEEDED_TO_CREATE_GROUP)) return;
-                routerService.navigate(Routes.GROUPS_CREATE);
+                // routerService.navigate(Routes.GROUPS_CREATE);
+                this.createCreateModal();
               }}
             >
               <ion-icon name="add"></ion-icon>
@@ -98,41 +105,50 @@ class GroupsPage extends PageMixin(LitElement) {
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding" fullscreen>
+      <ion-content class="ion-padding">
         <ion-header collapse="condense">
           <ion-toolbar>
             <ion-title size="large">${this.i18n.GROUPS}</ion-title>
           </ion-toolbar>
         </ion-header>
 
-        ${until(this.getHintTemplate(), this.skeleton)}
-        ${this.groups.map(group => {
-          return html`
-            <app-group
-              @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
-              .group=${group}
-              style="cursor: pointer"
-            >
-            </app-group>
-          `;
-        })}
+        ${until(this.getContentTemplate(), this.skeleton)}
 
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button
             @click=${(): void => {
               if (!this.signInNeeded(this.i18n.SIGN_IN_NEEDED_TO_JOIN_GROUP)) return;
-              this.createModal();
+              this.createJoinModal();
             }}
           >
             <ion-icon name="enter-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab>
-      </ion-content>`;
+      </ion-content>
+    `;
   }
 
-  protected async getHintTemplate(): Promise<TemplateResult> {
+  protected async getContentTemplate(): Promise<TemplateResult> {
     await this.loaded;
-    if (this.groups.length !== 0 && this.userInfo) return html``;
+    return html` ${this.groups.length === 0 || !this.userInfo ? this.hintTemplate : ''} ${this.groupListTemplate} `;
+  }
+
+  protected get groupListTemplate(): TemplateResult {
+    return html`
+      ${this.groups.map(group => {
+        return html`
+          <app-group
+            @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
+            .group=${group}
+            style="cursor: pointer"
+          >
+          </app-group>
+        `;
+      })}
+    `;
+  }
+
+  protected get hintTemplate(): TemplateResult {
     return html`
       <ion-card class="card-no-margin-when-small">
         <ion-card-header>
@@ -213,7 +229,7 @@ class GroupsPage extends PageMixin(LitElement) {
                   html`
                     <ion-skeleton-text
                       animated
-                      style="display:inline-flex;border-radius: 8px;width: 260px; height:164px"
+                      style="flex-shrink:0;display:inline-flex;border-radius: 8px;margin-right:8px;width: 260px; height:164px"
                     ></ion-skeleton-text>
                   `
               )}

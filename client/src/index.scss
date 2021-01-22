@@ -209,6 +209,8 @@ app-meals-future app-meal:first-of-type ion-card {
 
 .bg-image-wrapper {
   max-height: 100px;
+  background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12);
+  height: 100px;
   width: 100%;
   overflow: hidden;
 }
@@ -216,7 +218,7 @@ app-meals-future app-meal:first-of-type ion-card {
 .bg-image {
   filter: blur(4px);
   transform: scale(1.5);
-  max-height: 100px;
+  height: 100px;
   width: 100%;
   /* Center and scale the image nicely */
   background-position: center;
@@ -236,8 +238,11 @@ app-meals-future app-meal:first-of-type ion-card {
 
 .termin-card {
   display: inline-flex;
+  flex-direction: column;
   margin: 8px;
+  margin-top: 0px;
   margin-left: 0px;
+  height: 100%;
   box-shadow: none;
   line-height: 20px;
   --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); // standard ion-chip value
@@ -248,6 +253,22 @@ app-meals-future app-meal:first-of-type ion-card {
     // --color: rgb(255 255 255 / 87%); // standard ion-chip value
     --color: #8e8e8e;
   }
+}
+
+.large-termin-card {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0px;
+  margin-left: 0px;
+  box-shadow: none;
+  @media (prefers-color-scheme: light) {
+    border: solid 1px;
+    border-color: var(--ion-color-step-250);
+  }
+}
+
+.large-termin-card:first-of-type {
+  margin-top: 0px;
 }
 
 .horizontal-scroll-outer-container {
@@ -262,5 +283,53 @@ app-meals-future app-meal:first-of-type ion-card {
   white-space: nowrap;
   overflow-x: scroll;
   overflow-y: hide;
-  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  display: flex;
+  align-items: stretch;
+  // overflow-x: auto;
+}
+
+.circle-add-btn {
+  height: 56px;
+  width: 56px;
+  background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12);
+  border-radius: 50%;
+  display: flex;
+  justify-content: space-around;
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(255 255 255 / 12%);
+  }
+}
+
+#add-group-pic {
+  height: 100px;
+  width: 100px;
+  background-color: var(--ion-color-step-250);
+  @media (prefers-color-scheme: dark) {
+    filter: drop-shadow(0px 0px 8px black);
+    border: solid 3px rgba(white, 0.8);
+  }
+  border: solid 3px white;
+}
+
+.termin-add-card {
+  background-color: rgb(255 255 255 / 0%);
+}
+
+.create-group-modal {
+  // --width: 80% !important;
+  --width: 100% !important;
+  --min-width: 200px !important;
+  --border-radius: 10px !important;
+
+  --height: auto !important;
+  // overflow: overlay;
+  --min-height: auto !important;
+  // position: static !important;
+  padding: 16px !important;
+}
+
+app-group-create-modal {
+  position: static !important;
+  display: inline !important;
 }

@@ -1,4 +1,5 @@
 import express from 'express';
+import { createEntity } from '../helpers/create-entity';
 import { GenericDAO } from '../models/generic.dao';
 import { Task } from '../models/task';
 import { encrypt, decrypt } from '../services/crypto.service';
@@ -20,9 +21,13 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const taskDAO: GenericDAO<Task> = req.app.locals.taskDAO;
+  const { title, id, createdAt } = req.body;
+  const { id: serverID, createdAt: serverCreatedAt } = createEntity();
   const createdTask = await taskDAO.create({
+    id: id ?? serverID,
+    createdAt: createdAt ?? serverCreatedAt,
     userId: res.locals.user.id,
-    title: encrypt(req.body.title),
+    title: encrypt(title),
     status: 'open'
   });
   res.status(201).json({ ...createdTask, title: decrypt(createdTask.title) });
