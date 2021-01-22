@@ -218,4 +218,3 @@ class GroupDetailsPage extends PageMixin(LitElement) {
     alert.present();
   }
 }
-export default GroupDetailsPage;

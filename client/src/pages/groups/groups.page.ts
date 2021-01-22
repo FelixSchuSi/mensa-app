@@ -247,4 +247,3 @@ class GroupsPage extends PageMixin(LitElement) {
     `;
   }
 }
-export default GroupsPage;
