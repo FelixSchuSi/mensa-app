@@ -450,29 +450,28 @@ const lt=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeSha
  * http://polymer.github.io/PATENTS.txt
  */
 const Ee=(t,e)=>{const o=t.startNode.parentNode,n=void 0===e?t.endNode:e.startNode,i=o.insertBefore(f(),n);o.insertBefore(f(),n);const r=new R(t.options);return r.insertAfterNode(i),r},xe=(t,e)=>(t.setValue(e),t.commit(),t),_e=(t,e,o)=>{const n=t.startNode.parentNode,i=o?o.startNode:t.endNode,r=e.endNode.nextSibling;r!==i&&s(n,e.startNode,r,i)},ke=t=>{a(t.startNode.parentNode,t.startNode,t.endNode.nextSibling)},Te=(t,e,o)=>{const n=new Map;for(let i=e;i<=o;i++)n.set(t[i],i);return n},Ae=new WeakMap,Ne=new WeakMap,Ie=w((t,e,o)=>{let n;return void 0===o?o=e:void 0!==e&&(n=e),e=>{if(!(e instanceof R))throw new Error("repeat can only be used in text bindings");const i=Ae.get(e)||[],r=Ne.get(e)||[],s=[],a=[],l=[];let c,d,u=0;for(const e of t)l[u]=n?n(e,u):u,a[u]=o(e,u),u++;let h=0,p=i.length-1,f=0,m=a.length-1;for(;h<=p&&f<=m;)if(null===i[h])h++;else if(null===i[p])p--;else if(r[h]===l[f])s[f]=xe(i[h],a[f]),h++,f++;else if(r[p]===l[m])s[m]=xe(i[p],a[m]),p--,m--;else if(r[h]===l[m])s[m]=xe(i[h],a[m]),_e(e,i[h],s[m+1]),h++,m--;else if(r[p]===l[f])s[f]=xe(i[p],a[f]),_e(e,i[p],i[h]),p--,f++;else if(void 0===c&&(c=Te(l,f,m),d=Te(r,h,p)),c.has(r[h]))if(c.has(r[p])){const t=d.get(l[f]),o=void 0!==t?i[t]:null;if(null===o){const t=Ee(e,i[h]);xe(t,a[f]),s[f]=t}else s[f]=xe(o,a[f]),_e(e,o,i[h]),i[t]=null;f++}else ke(i[p]),p--;else ke(i[h]),h++;for(;f<=m;){const t=Ee(e,s[m+1]);xe(t,a[f]),s[f++]=t}for(;h<=p;){const t=i[h++];null!==t&&ke(t)}Ae.set(e,s),Ne.set(e,l)}}),Oe=new WeakMap,Re=w((t,e)=>o=>{const n=Oe.get(o);if(Array.isArray(t)){if(Array.isArray(n)&&n.length===t.length&&t.every((t,e)=>t===n[e]))return}else if(n===t&&(void 0!==t||Oe.has(o)))return;o.setValue(e()),Oe.set(o,Array.isArray(t)?Array.from(t):t)});var Ce=function(t,e,o,n){var i,r=arguments.length,s=r<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(t,e,o,n);else for(var a=t.length-1;a>=0;a--)(i=t[a])&&(s=(r<3?i(s):r>3?i(e,o,s):i(e,o))||s);return r>3&&s&&Object.defineProperty(e,o,s),s},Pe=function(t,e,o,n){return new(o||(o=Promise))((function(i,r){function s(t){try{l(n.next(t))}catch(t){r(t)}}function a(t){try{l(n.throw(t))}catch(t){r(t)}}function l(t){var e;t.done?i(t.value):(e=t.value,e instanceof o?e:new o((function(t){t(e)}))).then(s,a)}l((n=n.apply(t,e||[])).next())}))};const Me=o(5),Le=o(27);let je=class extends(ee(ft)){constructor(){super(...arguments),this.tasks=[],this.taskService=Jt}firstUpdated(){return Pe(this,void 0,void 0,(function*(){Zt.subscribe(t=>{void 0!==t&&Jt.getTasks()});try{Jt.subscribe(t=>{this.tasks=t}),Zt.userInfo&&(yield Jt.getTasks())}catch({message:t,statusCode:e}){401===e||this.setNotification({errorMessage:t})}}))}render(){return z`
-      <ion-content class="ion-padding" fullscreen>
-        <ion-header style="background-color: var(--ion-background-color);">
-          <ion-toolbar>
-            <ion-title>${this.i18n.TASKS}</ion-title>
-            <ion-buttons slot="primary">
-              <ion-button @click=${()=>mt.navigate(gt.SETTINGS)}>
-                <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
-                <!-- <ion-icon name="person-circle"></ion-icon> -->
-                <!-- TODO: Make Google style avatar work -->
-                <!-- <ion-avatar style="border-radius: 0px" slot="end">
+      <ion-header style="background-color: var(--ion-background-color);">
+        <ion-toolbar>
+          <ion-title>${this.i18n.TASKS}</ion-title>
+          <ion-buttons slot="primary">
+            <ion-button @click=${()=>mt.navigate(gt.SETTINGS)}>
+              <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+              <!-- <ion-icon name="person-circle"></ion-icon> -->
+              <!-- TODO: Make Google style avatar work -->
+              <!-- <ion-avatar style="border-radius: 0px" slot="end">
                 <img
                   style="width: 60px; height:60px"
                   src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
                 />
               </ion-avatar> -->
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <form novalidate @submit="${this.submit}">
-          <div class="inputField"></div>
-        </form>
-
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <form novalidate @submit="${this.submit}">
+        <div class="inputField"></div>
+      </form>
+      <ion-content class="ion-padding" fullscreen>
         <ion-header collapse="condense">
           <ion-toolbar>
             <ion-title size="large">${this.i18n.TASKS}</ion-title>
