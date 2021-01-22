@@ -120,6 +120,25 @@ router.post('/:id/membership', async (req, res) => {
   res.status(result.status).json({ message: result.message || 'Success' });
 });
 
+router.post('/membership', async (req, res) => {
+  const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
+
+  const { groupID, joinCode } = req.body;
+  let result: { status: number; message: string } = { status: 404, message: 'Unkown group' };
+
+  if (groupID) {
+    result = await addMembership(groupDAO, req.params.id, userDAO, res.locals.user.id);
+  } else if (joinCode) {
+    const group = await groupDAO.findOne({ joinCode });
+    if (group) {
+      result = await addMembership(groupDAO, group.id, userDAO, res.locals.user.id);
+    }
+  }
+
+  res.status(result.status).json({ message: result.message || 'Success' });
+});
+
 router.delete('/:gid/membership/:uid', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;

@@ -33,39 +33,22 @@ export class GroupService {
       const response = await httpService.get('groups/' + gid + '/members');
       return response.json();
     } else {
-      return new Promise((res, rej) => {
-        rej();
-      });
+      throw Error();
     }
   }
+
   public async getGroup(id: string): Promise<Group> {
     if (navigator.onLine) {
       const response = await httpService.get('groups/' + id);
       return response.json();
     } else {
-      const groups = <Group[] | null>await storeService.get(this.TASKKEY);
-      return new Promise((res, rej) => {
-        if (groups === null) rej();
-        groups?.forEach((group): void => {
-          if (group.id === id) {
-            res(group);
-          }
-        });
-      });
+      if (this.groups === null) throw Error();
+      const group = this.groups.find(group => group.id === id);
+      if (!group) throw Error();
+      return group;
     }
   }
-  public async joinByCode(code: string): Promise<void> {
-    if (navigator.onLine) {
-      const body = await (await httpService.get('groups?joincode=' + code)).json();
-      if (body.results.length < 1) {
-        throw new Error('Unkown group');
-      }
-      const groupID = body.results[0].id;
-      await this.addMembership(groupID);
-    } else {
-      return Promise.reject({});
-    }
-  }
+
   public async createGroup(name: string, image?: Image): Promise<Group> {
     if (navigator.onLine) {
       const result = await httpService.post('groups', { group: { name: name, image: image || null } });
@@ -141,14 +124,15 @@ export class GroupService {
     }
   }
 
-  public async addMembership(groupID: string): Promise<void> {
+  public async addMembership(groupID?: string, joinCode?: string): Promise<void> {
     if (navigator.onLine) {
-      await httpService.post('groups/' + groupID + '/membership', {});
+      await httpService.post('groups/membership', { groupID, joinCode });
       routerService.navigate(Routes.GROUPS);
     } else {
       return Promise.reject({});
     }
   }
+
   public async removeMembership(groupID: string, userID?: string): Promise<void> {
     if (navigator.onLine) {
       await httpService.delete('groups/' + groupID + '/membership' + (userID ? '/' + userID : ''));
