@@ -142,6 +142,9 @@ async function addMembership(
   const group = await groupDAO.findOne({ id: groupID });
   if (!group) return { status: 404, message: 'Unkown group' };
 
+  if (group.members.some(e => e === user.id)) {
+    return { status: 409, message: 'User is already a member of this group' };
+  }
   if (!group!.members) {
     group!.members = [];
   }
