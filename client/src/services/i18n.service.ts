@@ -48,16 +48,11 @@ class I18nService {
   private renderSentenceWithParams(sentence: string, params: { [key: string]: string }): string {
     const paramKeys = Object.keys(params);
     let targetStr = sentence;
-
-    if (paramKeys.length > 0) {
-      for (const p in paramKeys) {
-        const value = params['test'];
-        if (typeof value === 'string') {
-          targetStr = targetStr.replace(new RegExp('\\{' + p + '\\}', 'gi'), value);
-        }
+    if (paramKeys.length) {
+      for (const [key, value] of Object.entries(params)) {
+        targetStr = targetStr.replace(new RegExp('\\{' + key + '\\}', 'gi'), value);
       }
     }
-
     return targetStr;
   }
 }
