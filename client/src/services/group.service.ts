@@ -10,12 +10,8 @@ import { MensaVisit } from '../../../server/src/models/mensa-visit';
 export type GroupsListener = (groups: Group[]) => void;
 export class GroupService {
   protected _groups: Group[] = [];
-  protected TASKKEY = 'groups';
+  protected GROUPKEY = 'groups';
   private listeners: GroupsListener[] = [];
-
-  public subscribe(listener: GroupsListener): void {
-    this.listeners.push(listener);
-  }
 
   public async loadGroups(scopeMe: boolean): Promise<void> {
     if (navigator.onLine) {
@@ -23,16 +19,18 @@ export class GroupService {
       const groups = <Group[]>await response.json();
       await this.setGroups(groups);
     } else {
-      let groups = <Group[] | null>await storeService.get(this.TASKKEY);
+      let groups = <Group[] | null>await storeService.get(this.GROUPKEY);
       if (groups === null) groups = [];
       await this.setGroups(groups);
     }
   }
+
   public async getGroupMembers(gid: string): Promise<User[]> {
     if (navigator.onLine) {
       const response = await httpService.get('groups/' + gid + '/members');
       return response.json();
     } else {
+      // TODO make offline capable
       throw Error();
     }
   }
@@ -71,6 +69,8 @@ export class GroupService {
       await this.setGroups(updatedGroups);
       return groupWithNewMensaVisit;
     } else {
+      // There may be groups without id that were created in frontend
+      // -> Either dont allow visits on these groups or create complete obj in frontend
       // TODO make this service offline capable
       return Promise.reject({});
     }
@@ -129,6 +129,7 @@ export class GroupService {
       await httpService.post('groups/membership', { groupID, joinCode });
       routerService.navigate(Routes.GROUPS);
     } else {
+      // This function can not be offline capable
       return Promise.reject({});
     }
   }
@@ -138,25 +139,33 @@ export class GroupService {
       await httpService.delete('groups/' + groupID + '/membership' + (userID ? '/' + userID : ''));
       routerService.navigate(Routes.GROUPS);
     } else {
+      // TODO make this service offline capable
       return Promise.reject({});
     }
   }
+
   public async deleteGroup(groupID: string): Promise<void> {
     if (navigator.onLine) {
       await httpService.delete('groups/' + groupID);
       routerService.navigate(Routes.GROUPS);
     } else {
+      // TODO make this service offline capable
       return Promise.reject({});
     }
   }
+
   protected async setGroups(nGroups: Group[]): Promise<void> {
     this._groups = nGroups;
-    await storeService.set(this.TASKKEY, this._groups);
+    await storeService.set(this.GROUPKEY, this._groups);
     this.notifyListeners();
   }
 
   protected get groups(): Group[] {
     return this._groups;
+  }
+
+  public subscribe(listener: GroupsListener): void {
+    this.listeners.push(listener);
   }
 
   private notifyListeners(): void {

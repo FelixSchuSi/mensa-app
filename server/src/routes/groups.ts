@@ -69,12 +69,17 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const { image, joinCode, name, id, creat } = req.body.group;
+  if (!name) res.sendStatus(400);
+
   const createdGroup = await groupDAO.create({
-    name: encrypt(req.body.group.name),
-    joinCode: createJoinCode(codeLength),
-    image: req.body.group.image,
+    // id:
+    name: encrypt(name),
+    joinCode: joinCode ?? createJoinCode(codeLength),
+    image: image,
     owner: res.locals.user.id
   });
+
   res.status(201).json({ ...createdGroup, name: decrypt(createdGroup.name) });
 });
 
@@ -153,7 +158,7 @@ router.delete('/:gid/membership', async (req, res) => {
   res.status(result.status).json({ message: result.message || 'Success' });
 });
 
-function createJoinCode(length: number): string {
+export function createJoinCode(length: number): string {
   const charArrrayLength = codeCharacters.length;
   let code = '';
   for (let i = 0; i < length; i++) {
