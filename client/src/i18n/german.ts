@@ -173,5 +173,14 @@ export const german: LanguageStrings = {
   CANCEL: 'Abbrechen',
   COPIED_TO_CLIPBOARD: 'In die Zwischenablage kopiert!',
   NEW_GROUP: 'Neue Gruppe',
-  GROUP_NAME: 'Name der Gruppe'
+  GROUP_NAME: 'Name der Gruppe',
+  TITLE: 'Titel',
+  TIME: 'Zeit',
+  DATE: 'Datum',
+  MENSA: 'Mensa',
+  GIVE_THIS_MENSA_VITIST_A_TITLE: 'Gib dem Termin einen Titel',
+  CLICK_TO_CHOOSE_DATE: 'Klicken um Datum auszusuchen',
+  CLICK_TO_CHOOSE_TIME: 'Klicken um Zeit auszusuchen',
+  MENSA_VISIT_MISSING_FIELDS_MSG: 'Fülle folgende Felder:',
+  MENSA_VISIT_CREATE_ERROR: 'Termin konnte nicht erstellt werden: unbekannter Fehler.'
 };

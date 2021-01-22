@@ -15,6 +15,12 @@ export class GroupDateAddWidget extends LitElement {
   @property({ type: Boolean })
   protected large: boolean = false;
 
+  @property()
+  protected groupID!: string;
+
+  @property({ type: Object, attribute: false })
+  protected setNotification!: () => void;
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -47,7 +53,11 @@ export class GroupDateAddWidget extends LitElement {
   protected async createCreateModal(): Promise<void> {
     const modal: HTMLIonModalElement = await modalController.create({
       component: 'app-group-date-add-modal',
-      swipeToClose: true
+      swipeToClose: true,
+      componentProps: {
+        groupID: this.groupID,
+        setNotification: this.setNotification
+      }
     });
 
     await modal.present();

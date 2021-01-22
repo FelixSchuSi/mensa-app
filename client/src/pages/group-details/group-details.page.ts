@@ -135,7 +135,11 @@ class CreateGroupPage extends PageMixin(LitElement) {
               ></app-group-date>
             `
         )}
-        <app-group-date-add large></app-group-date-add>
+        <app-group-date-add
+          .groupID=${this.group?.id}
+          .setNotification=${this.setNotification}
+          large
+        ></app-group-date-add>
       </div>
     `;
   }

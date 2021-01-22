@@ -173,5 +173,14 @@ export const english: LanguageStrings = {
   CANCEL: 'Cancel',
   COPIED_TO_CLIPBOARD: 'Copied to clipboard!',
   NEW_GROUP: 'New group',
-  GROUP_NAME: 'Group name'
+  GROUP_NAME: 'Group name',
+  TITLE: 'Title',
+  TIME: 'Time',
+  DATE: 'Date',
+  MENSA: 'Mensa',
+  GIVE_THIS_MENSA_VITIST_A_TITLE: 'Give this mensa visit a title',
+  CLICK_TO_CHOOSE_DATE: 'Click to choose date',
+  CLICK_TO_CHOOSE_TIME: 'Click to choose time',
+  MENSA_VISIT_MISSING_FIELDS_MSG: 'Please fill out',
+  MENSA_VISIT_CREATE_ERROR: 'Something went wrong whil creating mensa visit.'
 };
