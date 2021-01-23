@@ -52,7 +52,7 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <ion-header>
+      <ion-header asdf="true">
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button

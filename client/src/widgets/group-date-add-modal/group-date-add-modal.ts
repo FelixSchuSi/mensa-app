@@ -6,6 +6,7 @@ import { ALL_MENSEN } from '../../helpers/all-mensen';
 import { Mensa } from '../../../../server/src/models/meal-filter-config';
 import { truncateToDay } from '../../helpers/truncate-to-day';
 import { MensaVisit } from '../../../../server/src/models/mensa-visit';
+import { LanguageKeys } from '../../i18n/language-keys';
 
 @customElement('app-group-date-add-modal')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -110,7 +111,7 @@ class GroupDateAddModalWidget extends LitElement {
                 id=${mensa}
                 style="flex-shrink:0"
               >
-                ${this.i18n[mensa + '_short']}
+                ${this.i18n[<LanguageKeys>(mensa + '_short')]}
               </ion-chip>
             `
           )}

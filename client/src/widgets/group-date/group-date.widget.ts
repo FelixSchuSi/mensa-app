@@ -24,7 +24,7 @@ export class GroupDateWidget extends LitElement {
   @property({ type: Object, attribute: false })
   protected group!: Group;
 
-  @property({ type: Object, attribute: false })
+  @property({ type: Array, attribute: false })
   protected members!: User[];
   @internalProperty()
   protected attending!: boolean;
