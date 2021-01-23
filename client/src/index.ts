@@ -40,5 +40,6 @@ import './widgets/group-create-modal/group-create-modal.widget';
 import './widgets/horizontal-scroller/horizontal-scroller.widget';
 import './widgets/share-modal/share-modal.widget';
 import './widgets/group-date-add-modal/group-date-add-modal';
+import './widgets/back-button/back-button';
 
 import './../node_modules/macro-carousel/dist/macro-carousel.min.js';

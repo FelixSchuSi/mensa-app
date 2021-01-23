@@ -9,7 +9,6 @@ import {
   unsafeCSS
 } from 'lit-element';
 import { goBackTo } from '../../helpers/go-back-to';
-import { popFromRootNav } from '../../helpers/nav-util';
 import { toggleIosMd } from '../../helpers/toggle-ios-md';
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';
@@ -19,8 +18,6 @@ import { routerService } from '../../services/router.service';
 import { userService } from '../../services/user.service';
 import { PageMixin } from '../page.mixin';
 import { Plugins } from '@capacitor/core';
-import { until } from 'lit-html/directives/until';
-import { backButton } from '../../helpers/back-button';
 const { Device } = Plugins;
 
 const sharedCSS = require('../../shared.scss');
@@ -57,9 +54,14 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
-      <ion-header asdf="true">
+      <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start"> ${until(backButton(), html``)} </ion-buttons>
+          <app-back-button
+            @click=${async () => {
+              goBackTo(Routes.MEALS_TODAY);
+            }}
+            .mode=${this.mode}
+          ></app-back-button>
           <ion-title>${this.i18n.SETTINGS}</ion-title>
         </ion-toolbar>
       </ion-header>

@@ -77,14 +77,14 @@ class MealDetailPage extends PageMixin(LitElement) {
       <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button
+            <app-back-button
               @click=${async () => {
                 const backRoute =
                   routerService.getPath() === Routes.MEAL_FUTURE_DETAILS ? Routes.MEALS_FUTURE : Routes.MEALS_TODAY;
                 goBackTo(backRoute);
               }}
-              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
-            ></ion-back-button>
+              .mode=${this.mode}
+            ></app-back-button>
           </ion-buttons>
           <ion-buttons slot="primary">
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>

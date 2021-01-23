@@ -46,13 +46,12 @@ export class SignInPage extends PageMixin(LitElement) {
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button
+            <app-back-button
               @click=${async () => {
-                await popFromRootNav();
                 goBackTo(Routes.SETTINGS);
               }}
-              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
-            ></ion-back-button>
+              .mode=${this.mode}
+            ></app-back-button>
           </ion-buttons>
           <ion-title>${this.i18n.SIGN_IN}</ion-title>
         </ion-toolbar>

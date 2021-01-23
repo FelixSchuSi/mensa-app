@@ -60,14 +60,12 @@ class GroupDetailsPage extends PageMixin(LitElement) {
     return html`
       <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-back-button
-              @click=${() => {
-                goBackTo(Routes.GROUPS);
-              }}
-              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
-            ></ion-back-button>
-          </ion-buttons>
+          <app-back-button
+            @click=${async () => {
+              goBackTo(Routes.GROUPS);
+            }}
+            .mode=${this.mode}
+          ></app-back-button>
           <ion-buttons slot="primary">
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
