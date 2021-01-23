@@ -54,7 +54,7 @@ export class ChipSelectWidget extends LitElement {
     this.chips.forEach((chip: HTMLIonChipElement) => {
       chip.addEventListener('click', event => {
         //@ts-ignore
-        let targetChip: HTMLElement = event.originalTarget ?? event.path[2];
+        let targetChip: HTMLElement = event.target ?? (event.path || event.composedPath())[2];
         //@ts-ignore
         targetChip = targetChip instanceof HTMLElement ? targetChip : event.path[0]; // sometimes the shadowroot is selected for some reason
         targetChip.classList.toggle('selected');
