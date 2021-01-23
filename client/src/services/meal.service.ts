@@ -28,8 +28,11 @@ class MealService {
       let meal = <Meal>(await response.json()).results;
       return meal;
     } else {
-      //TODO: search in all Meals
-      return <Meal>{};
+      const params = new URLSearchParams(search);
+      const filter = { mensa: params.get('mensa'), title: params.get('title') };
+      await this.getMeals();
+      const meal = this.meals.find(m => m.mensa === filter.mensa && m.title === filter.title);
+      return meal ?? <Meal>{};
     }
   }
 
