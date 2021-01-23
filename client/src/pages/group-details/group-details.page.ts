@@ -61,7 +61,7 @@ class GroupDetailsPage extends PageMixin(LitElement) {
       <ion-header style="background-color: var(--ion-background-color);">
         <ion-toolbar>
           <app-back-button
-            @click=${async () => {
+            @click=${() => {
               goBackTo(Routes.GROUPS);
             }}
             .mode=${this.mode}

@@ -57,7 +57,8 @@ class SignUpPage extends PageMixin(LitElement) {
       <ion-header>
         <ion-toolbar>
           <app-back-button
-            @click=${async () => {
+            slot="start"
+            @click=${() => {
               goBackTo(Routes.MEALS_TODAY);
             }}
             .mode=${this.mode}

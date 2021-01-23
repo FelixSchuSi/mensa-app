@@ -87,14 +87,14 @@ class SignUpPage extends PageMixin(LitElement) {
     return html`
       <ion-header class="sign-up-header">
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <app-back-button
-              @click=${async () => {
-                goBackTo(Routes.SETTINGS);
-              }}
-              .mode=${this.mode}
-            ></app-back-button>
-          </ion-buttons>
+          <app-back-button
+            slot="start"
+            @click=${() => {
+              goBackTo(Routes.SETTINGS);
+            }}
+            .mode=${this.mode}
+          ></app-back-button>
+
           <ion-title>${this.i18n.SIGN_UP}</ion-title>
         </ion-toolbar>
       </ion-header>
