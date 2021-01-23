@@ -109,7 +109,7 @@ export class SignInPage extends PageMixin(LitElement) {
       };
       try {
         await userService.signIn(signInData, this.i18n);
-        routerService.navigate(Routes.TASKS);
+        routerService.navigate(Routes.MEALS_TODAY);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }
