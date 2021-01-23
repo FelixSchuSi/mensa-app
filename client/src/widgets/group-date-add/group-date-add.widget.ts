@@ -36,7 +36,7 @@ export class GroupDateAddWidget extends LitElement {
       >
         <ion-card-content style="height:100%; display: flex; flex-direction:column; align-items: center; ">
           <div style="flex-grow:1; "></div>
-          <div class="circle-add-btn" @click=${() => console.log('TODO: create functionality to create mensa visits')}>
+          <div class="circle-add-btn">
             <ion-buttons>
               <ion-button>
                 <ion-icon slot="icon-only" color="primary" name="add-outline"></ion-icon>

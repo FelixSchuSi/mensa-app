@@ -190,7 +190,7 @@ export const german: LanguageStrings = {
   TIME: 'Zeit',
   DATE: 'Datum',
   MENSA: 'Mensa',
-  GIVE_THIS_MENSA_VITIST_A_TITLE: 'Gib dem Termin einen Titel',
+  GIVE_THIS_MENSA_VITIST_A_TITLE: 'Titel des Termins',
   CLICK_TO_CHOOSE_DATE: 'Klicken um Datum auszusuchen',
   CLICK_TO_CHOOSE_TIME: 'Klicken um Zeit auszusuchen',
   MENSA_VISIT_MISSING_FIELDS_MSG: 'Fülle folgende Felder:',

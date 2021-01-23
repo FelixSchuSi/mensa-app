@@ -189,7 +189,7 @@ export const english: LanguageStrings = {
   TIME: 'Time',
   DATE: 'Date',
   MENSA: 'Mensa',
-  GIVE_THIS_MENSA_VITIST_A_TITLE: 'Give this mensa visit a title',
+  GIVE_THIS_MENSA_VITIST_A_TITLE: 'Title of mensa visit',
   CLICK_TO_CHOOSE_DATE: 'Click to choose date',
   CLICK_TO_CHOOSE_TIME: 'Click to choose time',
   MENSA_VISIT_MISSING_FIELDS_MSG: 'Please fill out',

@@ -257,8 +257,6 @@ export class GroupService {
   //     await httpService.delete('groups/' + groupID);
   //     routerService.navigate(Routes.GROUPS);
   //   } else {
-  //     // TODO make this service offline capable
-  //     return Promise.reject({});
   //   }
   // }
 

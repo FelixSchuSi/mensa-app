@@ -29,6 +29,11 @@ class GroupCreateModalWidget extends LitElement {
     i18nService.subscribe(i18n => (this.i18n = i18n));
   }
 
+  protected dismissModal(): void {
+    const modal = <HTMLIonModalElement>this.parentElement?.parentElement!;
+    modal.dismiss();
+  }
+
   protected render(): TemplateResult {
     return html`
       <input
@@ -75,7 +80,7 @@ class GroupCreateModalWidget extends LitElement {
             </ion-card-subtitle>
             <ion-card-title style="display:flex"> 
               <ion-input autofocus
-              style="border-bottom: 1px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);"
+              style="border-bottom: 1px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5); "
                 @change=${(e: Event): void => {
                   const target = e.target as HTMLTextAreaElement;
                   this.groupName = target.value;
@@ -87,10 +92,13 @@ class GroupCreateModalWidget extends LitElement {
               </ion-input>
               <!-- <ion-button>Erstellen</ion-button> -->
               <div style="background-color: var(--ion-color-primary)" class="circle-add-btn"
-              @click=${(): void => {
-                this.groupService.createGroup(this.groupName!, this.uploadedImage).catch(err => {
-                  console.error(err);
-                });
+              @click=${async () => {
+                try {
+                  await this.groupService.createGroup(this.groupName!, this.uploadedImage);
+                } catch ({ message }) {
+                  console.log(message);
+                }
+                this.dismissModal();
               }}
                 >
               <ion-buttons>

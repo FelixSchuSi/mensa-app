@@ -63,14 +63,6 @@ class TasksPage extends PageMixin(LitElement) {
           <ion-buttons slot="primary">
             <ion-button @click=${() => routerService.navigate(Routes.SETTINGS)}>
               <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
-              <!-- <ion-icon name="person-circle"></ion-icon> -->
-              <!-- TODO: Make Google style avatar work -->
-              <!-- <ion-avatar style="border-radius: 0px" slot="end">
-                <img
-                  style="width: 60px; height:60px"
-                  src="https://www.scherenzauber.de/wp-content/uploads/Google-Avatar.png"
-                />
-              </ion-avatar> -->
             </ion-button>
           </ion-buttons>
         </ion-toolbar>

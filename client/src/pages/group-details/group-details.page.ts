@@ -167,17 +167,7 @@ class GroupDetailsPage extends PageMixin(LitElement) {
   protected async createVisit(): Promise<void> {
     const mensaVisit: Partial<MensaVisit> = { title: 'moin', mensa: 'aasee', datetime: 1611253613166 };
     if (!this.group?.id) return;
-    // TODO: create a Modal to create MensaVisit
-
-    // helpful stuff
     this.group = await groupService.createMensaVisit(this.group.id, mensaVisit);
-    // const groupAfterDelete = await groupService.deleteMensaVisit(this.group.id, 'bfdd27f9-7bb3-437e-bca5-e3fd566fcbd1');
-    // const groupAfterLeave = await groupService.leaveMensaVisit(this.group.id, 'f9c2e13d-7898-45e3-ae05-cb9dee533e59');
-    // const groupAfterJoin = await groupService.participateInMensaVisit(
-    //   this.group.id,
-    //   'f9c2e13d-7898-45e3-ae05-cb9dee533e59'
-    // );
-    // console.log(groupWithNewVisit);
   }
 
   protected get inviteCodeTemplate(): TemplateResult {

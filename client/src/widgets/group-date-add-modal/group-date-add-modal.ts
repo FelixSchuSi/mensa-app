@@ -65,6 +65,7 @@ class GroupDateAddModalWidget extends LitElement {
             <ion-input
               class="title-input"
               slot="end"
+              style="text-align: right;"
               placeholder=${this.i18n.GIVE_THIS_MENSA_VITIST_A_TITLE}
             ></ion-input>
           </ion-item>
