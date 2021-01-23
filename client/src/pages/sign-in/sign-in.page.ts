@@ -8,6 +8,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { Routes } from '../../routes';
 import { routerService } from '../../services/router.service';
 import { popFromRootNav } from '../../helpers/nav-util';
+import { goBackTo } from '../../helpers/go-back-to';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-in.page.scss');
@@ -48,7 +49,7 @@ export class SignInPage extends PageMixin(LitElement) {
             <ion-back-button
               @click=${async () => {
                 await popFromRootNav();
-                history.back();
+                goBackTo(Routes.SETTINGS);
               }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>

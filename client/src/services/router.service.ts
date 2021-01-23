@@ -36,7 +36,13 @@ export class RouterService {
       Object.keys(query || {})
         .map(e => e + '=' + query![e])
         .join('&') ?? '';
-    history.pushState(null, '', this.withRootPath(relUrl) + (queryString ? '?' + queryString : ''));
+    // window.history.pushState({ prevUrl: window.location.href }, null, "/new/path/in/your/app")
+    // console.log(this.withRootPath());
+    history.pushState(
+      { prevUrl: this.getPath() },
+      '',
+      this.withRootPath(relUrl) + (queryString ? '?' + queryString : '')
+    );
     this.notifyListeners();
   }
 

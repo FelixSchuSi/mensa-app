@@ -8,6 +8,7 @@ import {
   TemplateResult,
   unsafeCSS
 } from 'lit-element';
+import { goBackTo } from '../../helpers/go-back-to';
 import { popFromRootNav } from '../../helpers/nav-util';
 import { toggleIosMd } from '../../helpers/toggle-ios-md';
 import { LanguageStrings } from '../../models/language-strings';
@@ -58,7 +59,8 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-back-button
               @click=${async () => {
                 await popFromRootNav();
-                history.back();
+                // history.back();
+                goBackTo(Routes.MEALS_TODAY);
               }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>

@@ -27,6 +27,7 @@ import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info
 import { getAllContents } from '../../helpers/all-contents';
 import { ALL_STATUS } from '../../helpers/all-status';
 import { Status } from '../../../../server/src/models/status';
+import { goBackTo } from '../../helpers/go-back-to';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./sign-up.page.scss');
@@ -90,7 +91,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-back-button
               @click=${async () => {
                 await popFromRootNav();
-                history.back();
+                goBackTo(Routes.SETTINGS);
               }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>

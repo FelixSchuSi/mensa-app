@@ -19,6 +19,7 @@ import { transformPrice } from '../../widgets/meal/transform-price';
 import { i18nService } from '../../services/i18n.service';
 import { share, ShareParameter } from '../../helpers/share-api';
 import { modalController } from '@ionic/core';
+import { goBackTo } from '../../helpers/go-back-to';
 
 const sharedCSS = require('../../shared.scss');
 
@@ -78,7 +79,9 @@ class MealDetailPage extends PageMixin(LitElement) {
           <ion-buttons slot="start">
             <ion-back-button
               @click=${async () => {
-                history.back();
+                const backRoute =
+                  routerService.getPath() === Routes.MEAL_FUTURE_DETAILS ? Routes.MEALS_FUTURE : Routes.MEALS_TODAY;
+                goBackTo(backRoute);
               }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>

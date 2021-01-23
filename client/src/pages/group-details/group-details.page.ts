@@ -11,6 +11,7 @@ import { i18nService } from '../../services/i18n.service';
 import { copyToClipboard } from '../../helpers/copy-to-clipboard';
 import { createShareModal } from '../../helpers/create-share-modal';
 import { MensaVisit } from '../../../../server/src/models/mensa-visit';
+import { goBackTo } from '../../helpers/go-back-to';
 
 @customElement('app-group-details')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -62,7 +63,7 @@ class GroupDetailsPage extends PageMixin(LitElement) {
           <ion-buttons slot="start">
             <ion-back-button
               @click=${() => {
-                history.back();
+                goBackTo(Routes.GROUPS);
               }}
               .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
             ></ion-back-button>
