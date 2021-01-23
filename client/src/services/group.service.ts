@@ -6,6 +6,9 @@ import { httpService } from './http.service';
 import { routerService } from './router.service';
 import { storeService } from './store.service';
 import { MensaVisit } from '../../../server/src/models/mensa-visit';
+import { createJoinCode, codeLength } from '../../../server/src/helpers/create-join-code';
+import { createEntity } from '../helpers/create-entity';
+import { userService } from './user.service';
 
 export type GroupsListener = (groups: Group[]) => void;
 export class GroupService {
@@ -49,7 +52,10 @@ export class GroupService {
 
   public async createGroup(name: string, image?: Image): Promise<Group> {
     if (navigator.onLine) {
-      const result = await httpService.post('groups', { group: { name: name, image: image || null } });
+      const joinCode = createJoinCode(codeLength);
+      const { id, createdAt } = createEntity();
+      const group: Partial<Group> = { joinCode, id, createdAt, name, image: image! };
+      const result = await httpService.post('groups', { group });
       return result.json();
       // routerService.navigate(Routes.GROUPS);
     } else {
@@ -58,9 +64,19 @@ export class GroupService {
   }
 
   public async createMensaVisit(groupID: string, mensaVisit: Partial<MensaVisit>): Promise<Group> {
+    const { title, mensa, datetime } = mensaVisit;
+    const { id, createdAt } = createEntity();
+    const userID = userService.userInfo!.id;
+    const fullMensaVisit: MensaVisit = {
+      id,
+      createdAt,
+      title: title!,
+      mensa: mensa!,
+      datetime: datetime!,
+      participants: [userID]
+    };
     if (navigator.onLine) {
-      const { title, mensa, datetime } = mensaVisit;
-      const result = await httpService.post('mensa-visits/' + groupID, { title, mensa, datetime });
+      const result = await httpService.post('mensa-visits/' + groupID, fullMensaVisit);
       const groupWithNewMensaVisit: Group = await result.json();
       const updatedGroups: Group[] = this.groups.map(group => {
         if (group.id !== groupWithNewMensaVisit.id) return group;
@@ -129,7 +145,7 @@ export class GroupService {
       await httpService.post('groups/membership', { groupID, joinCode });
       routerService.navigate(Routes.GROUPS);
     } else {
-      // This function can not be offline capable
+      // join group if group is in offline storage
       return Promise.reject({});
     }
   }

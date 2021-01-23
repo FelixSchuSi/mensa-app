@@ -1,5 +1,6 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import { createEntity } from '../helpers/create-entity';
 import { GenericDAO } from '../models/generic.dao';
 import { Group } from '../models/group';
 import { MensaVisit } from '../models/mensa-visit';
@@ -20,13 +21,16 @@ router.post('/:groupID', async (req, res) => {
     return;
   }
 
+  const { id: serverID, createdAt: serverCreatedAt } = createEntity();
+  const { id, createdAt, title, mensa, datetime, participants } = req.body;
+
   const newMensaVisit: MensaVisit = {
-    id: uuidv4(),
-    createdAt: new Date().getTime(),
-    title: req.body.title,
-    mensa: <any>req.body.mensa,
-    datetime: Number(req.body.datetime),
-    participants: [userID]
+    id: id ?? serverID,
+    createdAt: createdAt ?? serverCreatedAt,
+    title: title,
+    mensa: <any>mensa,
+    datetime: Number(datetime),
+    participants: participants ?? [userID]
   };
 
   const listOfMensaVisits = group.mensaVisits ? group.mensaVisits : [];
@@ -146,7 +150,7 @@ router.patch('/:groupID/leave/:mensaVisitID', async (req, res) => {
 });
 
 export async function filterAndSortMensaVisits(group: Group): Promise<Group> {
-  const mensaVisits = group.mensaVisits;
+  const mensaVisits = group.mensaVisits ?? [];
 
   // Filter mensaVisits of the past
   const filteredMensaVisits = mensaVisits.filter(visit => visit.datetime >= Date.now());

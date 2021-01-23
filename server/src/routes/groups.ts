@@ -1,4 +1,6 @@
 import express from 'express';
+import { createEntity } from '../helpers/create-entity';
+import { codeLength, createJoinCode } from '../helpers/create-join-code';
 import { GenericDAO } from '../models/generic.dao';
 import { Group } from '../models/group';
 import { User } from '../models/user';
@@ -6,8 +8,6 @@ import { encrypt, decrypt } from '../services/crypto.service';
 import { filterAndSortMensaVisits } from './mensa-visits';
 
 const router = express.Router();
-const codeCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-const codeLength = 8;
 
 // Get a group by groupID
 router.get('/:id', async (req, res) => {
@@ -69,17 +69,21 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
-  const { image, joinCode, name, id, creat } = req.body.group;
+  const { image, joinCode, name, id, createdAt } = req.body.group;
+  const { id: serverID, createdAt: serverCreatedAt } = createEntity();
+
   if (!name) res.sendStatus(400);
 
   const createdGroup = await groupDAO.create({
-    // id:
+    id: id ?? serverID,
+    createdAt: createdAt ?? serverCreatedAt,
     name: encrypt(name),
     joinCode: joinCode ?? createJoinCode(codeLength),
     image: image,
     owner: res.locals.user.id
   });
 
+  console.log(createdGroup);
   res.status(201).json({ ...createdGroup, name: decrypt(createdGroup.name) });
 });
 
@@ -130,10 +134,11 @@ router.post('/membership', async (req, res) => {
   const userDAO: GenericDAO<User> = req.app.locals.userDAO;
 
   const { groupID, joinCode } = req.body;
+  console.log('joining: ', groupID, joinCode);
   let result: { status: number; message: string } = { status: 404, message: 'Unkown group' };
 
   if (groupID) {
-    result = await addMembership(groupDAO, req.params.id, userDAO, res.locals.user.id);
+    result = await addMembership(groupDAO, groupID, userDAO, res.locals.user.id);
   } else if (joinCode) {
     const group = await groupDAO.findOne({ joinCode });
     if (group) {
@@ -157,15 +162,6 @@ router.delete('/:gid/membership', async (req, res) => {
   const result = await removeMembership(groupDAO, req.params.gid, userDAO, res.locals.user.id);
   res.status(result.status).json({ message: result.message || 'Success' });
 });
-
-export function createJoinCode(length: number): string {
-  const charArrrayLength = codeCharacters.length;
-  let code = '';
-  for (let i = 0; i < length; i++) {
-    code += codeCharacters.charAt(Math.floor(Math.random() * charArrrayLength));
-  }
-  return code;
-}
 
 async function addMembership(
   groupDAO: GenericDAO<Group>,
