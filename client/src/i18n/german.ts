@@ -94,6 +94,7 @@ export const german: LanguageStrings = {
   NETWORK_SYNC_SUCESS: 'erfolgreich synchronisiert',
   INTERNET_NEEDED_FOR_SIGN_IN: 'Du musst online sein um dich anzumelden.',
   INTERNET_NEEDED_FOR_SIGN_UP: 'Du musst online sein um dich zu registrieren.',
+  INTERNET_NEEDED_TO_JOIN_GROUPS: 'Du musst online sein um einer Gruppe beitreten zu können',
   SETTINGS: 'Einstellungen',
   GERMAN: 'Deutsch',
   ENGLISH: 'Englisch',
@@ -193,5 +194,7 @@ export const german: LanguageStrings = {
   CLICK_TO_CHOOSE_DATE: 'Klicken um Datum auszusuchen',
   CLICK_TO_CHOOSE_TIME: 'Klicken um Zeit auszusuchen',
   MENSA_VISIT_MISSING_FIELDS_MSG: 'Fülle folgende Felder:',
-  MENSA_VISIT_CREATE_ERROR: 'Termin konnte nicht erstellt werden: unbekannter Fehler.'
+  MENSA_VISIT_CREATE_ERROR: 'Termin konnte nicht erstellt werden: unbekannter Fehler.',
+  YOU_ARE_ALREADY_A_MEMBER_OF_THIS_GROUP: 'Du bist bereits Mitglied dieser Gruppe!',
+  SUCCESSFULLY_JOINED_GROUP: 'Gruppe beigetreten!'
 };

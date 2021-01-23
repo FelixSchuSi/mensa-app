@@ -9,6 +9,7 @@ import { MensaVisit } from '../../../server/src/models/mensa-visit';
 import { createJoinCode, codeLength } from '../../../server/src/helpers/create-join-code';
 import { createEntity } from '../helpers/create-entity';
 import { userService } from './user.service';
+import { i18nService } from './i18n.service';
 
 export type GroupsListener = (groups: Group[]) => void;
 export class GroupService {
@@ -31,17 +32,38 @@ export class GroupService {
   public async getGroupMembers(gid: string): Promise<User[]> {
     if (navigator.onLine) {
       const response = await httpService.get('groups/' + gid + '/members');
-      return response.json();
+      const users: User[] = await response.json();
+      let groupMembers: { id: string; users: User[] }[] = <any>await storeService.get('group_members');
+      groupMembers = groupMembers ?? [];
+      groupMembers = groupMembers.map(g => {
+        if (g.id === gid) return { id: gid, users };
+        return g;
+      });
+      if (groupMembers.filter(g => g.id === gid).length === 0) groupMembers.push({ id: gid, users });
+      await storeService.set('group_members', groupMembers);
+      return users;
     } else {
-      // TODO make offline capable
-      throw Error();
+      const groupMembers: { id: string; users: User[] }[] = <any>await storeService.get('group_members');
+      const members = groupMembers.find(g => g.id === gid);
+      if (!members) return [];
+      return members.users;
     }
   }
 
   public async getGroup(id: string): Promise<Group> {
     if (navigator.onLine) {
       const response = await httpService.get('groups/' + id);
-      return response.json();
+      const fetchedGroup: Group = await response.json();
+      const newGroups = this.groups.map(group => {
+        if (group.id === fetchedGroup.id) {
+          return fetchedGroup;
+        } else {
+          return group;
+        }
+      });
+      if (!newGroups.includes(fetchedGroup)) newGroups.push(fetchedGroup);
+      await this.setGroups(newGroups);
+      return fetchedGroup;
     } else {
       if (this.groups === null) throw Error();
       const group = this.groups.find(group => group.id === id);
@@ -50,16 +72,20 @@ export class GroupService {
     }
   }
 
-  public async createGroup(name: string, image?: Image): Promise<Group> {
-    if (navigator.onLine) {
-      const joinCode = createJoinCode(codeLength);
-      const { id, createdAt } = createEntity();
-      const group: Partial<Group> = { joinCode, id, createdAt, name, image: image! };
+  public async createGroup(name: string, image?: Image): Promise<void> {
+    const joinCode = createJoinCode(codeLength);
+    const { id, createdAt } = createEntity();
+    const owner: string = userService.userInfo?.id!;
+    const mensaVisits: MensaVisit[] = [];
+    const members: string[] = [owner];
+    let group: Group = { joinCode, id, createdAt, name, mensaVisits, image: image!, owner, members };
+    try {
       const result = await httpService.post('groups', { group });
-      return result.json();
-      // routerService.navigate(Routes.GROUPS);
-    } else {
-      return Promise.reject({});
+      group = await result.json();
+      this.setGroups([...this.groups, group]);
+    } catch ({ message }) {
+      this.setGroups([...this.groups, group]);
+      throw { message };
     }
   }
 
@@ -75,7 +101,7 @@ export class GroupService {
       datetime: datetime!,
       participants: [userID]
     };
-    if (navigator.onLine) {
+    try {
       const result = await httpService.post('mensa-visits/' + groupID, fullMensaVisit);
       const groupWithNewMensaVisit: Group = await result.json();
       const updatedGroups: Group[] = this.groups.map(group => {
@@ -84,91 +110,157 @@ export class GroupService {
       });
       await this.setGroups(updatedGroups);
       return groupWithNewMensaVisit;
-    } else {
-      // There may be groups without id that were created in frontend
-      // -> Either dont allow visits on these groups or create complete obj in frontend
-      // TODO make this service offline capable
-      return Promise.reject({});
+    } catch ({ message }) {
+      if (message === '_offline') {
+        const groupWithoutNewVisit: Group = this.groups.find(g => g.id === groupID)!;
+        const newGroup = {
+          ...groupWithoutNewVisit,
+          mensaVisits: [...groupWithoutNewVisit.mensaVisits, fullMensaVisit]
+        };
+        const updatedGroups: Group[] = this.groups.map(group => {
+          if (group.id !== groupID) return group;
+          return newGroup;
+        });
+        await this.setGroups(updatedGroups);
+        return newGroup;
+      }
+      throw { message };
     }
   }
 
   public async deleteMensaVisit(groupID: string, mensaVisitID: string): Promise<Group> {
-    if (navigator.onLine) {
+    const oldGroup = this.groups.find(g => g.id === groupID)!;
+    const newMensaVisits = oldGroup.mensaVisits.filter(mv => mv.id !== mensaVisitID);
+    let newGroup: Group = { ...oldGroup, mensaVisits: newMensaVisits };
+
+    try {
       const result = await httpService.delete('mensa-visits/' + groupID + '/' + mensaVisitID);
-      const groupWithoutMensaVisit: Group = await result.json();
+      newGroup = await result.json();
       const updatedGroups: Group[] = this.groups.map(group => {
-        if (group.id !== groupWithoutMensaVisit.id) return group;
-        return groupWithoutMensaVisit;
+        if (group.id !== newGroup.id) return group;
+        return newGroup;
       });
       await this.setGroups(updatedGroups);
-      return groupWithoutMensaVisit;
-    } else {
-      // TODO make this service offline capable
-      return Promise.reject({});
+      return newGroup;
+    } catch ({ message }) {
+      if (message === '_offline') {
+        const updatedGroups: Group[] = this.groups.map(group => {
+          if (group.id !== newGroup.id) return group;
+          return newGroup;
+        });
+        await this.setGroups(updatedGroups);
+        return newGroup;
+      } else {
+        throw { message };
+      }
     }
   }
 
   public async participateInMensaVisit(groupID: string, mensaVisitID: string): Promise<Group> {
-    if (navigator.onLine) {
+    const oldGroup = this.groups.find(g => g.id === groupID)!;
+    const userID = userService.userInfo!.id;
+
+    const newMensaVisits = oldGroup.mensaVisits.map(mv => {
+      if (mv.id !== mensaVisitID) return mv;
+      const newParticipants = [...mv.participants, userID];
+      return { ...mv, participants: newParticipants };
+    });
+
+    let newGroup: Group = { ...oldGroup, mensaVisits: newMensaVisits };
+
+    try {
       const result = await httpService.patch('mensa-visits/' + groupID + '/participate/' + mensaVisitID, {});
-      const groupWithNewMensaVisit: Group = await result.json();
+      newGroup = await result.json();
       const updatedGroups: Group[] = this.groups.map(group => {
-        if (group.id !== groupWithNewMensaVisit.id) return group;
-        return groupWithNewMensaVisit;
+        if (group.id !== newGroup.id) return group;
+        return newGroup;
       });
       await this.setGroups(updatedGroups);
-      return groupWithNewMensaVisit;
-    } else {
-      // TODO make this service offline capable
-      return Promise.reject({});
+      return newGroup;
+    } catch ({ message }) {
+      if (message === '_offline') {
+        const updatedGroups: Group[] = this.groups.map(group => {
+          if (group.id !== newGroup.id) return group;
+          return newGroup;
+        });
+        await this.setGroups(updatedGroups);
+        return newGroup;
+      } else {
+        throw { message };
+      }
     }
   }
 
   public async leaveMensaVisit(groupID: string, mensaVisitID: string): Promise<Group> {
-    if (navigator.onLine) {
+    const oldGroup = this.groups.find(g => g.id === groupID)!;
+    const userID = userService.userInfo!.id;
+
+    const newMensaVisits = oldGroup.mensaVisits.map(mv => {
+      if (mv.id !== mensaVisitID) return mv;
+      const newParticipants = mv.participants.filter(p => p !== userID);
+      return { ...mv, participants: newParticipants };
+    });
+
+    let newGroup: Group = { ...oldGroup, mensaVisits: newMensaVisits };
+
+    try {
       const result = await httpService.patch('mensa-visits/' + groupID + '/leave/' + mensaVisitID, {});
-      const groupWithNewMensaVisit: Group = await result.json();
+      newGroup = await result.json();
       const updatedGroups: Group[] = this.groups.map(group => {
-        if (group.id !== groupWithNewMensaVisit.id) return group;
-        return groupWithNewMensaVisit;
+        if (group.id !== newGroup.id) return group;
+        return newGroup;
       });
       await this.setGroups(updatedGroups);
-      return groupWithNewMensaVisit;
-    } else {
-      // TODO make this service offline capable
-      return Promise.reject({});
+      return newGroup;
+    } catch ({ message }) {
+      if (message === '_offline') {
+        const updatedGroups: Group[] = this.groups.map(group => {
+          if (group.id !== newGroup.id) return group;
+          return newGroup;
+        });
+        await this.setGroups(updatedGroups);
+        return newGroup;
+      } else {
+        throw { message };
+      }
     }
   }
 
   public async addMembership(groupID?: string, joinCode?: string): Promise<void> {
-    if (navigator.onLine) {
+    const i18n = i18nService.getStrings();
+    try {
       await httpService.post('groups/membership', { groupID, joinCode });
       routerService.navigate(Routes.GROUPS);
-    } else {
-      // join group if group is in offline storage
-      return Promise.reject({});
+    } catch ({ message }) {
+      if (message === '_offline') {
+        throw { message: i18n.INTERNET_NEEDED_TO_JOIN_GROUPS };
+      }
+      throw { message };
     }
   }
 
   public async removeMembership(groupID: string, userID?: string): Promise<void> {
-    if (navigator.onLine) {
+    const newGroups: Group[] = this.groups.filter(group => group.id !== groupID);
+    try {
       await httpService.delete('groups/' + groupID + '/membership' + (userID ? '/' + userID : ''));
+      await this.setGroups(newGroups);
       routerService.navigate(Routes.GROUPS);
-    } else {
-      // TODO make this service offline capable
-      return Promise.reject({});
+    } catch ({ message }) {
+      await this.setGroups(newGroups);
+      throw { message };
     }
   }
 
-  public async deleteGroup(groupID: string): Promise<void> {
-    if (navigator.onLine) {
-      await httpService.delete('groups/' + groupID);
-      routerService.navigate(Routes.GROUPS);
-    } else {
-      // TODO make this service offline capable
-      return Promise.reject({});
-    }
-  }
+  // Currently no being used
+  // public async deleteGroup(groupID: string): Promise<void> {
+  //   if (navigator.onLine) {
+  //     await httpService.delete('groups/' + groupID);
+  //     routerService.navigate(Routes.GROUPS);
+  //   } else {
+  //     // TODO make this service offline capable
+  //     return Promise.reject({});
+  //   }
+  // }
 
   protected async setGroups(nGroups: Group[]): Promise<void> {
     this._groups = nGroups;

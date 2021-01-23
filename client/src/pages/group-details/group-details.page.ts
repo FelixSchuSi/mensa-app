@@ -228,6 +228,7 @@ class GroupDetailsPage extends PageMixin(LitElement) {
         text: this.i18n.LEAVE,
         handler: () => {
           this.groupService.removeMembership(this.groupID);
+          routerService.navigate(Routes.GROUPS);
         }
       }
     ];

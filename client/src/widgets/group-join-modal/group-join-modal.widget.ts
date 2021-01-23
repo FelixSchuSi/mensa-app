@@ -3,55 +3,44 @@ import { LitElement, customElement, TemplateResult, html, internalProperty, prop
 import { Group } from '../../../../server/src/models/group';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
-import { groupService, GroupService } from '../../services/group.service';
+import { groupService } from '../../services/group.service';
 
 @customElement('app-group-join-modal')
 export class FilterModalWidget extends LitElement {
+  protected createRenderRoot(): LitElement {
+    return this;
+  }
+
   @internalProperty()
   protected i18n!: LanguageStrings;
   @property({ type: Array })
   protected groups: Group[] = [];
-  protected groupService: GroupService = groupService;
   @property({ type: String })
   protected inputJoinCode = '';
+
+  @property({ type: Object, attribute: false })
+  protected setNotification!: (e: any) => void;
+
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
     i18nService.subscribe(i18n => (this.i18n = i18n));
   }
-  protected showAlert = async (msg: string, header?: string, subheader?: string): Promise<void> => {
-    const alert = document.createElement('ion-alert');
-    alert.cssClass = 'my-custom-class';
-    alert.header = header ?? 'Failure';
-    alert.subHeader = subheader;
-    alert.message = msg;
-    alert.buttons = ['OK'];
 
-    document.body.appendChild(alert);
-    await alert.present();
-  };
-  protected joinGroup = (code: string): void => {
+  protected async joinGroup(code: string): Promise<void> {
     if (this.groups.some(e => e.joinCode == code)) {
-      this.showAlert('You are already a member of this group!');
+      this.setNotification({ warningMessage: this.i18n.YOU_ARE_ALREADY_A_MEMBER_OF_THIS_GROUP });
       return;
     }
-    this.groupService
-      .addMembership(undefined, code)
-      .then(() => {
-        this.showAlert('Successful joined groups', 'Success');
-        this.groupService.loadGroups(true);
-        this.dismissModal();
-      })
-      .catch(err => {
-        this.showAlert(err.message);
-      });
-  };
-
-  protected createRenderRoot(): LitElement {
-    return this;
+    try {
+      await groupService.addMembership(undefined, code);
+      this.setNotification({ successMessage: this.i18n.SUCCESSFULLY_JOINED_GROUP });
+      groupService.loadGroups(true);
+      this.dismissModal();
+    } catch ({ message }) {
+      this.setNotification({ errorMessage: message });
+    }
   }
-
-  // protected firstUpdated(): void {}
 
   protected dismissModal(): void {
     const modal = <HTMLIonModalElement>this.parentElement?.parentElement;
@@ -77,7 +66,6 @@ export class FilterModalWidget extends LitElement {
                 const target = e.target as HTMLTextAreaElement;
                 this.inputJoinCode = target.value;
               }}
-              value=${this.inputJoinCode}
               placeholder=${this.i18n.JOIN_CODE}
               type="text"
               required

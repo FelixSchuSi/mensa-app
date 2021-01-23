@@ -54,7 +54,8 @@ class GroupsPage extends PageMixin(LitElement) {
       swipeToClose: true,
       componentProps: {
         groups: this.groups,
-        inputJoinCode: joinCode
+        inputJoinCode: joinCode,
+        setNotification: this.setNotification
       }
     });
 

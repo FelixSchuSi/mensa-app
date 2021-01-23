@@ -48,7 +48,7 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
     }
 
     public setNotification({ successMessage = '', errorMessage = '', warningMessage = '', duration = 3000 }): void {
-      if (errorMessage === '_ignoreMe' || warningMessage === '_ignoreMe' || successMessage === '_ignoreMe') return;
+      if (errorMessage === '_offline' || warningMessage === '_offline' || successMessage === '_offline') return;
       this.errorMessage = errorMessage;
       this.infoMessage = warningMessage;
       this.successMessage = successMessage;

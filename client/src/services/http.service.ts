@@ -1,3 +1,6 @@
+import { defautOnSyncFail } from '../helpers/default-on-sync-fail';
+import { storeService } from './store.service';
+
 interface HttpServiceConfig {
   baseURL: string;
 }
@@ -92,9 +95,9 @@ class HttpService {
       return fetch(request);
     } else {
       console.log('putting request in network queue');
-      const syncFail = onSyncFail === undefined ? () => {} : onSyncFail;
+      const syncFail = onSyncFail === undefined ? defautOnSyncFail : onSyncFail;
       this.queue.push({ request, onSyncFail: syncFail });
-      return Promise.reject({ message: '_ignoreMe' });
+      return Promise.reject({ message: '_offline' });
     }
   }
 }

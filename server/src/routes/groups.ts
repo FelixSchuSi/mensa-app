@@ -69,21 +69,24 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
+  const userDAO: GenericDAO<User> = req.app.locals.userDAO;
   const { image, joinCode, name, id, createdAt } = req.body.group;
   const { id: serverID, createdAt: serverCreatedAt } = createEntity();
-
   if (!name) res.sendStatus(400);
 
-  const createdGroup = await groupDAO.create({
+  let createdGroup = await groupDAO.create({
     id: id ?? serverID,
     createdAt: createdAt ?? serverCreatedAt,
     name: encrypt(name),
     joinCode: joinCode ?? createJoinCode(codeLength),
     image: image,
-    owner: res.locals.user.id
+    owner: res.locals.user.id,
+    mensaVisits: [],
+    members: []
   });
 
-  console.log(createdGroup);
+  await addMembership(groupDAO, createdGroup.id, userDAO, res.locals.user.id);
+  createdGroup = <Group>await groupDAO.findOne({ id: createdGroup.id });
   res.status(201).json({ ...createdGroup, name: decrypt(createdGroup.name) });
 });
 

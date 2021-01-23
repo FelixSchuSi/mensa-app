@@ -17,7 +17,15 @@ router.get('/', async (req, res) => {
   try {
     const { email } = <User>jwt.verify(token, 'mysecret');
     const user = await userDAO.findOne({ email });
-    res.status(200).json({ ...user });
+
+    if (!user) {
+      res.status(401).json({ message: 'Bitte melden Sie sich an!' });
+      return;
+    }
+
+    const { createdAt, filterConfig, groupMemberships, id, name } = user;
+
+    res.status(200).json({ createdAt, email, filterConfig, groupMemberships, id, name });
   } catch (error) {
     res.status(401).json({ message: 'Bitte melden Sie sich an!' });
   }

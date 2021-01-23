@@ -94,6 +94,7 @@ export const english: LanguageStrings = {
   NETWORK_SYNC_SUCESS: 'successfully synced',
   INTERNET_NEEDED_FOR_SIGN_IN: 'You need to be online to log in.',
   INTERNET_NEEDED_FOR_SIGN_UP: 'You need to be online to sign up.',
+  INTERNET_NEEDED_TO_JOIN_GROUPS: 'You need to be online to join a group',
   SETTINGS: 'Settings',
   GERMAN: 'German',
   ENGLISH: 'English',
@@ -192,5 +193,7 @@ export const english: LanguageStrings = {
   CLICK_TO_CHOOSE_DATE: 'Click to choose date',
   CLICK_TO_CHOOSE_TIME: 'Click to choose time',
   MENSA_VISIT_MISSING_FIELDS_MSG: 'Please fill out',
-  MENSA_VISIT_CREATE_ERROR: 'Something went wrong whil creating mensa visit.'
+  MENSA_VISIT_CREATE_ERROR: 'Something went wrong whil creating mensa visit.',
+  YOU_ARE_ALREADY_A_MEMBER_OF_THIS_GROUP: 'You are already a member of this group!',
+  SUCCESSFULLY_JOINED_GROUP: 'Successfully joined group!'
 };

@@ -88,17 +88,9 @@ class GroupCreateModalWidget extends LitElement {
               <!-- <ion-button>Erstellen</ion-button> -->
               <div style="background-color: var(--ion-color-primary)" class="circle-add-btn"
               @click=${(): void => {
-                this.groupService
-                  .createGroup(this.groupName!, this.uploadedImage)
-                  .then(json => {
-                    console.log(json);
-                    this.joinCode = json.joinCode;
-                    groupService.addMembership(json.id);
-                    this.requestUpdate();
-                  })
-                  .catch(err => {
-                    console.error(err);
-                  });
+                this.groupService.createGroup(this.groupName!, this.uploadedImage).catch(err => {
+                  console.error(err);
+                });
               }}
                 >
               <ion-buttons>

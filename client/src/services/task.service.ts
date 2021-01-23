@@ -75,7 +75,6 @@ export class TaskService {
 
   public async createTask(title: string): Promise<void> {
     let task: Task = { ...createEntity(), title, status: 'open' };
-
     try {
       const response = await httpService.post('tasks', task, this.onSyncFail);
       task = await response.json();

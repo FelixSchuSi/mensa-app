@@ -53,12 +53,14 @@ class UserService {
 
   public async editUser(newUserData: Partial<User>): Promise<void> {
     if (!this.userInfo?.email) return;
-    if (navigator.onLine) {
-      newUserData.email = newUserData.email ?? this.userInfo.email;
-      console.log(newUserData);
-      const res: Response = await httpService.patch('users', newUserData);
-      this.userInfo = await res.json();
+    let newUserInfo: User = { ...this.userInfo, ...newUserData };
+    try {
+      const res: Response = await httpService.patch('users', newUserInfo);
+      newUserInfo = await res.json();
+    } catch ({ message }) {
+      throw { message };
     }
+    this.userInfo = newUserInfo;
   }
 
   public async logOut(): Promise<void> {
