@@ -196,5 +196,7 @@ export const english: LanguageStrings = {
   MENSA_VISIT_CREATE_ERROR: 'Something went wrong whil creating mensa visit.',
   YOU_ARE_ALREADY_A_MEMBER_OF_THIS_GROUP: 'You are already a member of this group!',
   SUCCESSFULLY_JOINED_GROUP: 'Successfully joined group!',
-  DATE_OF_MENSA_VISIT_NEEDS_TO_BE_IN_THE_FUTURE: 'Choose a point of time in the future!'
+  DATE_OF_MENSA_VISIT_NEEDS_TO_BE_IN_THE_FUTURE: 'Choose a point of time in the future!',
+  DELETE_MENSA_VISIT: 'Delete mensa visit',
+  DELETE: 'Delete'
 };

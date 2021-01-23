@@ -1,5 +1,6 @@
-import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
-import { ChipSelectWidget } from '../chip-select/chip-select.widget';
+import { customElement, html, internalProperty, LitElement, query, TemplateResult } from 'lit-element';
+import { LanguageStrings } from '../../models/language-strings';
+import { i18nService } from '../../services/i18n.service';
 
 @customElement('chip-select-none-chip')
 export class ChipSelectNoneChipWidget extends LitElement {
@@ -8,6 +9,9 @@ export class ChipSelectNoneChipWidget extends LitElement {
   }
 
   protected isSelected = true;
+
+  @internalProperty()
+  protected i18n!: LanguageStrings;
 
   @query('ion-chip')
   protected chip?: HTMLIonChipElement;
@@ -25,11 +29,18 @@ export class ChipSelectNoneChipWidget extends LitElement {
     this.isSelected ? this.chip?.classList.add('selected') : this.chip?.classList.remove('selected');
   }
 
+  constructor() {
+    super();
+    this.i18n = i18nService.getStrings();
+    i18nService.subscribe(i18n => (this.i18n = i18n));
+  }
+
   protected firstUpdated(): void {
     this.evaluate();
   }
+
   protected render(): TemplateResult {
-    return html` <ion-chip @click="${this.onClick}" id="none" class="selected"> Keine </ion-chip> `;
+    return html` <ion-chip @click="${this.onClick}" id="none" class="selected"> ${this.i18n.NONE} </ion-chip> `;
   }
 
   protected onClick(e: any): void {

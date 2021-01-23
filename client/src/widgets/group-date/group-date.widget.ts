@@ -198,8 +198,8 @@ export class GroupDateWidget extends LitElement {
         button
         style="--background: var(--ion-card-background)"
       >
-        <ion-label>Delete</ion-label>
-        <ion-button color="danger" fill="outline" slot="end">Delete</ion-button>
+        <ion-label>${this.i18n.DELETE_MENSA_VISIT}</ion-label>
+        <ion-button color="danger" fill="outline" slot="end">${this.i18n.DELETE}</ion-button>
       </ion-item>
     `;
   }

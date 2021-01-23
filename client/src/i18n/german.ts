@@ -197,5 +197,7 @@ export const german: LanguageStrings = {
   MENSA_VISIT_CREATE_ERROR: 'Termin konnte nicht erstellt werden: unbekannter Fehler.',
   YOU_ARE_ALREADY_A_MEMBER_OF_THIS_GROUP: 'Du bist bereits Mitglied dieser Gruppe!',
   SUCCESSFULLY_JOINED_GROUP: 'Gruppe beigetreten!',
-  DATE_OF_MENSA_VISIT_NEEDS_TO_BE_IN_THE_FUTURE: 'Der Zeitpunkt muss in der Zukunft liegen!'
+  DATE_OF_MENSA_VISIT_NEEDS_TO_BE_IN_THE_FUTURE: 'Der Zeitpunkt muss in der Zukunft liegen!',
+  DELETE_MENSA_VISIT: 'Termin löschen',
+  DELETE: 'Löschen'
 };
