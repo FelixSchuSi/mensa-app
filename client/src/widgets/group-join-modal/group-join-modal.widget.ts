@@ -36,7 +36,7 @@ export class FilterModalWidget extends LitElement {
       return;
     }
     this.groupService
-      .joinByCode(code)
+      .addMembership(undefined, code)
       .then(() => {
         this.showAlert('Successful joined groups', 'Success');
         this.groupService.loadGroups(true);

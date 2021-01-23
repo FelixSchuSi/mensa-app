@@ -64,7 +64,7 @@ export type LanguageKeys =
   | 'SWITCH_LANGUAGE'
   | 'SIGN_UP'
   | 'SIGN_UP_NOW'
-  | "CREATE_ACCOUNT"
+  | 'CREATE_ACCOUNT'
   | 'GROUPS'
   | 'SIGN_IN'
   | 'SIGN_IN_NOW'
@@ -180,4 +180,13 @@ export type LanguageKeys =
   | 'MEAL_SHARE_SUBJECT'
   | 'SHARE_GROUP'
   | 'SHARE_MEAL'
-  | 'COPY_TO_CLIPBOARD';
+  | 'COPY_TO_CLIPBOARD'
+  | 'TITLE'
+  | 'TIME'
+  | 'DATE'
+  | 'MENSA'
+  | 'GIVE_THIS_MENSA_VITIST_A_TITLE'
+  | 'CLICK_TO_CHOOSE_DATE'
+  | 'CLICK_TO_CHOOSE_TIME'
+  | 'MENSA_VISIT_MISSING_FIELDS_MSG'
+  | 'MENSA_VISIT_CREATE_ERROR';

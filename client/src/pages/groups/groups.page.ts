@@ -9,7 +9,6 @@ import { Routes } from '../../routes';
 import { until } from 'lit-html/directives/until';
 import { sleep } from '../../helpers/sleep';
 import { userService } from '../../services/user.service';
-import { ShareParameter } from '../../helpers/share-api';
 
 @customElement('app-groups')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -144,9 +143,9 @@ class GroupsPage extends PageMixin(LitElement) {
       ${this.groups.map(group => {
         return html`
           <app-group
-            .setNotification=${this.setNotification}
             @click=${() => routerService.navigate(Routes.GROUPS_DETAILS, { id: group.id })}
             .group=${group}
+            .setNotification=${this.setNotification}
             style="cursor: pointer"
           >
           </app-group>

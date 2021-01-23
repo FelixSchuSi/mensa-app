@@ -1,5 +1,6 @@
 import { LitElement, customElement, property, TemplateResult, html } from 'lit-element';
 import { Group } from '../../../../server/src/models/group';
+import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 import { share, ShareParameter } from '../../helpers/share-api';
@@ -16,7 +17,6 @@ export class GroupWidget extends LitElement {
 
   @property({ type: Object, attribute: false })
   protected group!: Group;
-
   @property({ type: Object, attribute: false })
   protected setNotification!: (e: any) => void;
 
@@ -37,7 +37,9 @@ export class GroupWidget extends LitElement {
       subject: i18nService.complexi18n(this.i18n.GROUP_SHARE_SUBJECT, { Group: this.group?.name || '' })
     };
   };
+
   protected render(): TemplateResult {
+    const visits = this.group?.mensaVisits || [];
     return html`
       <ion-card class="card-no-margin-when-small">
         <div class="bg-image-wrapper">
@@ -66,8 +68,17 @@ export class GroupWidget extends LitElement {
         </ion-card-header>
         <ion-card-content style="display:flex">
           <app-horizontal-scroller>
-            ${[0, 1, 2].map(e => html`<app-group-date></app-group-date>`)}
-            <app-group-date-add></app-group-date-add>
+            ${visits.map(
+              mensaVisit =>
+                html` <app-group-date
+                  .setNotification=${this.setNotification}
+                  .group=${this.group}
+                  .mensaVisit=${mensaVisit}
+                  .groupID=${this.group?.id}
+                ></app-group-date>`
+            )}
+            <app-group-date-add .groupID=${this.group?.id} .setNotification=${this.setNotification}>
+            </app-group-date-add>
           </app-horizontal-scroller>
         </ion-card-content>
       </ion-card>
