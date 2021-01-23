@@ -19,6 +19,8 @@ import { routerService } from '../../services/router.service';
 import { userService } from '../../services/user.service';
 import { PageMixin } from '../page.mixin';
 import { Plugins } from '@capacitor/core';
+import { until } from 'lit-html/directives/until';
+import { backButton } from '../../helpers/back-button';
 const { Device } = Plugins;
 
 const sharedCSS = require('../../shared.scss');
@@ -57,15 +59,7 @@ class SignUpPage extends PageMixin(LitElement) {
     return html`
       <ion-header asdf="true">
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-back-button
-              @click=${async () => {
-                await popFromRootNav();
-                goBackTo(Routes.MEALS_TODAY);
-              }}
-              .text="${this.mode === 'ios' ? this.i18n.BACK : null}"
-            ></ion-back-button>
-          </ion-buttons>
+          <ion-buttons slot="start"> ${until(backButton(), html``)} </ion-buttons>
           <ion-title>${this.i18n.SETTINGS}</ion-title>
         </ion-toolbar>
       </ion-header>
@@ -148,8 +142,9 @@ class SignUpPage extends PageMixin(LitElement) {
             console.log({ model, operatingSystem, platform });
             this.setNotification({ successMessage: JSON.stringify({ model, operatingSystem, platform }) });
           }}
-          >Device Info</ion-button
         >
+          Device Info
+        </ion-button>
       </ion-content>
     `;
   }
