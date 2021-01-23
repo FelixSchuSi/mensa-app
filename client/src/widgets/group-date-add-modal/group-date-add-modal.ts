@@ -144,6 +144,10 @@ class GroupDateAddModalWidget extends LitElement {
   protected async createMensaVisit(): Promise<void> {
     if (!this.validateInputs()) return;
     const datetime = this.buildDateTime();
+    if (datetime <= Date.now()) {
+      this.setNotification({ warningMessage: this.i18n.DATE_OF_MENSA_VISIT_NEEDS_TO_BE_IN_THE_FUTURE });
+      return;
+    }
     const title = this.titleInput.value + '';
     const mensa = this.activeChip;
     const mensaVisit: Partial<MensaVisit> = { title, mensa, datetime };

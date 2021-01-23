@@ -67,9 +67,9 @@ export class FilterModalWidget extends LitElement {
                 this.inputJoinCode = target.value;
               }}
               placeholder=${this.i18n.JOIN_CODE}
+              value=${this.inputJoinCode ?? ''}
               type="text"
               required
-              pattern=".{8}"
             >
             </ion-input>
           </ion-item>
