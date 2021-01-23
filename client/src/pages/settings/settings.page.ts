@@ -17,8 +17,6 @@ import { i18nService } from '../../services/i18n.service';
 import { routerService } from '../../services/router.service';
 import { userService } from '../../services/user.service';
 import { PageMixin } from '../page.mixin';
-import { Plugins } from '@capacitor/core';
-const { Device } = Plugins;
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./settings.page.scss');
@@ -138,16 +136,6 @@ class SignUpPage extends PageMixin(LitElement) {
                 </ion-item>
               `}
         </ion-list>
-        <ion-button
-          @click=${async () => {
-            const info = await Device.getInfo();
-            const { model, operatingSystem, platform } = info;
-            console.log({ model, operatingSystem, platform });
-            this.setNotification({ successMessage: JSON.stringify({ model, operatingSystem, platform }) });
-          }}
-        >
-          Device Info
-        </ion-button>
       </ion-content>
     `;
   }
