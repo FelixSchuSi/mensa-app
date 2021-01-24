@@ -102,6 +102,7 @@ export type LanguageKeys =
   | 'MEALS_FUTURE'
   | 'GROUPS'
   | 'CREATE_GROUP'
+  | 'EDIT_GROUP'
   | 'FILTER_MEALS'
   | 'APPLY_FILTER'
   | 'LOCATION'

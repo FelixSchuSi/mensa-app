@@ -72,6 +72,20 @@ export class GroupService {
     }
   }
 
+  public async editGroup(newGroup: Group): Promise<void> {
+    let group = newGroup;
+    const newGroups = this.groups.map(g => {
+      if (g.id !== group.id) return g;
+      return group;
+    });
+    this.setGroups(newGroups);
+    try {
+      await httpService.patch('groups/' + group.id, group);
+    } catch ({ message }) {
+      throw { message };
+    }
+  }
+
   public async createGroup(name: string, image?: Image): Promise<void> {
     const joinCode = createJoinCode(codeLength);
     const { id, createdAt } = createEntity();

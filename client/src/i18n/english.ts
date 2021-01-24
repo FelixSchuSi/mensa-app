@@ -104,6 +104,7 @@ export const english: LanguageStrings = {
   MEALS_TODAY: "Today's Meals",
   MEALS_FUTURE: 'Meals',
   CREATE_GROUP: 'Create group',
+  EDIT_GROUP: 'Edit group',
   FILTER_MEALS: 'Filter meals',
   APPLY_FILTER: 'Apply filter',
   LOCATION: 'Location',

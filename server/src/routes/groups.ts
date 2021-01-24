@@ -92,7 +92,8 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const groupDAO: GenericDAO<Group> = req.app.locals.groupDAO;
-  await groupDAO.update({ id: req.params.id, name: encrypt(res.locals.group.name) });
+  const { name, image } = req.body;
+  await groupDAO.update({ id: req.params.id, name: encrypt(name), image });
   res.status(200).end();
 });
 

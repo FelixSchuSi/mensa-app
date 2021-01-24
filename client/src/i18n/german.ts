@@ -104,6 +104,7 @@ export const german: LanguageStrings = {
   MEALS_TODAY: 'Heutige Gerichte',
   MEALS_FUTURE: 'Gerichte',
   CREATE_GROUP: 'Gruppe erstellen',
+  EDIT_GROUP: 'Grupppe bearbeiten',
   FILTER_MEALS: 'Gerichte filtern',
   APPLY_FILTER: 'Filter anwenden',
   LOCATION: 'Mensa',

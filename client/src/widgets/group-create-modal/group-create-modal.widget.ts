@@ -1,9 +1,10 @@
-import { customElement, html, internalProperty, LitElement, property, TemplateResult } from 'lit-element';
+import { customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Image } from '../../../../server/src/models/image';
 import { mediaService, MediaService } from '../../services/media.service';
 import { i18nService } from '../../services/i18n.service';
+import { Group } from '../../../../server/src/models/group';
 
 @customElement('app-group-create-modal')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,7 +19,17 @@ class GroupCreateModalWidget extends LitElement {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
   protected joinCode = '';
+  @property({ type: Object, attribute: false })
+  protected group!: Group;
   protected uploadedImage: Image | undefined;
+  @query('.group-name-input')
+  protected groupNameInput!: HTMLIonInputElement;
+
+  @property()
+  protected mode: 'create' | 'edit' = 'create';
+
+  @internalProperty()
+  protected imageSetOnce: boolean = false;
 
   @internalProperty()
   protected imagesrc: string | null = null;
@@ -46,7 +57,7 @@ class GroupCreateModalWidget extends LitElement {
           mediaService.upload(file).then((res): void => {
             this.imagesrc = res.embed_url;
             const button = <HTMLElement>this.querySelector('#upload-button');
-            button.style.display = 'none';
+            this.imageSetOnce = true;
             this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
           });
         }}
@@ -61,40 +72,40 @@ class GroupCreateModalWidget extends LitElement {
           <div class="bg-image-wrapper" style="background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12); height: 100px">
           ${this.imagesrc ? html`<img class="bg-image" src=${this.imagesrc || ''} />` : ''}
           </div>
-          <ion-avatar id="add-group-pic" class="group-list-avatar circle-add-btn" 
-          @click=${(): void => {
-            const input = <HTMLElement>this.querySelector('#image-file-input');
-            input.click();
-          }}
-          >
-          <img id="group-image" src="${this.imagesrc || ''}" style="${this.imagesrc ? '' : 'display:none'}" />
-              <ion-buttons id="upload-button" style="width:100%; height:100%">
-                <ion-button style="width:100%; height:100%">
-                  <ion-icon style="width:50%; height:50%" slot="icon-only" color="primary" name="camera"></ion-icon>
-                </ion-button>
-              </ion-buttons>
-            </ion-avatar>
+         ${this.avatarTemplate}
           <ion-card-header style="padding-top:0px">
             <ion-card-subtitle >
-              ${this.i18n.NEW_GROUP}
+              ${this.mode === 'edit' ? this.i18n.EDIT_GROUP : this.i18n.NEW_GROUP}
             </ion-card-subtitle>
             <ion-card-title style="display:flex"> 
-              <ion-input autofocus
-              style="border-bottom: 1px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5); "
+              <ion-input 
+                style="border-bottom: 1px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5); "
                 @change=${(e: Event): void => {
                   const target = e.target as HTMLTextAreaElement;
                   this.groupName = target.value;
                 }}
                 placeholder=${this.i18n.GROUP_NAME}
+                class="group-name-input"
                 type="text"
+                value=${this.groupName ?? ''}
                 required
+                autofocus
+                
               >
               </ion-input>
-              <!-- <ion-button>Erstellen</ion-button> -->
               <div style="background-color: var(--ion-color-primary)" class="circle-add-btn"
               @click=${async () => {
                 try {
-                  await this.groupService.createGroup(this.groupName!, this.uploadedImage);
+                  if (this.mode === 'create') {
+                    await this.groupService.createGroup(this.groupName!, this.uploadedImage);
+                  } else {
+                    const newGroup: Group = {
+                      ...this.group,
+                      name: this.groupName!,
+                      image: this.uploadedImage ?? this.group.image
+                    };
+                    await this.groupService.editGroup(newGroup);
+                  }
                 } catch ({ message }) {
                   console.log(message);
                 }
@@ -112,5 +123,33 @@ class GroupCreateModalWidget extends LitElement {
           </ion-card-header>
               </ion-card>
       `;
+  }
+
+  protected get avatarTemplate(): TemplateResult {
+    return html`
+      <ion-avatar
+        id="add-group-pic"
+        class="group-list-avatar circle-add-btn"
+        @click=${(): void => {
+          const input = <HTMLElement>this.querySelector('#image-file-input');
+          input.click();
+        }}
+      >
+        <ion-buttons
+          class="avatar-content"
+          style="
+            ${this.imageSetOnce ? 'opacity:0;' : ''} 
+            ${this.imagesrc ? ' filter: drop-shadow(0 0 8px black);' : ''} 
+            z-index:99;
+          "
+          id="upload-button"
+        >
+          <ion-button style="width:100%; height:100%; ">
+            <ion-icon style="width:50%; height:50%; " slot="icon-only" color="primary" name="camera"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <img src="${this.imagesrc || ''}" style="${this.imagesrc ? '' : 'display:none;'} z-index:80; " />
+      </ion-avatar>
+    `;
   }
 }

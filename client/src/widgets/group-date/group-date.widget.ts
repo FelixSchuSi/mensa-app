@@ -206,9 +206,7 @@ export class GroupDateWidget extends LitElement {
 
   protected async deleteMensaVisit(): Promise<void> {
     try {
-      console.log('before ', this.group);
       this.group = await groupService.deleteMensaVisit(this.group.id, this.mensaVisit.id);
-      console.log('after ', this.group);
     } catch (e) {}
   }
 }

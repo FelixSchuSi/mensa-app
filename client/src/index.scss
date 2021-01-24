@@ -232,8 +232,20 @@ app-meals-future app-meal:first-of-type ion-card {
   position: relative;
   margin: 0 auto;
   margin-top: -75px;
-  // filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
   border: solid 3px white;
+
+  // display: grid !important;
+  // grid-template-columns: 100%;
+  // grid-template-rows: 100%;
+  // grid-template-areas: 'stack';
+}
+
+.avatar-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .termin-card {

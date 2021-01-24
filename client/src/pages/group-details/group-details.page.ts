@@ -12,6 +12,7 @@ import { copyToClipboard } from '../../helpers/copy-to-clipboard';
 import { createShareModal } from '../../helpers/create-share-modal';
 import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 import { goBackTo } from '../../helpers/go-back-to';
+import { modalController } from '@ionic/core';
 
 @customElement('app-group-details')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -124,6 +125,10 @@ class GroupDetailsPage extends PageMixin(LitElement) {
   protected get buttonsTemplate(): TemplateResult {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
+        <ion-button @click=${() => this.createEditModal()}>
+          <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
         <ion-button
           @click=${async (e: any): Promise<void> => {
             const params = this.createShareParameter();
@@ -137,6 +142,22 @@ class GroupDetailsPage extends PageMixin(LitElement) {
         </ion-button>
       </ion-buttons>
     `;
+  }
+
+  protected async createEditModal(): Promise<void> {
+    const modal: HTMLIonModalElement = await modalController.create({
+      component: 'app-group-create-modal',
+      swipeToClose: true,
+      cssClass: 'create-group-modal',
+      componentProps: {
+        mode: 'edit',
+        group: this.group,
+        groupName: this.group?.name ?? '',
+        imagesrc: this.group?.image?.url ?? null
+      }
+    });
+
+    await modal.present();
   }
 
   protected get mensaVisitsTemplate(): TemplateResult {
