@@ -4,17 +4,24 @@ import { storeService } from './store.service';
 interface HttpServiceConfig {
   baseURL: string;
 }
+
+interface FullRequestInit {
+  url: string;
+  requestInit: RequestInit;
+  onSyncFail: string;
+}
+
 // Is regular array but type protectes myself
 // from using wrong methods such as pop().
-interface NetworkQueue {
-  shift(): { request: Request; onSyncFail: () => void } | undefined;
-  push(...items: { request: Request; onSyncFail: () => void }[]): number;
+interface RequestQueue {
+  shift(): FullRequestInit | undefined;
+  push(...items: FullRequestInit[]): number;
   length: number;
 }
 
 class HttpService {
-  private queue: NetworkQueue = [];
   private requestReplayLock: Promise<void> = Promise.resolve();
+  private QUEUEKEY = 'REQUEST_QUEUE';
 
   constructor(private config: HttpServiceConfig) {}
 
@@ -39,19 +46,22 @@ class HttpService {
   }
   public async replayRequests(): Promise<void> {
     this.requestReplayLock = new Promise(() => {});
-    if (this.queue.length > 0) {
-      while (this.queue.length > 0) {
-        const { request, onSyncFail } = this.queue.shift()!;
+    let queue: RequestQueue = await this.getRequestQueue();
+    if (queue.length > 0) {
+      while (queue.length > 0) {
+        const { url, requestInit, onSyncFail } = queue.shift()!;
         try {
-          await fetch(request);
+          await fetch(new Request(url, requestInit));
+          await defautOnSyncFail();
         } catch (e) {
-          console.log('error during sync: ' + e);
-          await onSyncFail();
+          await defautOnSyncFail();
         }
+        await this.setRequestQueue(queue);
       }
     }
     this.requestReplayLock = Promise.resolve();
   }
+
   public getBaseURL(): string {
     return this.config.baseURL;
   }
@@ -62,9 +72,11 @@ class HttpService {
   ): Promise<Response> {
     await this.requestReplayLock;
 
-    const request: Request = this.buildRequest(method, url, body);
+    const fullRequestInit: FullRequestInit = this.buildFullRequestInit(method, url, body, onSyncFail);
+    const request: Request = new Request(fullRequestInit.url, fullRequestInit.requestInit);
 
-    const response: Response = request.method === 'GET' ? await fetch(request) : await this.bgSync(request, onSyncFail);
+    const response: Response = method === 'GET' ? await fetch(request) : await this.bgSync(fullRequestInit);
+
     if (response.ok) {
       return response;
     } else {
@@ -77,7 +89,7 @@ class HttpService {
       return Promise.reject({ message, statusCode: response.status });
     }
   }
-  private buildRequest(method: string, url: string, body?: unknown): Request {
+  private buildFullRequestInit(method: string, url: string, body?: unknown, onSyncFail?: () => void): FullRequestInit {
     const requestInit: RequestInit = {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       method: method,
@@ -87,18 +99,35 @@ class HttpService {
     if (body) {
       requestInit.body = JSON.stringify(body);
     }
-    return new Request(this.config.baseURL + url, requestInit);
+
+    const fullRequestInit: FullRequestInit = {
+      url: this.config.baseURL + url,
+      onSyncFail: onSyncFail ? onSyncFail.toString() : defautOnSyncFail.toString(),
+      requestInit
+    };
+    return fullRequestInit;
   }
 
-  private async bgSync(request: Request, onSyncFail?: () => void): Promise<Response> {
+  private async bgSync(fullRequestInit: FullRequestInit): Promise<Response> {
     if (navigator.onLine) {
-      return fetch(request);
+      const { url, requestInit } = fullRequestInit;
+      return fetch(new Request(url, requestInit));
     } else {
       console.log('putting request in network queue');
-      const syncFail = onSyncFail === undefined ? defautOnSyncFail : onSyncFail;
-      this.queue.push({ request, onSyncFail: syncFail });
+      const rq: RequestQueue = await this.getRequestQueue();
+      rq.push(fullRequestInit);
+      await this.setRequestQueue(rq);
       return Promise.reject({ message: '_offline' });
     }
+  }
+
+  private async getRequestQueue(): Promise<RequestQueue> {
+    const fromStorage = <RequestQueue | undefined>await storeService.get(this.QUEUEKEY);
+    return fromStorage ?? [];
+  }
+
+  private async setRequestQueue(queue: RequestQueue): Promise<void> {
+    await storeService.set(this.QUEUEKEY, queue);
   }
 }
 
