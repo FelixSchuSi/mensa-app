@@ -180,7 +180,7 @@ export const german: LanguageStrings = {
   GROUP_INVITE_MESSAGE:
     'Hey!\nIch lade dich zu meiner Mensa-Gruppe {Group} ein! Nutze einfach den Code {Joincode} um beizutreten.',
   GROUP_INVITE_TITLE: 'Lade deine Freunde ein {Group} beizutreten',
-  MEAL_SHARE_MESSAGE: 'Hey!\nSchau mal, heute gibt es {Meal} in der Mensa',
+  MEAL_SHARE_MESSAGE: 'Hey!\nSchau mal, bald gibt es {Meal} in der Mensa',
   MEAL_SHARE_TITLE: 'Teile {Meal} mit deinen Freunde',
   SHARE_GROUP: 'Gruppe teilen',
   SHARE_MEAL: 'Gericht teilen',
@@ -200,5 +200,10 @@ export const german: LanguageStrings = {
   SUCCESSFULLY_JOINED_GROUP: 'Gruppe beigetreten!',
   DATE_OF_MENSA_VISIT_NEEDS_TO_BE_IN_THE_FUTURE: 'Der Zeitpunkt muss in der Zukunft liegen!',
   DELETE_MENSA_VISIT: 'Termin löschen',
-  DELETE: 'Löschen'
+  DELETE: 'Löschen',
+  SHARE_GROUP_INVITE: 'Gruppeneinladung teilen',
+  COPY_TEXT: 'Text kopieren',
+  COPY: 'Kopieren',
+  SHARE_VIA_EMAIL: 'Teilen via E-Mail',
+  SEND: 'Senden'
 };

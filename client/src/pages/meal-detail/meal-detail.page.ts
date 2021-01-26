@@ -54,6 +54,7 @@ class MealDetailPage extends PageMixin(LitElement) {
   protected createShareParameter = (): ShareParameter => {
     return {
       title: i18nService.complexi18n(this.i18n.MEAL_SHARE_TITLE, { Meal: this.meal?.title || '' }),
+      subtitle: this.i18n.SHARE_MEAL,
       text: i18nService.complexi18n(this.i18n.MEAL_SHARE_MESSAGE, { Meal: this.meal?.title || '' }),
       path: `${Routes.MEALS_TODAY}/meal${window.location.search}`,
       subject: i18nService.complexi18n(this.i18n.MEAL_SHARE_SUBJECT, { Meal: this.meal?.title || '' })

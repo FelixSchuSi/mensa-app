@@ -26,7 +26,6 @@ class HttpService {
 
   constructor(private config: HttpServiceConfig) {
     this.getRequestQueue().then(queue => {
-      console.log(queue);
       if (queue && queue.length > 0) {
         connectionStatusService.onOnline();
       }

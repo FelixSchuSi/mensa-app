@@ -3,13 +3,16 @@ const { Share } = Plugins;
 
 export interface ShareParameter {
   title: string;
+  subtitle: string;
   text: string;
   path?: string;
   subject: string;
 }
+
 export function buildShareURL(path?: string): string {
   return 'https://mensa-app.dub-services.de' + (path ? encodeURI(`/${path}`) : '');
 }
+
 export async function share(parameter: ShareParameter): Promise<boolean> {
   try {
     await Share.share({

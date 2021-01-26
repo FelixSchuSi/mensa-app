@@ -38,6 +38,7 @@ export class MealWidget extends LitElement {
   protected createShareParameter = (): ShareParameter => {
     return {
       title: i18nService.complexi18n(this.i18n.MEAL_SHARE_TITLE, { Meal: this.meal?.title || '' }),
+      subtitle: this.i18n.SHARE_MEAL,
       text: i18nService.complexi18n(this.i18n.MEAL_SHARE_MESSAGE, { Meal: this.meal?.title || '' }),
       path: `${Routes.MEAL_TODAY_DETAILS}?mensa=${this.meal.mensa}&title=${this.meal.title}`,
       subject: i18nService.complexi18n(this.i18n.MEAL_SHARE_SUBJECT, { Meal: this.meal?.title || '' })

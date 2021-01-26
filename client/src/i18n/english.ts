@@ -177,8 +177,8 @@ export const english: LanguageStrings = {
   COPIED_TO_CLIPBOARD: 'Copied to clipboard!',
   NEW_GROUP: 'New group',
   GROUP_NAME: 'Group name',
-  GROUP_INVITE_MESSAGE: 'Hey there!\nPlease join my Group on mensa app! Please use the code {Joincode} to join.',
-  GROUP_INVITE_TITLE: 'Ask your friends to join {Group}',
+  GROUP_INVITE_MESSAGE: 'Hey there!\nPlease join my Group on mensa app! Use the code {Joincode} to join.',
+  GROUP_INVITE_TITLE: 'Invite your friends to join {Group}',
   MEAL_SHARE_MESSAGE: 'Hey!\nHeads up, there is {Meal} for lunch',
   MEAL_SHARE_TITLE: 'Show {Meal} to your friends',
   SHARE_GROUP: 'Share group',
@@ -199,5 +199,10 @@ export const english: LanguageStrings = {
   SUCCESSFULLY_JOINED_GROUP: 'Successfully joined group!',
   DATE_OF_MENSA_VISIT_NEEDS_TO_BE_IN_THE_FUTURE: 'Choose a point of time in the future!',
   DELETE_MENSA_VISIT: 'Delete mensa visit',
-  DELETE: 'Delete'
+  DELETE: 'Delete',
+  SHARE_GROUP_INVITE: 'Share group invite',
+  COPY_TEXT: 'Copy text',
+  COPY: 'Copy',
+  SHARE_VIA_EMAIL: 'Share via e-mail',
+  SEND: 'Send'
 };

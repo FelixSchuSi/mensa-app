@@ -29,6 +29,7 @@ export class GroupWidget extends LitElement {
   protected createShareParameter = (): ShareParameter => {
     return {
       title: i18nService.complexi18n(this.i18n.GROUP_INVITE_TITLE, { Group: this.group.name || '' }),
+      subtitle: this.i18n.SHARE_GROUP_INVITE,
       text: i18nService.complexi18n(this.i18n.GROUP_INVITE_MESSAGE, {
         Group: this.group.name,
         JoinCode: this.group.joinCode
