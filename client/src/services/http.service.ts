@@ -1,4 +1,5 @@
 import { defautOnSyncFail } from '../helpers/default-on-sync-fail';
+import { connectionStatusService } from './connection-status.service';
 import { storeService } from './store.service';
 
 interface HttpServiceConfig {
@@ -23,7 +24,14 @@ class HttpService {
   private requestReplayLock: Promise<void> = Promise.resolve();
   private QUEUEKEY = 'REQUEST_QUEUE';
 
-  constructor(private config: HttpServiceConfig) {}
+  constructor(private config: HttpServiceConfig) {
+    this.getRequestQueue().then(queue => {
+      console.log(queue);
+      if (queue && queue.length > 0) {
+        connectionStatusService.onOnline();
+      }
+    });
+  }
 
   public async get(url: string, onSyncFail?: () => void): Promise<Response> {
     return this.createFetch('GET', url, { onSyncFail });
@@ -45,21 +53,23 @@ class HttpService {
     return this.createFetch('DELETE', url, { onSyncFail });
   }
   public async replayRequests(): Promise<void> {
-    this.requestReplayLock = new Promise(() => {});
+    let resolver: () => void = () => {};
+    this.requestReplayLock = new Promise(resolve => {
+      resolver = resolve;
+    });
     let queue: RequestQueue = await this.getRequestQueue();
     if (queue.length > 0) {
       while (queue.length > 0) {
         const { url, requestInit, onSyncFail } = queue.shift()!;
         try {
           await fetch(new Request(url, requestInit));
-          await defautOnSyncFail();
         } catch (e) {
           await defautOnSyncFail();
         }
         await this.setRequestQueue(queue);
       }
     }
-    this.requestReplayLock = Promise.resolve();
+    resolver();
   }
 
   public getBaseURL(): string {
@@ -131,7 +141,7 @@ class HttpService {
   }
 }
 
-// const ISPROD = true;
+const ISPROD = true;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const baseURL: string = ISPROD ? 'https://api.mensa-app.dub-services.de/api/' : `http://${location.hostname}:3443/api/`;

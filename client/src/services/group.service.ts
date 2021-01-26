@@ -14,7 +14,7 @@ import { i18nService } from './i18n.service';
 export type GroupsListener = (groups: Group[]) => void;
 export class GroupService {
   protected _groups: Group[] = [];
-  protected GROUPKEY = 'groups';
+  public GROUPKEY = 'GROUPS';
   private listeners: GroupsListener[] = [];
 
   public async loadGroups(scopeMe: boolean): Promise<void> {

@@ -41,10 +41,6 @@ class ConnectionStatusBar extends LitElement {
         return this.stautusBarTemplate(this.i18n.NETWORK_ONLINE);
       case ConnectionStatus.SYNCING:
         return this.stautusBarTemplate(this.i18n.NETWORK_SYNCING);
-      case ConnectionStatus.SYNC_SUCESS:
-        return this.stautusBarTemplate(this.i18n.NETWORK_SYNC_SUCESS);
-      case ConnectionStatus.SYNC_FAILURE:
-        return this.stautusBarTemplate(this.i18n.NETWORK_SYNC_FAILURE);
       case ConnectionStatus.BASESTATE:
         return html``;
       default:
