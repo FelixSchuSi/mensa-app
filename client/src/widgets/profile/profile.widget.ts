@@ -33,8 +33,8 @@ export class ProfileWidget extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <ion-card class="card-no-margin-when-small">
-        <ion-card-header style="padding-top:0px">
+      <ion-card style="Margin-left:0; Margin-right:0">
+        <ion-card-header>
           <ion-card-subtitle>E-MAIL </ion-card-subtitle>
           <ion-card-title style="display:flex">Name </ion-card-title>
         </ion-card-header>
@@ -44,11 +44,11 @@ export class ProfileWidget extends LitElement {
               <ion-item
                 class="item-inside-card"
                 .detail="${false}"
-                style="--background: var(--ion-card-background)"
+                style="--background: var(--ion-card-background);--border-color: rgba(0,0,0,0);"
                 @click=${this.logOut}
               >
                 <ion-label>${this.i18n.SIGN_OUT}</ion-label>
-                <ion-button>${this.i18n.SIGN_OUT}</ion-button>
+                <ion-button fill="outline" slot="end">${this.i18n.SIGN_OUT}</ion-button>
               </ion-item>
             `
           : html`
