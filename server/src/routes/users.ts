@@ -23,9 +23,9 @@ router.get('/', async (req, res) => {
       return;
     }
 
-    const { createdAt, filterConfig, groupMemberships, id, name } = user;
+    const { createdAt, filterConfig, groupMemberships, id, name, status } = user;
 
-    res.status(200).json({ createdAt, email, filterConfig, groupMemberships, id, name });
+    res.status(200).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
   } catch (error) {
     res.status(401).json({ message: 'Bitte melden Sie sich an!' });
   }

@@ -7,12 +7,14 @@ import { httpService } from './http.service';
 import { taskService } from './task.service';
 import { User } from '../../../server/src/models/user';
 import { TouchSequence } from 'selenium-webdriver';
+import { storeService } from './store.service';
 
 type userInfoListener = (userInfo: User | undefined) => void;
 
 class UserService {
   private listeners: userInfoListener[] = [];
   private _userInfo?: User;
+  public USERKEY = 'USER';
 
   constructor() {
     this.getUserInfo();
@@ -24,19 +26,27 @@ class UserService {
   }
 
   public async getUserInfo(): Promise<void> {
-    try {
-      const user = await httpService.get('users/');
-      const userInfo = <User>await user.json();
-      this.userInfo = userInfo;
-    } catch ({ statusCode }) {
-      if (statusCode === 401) this.userInfo = undefined;
+    if (navigator.onLine) {
+      try {
+        const user = await httpService.get('users/');
+        const userInfo = <User>await user.json();
+        console.log('getUserInfo ', userInfo);
+        await this.setUserInfo(userInfo);
+      } catch ({ statusCode }) {
+        if (statusCode === 401) await this.setUserInfo(undefined);
+      }
+    } else {
+      const userInfoFromStore = <User>await storeService.get(this.USERKEY);
+      await this.setUserInfo(userInfoFromStore);
     }
   }
 
   public async signIn(signInData: SignInData, i18n: LanguageStrings): Promise<void> {
     if (navigator.onLine) {
       const res: Response = await httpService.post('users/sign-in', signInData);
-      this.userInfo = await res.json();
+      const userData: User = await res.json();
+      console.log('signIn ', userData);
+      await this.setUserInfo(userData);
     } else {
       return Promise.reject({ message: i18n.INTERNET_NEEDED_FOR_SIGN_IN, statusCode: 503 });
     }
@@ -45,7 +55,9 @@ class UserService {
   public async signUp(signUpData: SignUpData, i18n: LanguageStrings): Promise<void> {
     if (navigator.onLine) {
       const res: Response = await httpService.post('users', signUpData);
-      this.userInfo = await res.json();
+      const userData: User = await res.json();
+      console.log('signIn ', userData);
+      await this.setUserInfo(userData);
     } else {
       return Promise.reject({ message: i18n.INTERNET_NEEDED_FOR_SIGN_UP, statusCode: 503 });
     }
@@ -60,23 +72,21 @@ class UserService {
     } catch ({ message }) {
       throw { message };
     }
-    this.userInfo = newUserInfo;
+    await this.setUserInfo(newUserInfo);
   }
 
   public async logOut(): Promise<void> {
     await httpService.delete('users/sign-out');
-    this.userInfo = undefined;
+    await this.setUserInfo(undefined);
   }
 
   public get userInfo(): User | undefined {
     return this._userInfo;
   }
 
-  public set userInfo(userInfo: User | undefined) {
+  public async setUserInfo(userInfo: User | undefined): Promise<void> {
     this._userInfo = userInfo;
-    if (this._userInfo === undefined) {
-      taskService.clear();
-    }
+    await storeService.set(this.USERKEY, this._userInfo);
     this.notifyListeners(this._userInfo);
   }
 
