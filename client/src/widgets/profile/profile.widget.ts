@@ -35,14 +35,33 @@ export class ProfileWidget extends LitElement {
     return html`
       <ion-card style="Margin-left:0; Margin-right:0">
         <ion-card-content style=${this.userInfo ? '' : 'display:none'}>
-          <ion-list>
+          <ion-list class="bg-image-wrapper">
             <ion-item>
-              <ion-avatar slot="start">
-                <img src="./avatar.svg" />
+              <ion-avatar
+                slot="start"
+                class="group-margin-start"
+                style="
+          background-color: var(--ion-color-step-250); 
+          border-radius: var(--border-radius);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;"
+              >
+                ${this.userInfo?.image?.url
+                  ? html`<img class="bg-image" src=${this.userInfo.image?.url || ''} />`
+                  : html`<ion-icon style="width:90%;height:90%;" name="help-outline"></ion-icon>`}
               </ion-avatar>
-              <ion-label>Lorem ipsum</ion-label>
+              <ion-label>
+                <ion-card-title style="display:flex">${this.userInfo?.name}</ion-card-title>
+                <ion-card-subtitle style="text-transform: lowercase">${this.userInfo?.email}</ion-card-subtitle>
+                <ion-card-subtitle style="text-transform: lowercase"
+                  >${this.userInfo?.status ? this.i18n[this.userInfo?.status] : ''}</ion-card-subtitle
+                >
+              </ion-label>
             </ion-item>
           </ion-list>
+
           <div class="bg-image-wrapper">
             ${this.userInfo?.image?.url ? html`<img class="bg-image" src=${this.userInfo.image?.url || ''} />` : ''}
 
