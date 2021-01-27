@@ -34,11 +34,13 @@ export class ProfileWidget extends LitElement {
   protected render(): TemplateResult {
     return html`
       <ion-card style="Margin-left:0; Margin-right:0">
-        <ion-card-header>
-          <ion-card-title style="display:flex">${this.userInfo.name}</ion-card-title>
-          <ion-card-subtitle>${this.userInfo.email}</ion-card-subtitle>
+        <ion-card-header style=${this.userInfo ? '' : 'display:none'}>
+          <ion-card-title style="display:flex">${this.userInfo?.name}</ion-card-title>
+          <ion-card-subtitle>${this.userInfo?.email}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content style="display:flex">${this.userInfo.status}</ion-card-content>
+        <ion-card-content style=${this.userInfo ? '' : 'display:none'}
+          >${this.userInfo?.status ? this.i18n[this.userInfo?.status] : ''}</ion-card-content
+        >
         ${this.userInfo
           ? html`
               <ion-item
