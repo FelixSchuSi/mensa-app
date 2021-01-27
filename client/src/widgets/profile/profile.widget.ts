@@ -35,10 +35,10 @@ export class ProfileWidget extends LitElement {
     return html`
       <ion-card style="Margin-left:0; Margin-right:0">
         <ion-card-header>
-          <ion-card-subtitle>E-MAIL </ion-card-subtitle>
-          <ion-card-title style="display:flex">Name </ion-card-title>
+          <ion-card-title style="display:flex">${this.userInfo.name}</ion-card-title>
+          <ion-card-subtitle>${this.userInfo.email}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content style="display:flex">Test Test </ion-card-content>
+        <ion-card-content style="display:flex">${this.userInfo.status}</ion-card-content>
         ${this.userInfo
           ? html`
               <ion-item
