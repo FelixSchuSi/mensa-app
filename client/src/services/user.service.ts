@@ -4,9 +4,7 @@ import { SignUpData } from '../models/sign-up-data';
 import { ConnectionStatus } from '../widgets/connection-status-bar/connection-status-enum';
 import { connectionStatusService } from './connection-status.service';
 import { httpService } from './http.service';
-import { taskService } from './task.service';
 import { User } from '../../../server/src/models/user';
-import { TouchSequence } from 'selenium-webdriver';
 import { storeService } from './store.service';
 
 type userInfoListener = (userInfo: User | undefined) => void;
@@ -30,7 +28,6 @@ class UserService {
       try {
         const user = await httpService.get('users/');
         const userInfo = <User>await user.json();
-        console.log('getUserInfo ', userInfo);
         await this.setUserInfo(userInfo);
       } catch ({ statusCode }) {
         if (statusCode === 401) await this.setUserInfo(undefined);
@@ -45,7 +42,6 @@ class UserService {
     if (navigator.onLine) {
       const res: Response = await httpService.post('users/sign-in', signInData);
       const userData: User = await res.json();
-      console.log('signIn ', userData);
       await this.setUserInfo(userData);
     } else {
       return Promise.reject({ message: i18n.INTERNET_NEEDED_FOR_SIGN_IN, statusCode: 503 });
@@ -56,7 +52,6 @@ class UserService {
     if (navigator.onLine) {
       const res: Response = await httpService.post('users', signUpData);
       const userData: User = await res.json();
-      console.log('signIn ', userData);
       await this.setUserInfo(userData);
     } else {
       return Promise.reject({ message: i18n.INTERNET_NEEDED_FOR_SIGN_UP, statusCode: 503 });

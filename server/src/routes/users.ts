@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
   }
 
   const { name, email, password, status, filterConfig } = req.body;
-  const createdUser = await userDAO.create({
+  const createdUser: User = await userDAO.create({
     name,
     email,
     password: await bcrypt.hash(password, 10),
@@ -64,7 +64,9 @@ router.post('/', async (req, res) => {
 
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);
 
-  res.status(201).json(createdUser);
+  const { createdAt, groupMemberships, id } = createdUser;
+
+  res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
 });
 
 router.post('/sign-in', async (req, res) => {
@@ -81,7 +83,10 @@ router.post('/sign-in', async (req, res) => {
 
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
     res.cookie('jwt-token', createToken(user), cookieOptions);
-    res.status(201).json(user);
+
+    const { createdAt, filterConfig, groupMemberships, id, name, status, email } = user;
+
+    res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
   } else {
     res.clearCookie('jwt-token');
     res.status(400).json({ message: 'E-Mail oder Passwort ungültig!' });
@@ -97,7 +102,13 @@ router.patch('/', async (req, res) => {
   if (!user) res.status(400).json({ message: 'Dieser Benutzer existiert nicht.' });
   const newUser = { ...user, ...partialUser };
   const success = await userDAO.update(newUser);
-  success ? res.json(newUser) : res.sendStatus(500);
+
+  if (success) {
+    const { createdAt, filterConfig, groupMemberships, id, name, status, email } = newUser;
+    res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
+  } else {
+    res.sendStatus(500);
+  }
 });
 
 router.delete('/sign-out', (req, res) => {
