@@ -38,7 +38,7 @@ export class ProfileWidget extends LitElement {
           <ion-list>
             <ion-item>
               <ion-avatar slot="start">
-                <img src="./ban.svg" />
+                <img src="./avatar.svg" />
               </ion-avatar>
               <ion-label>Lorem ipsum</ion-label>
             </ion-item>
