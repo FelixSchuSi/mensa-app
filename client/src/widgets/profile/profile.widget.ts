@@ -41,9 +41,14 @@ export class ProfileWidget extends LitElement {
         <ion-card-content style="display:flex">Test Test </ion-card-content>
         ${this.userInfo
           ? html`
-              <ion-item>
+              <ion-item
+                class="item-inside-card"
+                .detail="${false}"
+                style="--background: var(--ion-card-background)"
+                @click=${this.logOut}
+              >
                 <ion-label>${this.i18n.SIGN_OUT}</ion-label>
-                <ion-button @click=${this.logOut}>${this.i18n.SIGN_OUT}</ion-button>
+                <ion-button>${this.i18n.SIGN_OUT}</ion-button>
               </ion-item>
             `
           : html`
@@ -51,7 +56,7 @@ export class ProfileWidget extends LitElement {
                 class="item-inside-card"
                 href=${Routes.SIGN_IN}
                 .detail="${false}"
-                style="--border-color: var();--background: var(--ion-card-background)"
+                style="--background: var(--ion-card-background)"
               >
                 <ion-label>${this.i18n.SIGN_IN_NOW}</ion-label>
                 <ion-button fill="outline" slot="end">${this.i18n.SIGN_IN}</ion-button>
