@@ -51,6 +51,7 @@ class HttpService {
   public delete(url: string, onSyncFail?: () => void): Promise<Response> {
     return this.createFetch('DELETE', url, { onSyncFail });
   }
+
   public async replayRequests(): Promise<void> {
     let resolver: () => void = () => {};
     this.requestReplayLock = new Promise(resolve => {
@@ -74,6 +75,7 @@ class HttpService {
   public getBaseURL(): string {
     return this.config.baseURL;
   }
+
   private async createFetch(
     method: string,
     url: string,
