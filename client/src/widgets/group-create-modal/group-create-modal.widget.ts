@@ -5,7 +5,7 @@ import { Image } from '../../models/image';
 import { mediaService, MediaService } from '../../services/media.service';
 import { i18nService } from '../../services/i18n.service';
 import { Group } from '../../../../server/src/models/group';
-import { selectPhoto } from '../../helpers/upload-helper';
+import { ImageSelect } from '../image-select/image-select.widget';
 @customElement('app-group-create-modal')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class GroupCreateModalWidget extends LitElement {
@@ -46,7 +46,13 @@ class GroupCreateModalWidget extends LitElement {
   }
 
   protected render(): TemplateResult {
-    return html`${this.cardTemplate}`;
+    return html`${this.cardTemplate}<app-image-select
+        .handleImageUpload=${(image: Image): void => {
+          this.imagesrc = image.embed_url;
+          this.imageSetOnce = true;
+          this.uploadedImage = image;
+        }}
+      ></app-image-select>`;
   }
 
   protected get cardTemplate(): TemplateResult {
@@ -119,16 +125,8 @@ class GroupCreateModalWidget extends LitElement {
         id="add-group-pic"
         class="group-list-avatar circle-add-btn"
         @click=${async (): Promise<void> => {
-          try {
-            const blob = await selectPhoto();
-            if (!blob) return;
-            const image = await mediaService.upload(blob);
-            this.imagesrc = image.embed_url;
-            this.imageSetOnce = true;
-            this.uploadedImage = image;
-          } catch (e) {
-            console.error(e);
-          }
+          const selector = <ImageSelect>this.querySelector('app-image-select');
+          selector.present();
         }}
       >
         <ion-buttons

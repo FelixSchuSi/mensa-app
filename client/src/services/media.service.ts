@@ -1,4 +1,4 @@
-import { Image } from '../../../server/src/models/image';
+import { Image } from '../models/image';
 import { httpService } from './http.service';
 
 export class MediaService {
