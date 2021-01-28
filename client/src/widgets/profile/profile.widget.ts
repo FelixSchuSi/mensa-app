@@ -70,7 +70,7 @@ export class ProfileWidget extends LitElement {
                 const input = <HTMLElement>this.querySelector('#image-file-input');
                 input.click();
               }}
-            >
+              ><img src="${this.imagesrc || ''}" style="${this.imagesrc ? '' : 'display:none;'} z-index:80; " />
               ${this.userInfo?.image?.url
                 ? html`<img
                     style="background-color:var(--ion-color-step-250)"
