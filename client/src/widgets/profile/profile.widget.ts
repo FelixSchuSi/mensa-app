@@ -75,11 +75,7 @@ export class ProfileWidget extends LitElement {
               }}
             >
               ${this.userInfo?.image?.url
-                ? html`<img
-                    style="background-color:var(--ion-color-step-250)"
-                    class="bg-image-wrapper"
-                    src=${this.userInfo.image?.url || ''}
-                  />`
+                ? html`<img style="background-color:var(--ion-color-step-250)" src=${this.userInfo.image?.url || ''} />`
                 : html`<img src="svg/avatar.svg" style="width:100%;height:100%;" name="help-outline"></ion-icon>`}
             </ion-avatar>
             <div style="padding-left: 16px">
