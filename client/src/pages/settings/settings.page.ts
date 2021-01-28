@@ -17,6 +17,8 @@ import { i18nService } from '../../services/i18n.service';
 import { routerService } from '../../services/router.service';
 import { userService } from '../../services/user.service';
 import { PageMixin } from '../page.mixin';
+import { User } from '../../../../server/src/models/user';
+import { Image } from '../../models/image';
 
 const sharedCSS = require('../../shared.scss');
 const componentCSS = require('./settings.page.scss');
@@ -52,6 +54,14 @@ class SignUpPage extends PageMixin(LitElement) {
 
   protected render(): TemplateResult {
     return html`
+      <app-image-select
+        .handleImageUpload=${async (img: Image): Promise<void> => {
+          const image = { id: img.metadata.id, url: img.embed_url };
+          const newUser = <User>{ ...this.userInfo, image };
+          await userService.editUser(newUser);
+          this.userInfo = newUser;
+        }}
+      ></app-image-select>
       <ion-header>
         <ion-toolbar>
           <app-back-button

@@ -3,7 +3,7 @@ import { Group } from '../../../../server/src/models/group';
 import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
-import { Image } from '../../../../server/src/models/image';
+import { Image } from '../../models/image';
 import { share, ShareParameter } from '../../helpers/share-api';
 import { Routes } from '../../routes';
 import { createShareModal } from '../../helpers/create-share-modal';
@@ -11,6 +11,7 @@ import { userService } from '../../services/user.service';
 import { User } from '../../../../server/src/models/user';
 import { mediaService } from '../../services/media.service';
 import { internalProperty } from 'lit-element';
+import { ImageSelect } from '../image-select/image-select.widget';
 @customElement('app-profile')
 export class ProfileWidget extends LitElement {
   protected createRenderRoot(): LitElement {
@@ -43,21 +44,6 @@ export class ProfileWidget extends LitElement {
 
   protected render(): TemplateResult {
     return html`
-      <input
-        style="display:none"
-        type="file"
-        name="file"
-        id="image-file-input"
-        @change=${async (e: any): Promise<void> => {
-          const file = e.target.files[0];
-          const tempImage = await mediaService.upload(file);
-          console.log(tempImage);
-          const image = { id: tempImage.metadata.id, url: tempImage.embed_url };
-          const newUser = <User>{ ...this.userInfo, image };
-          await userService.editUser(newUser);
-          this.userInfo = newUser;
-        }}
-      />
       <ion-card style="Margin-left:0; Margin-right:0">
         <ion-card-content style="${this.userInfo ? '' : 'display:none'}; padding-bottom: 0px">
           <div style="display:flex;">
@@ -72,8 +58,8 @@ export class ProfileWidget extends LitElement {
           align-items: center;
           color: white;"
               @click=${(): void => {
-                const input = <HTMLElement>this.querySelector('#image-file-input');
-                input.click();
+                const selector = <ImageSelect>document.querySelector('app-image-select');
+                selector.present();
               }}
             >
               ${this.userInfo?.image?.url
