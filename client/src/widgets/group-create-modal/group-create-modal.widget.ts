@@ -56,7 +56,6 @@ class GroupCreateModalWidget extends LitElement {
           const file = e.target.files[0];
           mediaService.upload(file).then((res): void => {
             this.imagesrc = res.embed_url;
-            const button = <HTMLElement>this.querySelector('#upload-button');
             this.imageSetOnce = true;
             this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
           });
