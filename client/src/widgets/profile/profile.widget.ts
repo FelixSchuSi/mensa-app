@@ -35,9 +35,9 @@ export class ProfileWidget extends LitElement {
     return html`
       <ion-card style="Margin-left:0; Margin-right:0">
         <ion-card-content style=${this.userInfo ? '' : 'display:none'}>
-          <ion-list class="bg-image-wrapper" style="background-color:var(--ion-color-step-250)">
-            <div class="bg-image-wrapper" style="background-color:#1339c4">
-              <ion-item style="background-color:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12)">
+          <ion-list class="item-content">
+            <div class="item-content">
+              <ion-item class="item-content">
                 <ion-avatar
                   class="single-list-avatar"
                   slot="start"
@@ -52,10 +52,14 @@ export class ProfileWidget extends LitElement {
                   ${this.userInfo?.image?.url
                     ? html`<img
                         style="background-color:var(--ion-color-step-250)"
-                        class="bg-image"
+                        class="bg-image-wrapper"
                         src=${this.userInfo.image?.url || ''}
                       />`
-                    : html`<ion-icon style="width:100%;height:100%;" name="help-outline"></ion-icon>`}
+                    : html`<ion-icon
+                        class="bg-image-wrapper"
+                        style="width:100%;height:100%;"
+                        name="help-outline"
+                      ></ion-icon>`}
                 </ion-avatar>
                 <ion-label style="background-color:var(--ion-color-step-250)">
                   <ion-card-title style="display:flex">${this.userInfo?.name}</ion-card-title>
