@@ -37,8 +37,9 @@ export class ProfileWidget extends LitElement {
         <ion-card-content style=${this.userInfo ? '' : 'display:none'}>
           <ion-list class="bg-image-wrapper" style="background-color:var(--ion-color-step-250)">
             <div class="bg-image-wrapper" style="background-color:#1339c4">
-              <ion-item style="background-color:#1339c4">
+              <ion-item style="background-color:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12)">
                 <ion-avatar
+                  class="single-list-avatar"
                   slot="start"
                   style="
           background-color: var(--ion-color-step-250); 

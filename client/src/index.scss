@@ -240,6 +240,13 @@ app-meals-future app-meal:first-of-type ion-card {
   // grid-template-areas: 'stack';
 }
 
+.single-list-avatar {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  border: solid;
+}
+
 .avatar-content {
   position: absolute;
   top: 0;
