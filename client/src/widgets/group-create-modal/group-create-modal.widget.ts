@@ -1,11 +1,11 @@
 import { customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
-import { Image } from '../../../../server/src/models/image';
+import { Image } from '../../models/image';
 import { mediaService, MediaService } from '../../services/media.service';
 import { i18nService } from '../../services/i18n.service';
 import { Group } from '../../../../server/src/models/group';
-
+import { selectPhoto } from '../../helpers/upload-helper';
 @customElement('app-group-create-modal')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class GroupCreateModalWidget extends LitElement {
@@ -46,24 +46,7 @@ class GroupCreateModalWidget extends LitElement {
   }
 
   protected render(): TemplateResult {
-    return html`
-      <input
-        style="display:none"
-        type="file"
-        name="file"
-        id="image-file-input"
-        @change=${(e: any): void => {
-          const file = e.target.files[0];
-          mediaService.upload(file).then((res): void => {
-            this.imagesrc = res.embed_url;
-            const button = <HTMLElement>this.querySelector('#upload-button');
-            this.imageSetOnce = true;
-            this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
-          });
-        }}
-      />
-      ${this.cardTemplate}
-    `;
+    return html`${this.cardTemplate}`;
   }
 
   protected get cardTemplate(): TemplateResult {
@@ -97,12 +80,17 @@ class GroupCreateModalWidget extends LitElement {
               @click=${async () => {
                 try {
                   if (this.mode === 'create') {
-                    await this.groupService.createGroup(this.groupName!, this.uploadedImage);
+                    await this.groupService.createGroup(this.groupName!, {
+                      id: this.uploadedImage?.metadata.id || '',
+                      url: this.uploadedImage?.embed_url || ''
+                    });
                   } else {
                     const newGroup: Group = {
                       ...this.group,
                       name: this.groupName!,
-                      image: this.uploadedImage ?? this.group.image
+                      image: this.uploadedImage
+                        ? { id: this.uploadedImage?.metadata.id, url: this.uploadedImage?.embed_url }
+                        : this.group.image
                     };
                     await this.groupService.editGroup(newGroup);
                   }
@@ -130,9 +118,17 @@ class GroupCreateModalWidget extends LitElement {
       <ion-avatar
         id="add-group-pic"
         class="group-list-avatar circle-add-btn"
-        @click=${(): void => {
-          const input = <HTMLElement>this.querySelector('#image-file-input');
-          input.click();
+        @click=${async (): Promise<void> => {
+          try {
+            const blob = await selectPhoto();
+            if (!blob) return;
+            const image = await mediaService.upload(blob);
+            this.imagesrc = image.embed_url;
+            this.imageSetOnce = true;
+            this.uploadedImage = image;
+          } catch (e) {
+            console.error(e);
+          }
         }}
       >
         <ion-buttons

@@ -18,19 +18,24 @@ export async function takePhoto(): Promise<Blob | null> {
     return Promise.reject(e);
   }
 }
-export async function selectPhoto(): Promise<Blob | null> {
-  const uploadInput = document.createElement('input');
-  uploadInput.setAttribute('capture', 'filesystem'); // Try to disable "capture" option from FileAPI - we want to use native camera
-  uploadInput.setAttribute('accept', 'image/*');
-  uploadInput.setAttribute('type', 'file');
-  uploadInput.setAttribute('name', 'file');
-  uploadInput.setAttribute('id', 'image-file-input');
-  uploadInput.style.display = 'none';
-  uploadInput.addEventListener('change', () => {
-    const file = uploadInput.files ? uploadInput.files[0] : null;
-    document.body.removeChild(uploadInput);
-    return Promise.resolve(file);
+export async function selectPhoto(): Promise<Blob> {
+  return new Promise<Blob>((res, rej) => {
+    const uploadInput = document.createElement('input');
+    uploadInput.setAttribute('capture', 'filesystem'); // Try to disable "capture" option from FileAPI - we want to use native camera
+    uploadInput.setAttribute('accept', 'image/*');
+    uploadInput.setAttribute('type', 'file');
+    uploadInput.setAttribute('name', 'file');
+    uploadInput.setAttribute('id', 'image-file-input');
+    uploadInput.style.display = 'none';
+    uploadInput.addEventListener('change', () => {
+      const file = uploadInput.files ? uploadInput.files[0] : null;
+      document.body.removeChild(uploadInput);
+      if (!file) {
+        return rej();
+      }
+      return res(file);
+    });
+    document.body.appendChild(uploadInput);
+    uploadInput.click();
   });
-  document.body.appendChild(uploadInput);
-  return null;
 }
