@@ -7,7 +7,8 @@ export async function takePhoto(): Promise<Blob | null> {
       quality: 90,
       allowEditing: true,
       resultType: CameraResultType.Uri,
-      source: CameraSource.Prompt
+      source: CameraSource.Prompt,
+      saveToGallery: false
     });
     if (!photo.webPath) {
       return null;
