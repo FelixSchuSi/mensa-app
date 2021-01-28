@@ -205,5 +205,8 @@ export const german: LanguageStrings = {
   COPY_TEXT: 'Text kopieren',
   COPY: 'Kopieren',
   SHARE_VIA_EMAIL: 'Teilen via E-Mail',
-  SEND: 'Senden'
+  SEND: 'Senden',
+  STORAGE: 'Speicher',
+  CAMERA: 'Kamera',
+  SELECT_SOURCE: 'Bildquelle auswählen'
 };
