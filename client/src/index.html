@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>mensa-app</title>
-    <script>
-      const mode = localStorage.getItem('mode');
-      const htmlElement = document.querySelector('html');
-      if (mode) {
-        this.mode = mode;
-        htmlElement.setAttribute('mode', this.mode);
-      }
-    </script>
-  </head>
 
-  <body>
-    <div class="full-size">
-      <div class="ion-app-container">
-        <ion-nav id="root-nav" root="app-root"></ion-nav>
-      </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+  <title>mensa-app</title>
+  <script>
+    const mode = localStorage.getItem('mode');
+    const htmlElement = document.querySelector('html');
+    if (mode) {
+      this.mode = mode;
+      htmlElement.setAttribute('mode', this.mode);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="full-size">
+    <div class="ion-app-container">
+      <ion-nav id="root-nav" root="app-root"></ion-nav>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
