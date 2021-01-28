@@ -204,5 +204,8 @@ export const english: LanguageStrings = {
   COPY_TEXT: 'Copy text',
   COPY: 'Copy',
   SHARE_VIA_EMAIL: 'Share via e-mail',
-  SEND: 'Send'
+  SEND: 'Send',
+  STORAGE: 'Storage',
+  CAMERA: 'Camera',
+  SELECT_SOURCE: 'Select image source'
 };

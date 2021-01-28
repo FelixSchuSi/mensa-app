@@ -201,4 +201,7 @@ export type LanguageKeys =
   | 'COPY_TEXT'
   | 'COPY'
   | 'SHARE_VIA_EMAIL'
-  | 'SEND';
+  | 'SEND'
+  | 'CAMERA'
+  | 'STORAGE'
+  | 'SELECT_SOURCE';
