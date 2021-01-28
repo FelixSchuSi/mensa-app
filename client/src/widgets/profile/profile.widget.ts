@@ -66,6 +66,10 @@ export class ProfileWidget extends LitElement {
           justify-content: center;
           align-items: center;
           color: white;"
+              @click=${(): void => {
+                const input = <HTMLElement>this.querySelector('#image-file-input');
+                input.click();
+              }}
             >
               ${this.userInfo?.image?.url
                 ? html`<img
