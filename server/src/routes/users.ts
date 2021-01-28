@@ -7,7 +7,7 @@ import { User } from '../models/user';
 const router = express.Router();
 const isProd = !!process.env.ISPROD;
 const cookieOptions: CookieOptions = isProd
-  ? { sameSite: 'none', secure: true, httpOnly: false, domain: process.env.URL }
+  ? { sameSite: 'lax', secure: true, httpOnly: true, domain: process.env.URL }
   : { sameSite: 'lax', httpOnly: false };
 
 // Used to check if a user has a valid token.
