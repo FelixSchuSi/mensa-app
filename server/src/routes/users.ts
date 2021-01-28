@@ -97,6 +97,7 @@ router.patch('/', async (req, res) => {
   const user = await userDAO.findOne({ email: partialUser.email });
   if (!user) res.status(400).json({ message: 'Dieser Benutzer existiert nicht.' });
   const newUser = { ...user, ...partialUser };
+  delete newUser._id;
   const success = await userDAO.update(newUser);
   success ? res.json(newUser) : res.sendStatus(500);
 });

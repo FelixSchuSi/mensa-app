@@ -30,6 +30,9 @@ export class ProfileWidget extends LitElement {
   @internalProperty()
   protected imagesrc: string | null = null;
 
+  protected updated(): void {
+    console.log(this.userInfo);
+  }
   constructor() {
     super();
     this.i18n = i18nService.getStrings();
@@ -39,7 +42,6 @@ export class ProfileWidget extends LitElement {
   }
 
   protected render(): TemplateResult {
-    console.log(this.userInfo);
     return html`
       <input
         style="display:none"
