@@ -27,6 +27,9 @@ export class ProfileWidget extends LitElement {
   protected setNotification!: (e: any) => void;
   protected uploadedImage: Image | undefined;
 
+  @property()
+  protected mode: 'create' | 'edit' = 'create';
+
   @internalProperty()
   protected imagesrc: string | null = null;
 
