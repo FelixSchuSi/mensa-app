@@ -27,9 +27,6 @@ export class ProfileWidget extends LitElement {
   protected setNotification!: (e: any) => void;
   protected uploadedImage: Image | undefined;
 
-  @property()
-  protected mode: 'create' | 'edit' = 'create';
-
   @internalProperty()
   protected imagesrc: string | null = null;
 
@@ -42,18 +39,21 @@ export class ProfileWidget extends LitElement {
   }
 
   protected render(): TemplateResult {
+    console.log(this.userInfo);
     return html`
       <input
         style="display:none"
         type="file"
         name="file"
         id="image-file-input"
-        @change=${(e: any): void => {
+        @change=${async (e: any): Promise<void> => {
           const file = e.target.files[0];
-          mediaService.upload(file).then((res): void => {
-            this.imagesrc = res.embed_url;
-            this.uploadedImage = { url: res.embed_url, id: res.metadata.id };
-          });
+          const tempImage = await mediaService.upload(file);
+          console.log(tempImage);
+          const image = { id: tempImage.metadata.id, url: tempImage.embed_url };
+          const newUser = <User>{ ...this.userInfo, image };
+          await userService.editUser(newUser);
+          this.userInfo = newUser;
         }}
       />
       <ion-card style="Margin-left:0; Margin-right:0">
@@ -73,7 +73,7 @@ export class ProfileWidget extends LitElement {
                 const input = <HTMLElement>this.querySelector('#image-file-input');
                 input.click();
               }}
-              ><img src="${this.imagesrc || ''}" style="${this.imagesrc ? '' : 'display:none;'} z-index:80; " />
+            >
               ${this.userInfo?.image?.url
                 ? html`<img
                     style="background-color:var(--ion-color-step-250)"

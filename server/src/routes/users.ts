@@ -23,9 +23,9 @@ router.get('/', async (req, res) => {
       return;
     }
 
-    const { createdAt, filterConfig, groupMemberships, id, name, status } = user;
+    const { createdAt, filterConfig, groupMemberships, id, name, status, image } = user;
 
-    res.status(200).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
+    res.status(200).json({ createdAt, email, filterConfig, groupMemberships, id, name, status, image });
   } catch (error) {
     res.status(401).json({ message: 'Bitte melden Sie sich an!' });
   }
@@ -53,13 +53,14 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  const { name, email, password, status, filterConfig } = req.body;
+  const { name, email, password, status, filterConfig, image } = req.body;
   const createdUser = await userDAO.create({
     name,
     email,
     password: await bcrypt.hash(password, 10),
     filterConfig,
-    status
+    status,
+    image
   });
 
   res.cookie('jwt-token', createToken(createdUser), cookieOptions);
