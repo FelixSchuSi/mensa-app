@@ -5,7 +5,7 @@ export async function takePhoto(): Promise<Blob | null> {
   try {
     const photo = await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.Uri,
       source: CameraSource.Prompt,
       saveToGallery: false
@@ -22,7 +22,6 @@ export async function takePhoto(): Promise<Blob | null> {
 export async function selectPhoto(): Promise<Blob> {
   return new Promise<Blob>((res, rej) => {
     const uploadInput = document.createElement('input');
-    uploadInput.setAttribute('capture', 'filesystem'); // Try to disable "capture" option from FileAPI - we want to use native camera
     uploadInput.setAttribute('accept', 'image/*');
     uploadInput.setAttribute('type', 'file');
     uploadInput.setAttribute('name', 'file');
