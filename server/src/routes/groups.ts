@@ -116,9 +116,10 @@ router.get('/:id/members', async (req, res) => {
       }
     )
   );
-  const filteredUsers = users.map(e => {
+  const filteredUsers = users.map((e: User | null) => {
     if (e !== null) {
-      return { name: e.name, id: e.id };
+      const { createdAt, filterConfig, groupMemberships, id, name, status, email, image } = e;
+      return { createdAt, filterConfig, groupMemberships, id, name, status, email, image };
     } else {
       return { name: 'Unkown User' };
     }

@@ -104,17 +104,17 @@ class GroupDetailsPage extends PageMixin(LitElement) {
           </ion-card-header>
           <ion-card-content style="display:flex">
             <app-horizontal-scroller>
-              ${this.members?.map(
-                member =>
-                  html`
-                    <ion-chip style="flex-shrink:0; margin-left:0px">
-                      <ion-avatar>
-                        <img src="./svg/avatar.svg" />
-                      </ion-avatar>
-                      <ion-label>${member.name}</ion-label>
-                    </ion-chip>
-                  `
-              )}
+              ${this.members?.map(member => {
+                const imgSrc = member.image?.url ?? './svg/avatar.svg';
+                return html`
+                  <ion-chip style="flex-shrink:0; margin-left:0px">
+                    <ion-avatar>
+                      <img src=${imgSrc} />
+                    </ion-avatar>
+                    <ion-label>${member.name}</ion-label>
+                  </ion-chip>
+                `;
+              })}
             </app-horizontal-scroller>
           </ion-card-content>
           ${this.inviteCodeTemplate} ${this.leaveGroupButtonTemplate}
@@ -127,7 +127,6 @@ class GroupDetailsPage extends PageMixin(LitElement) {
     return html`
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button @click=${() => this.createEditModal()}>
-          <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
           <ion-icon slot="icon-only" color="primary" name="create-outline"></ion-icon>
         </ion-button>
         <ion-button

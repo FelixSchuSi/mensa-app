@@ -116,16 +116,19 @@ export class GroupDateWidget extends LitElement {
         </ion-card-header>
         <ion-card-content style="display: flex; flex-direction:column; padding-top: 0px; ">
           <app-horizontal-scroller>
-            ${this.mensaVisit.participants.map(
-              participant => html`
+            ${this.mensaVisit.participants.map(participant => {
+              const fullParticipant = this.getParticipant(participant);
+              const name = fullParticipant.name;
+              const imgSrc = fullParticipant.image?.url ?? './svg/avatar.svg';
+              return html`
                 <ion-chip style="flex-shrink:0; margin-left:0px">
                   <ion-avatar>
-                    <img src="./svg/avatar.svg" />
+                    <img src=${imgSrc} />
                   </ion-avatar>
-                  <ion-label>${this.getParticipantName(participant)}</ion-label>
+                  <ion-label>${name}</ion-label>
                 </ion-chip>
-              `
-            )}
+              `;
+            })}
           </app-horizontal-scroller>
           <div style="color: var(--ion-text-color)">
             <div><ion-icon name="location-outline"></ion-icon> ${this.i18n[this.mensaVisit.mensa]}</div>
@@ -138,8 +141,8 @@ export class GroupDateWidget extends LitElement {
     `;
   }
 
-  protected getParticipantName(userID: string): string | undefined {
-    return this.members.find(member => member.id === userID)?.name;
+  protected getParticipant(userID: string): User {
+    return this.members.find(member => member.id === userID)!;
   }
 
   protected get participateButton(): TemplateResult {
