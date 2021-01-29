@@ -106,8 +106,8 @@ router.patch('/', async (req, res) => {
   const success = await userDAO.update(newUser);
 
   if (success) {
-    const { createdAt, filterConfig, groupMemberships, id, name, status, email } = newUser;
-    res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
+    const { createdAt, filterConfig, groupMemberships, id, name, status, email, image } = newUser;
+    res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status, image });
   } else {
     res.sendStatus(500);
   }
