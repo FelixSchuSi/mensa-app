@@ -1,6 +1,6 @@
 {
-  "appId": "org.example.myapp",
-  "appName": "MyApp",
+  "appId": "de.fhms.mensa_app",
+  "appName": "Mensa App",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist",
@@ -9,5 +9,8 @@
       "launchShowDuration": 0
     }
   },
-  "cordova": {}
+  "cordova": {},
+  "server": {
+    "hostname": "api.mensa-app.dub-services.de"
+  }
 }
