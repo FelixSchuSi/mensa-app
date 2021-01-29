@@ -11,6 +11,6 @@
   },
   "cordova": {},
   "server": {
-    "hostname": "api.mensa-app.dub-services.de"
+    "hostname": "mensa-app.dub-services.de"
   }
 }
