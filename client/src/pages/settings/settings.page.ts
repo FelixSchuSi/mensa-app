@@ -70,6 +70,7 @@ class SignUpPage extends PageMixin(LitElement) {
             <ion-title size="large">${this.i18n.SETTINGS}</ion-title>
           </ion-toolbar>
         </ion-header>
+        <app-profile .setNotification=${this.setNotification}></app-profile>
         <ion-list>
           <ion-item>
             <ion-label>${this.i18n.LANGUAGE}</ion-label>
@@ -107,44 +108,8 @@ class SignUpPage extends PageMixin(LitElement) {
               </ion-segment>
             </div>
           </ion-item>
-          <ion-list-header> User-Area </ion-list-header>
-          ${!!this.userInfo
-            ? html`
-                <ion-item>
-                  <ion-label>${this.i18n.SIGN_OUT}</ion-label>
-                  <ion-button @click=${this.logOut}>${this.i18n.SIGN_OUT}</ion-button>
-                </ion-item>
-              `
-            : html`
-                <ion-item>
-                  <ion-label>${this.i18n.SIGN_IN}</ion-label>
-                  <ion-button
-                    @click=${() => {
-                      routerService.navigate(Routes.SIGN_IN);
-                    }}
-                    >${this.i18n.SIGN_IN}</ion-button
-                  >
-                </ion-item>
-                <ion-item>
-                  <ion-label>${this.i18n.SIGN_UP}</ion-label>
-                  <ion-button
-                    @click=${() => {
-                      routerService.navigate(Routes.SIGN_UP);
-                    }}
-                    >${this.i18n.SIGN_UP}</ion-button
-                  >
-                </ion-item>
-              `}
         </ion-list>
       </ion-content>
     `;
-  }
-  protected async logOut(): Promise<void> {
-    try {
-      await userService.logOut();
-      this.setNotification({ successMessage: this.i18n.SIGN_OUT_MESSAGE + '!' });
-    } catch ({ message }) {
-      this.setNotification({ errorMessage: message });
-    }
   }
 }

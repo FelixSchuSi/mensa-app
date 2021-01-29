@@ -17,6 +17,7 @@ export class GroupWidget extends LitElement {
 
   @property({ type: Object, attribute: false })
   protected group!: Group;
+
   @property({ type: Object, attribute: false })
   protected setNotification!: (e: any) => void;
 
