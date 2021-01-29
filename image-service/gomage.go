@@ -17,6 +17,7 @@ func main() {
 	log.Println("Starting Gomage...")
 	storage.SetInstance(storage.NewFileSystemDriver("./data/meta", "./data/content"))
 	router := mux.NewRouter()
+	router.Use(corsMiddlewareFunc)
 	router.HandleFunc("/media/{id}", api.GetFile).Methods("GET")
 	router.HandleFunc("/raw/{id}", api.GetFileRaw).Methods("GET")
 	router.HandleFunc("/media", api.PostFile).Methods("POST")
@@ -42,19 +43,25 @@ func main() {
 	}()
 	<-c
 }
-func cors(r *http.Request, w *http.ResponseWriter) {
+func corsMiddlewareFunc(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		cors(r, w)
+		next.ServeHTTP(w, r)
+	})
+}
+func cors(r *http.Request, w http.ResponseWriter) {
 	ua := r.Header.Get("Origin")
 	// Fck CORS Mode :D
 	if ua == "" {
 		ua = "*"
 	}
 
-	(*w).Header().Set("Access-Control-Allow-Origin", ua)
-	(*w).Header().Set("Access-Control-Expose-Headers", "x-csrf-token")
-	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, PATCH")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Access-Control-Allow-Origin", ua)
+	w.Header().Set("Access-Control-Expose-Headers", "x-csrf-token")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, PATCH")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
 func optionsHandler(w http.ResponseWriter, r *http.Request) {
-	cors(r, &w)
+	cors(r, w)
 }

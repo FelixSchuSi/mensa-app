@@ -16,8 +16,8 @@ type AuthorizationMiddleware struct {
 func (*AuthorizationMiddleware) Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var token string
-		split := strings.Split(r.Header.Get("Authorization")," ")
-		if len(split)> 1 {
+		split := strings.Split(r.Header.Get("Authorization"), " ")
+		if len(split) > 1 {
 			//Remove bearer
 			token = split[1]
 		}
@@ -39,6 +39,16 @@ func (*AuthorizationMiddleware) Middleware(next http.Handler) http.Handler {
 			}
 			return []byte(os.Getenv("JWT_SECRET")), nil
 		})
+		if err != nil {
+			http.Error(w, "Forbidden", http.StatusForbidden)
+			log.Println("Forbidden request: ", err.Error(), " for token: ", token)
+			return
+		}
+		if jwtToken == nil {
+			http.Error(w, "Forbidden", http.StatusForbidden)
+			log.Println("JWT is nil: ", token)
+			return
+		}
 		if claims, ok := jwtToken.Claims.(jwt.MapClaims); err == nil && ok && jwtToken.Valid {
 			r.Header.Set("user", claims["email"].(string))
 			next.ServeHTTP(w, r)

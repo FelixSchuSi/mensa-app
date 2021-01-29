@@ -62,7 +62,10 @@ func PostFile(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	var res types.FileResponse = types.FileResponse{MetaData: sFile.MetaData, EmbedURL: getEmbedURL(sFile.MetaData)}
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(res)
 }
 func DeleteFile(w http.ResponseWriter, r *http.Request) {
 	id, _ := splitIDAndExtension(getID(r))
