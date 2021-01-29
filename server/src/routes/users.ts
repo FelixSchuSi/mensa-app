@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
 
   const { createdAt, groupMemberships, id } = createdUser;
 
-  res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
+  res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status, image });
 });
 
 router.post('/sign-in', async (req, res) => {
@@ -85,9 +85,9 @@ router.post('/sign-in', async (req, res) => {
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
     res.cookie('jwt-token', createToken(user), cookieOptions);
 
-    const { createdAt, filterConfig, groupMemberships, id, name, status, email } = user;
+    const { createdAt, filterConfig, groupMemberships, id, name, status, email, image } = user;
 
-    res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status });
+    res.status(201).json({ createdAt, email, filterConfig, groupMemberships, id, name, status, image });
   } else {
     res.clearCookie('jwt-token');
     res.status(400).json({ message: 'E-Mail oder Passwort ungültig!' });
