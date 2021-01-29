@@ -75,8 +75,6 @@ export type LanguageKeys =
   | 'NAME'
   | 'PASSWORD_NOT_IDENTICAL'
   | 'SIGN_OUT_MESSAGE'
-  | 'TASKS'
-  | 'NEW_TASK'
   | 'USER_STATUS'
   | 'STUDENT'
   | 'EMPLOYEE'

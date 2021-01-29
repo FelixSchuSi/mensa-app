@@ -78,8 +78,6 @@ export const german: LanguageStrings = {
   NAME: 'Name',
   PASSWORD_NOT_IDENTICAL: 'Passwörter müssen gleich sein',
   SIGN_OUT_MESSAGE: 'Sie wurden erfolgreich abgemeldet',
-  TASKS: 'Aufgaben',
-  NEW_TASK: 'Neue Aufgabe',
   USER_STATUS: 'Status',
   STUDENT: 'Studierender',
   EMPLOYEE: 'Mitarbeiter',

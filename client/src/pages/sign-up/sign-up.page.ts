@@ -318,7 +318,7 @@ class SignUpPage extends PageMixin(LitElement) {
       };
       try {
         await userService.signUp(signUpData, this.i18n);
-        routerService.navigate(Routes.TASKS);
+        routerService.navigate(Routes.MEALS_TODAY);
       } catch ({ message }) {
         this.setNotification({ errorMessage: message });
       }

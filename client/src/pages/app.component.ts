@@ -100,7 +100,6 @@ export class AppComponent extends LitElement {
       // all root Routes
       case Routes.MEALS_FUTURE:
       case Routes.MEALS_TODAY:
-      case Routes.TASKS:
       case Routes.GROUPS:
         await activeNav.popToRoot();
     }
@@ -108,7 +107,6 @@ export class AppComponent extends LitElement {
 
   public get tabs(): Tab[] {
     return [
-      { rootComponent: 'app-tasks', baseRoute: Routes.TASKS, titleString: this.i18n.TASKS, icon: 'list' },
       {
         rootComponent: 'app-meals-today',
         baseRoute: Routes.MEALS_TODAY,
@@ -129,9 +127,6 @@ export class AppComponent extends LitElement {
     return html`
       <ion-app id="undo-ion-page">
         <ion-tabs style="position:static;">
-          <ion-tab tab=${Routes.TASKS}>
-            <ion-nav class="${Routes.TASKS}" root="app-tasks"></ion-nav>
-          </ion-tab>
           <ion-tab tab=${Routes.MEALS_TODAY}>
             <ion-nav class="${Routes.MEALS_TODAY}" root="app-meals-today"></ion-nav>
           </ion-tab>

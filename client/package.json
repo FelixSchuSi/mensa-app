@@ -2,7 +2,7 @@
   "name": "client",
   "homepage": "https://felixschusi.github.io/mensa-app",
   "version": "1.0.0",
-  "description": "task manager",
+  "description": "mensa app",
   "private": true,
   "main": "index.js",
   "scripts": {
