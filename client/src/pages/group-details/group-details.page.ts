@@ -128,7 +128,7 @@ class GroupDetailsPage extends PageMixin(LitElement) {
       <ion-buttons style="position:absolute; right:0px; top:0px; z-index:999; padding:4px">
         <ion-button @click=${() => this.createEditModal()}>
           <!-- <ion-icon slot="icon-only" name="pencil-outline"></ion-icon> -->
-          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          <ion-icon slot="icon-only" color="primary" name="create-outline"></ion-icon>
         </ion-button>
         <ion-button
           @click=${async (e: any): Promise<void> => {
