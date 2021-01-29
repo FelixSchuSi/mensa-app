@@ -18,7 +18,8 @@ Wenn ohne Docker entwickelt wird muss das Frontend und das Backend separat gesta
 - Das Frontend ist jetzt unter https://localhost:8080/ erreichbar.
 
 #### Backend
-**Umgebungsvariablen**   
+
+**Umgebungsvariablen**  
 Es sollte die Umgebungsvariable `URL` auf die Domain des Backends gesetzt werden. Für die lokale Entwicklung wäre dies `localhost:3443`. Dadurch werden die URLs des Image Service korrekt umgeschrieben. Dies ist notwendig, damit diese über den express-proxy des backends laufen. So kann der JWT inkludiert, und CORS Schwierigkeiten ([Safari blockiert alle Cross-Resource Cookies](https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/)) umgangen werden.
 
 - `cd server`
