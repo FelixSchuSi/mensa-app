@@ -4,7 +4,6 @@ import { Express } from 'express';
 import { MongoGenericDAO } from './models/mongo-generic.dao';
 import { PsqlGenericDAO } from './models/psql-generic.dao';
 import { InMemoryGenericDAO } from './models/in-memory-generic.dao';
-import { Task } from './models/task';
 import { User } from './models/user';
 import { Group } from './models/group';
 import { getSecrets } from './getSecrets';
@@ -27,7 +26,6 @@ export default async function startDB(app: Express, dbms = 'in-memory-db') {
 }
 
 function startInMemoryDB(app: Express) {
-  app.locals.taskDAO = new InMemoryGenericDAO<Task>();
   app.locals.userDAO = new InMemoryGenericDAO<User>();
   app.locals.groupDAO = new InMemoryGenericDAO<Group>();
   app.locals.userDAO = new InMemoryGenericDAO<Meal>();
@@ -35,7 +33,6 @@ function startInMemoryDB(app: Express) {
 
 async function startMongoDB(app: Express) {
   const db: Db = useProdDB ? await connectToProdMongoDB() : await connectToDevMongoDB();
-  app.locals.taskDAO = new MongoGenericDAO<Task>(db, 'tasks');
   app.locals.userDAO = new MongoGenericDAO<User>(db, 'users');
   app.locals.groupDAO = new MongoGenericDAO<Group>(db, 'groups');
   app.locals.mealsDAO = new MongoGenericDAO<Meal>(db, 'meals');
@@ -72,7 +69,6 @@ export async function connectToDevMongoDB(): Promise<Db> {
 
 async function startPsql(app: Express) {
   const client = await connectToPsql();
-  app.locals.taskDAO = new PsqlGenericDAO<Task>(client!, 'tasks');
   app.locals.userDAO = new PsqlGenericDAO<User>(client!, 'users');
   app.locals.groupDAO = new PsqlGenericDAO<Group>(client!, 'groups');
   app.locals.userDAO = new PsqlGenericDAO<Meal>(client!, 'meals');

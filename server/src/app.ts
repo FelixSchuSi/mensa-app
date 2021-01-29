@@ -3,7 +3,6 @@ import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import * as jwt from 'jsonwebtoken';
 import * as http from 'http';
-import tasks from './routes/tasks';
 import users from './routes/users';
 import groups from './routes/groups';
 import meals from './routes/meals';
@@ -73,7 +72,6 @@ function configureApp(app: Express) {
       res.status(401).json({ message: 'Bitte melden Sie sich an!' });
     }
   });
-  app.use('/api/tasks', tasks);
   app.use('/api/groups', groups);
   app.use('/api/mensa-visits', mensaVisits);
 }
