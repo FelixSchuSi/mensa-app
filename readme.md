@@ -18,9 +18,12 @@ Wenn ohne Docker entwickelt wird muss das Frontend und das Backend separat gesta
 - Das Frontend ist jetzt unter https://localhost:8080/ erreichbar.
 
 #### Backend
+**Umgebungsvariablen**   
+Es sollte die Umgebungsvariable `URL` auf die Domain des Backends gesetzt werden. Für die lokale Entwicklung wäre dies `localhost:3443`. Dadurch werden die URLs des Image Service korrekt umgeschrieben. Dies ist notwendig, damit diese über den express-proxy des backends laufen. So kann der JWT inkludiert, und CORS Schwierigkeiten umgangen ([Safari blockt alle Cross-Resource Cookies](https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/)) werden.
 
 - `cd server`
 - `npm install`
+- `export URL="localhost:3443"`
 - `npm run watch:dev` Alternativ kann die Produktionsdatenbank mit `npm run watch:prod` angesteuert werden.
 - Das Backend wartet unter http://localhost:3443/app/ auf Anfragen.
 
