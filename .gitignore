@@ -7,3 +7,9 @@ node_modules/
 # Testing Certs
 cert.pem
 key.pem
+
+content
+data
+meta
+gomagestore
+go.sum
