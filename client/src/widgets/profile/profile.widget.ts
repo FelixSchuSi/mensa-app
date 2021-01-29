@@ -44,6 +44,14 @@ export class ProfileWidget extends LitElement {
 
   protected render(): TemplateResult {
     return html`
+      <app-image-select
+        .handleImageUpload=${async (img: Image): Promise<void> => {
+          const image = { id: img.metadata.id, url: img.embed_url };
+          const newUser = <User>{ ...this.userInfo, image };
+          await userService.editUser(newUser);
+          this.userInfo = newUser;
+        }}
+      ></app-image-select>
       <ion-card style="Margin-left:0; Margin-right:0">
         <ion-card-content style="${this.userInfo ? '' : 'display:none'}; padding-bottom: 0px">
           <div style="display:flex;">
