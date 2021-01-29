@@ -21,54 +21,55 @@ export class ImageSelect extends LitElement {
     this.i18n = i18nService.getStrings();
     i18nService.subscribe(i18n => (this.i18n = i18n));
   }
-  public present = async (): Promise<void> => {
-    const actionSheet = await actionSheetController.create({
-      header: this.i18n.SELECT_SOURCE,
-      buttons: [
-        {
-          text: this.i18n.CAMERA,
-          handler: async (): Promise<void> => {
-            try {
-              const blob = await takePhoto();
-              if (blob) {
-                this.uploadImage(blob)
-                  .then(img => {
-                    this.handleImageUpload(img);
-                  })
-                  .catch(e => {
-                    console.error(e);
-                  });
-              }
-            } catch (e) {
-              console.error(e);
+  public present = async (targetElement?: Element): Promise<void> => {
+    const actionSheet = document.createElement('ion-action-sheet');
+    actionSheet.header = this.i18n.SELECT_SOURCE;
+    actionSheet.buttons = [
+      {
+        text: this.i18n.CAMERA,
+        handler: async (): Promise<void> => {
+          try {
+            const blob = await takePhoto();
+            if (blob) {
+              this.uploadImage(blob)
+                .then(img => {
+                  this.handleImageUpload(img);
+                })
+                .catch(e => {
+                  console.error(e);
+                });
             }
+          } catch (e) {
+            console.error(e);
           }
-        },
-        {
-          text: this.i18n.STORAGE,
-          handler: async (): Promise<void> => {
-            try {
-              const blob = await selectPhoto();
-              if (blob) {
-                this.uploadImage(blob)
-                  .then(img => {
-                    this.handleImageUpload(img);
-                  })
-                  .catch(e => {
-                    console.error(e);
-                  });
-              }
-            } catch (e) {
-              console.error(e);
-            }
-          }
-        },
-        {
-          text: this.i18n.CANCEL,
-          role: 'cancel'
         }
-      ]
-    });
+      },
+      {
+        text: this.i18n.STORAGE,
+        handler: async (): Promise<void> => {
+          try {
+            const blob = await selectPhoto();
+            if (blob) {
+              this.uploadImage(blob)
+                .then(img => {
+                  this.handleImageUpload(img);
+                })
+                .catch(e => {
+                  console.error(e);
+                });
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      },
+      {
+        text: this.i18n.CANCEL,
+        role: 'cancel'
+      }
+    ];
+    targetElement = targetElement ?? document.querySelector('ion-app')!;
+    targetElement.appendChild(actionSheet);
     return actionSheet.present();
   };
 

@@ -59,7 +59,7 @@ export class ProfileWidget extends LitElement {
           color: white;"
               @click=${(): void => {
                 const selector = <ImageSelect>document.querySelector('app-image-select');
-                selector.present();
+                selector.present(document.querySelector('app-settings')!);
               }}
             >
               ${this.userInfo?.image?.url
