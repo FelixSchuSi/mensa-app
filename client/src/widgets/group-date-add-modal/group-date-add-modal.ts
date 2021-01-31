@@ -78,6 +78,8 @@ class GroupDateAddModalWidget extends LitElement {
             <ion-datetime
               @ionChange=${(e: any) => (this.dateValue = e.detail.value)}
               class="date-picker"
+              .doneText=${this.i18n.DONE}
+              .cancelText=${this.i18n.CANCEL}
               display-format="DD MMM YYYY"
               min="${new Date().toISOString()}"
               max="${new Date(new Date().setFullYear(new Date().getFullYear() + 5)).toISOString()}"
@@ -89,6 +91,8 @@ class GroupDateAddModalWidget extends LitElement {
             <ion-datetime
               @ionChange=${(e: any) => (this.timeValue = e.detail.value)}
               class="time-picker"
+              .doneText=${this.i18n.DONE}
+              .cancelText=${this.i18n.CANCEL}
               minute-values="0,15,30,45"
               display-format="HH:mm"
               placeholder=${this.i18n.CLICK_TO_CHOOSE_TIME}

@@ -206,5 +206,6 @@ export const german: LanguageStrings = {
   SEND: 'Senden',
   STORAGE: 'Speicher',
   CAMERA: 'Kamera',
-  SELECT_SOURCE: 'Bildquelle auswählen'
+  SELECT_SOURCE: 'Bildquelle auswählen',
+  DONE: 'Fertig'
 };

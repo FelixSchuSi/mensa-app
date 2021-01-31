@@ -202,4 +202,5 @@ export type LanguageKeys =
   | 'SEND'
   | 'CAMERA'
   | 'STORAGE'
-  | 'SELECT_SOURCE';
+  | 'SELECT_SOURCE'
+  | 'DONE';

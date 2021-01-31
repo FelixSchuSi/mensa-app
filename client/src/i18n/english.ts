@@ -205,5 +205,6 @@ export const english: LanguageStrings = {
   SEND: 'Send',
   STORAGE: 'Storage',
   CAMERA: 'Camera',
-  SELECT_SOURCE: 'Select image source'
+  SELECT_SOURCE: 'Select image source',
+  DONE: 'Done'
 };

@@ -76,6 +76,8 @@ export class DateFilterModalWidget extends LitElement {
         <ion-label>${this.i18n.DAY}</ion-label>
         <ion-datetime
           id="day"
+          .doneText=${this.i18n.DONE}
+          .cancelText=${this.i18n.CANCEL}
           @ionChange=${this.onChange}
           value="${this.toISOStringOrNull(this.dateFilterConfig.start)}"
           placeholder=${this.i18n.SELECT_DAY}
@@ -90,6 +92,8 @@ export class DateFilterModalWidget extends LitElement {
         <ion-label>${this.i18n.FROM}</ion-label>
         <ion-datetime
           id="startdate"
+          .doneText=${this.i18n.DONE}
+          .cancelText=${this.i18n.CANCEL}
           @ionChange=${this.onChange}
           value="${this.toISOStringOrNull(this.dateFilterConfig.start)}"
           placeholder=${this.i18n.SELECT_START_DATE}
@@ -99,6 +103,8 @@ export class DateFilterModalWidget extends LitElement {
         <ion-label>${this.i18n.UNTIL}</ion-label>
         <ion-datetime
           id="enddate"
+          .doneText=${this.i18n.DONE}
+          .cancelText=${this.i18n.CANCEL}
           @ionChange=${this.onChange}
           value="${this.toISOStringOrNull(this.dateFilterConfig.end)}"
           placeholder=${this.i18n.SELECT_END_DATE}
