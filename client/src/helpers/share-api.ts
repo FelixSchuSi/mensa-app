@@ -1,4 +1,5 @@
 import { Plugins } from '@capacitor/core';
+import { encode } from 'punycode';
 const { Share } = Plugins;
 
 export interface ShareParameter {
@@ -10,7 +11,15 @@ export interface ShareParameter {
 }
 
 export function buildShareURL(path?: string): string {
-  return 'https://mensa-app.dub-services.de' + (path ? encodeURI(`/${path}`) : '');
+  let uri: string | undefined;
+  if (path) {
+    if (new RegExp('%[0-9a-f]{2}', 'i').test(path)) {
+      uri = path;
+    } else {
+      uri = encodeURI(path);
+    }
+  }
+  return 'https://mensa-app.dub-services.de' + (uri ? `/${uri}` : '');
 }
 
 export async function share(parameter: ShareParameter): Promise<boolean> {
