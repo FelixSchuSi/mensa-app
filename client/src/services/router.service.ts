@@ -41,7 +41,7 @@ export class RouterService {
     history.pushState(
       { prevUrl: this.getPath() },
       '',
-      this.withRootPath(relUrl) + (queryString ? '?' + queryString : '')
+      this.withRootPath(relUrl) + (queryString ? '?' + encodeURI(queryString) : '')
     );
     this.notifyListeners();
   }
