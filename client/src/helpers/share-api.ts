@@ -1,5 +1,4 @@
 import { Plugins } from '@capacitor/core';
-import { encode } from 'punycode';
 const { Share } = Plugins;
 
 export interface ShareParameter {
