@@ -188,7 +188,7 @@ export class GroupDateWidget extends LitElement {
     const date = new Date(dateTime);
     const language = this.i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
     // @ts-ignore
-    return new Intl.DateTimeFormat(language, { timeStyle: 'short' }).format(date);
+    return date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
   }
 
   protected get deleteMensaVisitTemplate(): TemplateResult {
