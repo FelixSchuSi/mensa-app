@@ -65,6 +65,7 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
           cd client/android
+          ls -a
           gradlew build --warning-mode all
 
       - name: Check if apks were created.
