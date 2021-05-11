@@ -52,7 +52,7 @@ jobs:
       
       - name: Cat build.gradle.
         run: |
-          cat /client/android/capacitor-cordova-android-plugins/build.gradle
+          cat client/android/capacitor-cordova-android-plugins/build.gradle
 
       - name: Build apks.
         env:
