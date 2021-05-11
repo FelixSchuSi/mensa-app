@@ -18,9 +18,9 @@ jobs:
       - name: Install npm packages.
         run: |
           cd server
-          npm i
+          npm ci
           cd ../scraper
-          npm i
+          npm ci
       - name: Run scraper.
         env:
           DBURL: ${{ secrets.DBURL }}

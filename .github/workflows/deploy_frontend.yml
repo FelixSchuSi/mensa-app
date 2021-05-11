@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies.
         run: |
           cd client
-          npm i
+          npm ci
 
       - name: Webpack build.
         run: |
