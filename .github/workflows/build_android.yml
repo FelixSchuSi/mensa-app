@@ -29,6 +29,7 @@ jobs:
         run: |
           cd client/android
           chmod +x gradle
+          chmod +x ./gradlew
 
       - name: Set up Node.js.
         uses: actions/setup-node@v1
