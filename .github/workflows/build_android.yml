@@ -52,7 +52,7 @@ jobs:
 
       - name: Log gradle version
         run: |
-          client/android/gradle -v
+          cd client/android && gradle -v
 
       - name: Cat build.gradle
         run: |
