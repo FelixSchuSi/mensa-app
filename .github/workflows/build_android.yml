@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies.
         run: |
           cd client
-          npm i
+          npm ci
 
       - name: Webpack build.
         run: |
@@ -49,8 +49,12 @@ jobs:
         run: |
           cd client
           npx cap sync android
-      
-      - name: Cat build.gradle.
+
+      - name: Log gradle version
+        run: |
+          client/android/gradle -v
+
+      - name: Cat build.gradle
         run: |
           cat client/android/capacitor-cordova-android-plugins/build.gradle
 
