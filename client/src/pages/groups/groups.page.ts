@@ -1,4 +1,5 @@
-import { customElement, html, internalProperty, LitElement, property, TemplateResult } from 'lit-element';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, state, property } from 'lit/decorators.js';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
@@ -6,7 +7,7 @@ import { Group } from '../../../../server/src/models/group';
 import { modalController } from '@ionic/core';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
-import { until } from 'lit-html/directives/until';
+import { until } from 'lit/directives/until';
 import { sleep } from '../../helpers/sleep';
 import { userService } from '../../services/user.service';
 
@@ -16,7 +17,7 @@ class GroupsPage extends PageMixin(LitElement) {
   @property({ type: Array })
   protected groups: Group[] = [];
 
-  @internalProperty()
+  @state()
   protected loaded!: Promise<void>;
 
   protected groupService: GroupService = groupService;

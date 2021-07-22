@@ -1,6 +1,8 @@
-import { unsafeCSS } from 'lit-element';
-import { css } from 'lit-element';
-import { LitElement, customElement, property, TemplateResult, html, query } from 'lit-element';
+import { unsafeCSS } from 'lit';
+import { css } from 'lit';
+import { LitElement, TemplateResult, html } from 'lit';
+
+import { customElement, property, query } from 'lit/decorators.js';
 
 const componentCSS = require('./horizontal-scroller.widget.scss');
 const sharedCSS = require('../../shared.scss');

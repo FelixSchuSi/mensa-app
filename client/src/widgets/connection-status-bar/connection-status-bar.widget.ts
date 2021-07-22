@@ -1,4 +1,5 @@
-import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { LanguageStrings } from '../../models/language-strings';
 import { connectionStatusService } from '../../services/connection-status.service';
 import { i18nService } from '../../services/i18n.service';

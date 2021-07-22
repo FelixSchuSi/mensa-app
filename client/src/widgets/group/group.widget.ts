@@ -1,4 +1,5 @@
-import { LitElement, customElement, property, TemplateResult, html } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { Group } from '../../../../server/src/models/group';
 import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 import { LanguageStrings } from '../../models/language-strings';

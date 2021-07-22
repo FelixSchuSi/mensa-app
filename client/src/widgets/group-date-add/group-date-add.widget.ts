@@ -1,5 +1,6 @@
 import { modalController } from '@ionic/core';
-import { LitElement, customElement, property, TemplateResult, html } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 

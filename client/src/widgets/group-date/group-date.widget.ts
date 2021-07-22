@@ -1,5 +1,6 @@
 import { group } from 'console';
-import { LitElement, customElement, internalProperty, property, TemplateResult, html, query } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { Group } from '../../../../server/src/models/group';
 import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 import { User } from '../../../../server/src/models/user';
@@ -15,7 +16,7 @@ export class GroupDateWidget extends LitElement {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   @property({ type: Object, attribute: false })
@@ -26,17 +27,17 @@ export class GroupDateWidget extends LitElement {
 
   @property({ type: Array, attribute: false })
   protected members!: User[];
-  @internalProperty()
+  @state()
   protected attending!: boolean;
   protected numberOfParticipants: number = 3;
 
-  @internalProperty()
+  @state()
   protected chipColor!: 'success' | 'danger';
 
   @property({ type: Boolean })
   protected large: boolean = false;
 
-  @internalProperty()
+  @state()
   protected userInfo!: User;
 
   constructor() {

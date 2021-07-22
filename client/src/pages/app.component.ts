@@ -1,14 +1,5 @@
-import {
-  css,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  query,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { routerService } from '../services/router.service';
 import { Routes } from '../routes';
 import { LanguageStrings } from '../models/language-strings';
@@ -60,10 +51,10 @@ export class AppComponent extends LitElement {
   @property()
   protected appTitle = 'mensa-app';
 
-  @internalProperty()
+  @state()
   protected currentRoute!: Routes;
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   @query('ion-tabs')

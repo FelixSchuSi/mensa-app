@@ -1,14 +1,5 @@
-import {
-  css,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  query,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { PageMixin } from '../page.mixin';
 import { Meal } from '../../../../server/src/models/meal';
 import { routerService } from '../../services/router.service';
@@ -35,7 +26,7 @@ class MealDetailPage extends PageMixin(LitElement) {
   @property({ type: Object })
   public meal?: Meal;
 
-  @internalProperty()
+  @state()
   protected isBookmark: boolean = false;
 
   @query('macro-carousel')

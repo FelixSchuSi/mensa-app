@@ -1,4 +1,5 @@
-import { css, customElement, html, LitElement, property, query, TemplateResult, unsafeCSS } from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { intro } from '../../models/intro';

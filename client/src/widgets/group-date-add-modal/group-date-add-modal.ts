@@ -1,4 +1,5 @@
-import { customElement, html, LitElement, property, query, TemplateResult } from 'lit-element';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService } from '../../services/group.service';
 import { i18nService } from '../../services/i18n.service';

@@ -1,4 +1,5 @@
-import { css, customElement, html, LitElement, property, TemplateResult, unsafeCSS } from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { ChipSelectWidget } from '../chip-select/chip-select.widget';
 
 const componentCSS = require('./chip-toggle-show-more.scss');

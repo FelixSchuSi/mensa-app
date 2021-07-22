@@ -1,4 +1,5 @@
-import { customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { PageMixin } from '../page.mixin';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
@@ -19,9 +20,9 @@ import { modalController } from '@ionic/core';
 class GroupDetailsPage extends PageMixin(LitElement) {
   protected groupService: GroupService = groupService;
   protected groupID = routerService.getQueryParameter('id');
-  @internalProperty()
+  @state()
   protected group?: Group;
-  @internalProperty()
+  @state()
   protected members: User[] | undefined;
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;

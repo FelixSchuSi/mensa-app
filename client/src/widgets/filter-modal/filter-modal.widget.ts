@@ -1,4 +1,5 @@
-import { LitElement, customElement, TemplateResult, html, internalProperty, property } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, state, property } from 'lit/decorators.js';
 import { AdditivesKeys } from '../../../../server/src/models/additives';
 import { AllergenesKeys } from '../../../../server/src/models/allergenes';
 import { OtherMealInfoKeys } from '../../../../server/src/models/other-meal-info';
@@ -16,7 +17,7 @@ export class FilterModalWidget extends LitElement {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   protected allContents: Array<AdditivesKeys | AllergenesKeys | OtherMealInfoKeys> = getAllContents();

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { css, customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
+import { css, html, LitElement, TemplateResult } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { PageMixin } from '../page.mixin';
 import { routerService } from '../../services/router.service';
 import { Routes } from '../../routes';
@@ -21,17 +22,17 @@ import { ShareParameter } from '../../helpers/share-api';
 export class MealsTodayPage extends PageMixin(LitElement) {
   @query('ion-infinite-scroll')
   protected infiniteScrollElem!: HTMLIonInfiniteScrollElement;
-  @internalProperty()
+  @state()
   protected scrollIndex: number = 0;
 
   @property({ attribute: false })
   protected displayMeals: Meal[] = [];
   protected mealsBeforeTextSearch: Meal[] = [];
   protected allMeals: Meal[] = [];
-  @internalProperty()
+  @state()
   protected userInfo?: User = userService.userInfo;
   protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
-  @internalProperty()
+  @state()
   protected dateFilterConfig: MealDateFilterConfig = { start: getToday().getTime(), end: getToday().getTime() };
 
   protected searchInput = '';

@@ -1,4 +1,5 @@
-import { customElement, html, internalProperty, LitElement, query, TemplateResult } from 'lit-element';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, state, query } from 'lit/decorators.js';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 
@@ -10,7 +11,7 @@ export class ChipSelectNoneChipWidget extends LitElement {
 
   protected isSelected = true;
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   @query('ion-chip')

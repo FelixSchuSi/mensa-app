@@ -1,4 +1,6 @@
-import { LitElement, customElement, TemplateResult, property, html, internalProperty } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+
+import { customElement, property, state } from 'lit/decorators.js';
 
 @customElement('app-rating-starts-pick')
 export class RatingStarsPickWidget extends LitElement {
@@ -6,7 +8,7 @@ export class RatingStarsPickWidget extends LitElement {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected displayRating: number = 0;
 
   protected rating: number = 0;

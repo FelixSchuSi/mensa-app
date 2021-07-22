@@ -1,4 +1,5 @@
-import { customElement, html, internalProperty, LitElement, property, query, TemplateResult } from 'lit-element';
+import { html, LitElement, TemplateResult } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { LanguageStrings } from '../../models/language-strings';
 import { groupService, GroupService } from '../../services/group.service';
 import { Image } from '../../models/image';
@@ -28,10 +29,10 @@ class GroupCreateModalWidget extends LitElement {
   @property()
   protected mode: 'create' | 'edit' = 'create';
 
-  @internalProperty()
+  @state()
   protected imageSetOnce: boolean = false;
 
-  @internalProperty()
+  @state()
   protected imagesrc: string | null = null;
 
   constructor() {

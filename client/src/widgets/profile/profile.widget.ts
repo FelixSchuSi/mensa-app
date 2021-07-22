@@ -1,4 +1,4 @@
-import { LitElement, customElement, property, TemplateResult, html } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
 import { Group } from '../../../../server/src/models/group';
 import { MensaVisit } from '../../../../server/src/models/mensa-visit';
 import { LanguageStrings } from '../../models/language-strings';
@@ -10,7 +10,7 @@ import { createShareModal } from '../../helpers/create-share-modal';
 import { userService } from '../../services/user.service';
 import { User } from '../../../../server/src/models/user';
 import { mediaService } from '../../services/media.service';
-import { internalProperty } from 'lit-element';
+import { customElement, property, state } from 'lit/decorators.js';
 import { ImageSelect } from '../image-select/image-select.widget';
 @customElement('app-profile')
 export class ProfileWidget extends LitElement {
@@ -28,7 +28,7 @@ export class ProfileWidget extends LitElement {
   protected setNotification!: (e: any) => void;
   protected uploadedImage: Image | undefined;
 
-  @internalProperty()
+  @state()
   protected imagesrc: string | null = null;
 
   constructor() {

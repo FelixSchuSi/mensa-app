@@ -1,5 +1,6 @@
 import { modalController } from '@ionic/core';
-import { customElement, html, internalProperty, LitElement, PropertyValues, query, TemplateResult } from 'lit-element';
+import { html, LitElement, PropertyValues, TemplateResult } from 'lit';
+import { customElement, state, query } from 'lit/decorators.js';
 import { getToday } from '../../helpers/get-today';
 import { getTomorrow } from '../../helpers/get-tomorrow';
 import { LanguageStrings } from '../../models/language-strings';
@@ -13,13 +14,13 @@ export class DateChipSelectWidget extends LitElement {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected activeChip: DateFilterType = 'all';
 
-  @internalProperty()
+  @state()
   protected dateFilterConfig!: MealDateFilterConfig;
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   @query('.chip-wrapper')

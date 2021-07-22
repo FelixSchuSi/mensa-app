@@ -1,4 +1,5 @@
-import { LitElement, customElement, TemplateResult, html, internalProperty, property } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, state, property } from 'lit/decorators.js';
 import { truncateToDay } from '../../helpers/truncate-to-day';
 import { LanguageStrings } from '../../models/language-strings';
 import { DEFAULT_DATE_FILTER, MealDateFilterConfig } from '../../models/meal-date-filter-config';
@@ -10,12 +11,12 @@ export class DateFilterModalWidget extends LitElement {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   public dateFilterConfig!: MealDateFilterConfig;
 
-  @internalProperty()
+  @state()
   protected dateTab: 'day' | 'period' = 'day';
 
   constructor() {

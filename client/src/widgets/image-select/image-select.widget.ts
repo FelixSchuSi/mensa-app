@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { LitElement, customElement, TemplateResult, html, internalProperty } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
 import { actionSheetController } from '@ionic/core';
@@ -11,10 +12,10 @@ export class ImageSelect extends LitElement {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected handleImageUpload: (img: Image) => void = () => {};
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
-  @internalProperty()
+  @state()
   protected actionSheetElement: HTMLIonActionSheetElement | undefined;
   constructor() {
     super();

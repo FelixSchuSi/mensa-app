@@ -1,4 +1,5 @@
-import { LitElement, property, html, TemplateResult, internalProperty } from 'lit-element';
+import { LitElement, html, TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { User } from '../../../server/src/models/user';
 import { LanguageStrings } from '../models/language-strings';
 import { i18nService } from '../services/i18n.service';
@@ -14,7 +15,7 @@ export const PageMixin = <T extends new (...args: any[]) => LitElement>(base: T)
     @property()
     private successMessage = '';
 
-    @internalProperty()
+    @state()
     protected i18n!: LanguageStrings;
 
     @property()

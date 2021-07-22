@@ -1,4 +1,4 @@
-import { html, TemplateResult } from 'lit-element';
+import { html, TemplateResult } from 'lit';
 import { Routes } from '../routes';
 import { goBackTo } from './go-back-to';
 import { popFromRootNav } from './nav-util';

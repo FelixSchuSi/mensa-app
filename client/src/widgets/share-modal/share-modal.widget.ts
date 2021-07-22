@@ -1,4 +1,5 @@
-import { LitElement, customElement, TemplateResult, html, internalProperty, property } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, state, property } from 'lit/decorators.js';
 import { copyToClipboard } from '../../helpers/copy-to-clipboard';
 import { LanguageStrings } from '../../models/language-strings';
 import { i18nService } from '../../services/i18n.service';
@@ -12,7 +13,7 @@ export class ShareModalWidget extends LitElement {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   @property({ type: Object })
@@ -21,7 +22,7 @@ export class ShareModalWidget extends LitElement {
   @property({ type: Object, attribute: false })
   protected setNotification!: (e: any) => void;
 
-  @internalProperty()
+  @state()
   protected shareText = '';
   protected toEmail = '';
 

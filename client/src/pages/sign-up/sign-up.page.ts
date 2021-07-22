@@ -1,14 +1,5 @@
-import {
-  css,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  query,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { PageMixin } from '../page.mixin';
 import { SignUpData } from '../../models/sign-up-data';
 import { userService } from '../../services/user.service';
@@ -69,7 +60,7 @@ class SignUpPage extends PageMixin(LitElement) {
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
 
-  @internalProperty()
+  @state()
   protected currentStep: number = 1;
 
   protected signUpData: Partial<SignUpData> = {

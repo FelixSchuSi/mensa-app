@@ -1,13 +1,5 @@
-import {
-  css,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, state, property } from 'lit/decorators.js';
 import { goBackTo } from '../../helpers/go-back-to';
 import { toggleIosMd } from '../../helpers/toggle-ios-md';
 import { LanguageStrings } from '../../models/language-strings';
@@ -37,7 +29,7 @@ class SignUpPage extends PageMixin(LitElement) {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
 
   @property()

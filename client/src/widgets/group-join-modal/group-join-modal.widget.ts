@@ -1,4 +1,6 @@
-import { LitElement, customElement, TemplateResult, html, internalProperty, property } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+
+import { customElement, state, property } from 'lit/decorators.js';
 
 import { Group } from '../../../../server/src/models/group';
 import { LanguageStrings } from '../../models/language-strings';
@@ -11,7 +13,7 @@ export class FilterModalWidget extends LitElement {
     return this;
   }
 
-  @internalProperty()
+  @state()
   protected i18n!: LanguageStrings;
   @property({ type: Array })
   protected groups: Group[] = [];

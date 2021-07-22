@@ -1,14 +1,5 @@
-import {
-  css,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  query,
-  TemplateResult,
-  unsafeCSS
-} from 'lit-element';
+import { css, html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { PageMixin } from '../page.mixin';
 import { Meal } from '../../../../server/src/models/meal';
 import { routerService } from '../../services/router.service';
@@ -40,17 +31,17 @@ export class MealsFuturePage extends PageMixin(LitElement) {
 
   @query('ion-infinite-scroll')
   protected infiniteScrollElem!: HTMLIonInfiniteScrollElement;
-  @internalProperty()
+  @state()
   protected scrollIndex: number = 0;
 
   @property({ attribute: false })
   protected displayMeals: Meal[] = [];
   protected mealsBeforeTextSearch: Meal[] = [];
   protected allMeals: Meal[] = [];
-  @internalProperty()
+  @state()
   protected userInfo?: User = userService.userInfo;
   protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
-  @internalProperty()
+  @state()
   protected dateFilterConfig: MealDateFilterConfig = DEFAULT_DATE_FILTER;
 
   protected searchInput = '';

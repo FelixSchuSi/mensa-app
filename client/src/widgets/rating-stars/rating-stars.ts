@@ -1,4 +1,6 @@
-import { LitElement, customElement, TemplateResult, property, html } from 'lit-element';
+import { LitElement, TemplateResult, html } from 'lit';
+
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('app-rating-starts')
 export class RatingStarsWidget extends LitElement {
