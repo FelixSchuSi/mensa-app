@@ -2,8 +2,6 @@ name: Scraper Cronjob
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
   schedule:
     - cron: "0 0 * * *" # every day at midnight
 jobs:
