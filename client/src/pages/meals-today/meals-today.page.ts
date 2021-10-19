@@ -42,11 +42,8 @@ export class MealsTodayPage extends PageMixin(LitElement) {
 
   protected filter() {
     this.mealsBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
-    console.log(this.mealsBeforeTextSearch);
     this.mealsBeforeTextSearch = this.applyDateFilter();
-    console.log(this.mealsBeforeTextSearch);
     this.mealsBeforeTextSearch = this.mealsBeforeTextSearch.sort(this.sort);
-    console.log(this.mealsBeforeTextSearch);
     return this.applyTextSearch();
   }
 
