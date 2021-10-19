@@ -13,7 +13,7 @@ class MealService {
   public async getMeals(): Promise<void> {
     if (navigator.onLine) {
       const response = await httpService.get('meals');
-      let meals = <Meal[]>(await response.json()).results;
+      const meals = <Meal[]>(await response.json()).results;
       await this.setMeals(meals);
     } else {
       let meals = <Meal[] | null>await storeService.get(this.MEALKEY);
@@ -25,7 +25,7 @@ class MealService {
   public async getMeal(search: string): Promise<Meal> {
     if (navigator.onLine) {
       const response = await httpService.get('meals/search' + search);
-      let meal = <Meal>(await response.json()).results;
+      const meal = <Meal>(await response.json()).results;
       return meal;
     } else {
       const params = new URLSearchParams(search);

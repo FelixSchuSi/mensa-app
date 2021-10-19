@@ -73,7 +73,7 @@ export class GroupService {
   }
 
   public async editGroup(newGroup: Group): Promise<void> {
-    let group = newGroup;
+    const group = newGroup;
     const newGroups = this.groups.map(g => {
       if (g.id !== group.id) return g;
       return group;

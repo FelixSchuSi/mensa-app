@@ -7,9 +7,9 @@ export function transformPrice(
   price: Price,
   status: Status | undefined,
   i18n: LanguageStrings,
-  smallLayout: boolean = false
+  smallLayout = false
 ): string {
-  let { student, employee, guest } = internationalizePrice(price, i18n);
+  const { student, employee, guest } = internationalizePrice(price, i18n);
   switch (status) {
     case 'EMPLOYEE':
       return `${employee} €`;
@@ -33,7 +33,7 @@ function internationalizePrice(
   if (price.employee === null || price.student === null || price.guest === null) {
     price = { student: 2.3, employee: 3.4, guest: 4.15 };
   }
-  let values = Object.values(price);
+  const values = Object.values(price);
 
   const transformedValues = values.map(value => {
     // Enforce two decimal places

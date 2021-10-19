@@ -11,7 +11,7 @@ class I18nService {
   private strings!: LanguageStrings;
   private _language!: Languages;
   private listeners: i18nListener[] = [];
-  private LANGUAGE_KEY: string = 'LANGUAGE';
+  private LANGUAGE_KEY = 'LANGUAGE';
 
   constructor() {
     storeService.get(this.LANGUAGE_KEY).then(language => {

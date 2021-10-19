@@ -32,7 +32,7 @@ export class MealsFuturePage extends PageMixin(LitElement) {
   @query('ion-infinite-scroll')
   protected infiniteScrollElem!: HTMLIonInfiniteScrollElement;
   @state()
-  protected scrollIndex: number = 0;
+  protected scrollIndex = 0;
 
   @property({ attribute: false })
   protected displayMeals: Meal[] = [];

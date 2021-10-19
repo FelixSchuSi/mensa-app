@@ -61,7 +61,7 @@ class SignUpPage extends PageMixin(LitElement) {
   protected i18n!: LanguageStrings;
 
   @state()
-  protected currentStep: number = 1;
+  protected currentStep = 1;
 
   protected signUpData: Partial<SignUpData> = {
     name: '',
@@ -207,7 +207,7 @@ class SignUpPage extends PageMixin(LitElement) {
               <div style="min-width:220px;width:40%">
                 <ion-segment mode="ios" @ionChange=${(e: any) => (this.status = e.detail.value)} value=${this.status}>
                   ${ALL_STATUS.map((status, i) => {
-                    let euros = '€'.repeat(i + 1);
+                    const euros = '€'.repeat(i + 1);
                     return html`
                       <ion-segment-button value="${status}">
                         <ion-label>${this.i18n[status]}</ion-label>

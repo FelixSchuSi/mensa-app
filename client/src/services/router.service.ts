@@ -53,8 +53,8 @@ export class RouterService {
 
   public getAllQueryParameters(): QueryParameter {
     const params = new URLSearchParams(location.search);
-    let paramObj: QueryParameter = {};
-    for (var value of params.keys()) {
+    const paramObj: QueryParameter = {};
+    for (const value of params.keys()) {
       paramObj[value] = params.get(value)!;
     }
     return paramObj;

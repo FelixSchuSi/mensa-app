@@ -30,7 +30,7 @@ class GroupCreateModalWidget extends LitElement {
   protected mode: 'create' | 'edit' = 'create';
 
   @state()
-  protected imageSetOnce: boolean = false;
+  protected imageSetOnce = false;
 
   @state()
   protected imagesrc: string | null = null;

@@ -29,13 +29,13 @@ export class GroupDateWidget extends LitElement {
   protected members!: User[];
   @state()
   protected attending!: boolean;
-  protected numberOfParticipants: number = 3;
+  protected numberOfParticipants = 3;
 
   @state()
   protected chipColor!: 'success' | 'danger';
 
   @property({ type: Boolean })
-  protected large: boolean = false;
+  protected large = false;
 
   @state()
   protected userInfo!: User;

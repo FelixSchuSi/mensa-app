@@ -21,10 +21,10 @@ export class ChipToggleShowMore extends LitElement {
   }
 
   @property({ type: Boolean })
-  protected expanded: boolean = true;
+  protected expanded = true;
 
   @property({ type: Number, attribute: false })
-  protected cutOffIndex: number = 1;
+  protected cutOffIndex = 1;
 
   protected firstUpdated(): void {
     this.toggle();

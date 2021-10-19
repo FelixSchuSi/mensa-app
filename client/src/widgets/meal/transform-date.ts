@@ -1,7 +1,7 @@
 import { LanguageStrings } from '../../models/language-strings';
 import { Languages } from '../../models/languages';
 
-export function transformDate(dateIsoString: string, i18n: LanguageStrings, smallLayout: boolean = false): string {
+export function transformDate(dateIsoString: string, i18n: LanguageStrings, smallLayout = false): string {
   const date: Date = new Date(dateIsoString);
   const language = i18n._LANGUAGE === Languages.ENGLISH ? 'en-US' : 'de-DE';
   if (smallLayout) {

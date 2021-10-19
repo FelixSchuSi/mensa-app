@@ -57,7 +57,7 @@ class HttpService {
     this.requestReplayLock = new Promise(resolve => {
       resolver = resolve;
     });
-    let queue: RequestQueue = await this.getRequestQueue();
+    const queue: RequestQueue = await this.getRequestQueue();
     if (queue.length > 0) {
       while (queue.length > 0) {
         const { url, requestInit, onSyncFail } = queue.shift()!;
@@ -142,7 +142,7 @@ class HttpService {
   }
 }
 
-// const ISPROD = true;
+const ISPROD = true;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const baseURL: string = ISPROD ? 'https://api.mensa-app.dub-services.de/api/' : `http://${location.hostname}:3443/api/`;

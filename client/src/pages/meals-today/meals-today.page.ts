@@ -23,7 +23,7 @@ export class MealsTodayPage extends PageMixin(LitElement) {
   @query('ion-infinite-scroll')
   protected infiniteScrollElem!: HTMLIonInfiniteScrollElement;
   @state()
-  protected scrollIndex: number = 0;
+  protected scrollIndex = 0;
 
   @property({ attribute: false })
   protected displayMeals: Meal[] = [];
@@ -33,14 +33,20 @@ export class MealsTodayPage extends PageMixin(LitElement) {
   protected userInfo?: User = userService.userInfo;
   protected mealFilterConfig: MealFilterConfig = this.userInfo?.filterConfig ?? DEFAULT_MEAL_FILTER_CONFIG;
   @state()
-  protected dateFilterConfig: MealDateFilterConfig = { start: getToday().getTime(), end: getToday().getTime() };
+  protected dateFilterConfig: MealDateFilterConfig = {
+    start: truncateToDay(getToday()).getTime(),
+    end: truncateToDay(getToday()).getTime()
+  };
 
   protected searchInput = '';
 
   protected filter() {
     this.mealsBeforeTextSearch = filterMeals(this.allMeals, this.mealFilterConfig);
+    console.log(this.mealsBeforeTextSearch);
     this.mealsBeforeTextSearch = this.applyDateFilter();
+    console.log(this.mealsBeforeTextSearch);
     this.mealsBeforeTextSearch = this.mealsBeforeTextSearch.sort(this.sort);
+    console.log(this.mealsBeforeTextSearch);
     return this.applyTextSearch();
   }
 

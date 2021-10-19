@@ -19,7 +19,7 @@ class GroupDateAddModalWidget extends LitElement {
 
   @property({ type: Object, attribute: false })
   protected i18n!: LanguageStrings;
-  protected mouseDownPos: number = 0;
+  protected mouseDownPos = 0;
 
   @query('date-picker')
   protected datePickerElem!: HTMLIonDatetimeElement;
@@ -127,7 +127,7 @@ class GroupDateAddModalWidget extends LitElement {
   }
 
   protected async onClick(e: any): Promise<void> {
-    let clickedChip = <HTMLIonChipElement>e.target;
+    const clickedChip = <HTMLIonChipElement>e.target;
     if ((this.mouseDownPos - e.clientX) ** 2 <= 7) {
       this.activeChip = <Mensa>clickedChip.id;
       const scroller = clickedChip.parentElement;

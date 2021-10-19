@@ -14,7 +14,7 @@ export class GroupDateAddWidget extends LitElement {
   protected i18n!: LanguageStrings;
 
   @property({ type: Boolean })
-  protected large: boolean = false;
+  protected large = false;
 
   @property()
   protected groupID!: string;

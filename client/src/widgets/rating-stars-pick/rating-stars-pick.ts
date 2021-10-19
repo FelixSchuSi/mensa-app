@@ -9,11 +9,11 @@ export class RatingStarsPickWidget extends LitElement {
   }
 
   @state()
-  protected displayRating: number = 0;
+  protected displayRating = 0;
 
-  protected rating: number = 0;
+  protected rating = 0;
 
-  protected isMouseOverContainer: boolean = false;
+  protected isMouseOverContainer = false;
 
   protected render(): TemplateResult {
     return html`

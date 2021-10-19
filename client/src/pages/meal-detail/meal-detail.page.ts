@@ -27,7 +27,7 @@ class MealDetailPage extends PageMixin(LitElement) {
   public meal?: Meal;
 
   @state()
-  protected isBookmark: boolean = false;
+  protected isBookmark = false;
 
   @query('macro-carousel')
   protected carousel!: any;

@@ -26,7 +26,7 @@ export class DateChipSelectWidget extends LitElement {
   @query('.chip-wrapper')
   protected chipWrapperElement!: HTMLDivElement;
 
-  protected mouseDownPos: number = 0;
+  protected mouseDownPos = 0;
 
   constructor() {
     super();
@@ -82,18 +82,18 @@ export class DateChipSelectWidget extends LitElement {
         const tomorrow = getTomorrow();
         return { start: tomorrow.getTime(), end: tomorrow.getTime() };
       case 'this-week':
-        let endOfThisWeek = getToday();
+        const endOfThisWeek = getToday();
         while (endOfThisWeek.getDay() !== 0) {
           endOfThisWeek.setDate(endOfThisWeek.getDate() + 1);
         }
         return { start: getTomorrow().getTime(), end: endOfThisWeek.getTime() };
       case 'next-week':
-        let startOfNextWeek = getToday();
+        const startOfNextWeek = getToday();
         startOfNextWeek.setDate(startOfNextWeek.getDate() + 1);
         while (startOfNextWeek.getDay() !== 1) {
           startOfNextWeek.setDate(startOfNextWeek.getDate() + 1);
         }
-        let endOfNextWeek = new Date(startOfNextWeek.getTime());
+        const endOfNextWeek = new Date(startOfNextWeek.getTime());
         while (endOfNextWeek.getDay() !== 0) {
           endOfNextWeek.setDate(endOfNextWeek.getDate() + 1);
         }
