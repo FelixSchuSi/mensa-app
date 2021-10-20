@@ -53,7 +53,7 @@ class HttpService {
   }
 
   public async replayRequests(): Promise<void> {
-    let resolver: () => void = () => {};
+    let resolver: () => void = () => { };
     this.requestReplayLock = new Promise(resolve => {
       resolver = resolve;
     });
@@ -79,7 +79,7 @@ class HttpService {
   private async createFetch(
     method: string,
     url: string,
-    { body, onSyncFail }: { body?: unknown; onSyncFail?: () => void } = { onSyncFail: () => {} }
+    { body, onSyncFail }: { body?: unknown; onSyncFail?: () => void } = { onSyncFail: () => { } }
   ): Promise<Response> {
     await this.requestReplayLock;
 
@@ -95,7 +95,7 @@ class HttpService {
       try {
         message = JSON.parse(message).message;
         // eslint-disable-next-line no-empty
-      } catch (e) {}
+      } catch (e) { }
       message = message || response.statusText;
       return Promise.reject({ message, statusCode: response.status });
     }
@@ -142,7 +142,7 @@ class HttpService {
   }
 }
 
-const ISPROD = true;
+// const ISPROD = true;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const baseURL: string = ISPROD ? 'https://api.mensa-app.dub-services.de/api/' : `http://${location.hostname}:3443/api/`;
