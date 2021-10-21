@@ -2,5 +2,5 @@ import axios from 'axios';
 
 export async function gethtmlFromUrl(url: string): Promise<string> {
   const response = await axios(url);
-  return response.data;
+  return <string>response.data;
 }
