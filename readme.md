@@ -4,7 +4,7 @@ Informiere dich über aktuelle Gerichte der Mensen in Münster, verabrede dich z
 
 ## Entwicklung
 
-Die Anwendung kannn entweder lokal, oder mit Docker entwickelt werden.
+Die Anwendung kann entweder lokal, oder mit Docker entwickelt werden.
 
 ### Entwicklung ohne Docker
 
