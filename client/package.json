@@ -70,11 +70,11 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.3",
     "workbox-cacheable-response": "^5.1.4",
-    "workbox-cli": "^5.1.4",
+    "workbox-cli": "^6.5.4",
     "workbox-precaching": "^5.1.4",
     "workbox-routing": "^5.1.4",
     "workbox-strategies": "^5.1.4",
-    "workbox-webpack-plugin": "^5.1.4"
+    "workbox-webpack-plugin": "^6.5.4"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.7",
